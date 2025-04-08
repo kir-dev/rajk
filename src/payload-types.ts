@@ -70,6 +70,15 @@ export interface Config {
     users: User;
     media: Media;
     sponsors: Sponsor;
+    groups: Group;
+    people: Person;
+    awards: Award;
+    awardees: Awardee;
+    tdks: Tdk;
+    faqs: Faq;
+    reports: Report;
+    'apply-timeline-event': ApplyTimelineEvent;
+    'about-timeline-event': AboutTimelineEvent;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -79,6 +88,15 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
+    groups: GroupsSelect<false> | GroupsSelect<true>;
+    people: PeopleSelect<false> | PeopleSelect<true>;
+    awards: AwardsSelect<false> | AwardsSelect<true>;
+    awardees: AwardeesSelect<false> | AwardeesSelect<true>;
+    tdks: TdksSelect<false> | TdksSelect<true>;
+    faqs: FaqsSelect<false> | FaqsSelect<true>;
+    reports: ReportsSelect<false> | ReportsSelect<true>;
+    'apply-timeline-event': ApplyTimelineEventSelect<false> | ApplyTimelineEventSelect<true>;
+    'about-timeline-event': AboutTimelineEventSelect<false> | AboutTimelineEventSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -168,6 +186,227 @@ export interface Sponsor {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "groups".
+ */
+export interface Group {
+  id: number;
+  name: string;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  members?:
+    | {
+        user: number | Person;
+        role?: string | null;
+        joined_at?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "people".
+ */
+export interface Person {
+  id: number;
+  name: string;
+  picture?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "awards".
+ */
+export interface Award {
+  id: number;
+  name: string;
+  logo: number | Media;
+  about: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  awardees?: (number | null) | Awardee;
+  covers?:
+    | {
+        cover: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  facebook_link?: string | null;
+  event_facebook_link?: string | null;
+  connected_publicatios?: number | null;
+  block_seminar_participants?: number | null;
+  lecture_participants?: number | null;
+  video?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "awardees".
+ */
+export interface Awardee {
+  id: number;
+  name: string;
+  about: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  year: number;
+  picture: number | Media;
+  testimony: string;
+  facebook_link?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * TDK dolgozatok
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tdks".
+ */
+export interface Tdk {
+  id: number;
+  title: string;
+  section_name?: string | null;
+  author?: (number | Person)[] | null;
+  year?: number | null;
+  placement?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * TDK dolgozatok
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs".
+ */
+export interface Faq {
+  id: number;
+  question: string;
+  answer: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Jelentések
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reports".
+ */
+export interface Report {
+  id: number;
+  title: string;
+  topic?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "apply-timeline-event".
+ */
+export interface ApplyTimelineEvent {
+  id: number;
+  name: string;
+  date: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-timeline-event".
+ */
+export interface AboutTimelineEvent {
+  id: number;
+  name: string;
+  date: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  logo: number | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -184,6 +423,42 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'sponsors';
         value: number | Sponsor;
+      } | null)
+    | ({
+        relationTo: 'groups';
+        value: number | Group;
+      } | null)
+    | ({
+        relationTo: 'people';
+        value: number | Person;
+      } | null)
+    | ({
+        relationTo: 'awards';
+        value: number | Award;
+      } | null)
+    | ({
+        relationTo: 'awardees';
+        value: number | Awardee;
+      } | null)
+    | ({
+        relationTo: 'tdks';
+        value: number | Tdk;
+      } | null)
+    | ({
+        relationTo: 'faqs';
+        value: number | Faq;
+      } | null)
+    | ({
+        relationTo: 'reports';
+        value: number | Report;
+      } | null)
+    | ({
+        relationTo: 'apply-timeline-event';
+        value: number | ApplyTimelineEvent;
+      } | null)
+    | ({
+        relationTo: 'about-timeline-event';
+        value: number | AboutTimelineEvent;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -266,6 +541,128 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface SponsorsSelect<T extends boolean = true> {
   name?: T;
+  logo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "groups_select".
+ */
+export interface GroupsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  members?:
+    | T
+    | {
+        user?: T;
+        role?: T;
+        joined_at?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "people_select".
+ */
+export interface PeopleSelect<T extends boolean = true> {
+  name?: T;
+  picture?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "awards_select".
+ */
+export interface AwardsSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
+  about?: T;
+  awardees?: T;
+  covers?:
+    | T
+    | {
+        cover?: T;
+        id?: T;
+      };
+  facebook_link?: T;
+  event_facebook_link?: T;
+  connected_publicatios?: T;
+  block_seminar_participants?: T;
+  lecture_participants?: T;
+  video?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "awardees_select".
+ */
+export interface AwardeesSelect<T extends boolean = true> {
+  name?: T;
+  about?: T;
+  year?: T;
+  picture?: T;
+  testimony?: T;
+  facebook_link?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tdks_select".
+ */
+export interface TdksSelect<T extends boolean = true> {
+  title?: T;
+  section_name?: T;
+  author?: T;
+  year?: T;
+  placement?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs_select".
+ */
+export interface FaqsSelect<T extends boolean = true> {
+  question?: T;
+  answer?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reports_select".
+ */
+export interface ReportsSelect<T extends boolean = true> {
+  title?: T;
+  topic?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "apply-timeline-event_select".
+ */
+export interface ApplyTimelineEventSelect<T extends boolean = true> {
+  name?: T;
+  date?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-timeline-event_select".
+ */
+export interface AboutTimelineEventSelect<T extends boolean = true> {
+  name?: T;
+  date?: T;
+  description?: T;
   logo?: T;
   updatedAt?: T;
   createdAt?: T;
