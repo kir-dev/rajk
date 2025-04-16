@@ -11,12 +11,15 @@
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.31.0",
+    "@payloadcms/db-vercel-postgres": "^3.34.0",
     "@payloadcms/next": "^3.31.0",
     "@payloadcms/payload-cloud": "^3.31.0",
     "@payloadcms/richtext-lexical": "^3.31.0",
+    "@prisma/client": "^6.6.0",
     "graphql": "^16.8.1",
     "next": "15.2.4",
     "payload": "^3.31.0",
+    "prisma": "^6.6.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
