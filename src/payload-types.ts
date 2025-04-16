@@ -208,7 +208,7 @@ export interface Group {
   } | null;
   members?:
     | {
-        user: number | Person;
+        member: number | Person;
         role?: string | null;
         joined_at?: string | null;
         id?: string | null;
@@ -555,7 +555,7 @@ export interface GroupsSelect<T extends boolean = true> {
   members?:
     | T
     | {
-        user?: T;
+        member?: T;
         role?: T;
         joined_at?: T;
         id?: T;

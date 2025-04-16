@@ -27,8 +27,8 @@ export const Groups: CollectionConfig = {
             },
             fields: [
                 {
-                    name: 'user',
-                    label: 'User',
+                    name: 'member',
+                    label: 'Tag',
                     type: 'relationship',
                     relationTo: 'people',
                     required: true,
