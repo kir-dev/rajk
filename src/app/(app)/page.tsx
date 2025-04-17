@@ -1,4 +1,5 @@
 import ActionButton from "@/components/ActionButton";
+import {ArrowRight} from "lucide-react";
 
 export default function Home() {
     return (<>
@@ -12,7 +13,10 @@ export default function Home() {
                 />
             </div>
             <div className = 'bg-foreground h-screen w-full flex justify-center'>
-                <ActionButton></ActionButton>
+                <ActionButton>
+                    Menjünk
+                    <ArrowRight size={20} />
+                </ActionButton>
             </div>
         </>
     );
