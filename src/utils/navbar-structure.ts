@@ -10,7 +10,16 @@ export const navItems = [
   },
   { label: 'Szakma', href: '/profession' },
   { label: 'Társasadalmi felelősségvállalás', href: '/social-responsibility' },
-  { label: 'Díjak', href: '/awards' },
+  {
+    label: 'Díjak',
+    href: '/awards',
+    subItems: [
+      { label: 'John von Neumann Award', href: '/awards/neumann' },
+      { label: 'Herbert Simon Award', href: '/awards/herbert' },
+      { label: 'Kaliforniától Budapestig', href: '/awards/california' },
+    ],
+  },
+  { label: 'Nemzetközi kapcsolataink', href: '/international-relations' },
   { label: 'Jelentkezés', href: '/application', bordered: true },
   { label: 'Támogatás', href: '/support', bordered: true },
 ];

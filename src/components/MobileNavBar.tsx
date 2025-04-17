@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import {Menu, X} from "lucide-react";
 import {useState} from "react";
 import {navItems} from "@/utils/navbar-structure";
 import NavBarItem from "./NavBarItem";
@@ -24,7 +24,7 @@ export default function MobileNavBar() {
                   bordered={item.bordered}
                 />
                 {item.subItems && (
-                  <div className="ml-4 mt-1 flex flex-col gap-1">
+                  <div className="ml-4 mt-1 flex flex-col gap-0">
                     {item.subItems.map((sub) => (
                       <NavBarItem
                         key={sub.href}

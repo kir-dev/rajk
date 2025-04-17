@@ -32,7 +32,7 @@ export default function RootLayout({
             <body
                 className = {`${robotoCondensed.variable} ${openSans.variable} antialiased font-open-sans`}
             >
-                <NavBar></NavBar>
+                <NavBar/>
                 {children}
             </body>
         </html>
