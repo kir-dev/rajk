@@ -2,7 +2,14 @@
 
 export default function Home() {
   return (
-      <div className="bg-black text-[#EA580B] flex items-center justify-center min-h-screen">
+      <div>
+          <iframe
+              src = "https://www.youtube.com/embed/lJgPfSw4w2c?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1"
+              title = "YouTube video player"
+              allow = "autoplay; encrypted-media"
+              allowFullScreen
+              className = "w-full h-screen"
+          />
       </div>
   );
 }
