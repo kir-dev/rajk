@@ -8,7 +8,7 @@ export default function Home() {
               title = "YouTube video player"
               allow = "autoplay; encrypted-media"
               allowFullScreen
-              className = "w-full h-screen"
+              className = 'aspect-video w-full'
           />
       </div>
   );
