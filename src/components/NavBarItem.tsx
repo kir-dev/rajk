@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 export default function NavBarItem(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     { text, href, selected = false, bordered = false }: {
         text: string;
         href: string;
