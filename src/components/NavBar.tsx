@@ -27,12 +27,12 @@ export default function NavBar() {
                     )}
                 </div>
             ))}
-            <div className='mx-4'>
-            
-            <LanguageSelector/>
+            <div className = 'mx-4'>
+                
+                <LanguageSelector/>
             </div>
         </div>
-        <div className='lg:hidden'>
+        <div className = 'lg:hidden'>
             <MobileNavBar/>
         </div>
     </div>)
