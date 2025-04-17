@@ -1,4 +1,4 @@
-import NavBarItem from "@/components/NavBarItem";
+import NavBarItem from "@/components/NavBar/NavBarItem";
 
 export type SubCategory = [string, string];
 

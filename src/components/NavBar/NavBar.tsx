@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import NavBarItem from "@/components/NavBarItem";
-import NavBarDropDown from "@/components/NavBarDropDown";
-import LanguageSelector from "@/components/LanguageSelector";
-import MobileNavBar from "@/components/MobileNavBar";
+import NavBarItem from "@/components/NavBar/NavBarItem";
+import NavBarDropDown from "@/components/NavBar/NavBarDropDown";
+import LanguageSelector from "@/components/NavBar/LanguageSelector";
+import MobileNavBar from "@/components/NavBar/MobileNavBar";
 import {navItems} from "@/utils/navbar-structure";
 
 export default function NavBar() {
