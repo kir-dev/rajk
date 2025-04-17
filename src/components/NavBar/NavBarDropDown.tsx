@@ -15,8 +15,7 @@ export default function NavBarDropDown(
                 {subCategories && subCategories.map((subCategory, index) => {
                     return (
                         <div key = {index}>
-                            <NavBarItem href = {subCategory[1]} text = {subCategory[0]}>
-                            </NavBarItem>
+                            <NavBarItem href = {subCategory[1]} text = {subCategory[0]}/>
                         </div>
                     )
                 })}

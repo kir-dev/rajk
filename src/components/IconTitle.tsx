@@ -2,7 +2,6 @@ import React from "react";
 import cn from "@/utils/concatenate";
 import * as Icons from "lucide-react";
 import {LucideIcon} from "lucide-react";
-import {black} from "colorette";
 
 export default function IconTitle(
     {icon, text, className}: {
