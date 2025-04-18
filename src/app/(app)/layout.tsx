@@ -34,8 +34,8 @@ export default function RootLayout({
                 className = {`${robotoCondensed.variable} ${openSans.variable} antialiased font-open-sans`}
             >
                 <NavBar/>
-                <Footer/>
                 {children}
+                <Footer/>
             </body>
         </html>
     );
