@@ -1,7 +1,7 @@
 import type {Metadata} from "next";
 import {Open_Sans, Roboto_Condensed} from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/app/(app)/footer";
 
 const robotoCondensed = Roboto_Condensed({
