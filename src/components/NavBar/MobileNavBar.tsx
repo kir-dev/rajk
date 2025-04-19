@@ -15,7 +15,7 @@ export default function MobileNavBar() {
         </button>
         {menuOpen && (
         <div className="absolute left-0 top-full w-full bg-white shadow-md animate-slide-down ">
-          <div className="flex flex-col gap-2 px-4 bg-rajk-green pb-4 pl-8">
+          <div className="flex flex-col gap-2 px-4 bg-rajk-green pb-4 pl-8 w-full">
             {navItems.map((item) => (
               <div key={item.label}>
                 <NavBarItem
@@ -24,7 +24,7 @@ export default function MobileNavBar() {
                   bordered={item.bordered}
                 />
                 {item.subItems && (
-                  <div className="ml-4 mt-1 flex flex-col gap-0">
+                  <div className="ml-4 mt-1 flex flex-col gap-0 w-full">
                     {item.subItems.map((sub) => (
                       <NavBarItem
                         key={sub.href}
