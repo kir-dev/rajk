@@ -4,7 +4,7 @@ import {Menu, X} from "lucide-react";
 import {useState} from "react";
 import {navItems} from "@/utils/navbar-structure";
 import NavBarItem from "./NavBarItem";
-import LanguageSelector from "@/components/LanguageSelector";
+import LanguageSelector from "@/components/NavBar/LanguageSelector";
 
 export default function MobileNavBar() {
     const [menuOpen, setMenuOpen] = useState(false);
