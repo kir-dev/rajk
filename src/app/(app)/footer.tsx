@@ -1,8 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { Facebook, Instagram, Youtube, ArrowUp } from "lucide-react"
-import { useEffect, useState } from "react"
+import {ArrowUp, Facebook, Instagram, Youtube} from "lucide-react"
+import {useEffect, useState} from "react"
 import Image from "next/image"
 
 /*
@@ -35,7 +35,7 @@ export default function Footer() {
     }
 
     return (
-        <footer className="relative bg-[#5EB25E] text-white">
+        <footer className="relative bg-rajk-green text-white">
             {/* Wavy border */}
             <div className="absolute top-0 left-0 w-full overflow-hidden leading-0 transform translate-y-[-98%]">
                 <svg
@@ -116,7 +116,7 @@ export default function Footer() {
                 {showScrollTop && (
                     <button
                         onClick={scrollToTop}
-                        className="fixed bottom-8 right-8 bg-white text-[#5EB25E] p-3 rounded-md shadow-md hover:bg-gray-100 transition-all"
+                        className="fixed bottom-8 right-8 bg-white text-rajk-green p-3 rounded-md shadow-md hover:bg-gray-100 transition-all"
                         aria-label="Scroll to top"
                     >
                         <ArrowUp size={24} />
