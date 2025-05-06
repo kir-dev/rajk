@@ -3,9 +3,10 @@ import {ArrowRight} from "lucide-react";
 import SubTitle from "@/components/SubTitle";
 import IconTitle from "@/components/IconTitle";
 import MemberGrid from "@/components/MemberGrid";
-import {mockMembers} from "@/mock-data/mock-members";
+import {fetchMembers} from "@/fetch/fetchMembers";
 
-export default function Home() {
+export  default async function Home() {
+    const members = await fetchMembers();
     return (<>
             {/*            <div>
                 <iframe
@@ -22,7 +23,9 @@ export default function Home() {
                     Menjünk
                     <ArrowRight size = {20}/>
                 </ActionButton>
-                <MemberGrid members = {mockMembers}/>
+                {members &&
+                <MemberGrid members = {members}/>
+                }
                 <IconTitle text = 'Rajk László Szakkollégium' icon = "Landmark"/>
             </div>
         </>
