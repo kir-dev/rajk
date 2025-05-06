@@ -10,12 +10,12 @@ export default function ApplyPage() {
         <div className = "flex flex-col justify-center my-20 bg-foreground">
             <div className = "flex flex-col items-center bg-rajk-green">
                 
-                <h1 className = "text-4xl font-bold mb-4 mt-4 text-center">{"Ajtókat nyitunk a világra"}
+                <h1 className = "text-6xl font-bold mb-4 mt-4 text-center">{"Ajtókat nyitunk a világra"}
                     <br/> {"-Rajk a Szakkollégium-"}</h1>
                 {/*<div className = "flex flex-row items-center gap-6 justify-center mb-4">*/}
                 <div className = "grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <div className = "flex flex-col self-end items-end">
-                        <p className = "text-4xl w-1/2 text-right font-bold mr-2 mb-4">Töltsd le a 2025-ös kérdőívet!</p>
+                        <p className = "text-8xl w-3/4 text-right font-bold mr-2 mb-4">Töltsd le a 2025-ös kérdőívet!</p>
                         <a
                             href = "/2025_Rajk-kerdoiv-2.pdf"
                             download
