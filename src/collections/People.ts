@@ -23,3 +23,7 @@ export const People: CollectionConfig = {
     ],
 };
 
+export type Person = {
+  name: string;
+  imageSrc?: string;
+};
