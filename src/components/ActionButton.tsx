@@ -14,7 +14,7 @@ export default function ActionButton(
 ) {
     return (<Link href = {href ? href : ''}>
         <button
-            className = {cn('m-2 font-bold text-foreground py-2 px-4 rounded-md h-fit flex gap-2 items-center hover:bg-green-700 duration-100', className)}
+            className = {cn('m-2 font-bold text-foreground py-2 px-4 rounded-md h-fit flex gap-2 items-center hover:bg-green-700 bg-rajk-green duration-100', className)}
             onClick = {href? () => {} : onClick}>
             {text}
             {children}

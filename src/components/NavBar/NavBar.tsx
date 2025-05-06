@@ -9,9 +9,9 @@ import ExtraNavBarStrip from "@/components/NavBar/ExtraNavBarStrip";
 
 export default function NavBar() {
     return (
-        <div>
+        <div className='flex flex-col relative'>
             <ExtraNavBarStrip></ExtraNavBarStrip>
-            <div className = 'bg-rajk-green w-full p-4 flex justify-between relative '>
+            <div className = 'bg-rajk-green w-full p-4 flex justify-between  '>
                 <div className = 'mt-1'>
                     <Image height = {120} width = {120} src = '/rajk_logo2_white.png' alt = 'Rajka'></Image>
                 </div>
