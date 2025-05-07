@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: "Rajk",
     description: "Rajk Szakkollégium",
     icons: {
-        icon: "https://www.rajk.eu/favicon.ico",
+        icon: "/favicon.ico",
     },
 };
 
