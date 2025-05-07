@@ -7,7 +7,10 @@ export default function ApplyPage() {
     
     
     return (
-        <div className = "flex flex-col justify-center my-20 bg-foreground">
+        <div className = "flex flex-col justify-center bg-white">
+            <div className="">
+                <Image src={"/koli.png"} alt={"Koli"} width={1920} height={1080} className = ""/>
+            </div>
             <div className = "flex flex-col items-center bg-rajk-green">
                 
                 <h1 className = "text-6xl font-bold mb-4 mt-4 text-center">{"Ajtókat nyitunk a világra"}

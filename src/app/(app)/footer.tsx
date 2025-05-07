@@ -37,7 +37,7 @@ export default function Footer() {
     return (
         <footer className="relative bg-rajk-green text-white">
             {/* Wavy border */}
-            <div className=" bg-transparent absolute top-0 left-0 w-full overflow-hidden leading-0 transform translate-y-[-98%]">
+            <div className=" bg-white absolute top-0 left-0 w-full overflow-hidden leading-0 transform translate-y-[-98%]">
                 <svg
                     className="relative block w-full h-[70px]"
                     data-name="Layer 1"
