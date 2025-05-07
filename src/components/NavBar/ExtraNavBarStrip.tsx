@@ -8,6 +8,6 @@ export default function ExtraNavBarStrip() {
         <p>
             Ez a Rajk átmeneti oldala, amíg a régi oldalunkat kihozzuk az intenzívről. Okosba összedobta: Marci és Máté a Kir-Dev-ből.
         </p>
-        <button onClick={()=>setIsOpen(false)} className='font-bold ml-4 text-rajk-green underline'>Bezárás</button>
-        </div>)
+        <button onClick={()=>setIsOpen(false)} className='font-bold ml-4 text-rajk-green underline cursor-pointer'>Bezárás</button>
+    </div>)
 }

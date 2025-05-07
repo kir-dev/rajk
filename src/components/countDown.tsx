@@ -1,7 +1,7 @@
 // components/Countdown.tsx
 'use client'
 
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
 import cn from "@/utils/concatenate";
 
 export default function Countdown({ targetDate, className }: { targetDate: Date, className?: string }) {
@@ -20,18 +20,18 @@ export default function Countdown({ targetDate, className }: { targetDate: Date,
     }
 
     return (
-        <div className={cn("text-white text-3xl flex gap-8 font-mono", className)}>
+        <div className={cn("text-white text-3xl flex gap-8 font-bold", className)}>
             <div className="flex flex-col items-center">
-                <span className="text-7xl">{timeLeft.days}</span> <span className="text-2xl">Nap</span>
+                <span className="text-4xl md:text-7xl">{timeLeft.days}</span> <span className="md:text-2xl">nap</span>
             </div>
             <div className="flex flex-col items-center">
-                <span className="text-7xl">{timeLeft.hours}</span> <span className="text-2xl">óra</span>
+                <span className="text-4xl md:text-7xl">{timeLeft.hours}</span> <span className="md:text-2xl">óra</span>
             </div>
             <div className="flex flex-col items-center">
-                <span className="text-7xl">{timeLeft.minutes}</span> <span className="text-2xl">perc</span>
+                <span className="text-4xl md:text-7xl">{timeLeft.minutes}</span> <span className="md:text-2xl">perc</span>
             </div>
             <div className="flex flex-col items-center">
-                <span className="text-7xl">{timeLeft.seconds}</span> <span className="text-2xl">sec</span>
+                <span className="text-4xl md:text-7xl">{timeLeft.seconds}</span> <span className="md:text-2xl">sec</span>
             </div>
         </div>
     )
