@@ -9,13 +9,12 @@ export default function ApplyPage() {
     
     return (
         <div className = "flex flex-col justify-center bg-white pb-20">
-            <div className="">
+            <div className="relative">
                 <Image src={"/koli.png"} alt={"Koli"} width={500} height={500} className = "w-full h-screen object-cover object-top brightness-50 z-10"/>
-                <div className="flex flex-col absolute font-black top-0 left-0 w-full h-full items-center justify-center mt-40">
-                    <h2 className = "text-4xl font-black mx-8 lg:w-1/2 text-center lg:text-left  mb-16">Ajtót nyitunk a világra</h2>
-                    {/*<div className = "text-[20rem] text-rajk-green text-center -mt-25">{"Rajk"}</div>*/}
+                <div className="flex flex-col absolute font-black top-0 left-0 w-full h-full items-center justify-center mt-20">
+                    <h2 className = "text-2xl md:text-4xl font-black mx-8 lg:w-1/2 text-center lg:text-left mb-16">Ajtót nyitunk a világra</h2>
                     <Image className={'px-8'} src={"/rajk_logo2_white.png"} alt={"Rajk logo"} width={700} height={400}/>
-                    <h2 className = "text-5xl font-black text-right lg:w-1/2 mb-32">Felvételi</h2>
+                    <h2 className = "text-2xl md:text-4xl font-black text-right lg:w-1/2 mb-20">Felvételi</h2>
                     <Countdown targetDate={new Date('2025-05-15T23:59:59')} />
                 </div>
             </div>
@@ -61,3 +60,4 @@ export default function ApplyPage() {
         </div>
     )
 }
+
