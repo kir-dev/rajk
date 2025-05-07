@@ -1,7 +1,6 @@
 import ActionButton from "@/components/ActionButton";
 import {ArrowRight} from "lucide-react";
 import SubTitle from "@/components/SubTitle";
-import IconTitle from "@/components/IconTitle";
 
 export default function Home() {
     return (<>
@@ -14,13 +13,13 @@ export default function Home() {
                     className = 'aspect-video w-full'
                 />
             </div>
-            <div className = 'bg-foreground h-screen w-full flex flex-col'>
-                <SubTitle text='Második cím'/>
-                <ActionButton>
+            <div className = 'bg-foreground h-screen w-full flex flex-col pt-32 items-center gap-8'>
+                <SubTitle text='Jelentkezz a Rajkba!'/>
+                <ActionButton href='/felveteli'>
                     Menjünk
                     <ArrowRight size={20} />
                 </ActionButton>
-                <IconTitle text='Rajk László Szakkollégium' icon="Landmark"/>
+                <p>A régi weboldal további tartalmai sajnos átmenetileg nem elérthetőek :/</p>
             </div>
         </>
     );
