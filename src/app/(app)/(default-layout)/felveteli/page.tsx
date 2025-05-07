@@ -2,19 +2,25 @@
 import Image from "next/image";
 import React from "react";
 import {Download} from "lucide-react";
+import Countdown from "@/components/countDown";
 
 export default function ApplyPage() {
     
     
     return (
-        <div className = "flex flex-col justify-center bg-white">
+        <div className = "flex flex-col justify-center bg-white pb-20">
             <div className="">
-                <Image src={"/koli.png"} alt={"Koli"} width={1920} height={1080} className = ""/>
+                <Image src={"/koli.png"} alt={"Koli"} width={500} height={500} className = "w-full h-auto brightness-50"/>
+                <div className="flex flex-col absolute font-black top-0 left-0 w-full h-full items-center justify-center mt-40">
+                    <h2 className = "text-4xl font-black text-right w-1/2">{"Felvételi kérdőív beküldése"}</h2>
+                    <div className = "text-[20rem] text-rajk-green text-center -mt-25">{"Rajk"}</div>
+                    <Countdown targetDate={new Date('2025-12-31T23:59:59')} className={"text-right w-1/2"}/>
+                </div>
             </div>
             <div className = "flex flex-col items-center bg-rajk-green">
                 
                 <h1 className = "text-6xl font-bold mb-4 mt-4 text-center">{"Ajtókat nyitunk a világra"}
-                    <br/> {"-Rajk a Szakkollégium-"}</h1>
+                    <br/> {"-Rajk Szakkollégium-"}</h1>
                 {/*<div className = "flex flex-row items-center gap-6 justify-center mb-4">*/}
                 <div className = "grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <div className = "flex flex-col self-end items-end">
