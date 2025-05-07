@@ -1,7 +1,7 @@
-import './(app)/globals.css';
+import '../../globals.css';
 import ActionButton from "@/components/ActionButton";
 import {ArrowRight} from "lucide-react";
-import Layout from "./(app)/layout";
+import Layout from "../../layout";
 
 export default function NotFound() {
     return (
