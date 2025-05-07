@@ -2,9 +2,11 @@ import ActionButton from "@/components/ActionButton";
 import {ArrowRight} from "lucide-react";
 import SubTitle from "@/components/SubTitle";
 import IconTitle from "@/components/IconTitle";
+import VertNavbar from "@/components/vertNavbar";
 
 export default function Home() {
     return (<>
+            <VertNavbar/>
             <div>
                 <iframe
                     src = "https://www.youtube.com/embed/lJgPfSw4w2c?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1"

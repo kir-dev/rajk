@@ -6,15 +6,16 @@ import LanguageSelector from "@/components/NavBar/LanguageSelector";
 import MobileNavBar from "@/components/NavBar/MobileNavBar";
 import {navItems} from "@/utils/navbar-structure";
 import ExtraNavBarStrip from "@/components/NavBar/ExtraNavBarStrip";
+import Link from "next/link";
 
 export default function NavBar() {
     return (
         <div className='flex flex-col relative'>
             <ExtraNavBarStrip></ExtraNavBarStrip>
             <div className = 'bg-rajk-green w-full p-4 flex justify-between  '>
-                <div className = 'mt-1'>
+                <Link href={"/"} className = 'mt-1'>
                     <Image height = {120} width = {120} src = '/rajk_logo2_white.png' alt = 'Rajka'></Image>
-                </div>
+                </Link>
                 <div className = 'max-lg:hidden flex justify-end w-full gap-2 w-full items-center'>
                     {navItems.map((item) => (
                         <div key = {item.label}>
