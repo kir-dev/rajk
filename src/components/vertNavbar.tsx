@@ -46,7 +46,7 @@ const TableOfContents = () => {
                         <button
                             onClick={() => scrollToSection(section.id)}
                             className={cn(
-                                "text-sm transition-colors pl-2 border-l-2",
+                                "text-sm transition-colors pl-2 border-l-2 text-left",
                                 activeSection === section.id
                                     ? "text-[#022029] border-[#022029]"
                                     : "text-[#02202999] hover:text-[#022029cc] border-transparent",
