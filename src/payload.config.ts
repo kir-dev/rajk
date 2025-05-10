@@ -19,26 +19,41 @@ import {FAQs} from "@/collections/FAQs";
 import {Reports} from "@/collections/Reports";
 import {Apply_Timeline_Event} from "@/collections/Apply_Timeline_Event";
 import {About_Timeline_Event} from "@/collections/About_Timeline_Event";
+import {Applicants} from "@/collections/Applicants";
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
-    user: 'users',
+    user: "users",
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Sponsors, Groups, People, Awards, Awardees, TDKs, FAQs, Reports, Apply_Timeline_Event, About_Timeline_Event],
+  collections: [
+    Users,
+    Media,
+    Sponsors,
+    Groups,
+    People,
+    Applicants,
+    Awards,
+    Awardees,
+    TDKs,
+    FAQs,
+    Reports,
+    Apply_Timeline_Event,
+    About_Timeline_Event,
+  ],
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
+    outputFile: path.resolve(dirname, "payload-types.ts"),
   },
   db: vercelPostgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || '',
+      connectionString: process.env.DATABASE_URI || "",
     },
   }),
   sharp,
@@ -46,4 +61,4 @@ export default buildConfig({
     payloadCloudPlugin(),
     // storage-adapter-placeholder
   ],
-})
+});

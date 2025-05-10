@@ -72,6 +72,7 @@ export interface Config {
     sponsors: Sponsor;
     groups: Group;
     people: Person;
+    applicants: Applicant;
     awards: Award;
     awardees: Awardee;
     tdks: Tdk;
@@ -90,6 +91,7 @@ export interface Config {
     sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
     groups: GroupsSelect<false> | GroupsSelect<true>;
     people: PeopleSelect<false> | PeopleSelect<true>;
+    applicants: ApplicantsSelect<false> | ApplicantsSelect<true>;
     awards: AwardsSelect<false> | AwardsSelect<true>;
     awardees: AwardeesSelect<false> | AwardeesSelect<true>;
     tdks: TdksSelect<false> | TdksSelect<true>;
@@ -225,6 +227,16 @@ export interface Person {
   id: number;
   name: string;
   picture?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "applicants".
+ */
+export interface Applicant {
+  id: number;
+  email: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -433,6 +445,10 @@ export interface PayloadLockedDocument {
         value: number | Person;
       } | null)
     | ({
+        relationTo: 'applicants';
+        value: number | Applicant;
+      } | null)
+    | ({
         relationTo: 'awards';
         value: number | Award;
       } | null)
@@ -570,6 +586,15 @@ export interface GroupsSelect<T extends boolean = true> {
 export interface PeopleSelect<T extends boolean = true> {
   name?: T;
   picture?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "applicants_select".
+ */
+export interface ApplicantsSelect<T extends boolean = true> {
+  email?: T;
   updatedAt?: T;
   createdAt?: T;
 }
