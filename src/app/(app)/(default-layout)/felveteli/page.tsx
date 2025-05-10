@@ -94,14 +94,19 @@ export default function ApplyPage() {
                                        className="border border-gray-300 p-2 rounded w-full mb-4"
                                        onChange={(e) => setEmail(e.target.value)}
                                 />
-                                <a
-                                    href="/2025_Rajk-kerdoiv.docx"
-                                    download
-                                    className="max-md:mx-8 max-md:justify-center m-2 font-bold text-foreground py-2 px-4 rounded-md h-fit flex gap-2 items-center hover:bg-green-700 duration-100 inline-flex bg-green-800"
-                                    onClick={handleEmailReg}
-                                >
-                                    Küldés
-                                </a>
+                                <div className="flex flex-row w-full">
+                                    <a
+                                        href="/2025_Rajk-kerdoiv.docx"
+                                        download
+                                        className="max-md:mx-8 max-md:justify-center m-2 font-bold text-foreground py-2 px-4 rounded-md h-fit flex gap-2 items-center hover:bg-green-700 duration-100 inline-flex bg-green-800"
+                                        onClick={handleEmailReg}
+                                    >
+                                        Küldés
+                                    </a>
+                                    <button className='m-2 font-bold text-black py-2 px-4 rounded-md h-fit flex gap-2 items-center hover:bg-gray-400 bg-gray-300 duration-100' onClick={() => setEmailReg(false)}>
+                                        Bezárás
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
