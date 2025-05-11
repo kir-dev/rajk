@@ -1,6 +1,6 @@
 export const EmailReg = async (email: string) => {
     try {
-        const response = await fetch(`${process.env.FRONTEND_URL}/api/applicants`, {
+        const response = await fetch(`/api/applicants`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
