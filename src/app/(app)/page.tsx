@@ -19,7 +19,7 @@ export default function Home() {
                     Menjünk
                     <ArrowRight size={20} />
                 </ActionButton>
-                <p>A régi weboldal további tartalmai sajnos átmenetileg nem elérthetőek :/</p>
+                <p className='font-black'>A régi weboldal további tartalmai sajnos átmenetileg nem elérthetőek :/</p>
             </div>
         </>
     );
