@@ -29,7 +29,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang = "en">
-            
+            <head>
+                <script defer data-domain = "rajk.kir-dev.hu" src = "https://visit.kir-dev.hu/js/script.js"></script>
+            </head>
             <body
                 className = {`${robotoCondensed.variable} ${openSans.variable} antialiased font-open-sans`}
             >
