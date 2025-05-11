@@ -38,7 +38,7 @@ export default function ApplyPage() {
                         <div className="flex flex-col md:self-end md:items-end">
                             <p className="text-4xl md:text-5xl xl:text-6xl mx-8 lg:w-1/2 md:text-right font-bold mr-2 mb-4">Töltsd
                                 le a 2025-ös kérdőívet!</p>
-                            <ActionButton className="bg-green-800" onClick={() => setEmailReg(true)}>
+                            <ActionButton className="max-md:mx-8 max-md:justify-center m-2 font-bold text-foreground py-2 px-4 rounded-md h-fit flex gap-2 items-center hover:bg-green-700 duration-100 inline-flex bg-green-800" onClick={() => setEmailReg(true)}>
                                 <Download className="mr-2" size={20}/>
                                 Letöltés
                             </ActionButton>
@@ -88,22 +88,22 @@ export default function ApplyPage() {
                         <div className="fixed inset-0 flex items-center justify-center z-30">
                             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                                 <h2 className="text-2xl font-bold mb-4">Email cím megadása</h2>
-                                <p className="mb-4">Kérlek add meg az email címedet a letöltéshez, hogy a jövőben
-                                    fel tudjuk venni veled a kapcsolatot</p>
+                                <p className="mb-4">Kérjük add meg az email címedet a letöltéshez, hogy a jövőben
+                                    fel tudjuk venni veled a kapcsolatot!</p>
                                 <input type="text" placeholder="Email cím"
                                        className="border border-gray-300 p-2 rounded w-full mb-4"
                                        onChange={(e) => setEmail(e.target.value)}
                                 />
-                                <div className="flex flex-row w-full">
+                                <div className="flex flex-row w-full gap-2">
                                     <a
                                         href="/2025_Rajk-kerdoiv.docx"
                                         download
-                                        className="max-md:mx-8 max-md:justify-center m-2 font-bold text-foreground py-2 px-4 rounded-md h-fit flex gap-2 items-center hover:bg-green-700 duration-100 inline-flex bg-green-800"
+                                        className="max-md:mx-8 max-md:justify-center font-bold text-foreground py-2 px-4 rounded-md h-fit flex gap-2 items-center hover:bg-green-700 duration-100 inline-flex bg-green-800"
                                         onClick={handleEmailReg}
                                     >
-                                        Küldés
+                                        Letöltés
                                     </a>
-                                    <button className='m-2 font-bold text-black py-2 px-4 rounded-md h-fit flex gap-2 items-center hover:bg-gray-400 bg-gray-300 duration-100' onClick={() => setEmailReg(false)}>
+                                    <button className='font-bold text-black py-2 px-4 rounded-md h-fit flex gap-2 items-center hover:bg-gray-400 bg-gray-300 duration-100' onClick={() => setEmailReg(false)}>
                                         Bezárás
                                     </button>
                                 </div>

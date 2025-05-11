@@ -20,7 +20,7 @@ export default function Countdown({ targetDate, className }: { targetDate: Date,
     }
 
     return (
-        <div className={cn("text-white text-3xl flex gap-4 font-bold", className)}>
+        <div className={cn("text-white w-full flex justify-center p-4 gap-4 font-bold", className)}>
             <CountdownElement value={timeLeft.days} label="nap" />
             <CountdownElement value={timeLeft.hours} label="óra" />
             <CountdownElement value={timeLeft.minutes} label="perc" />
@@ -32,7 +32,7 @@ export default function Countdown({ targetDate, className }: { targetDate: Date,
 function CountdownElement({ value, label }: { value: number, label: string }) {
     return (
         <div className={`flex flex-col items-center border-2 p-2 rounded-lg w-28`}>
-            <span className="text-4xl md:text-7xl">{value}</span> <span className="md:text-2xl font-normal">{label}</span>
+            <span className="text-3xl md:text-7xl">{value}</span> <span className="text-sm md:text-2xl font-normal">{label}</span>
         </div>
     )
 }
