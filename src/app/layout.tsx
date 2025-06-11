@@ -1,6 +1,6 @@
 import type {Metadata} from "next";
 import {Open_Sans, Roboto_Condensed} from "next/font/google";
-import "./globals.css";
+import "./(app)/globals.css";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/app/(app)/footer";
 
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: "Rajk",
     description: "Rajk Szakkollégium",
     icons: {
-        icon: "https://www.rajk.eu/favicon.ico",
+        icon: "/favicon.ico",
     },
 };
 
@@ -29,7 +29,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang = "en">
-            
+            <head>
+                <script defer data-domain = "rajk.kir-dev.hu" src = "https://visit.kir-dev.hu/js/script.js"></script>
+            </head>
             <body
                 className = {`${robotoCondensed.variable} ${openSans.variable} antialiased font-open-sans`}
             >

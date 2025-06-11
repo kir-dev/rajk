@@ -16,7 +16,7 @@ opacity="1"
 
 export default function Footer() {
     const [showScrollTop, setShowScrollTop] = useState(false)
-
+    
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 300) {
@@ -25,104 +25,86 @@ export default function Footer() {
                 setShowScrollTop(false)
             }
         }
-
+        
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
-
+    
     const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: "smooth" })
+        window.scrollTo({top: 0, behavior: "smooth"})
     }
-
+    
     return (
-        <footer className="relative bg-rajk-green text-white">
+        <footer className = "relative bg-rajk-green text-white w-full">
             {/* Wavy border */}
-            <div className="absolute top-0 left-0 w-full overflow-hidden leading-0 transform translate-y-[-98%]">
+            <div className = "absolute top-0 left-0 w-full overflow-hidden leading-0 transform translate-y-[-98%]">
                 <svg
-                    className="relative block w-full h-[70px]"
-                    data-name="Layer 1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 1200 120"
-                    preserveAspectRatio="none"
+                    className = "relative block w-full h-[70px]"
+                    data-name = "Layer 1"
+                    xmlns = "http://www.w3.org/2000/svg"
+                    viewBox = "0 0 1200 120"
+                    preserveAspectRatio = "none"
                 >
-
+                    
                     <path
-                        d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-                        fill="#23A455"
+                        d = "M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                        fill = "#23A455"
                     ></path>
                 </svg>
             </div>
-
-            <div className="container mx-auto px-6 pt-16 pb-8">
-            <div className="flex items-end justify-between max-lg:flex-col max-lg:items-start gap-8">
-                    {/* Logo and left column */}
-                    <div className="space-y-6">
+            
+            <div className = "px-6 pt-4 pb-8 border w-full">
+                {/* Logo and left column */}
+                <div
+                    className = "flex items-end justify-between max-lg:flex-col max-lg:items-start gap-8 w-full">
+                    <div>
                         <Image
-                            src="/rajk_logo2_white.png"
-                            alt="Rajk Szakkollégium Logo"
-                            width={150}
-                            height={150}
-                            className="mb-4"
+                            src = "/rajk_logo2_white.png"
+                            alt = "Rajk Szakkollégium Logo"
+                            width = {150}
+                            height = {150}
+                            className = "mb-4"
                         />
-                        <div className="">
+                        <div>
                             <p>Rajk Szakkollégium Alapítvány</p>
                             <p>1085, Budapest, Horánszky u. 6.</p>
                             <p>Adószám: 19624806-2-42</p>
                             <p>Bankszámlaszám: 10700347-69549474-51100005 (CIB)</p>
                         </div>
                     </div>
-
-                    {/* Middle column */}
-                    {/*<div className="space-y-6">
-                        <h3 className="text-xl font-semibold mb-4">Projektjeink</h3>
-                        <div className="space-y-2">
-                            <p>
-                                Szabó Kálmán
-                                <br />
-                                Tehetségprogram
-                            </p>
-                            <p></p>
-                            <p className="mt-6">Szexi Közgáz Blog</p>
-                            <p className="mt-6">Rajk Agóra</p>
-                        </div>
-                    </div>*/}
-
-                    {/* Right column */}
-                    <div className="space-y-6">
-                        <h3 className="text-xl font-semibold mb-4">Elérhetőségünk</h3>
+                    
+                    <div>
+                        <h3 className = "text-xl font-semibold mb-4">Elérhetőségünk</h3>
                         <div>
-                            <p className="font-bold">diakbizottsag@rajk.eu</p>
+                            <p className = "font-bold">diakbizottsag@rajk.eu</p>
                             <p>Diákbizottság</p>
                             <p className = "mt-6 font-bold">+36303508715</p>
                             <p>Főző Zsolt, kollégiumi igazgató</p>
                         </div>
                     </div>
-                <div></div>
-            </div>
-
-                {/* Social media icons */}
-                <div className="flex justify-end mt-16 space-x-6">
-                    <Link href="#" className="hover:opacity-80 transition-opacity">
-                        <Facebook size={28} />
-                    </Link>
-                    <Link href="#" className="hover:opacity-80 transition-opacity">
-                        <Instagram size={28} />
-                    </Link>
-                    <Link href="#" className="hover:opacity-80 transition-opacity">
-                        <Youtube size={28} />
-                    </Link>
+                    
+                    {/* Social media icons */}
+                    <div className = "flex justify-end mt-16 mr-24 gap-8">
+                        <Link href = "#" className = "hover:opacity-80 transition-opacity">
+                            <Facebook size = {28}/>
+                        </Link>
+                        <Link href = "#" className = "hover:opacity-80 transition-opacity">
+                            <Instagram size = {28}/>
+                        </Link>
+                        <Link href = "#" className = "hover:opacity-80 transition-opacity">
+                            <Youtube size = {28}/>
+                        </Link>
+                        {showScrollTop && (
+                            <button
+                                onClick = {scrollToTop}
+                                className = "fixed bottom-8 right-8 bg-white text-rajk-green p-3 rounded-md shadow-md hover:bg-gray-100 transition-all"
+                                aria-label = "Scroll to top"
+                            >
+                                <ArrowUp size = {24}/>
+                            </button>
+                        )}
+                    </div>
                 </div>
-
-                {/* Scroll to top button */}
-                {showScrollTop && (
-                    <button
-                        onClick={scrollToTop}
-                        className="fixed bottom-8 right-8 bg-white text-rajk-green p-3 rounded-md shadow-md hover:bg-gray-100 transition-all"
-                        aria-label="Scroll to top"
-                    >
-                        <ArrowUp size={24} />
-                    </button>
-                )}
             </div>
         </footer>
     )

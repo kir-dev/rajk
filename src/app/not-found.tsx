@@ -1,11 +1,9 @@
-import '../../globals.css';
+import './(app)/globals.css';
 import ActionButton from "@/components/ActionButton";
 import {ArrowRight} from "lucide-react";
-import Layout from "../../layout";
 
 export default function NotFound() {
     return (
-        <Layout>
             <div
                 className = "min-h-screen flex flex-col items-center justify-center text-center bg-foreground background">
                 <svg className = "" version = "1.1" xmlns = "http://www.w3.org/2000/svg"
@@ -412,6 +410,5 @@ export default function NotFound() {
                     <ArrowRight size = {20}/>
                 </ActionButton>
             </div>
-        </Layout>
     );
 }

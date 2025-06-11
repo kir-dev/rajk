@@ -14,7 +14,7 @@ export default function MobileNavBar() {
             {menuOpen ? <X size = {32} color = "white"/> : <Menu size = {32} color = "white"/>}
         </button>
         {menuOpen && (
-        <div className="absolute left-0 top-full w-full bg-white shadow-md animate-slide-down ">
+        <div className="absolute left-0 top-full w-full bg-white shadow-md animate-slide-down z-50">
           <div className="flex flex-col gap-2 px-4 bg-rajk-green pb-4 pl-8 w-full">
             {navItems.map((item) => (
               <div key={item.label}>

@@ -1,5 +1,5 @@
 // components/Countdown.tsx
-'use client'
+'use client';
 
 import {useEffect, useState} from 'react'
 import cn from "@/utils/concatenate";
@@ -20,19 +20,19 @@ export default function Countdown({ targetDate, className }: { targetDate: Date,
     }
 
     return (
-        <div className={cn("text-white text-3xl flex gap-8 font-bold", className)}>
-            <div className="flex flex-col items-center">
-                <span className="text-4xl md:text-7xl">{timeLeft.days}</span> <span className="md:text-2xl">nap</span>
-            </div>
-            <div className="flex flex-col items-center">
-                <span className="text-4xl md:text-7xl">{timeLeft.hours}</span> <span className="md:text-2xl">óra</span>
-            </div>
-            <div className="flex flex-col items-center">
-                <span className="text-4xl md:text-7xl">{timeLeft.minutes}</span> <span className="md:text-2xl">perc</span>
-            </div>
-            <div className="flex flex-col items-center">
-                <span className="text-4xl md:text-7xl">{timeLeft.seconds}</span> <span className="md:text-2xl">sec</span>
-            </div>
+        <div className={cn("text-white w-full flex justify-center p-4 gap-4 font-bold", className)}>
+            <CountdownElement value={timeLeft.days} label="nap" />
+            <CountdownElement value={timeLeft.hours} label="óra" />
+            <CountdownElement value={timeLeft.minutes} label="perc" />
+            <CountdownElement value={timeLeft.seconds} label="mp" />
+        </div>
+    )
+}
+
+function CountdownElement({ value, label }: { value: number, label: string }) {
+    return (
+        <div className={`flex flex-col items-center border-2 p-2 rounded-lg w-28`}>
+            <span className="text-3xl md:text-7xl">{value}</span> <span className="text-sm md:text-2xl font-normal">{label}</span>
         </div>
     )
 }
