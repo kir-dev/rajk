@@ -1,10 +1,11 @@
 interface WawyBorderProps {
     direction: "top" | "bottom";
+    placement
 }
 
 export default function WawyBorder(props: WawyBorderProps) {
     return (
-        <div className = {`absolute top-0 left-0 w-full overflow-hidden leading-0 transform ${(props.direction === "top") ? "translate-y-[-98%]" : "translate-y-[98%] rotate-180"} z-10`}>
+        <div className = {`absolute left-0 w-full overflow-hidden leading-0 transform ${(props.direction === "top") ? "translate-y-[-98%] top-0" : "translate-y-[98%] rotate-180 bottom-0"} z-10`}>
             <svg
                 className = "relative block w-full h-[70px]"
                 data-name = "Layer 1"

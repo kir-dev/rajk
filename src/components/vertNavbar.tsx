@@ -39,8 +39,8 @@ const TableOfContents = () => {
     ]
 
     return (
-        <nav className="fixed top-4 self-start p-4 backdrop-blur-md bg-white/30 rounded-lg shadow-lg h-full justify-between z-20">
-            <ul className="flex flex-col justify-center h-full">
+        <nav className="sticky top-4 self-start p-4 backdrop-blur-md bg-white/30 rounded-lg shadow-lg h-full justify-between z-20">
+            <ul className="flex flex-col justify-center h-full space-y-4">
                 {sections.map((section) => (
                     <li key={section.id} className="">
                         <button

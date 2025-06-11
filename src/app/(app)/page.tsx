@@ -21,7 +21,7 @@ export default function Home() {
                     className="aspect-video w-full"
                 />
             </div>
-            <div className="flex flex-row w-full bg-foreground overflow-auto">
+            <div className="flex flex-row h-screen w-full bg-foreground overflow-auto">
                 <VertNavbar />
                 <div className="bg-foreground h-full container mx-auto px-4 flex flex-col">
                     <Section id={"kozosseg"} title={"Közösség"}>
@@ -44,11 +44,37 @@ export default function Home() {
                             />
                             <div className="relative">
                                 <WawyBorder direction={"top"}/>
-                                <div className="flex flex-row justify-between items-center p-4 bg-rajk-green rounded-b-2xl">
-                                    <div className="flex flex-col w-full h-[70px]">
-                                        <p>A 2024/25-ös tanévben</p>
-                                        <p>51</p>
-                                        <p>Kurzus</p>
+                                <div className="bg-rajk-green text-white py-16 px-8">
+                                    <div className="max-w-6xl mx-auto">
+                                        {/* Header */}
+                                        <div className="text-center mb-16">
+                                            <h2 className="text-4xl md:text-5xl font-bold mb-2">SZAKMA</h2>
+                                            <div className="w-20 h-1 bg-white mx-auto"></div>
+                                        </div>
+
+                                        {/* Statistics Grid */}
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                                            {/* First Stat */}
+                                            <div className="space-y-4">
+                                                <p className="text-lg md:text-xl font-light">A 2022/23-es tanévben</p>
+                                                <div className="text-6xl md:text-7xl font-bold">48</div>
+                                                <p className="text-lg md:text-xl font-light">Kurzus</p>
+                                            </div>
+
+                                            {/* Second Stat */}
+                                            <div className="space-y-4">
+                                                <p className="text-lg md:text-xl font-light">Az elmúlt 5 évben</p>
+                                                <div className="text-6xl md:text-7xl font-bold">201</div>
+                                                <p className="text-lg md:text-xl font-light">Leadott TDK</p>
+                                            </div>
+
+                                            {/* Third Stat */}
+                                            <div className="space-y-4">
+                                                <p className="text-lg md:text-xl font-light">Az elmúlt 5 év alatt</p>
+                                                <div className="text-6xl md:text-7xl font-bold">93</div>
+                                                <p className="text-lg md:text-xl font-light">Helyezett TDK</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <WawyBorder direction={"bottom"}/>
