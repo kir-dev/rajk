@@ -7,6 +7,7 @@ import IconTitle from "@/components/IconTitle";
 import VertNavbar from "@/components/vertNavbar";
 import Section from "@/components/Section";
 import {PillarCard} from "@/components/PillarCard";
+import WawyBorder from "@/components/WawyBorder";
 
 export default function Home() {
     return (
@@ -20,11 +21,11 @@ export default function Home() {
                     className="aspect-video w-full"
                 />
             </div>
-            <div className="flex flex-row bg-foreground flex-grow overflow-auto">
+            <div className="flex flex-row w-full bg-foreground overflow-auto">
                 <VertNavbar />
-                <div className="bg-foreground h-full w-full flex flex-col">
+                <div className="bg-foreground h-full container mx-auto px-4 flex flex-col">
                     <Section id={"kozosseg"} title={"Közösség"}>
-                        <div className="flex flex-col w-3/4 h-full rounded-2xl">
+                        <div className="flex flex-col w-full h-full rounded-2xl">
                             <PillarCard
                                 title="Közösség"
                                 description="A rajkosság egy életre szól. Közös élmények sokasága kovácsolja össze az itt végzetteket, ez a kapcsolat pedig a végzés után sem ér véget: A kollégium mindig visszavárja végzettjeit."
@@ -34,17 +35,28 @@ export default function Home() {
                         </div>
                     </Section>
                     <Section id={"szakma"} title={"Szakma"}>
-                        <div className="flex flex-col w-3/4 h-full rounded-2xl">
+                        <div className="flex flex-col h-full rounded-2xl">
                             <PillarCard
                                 title="Szakma"
                                 description="A Rajk segíti tagjait a fejlődésben, hogy célokat tűzzenek maguk elé és el is érjék azokat. Felkészültté teszi őket a társadalom egészét érintő kérdésekben is."
                                 icon={UsersRound}
                                 buttonText="Tovább"
                             />
+                            <div className="relative">
+                                <WawyBorder direction={"top"}/>
+                                <div className="flex flex-row justify-between items-center p-4 bg-rajk-green rounded-b-2xl">
+                                    <div className="flex flex-col w-full h-[70px]">
+                                        <p>A 2024/25-ös tanévben</p>
+                                        <p>51</p>
+                                        <p>Kurzus</p>
+                                    </div>
+                                </div>
+                                <WawyBorder direction={"bottom"}/>
+                            </div>
                         </div>
                     </Section>
                     <Section id={"tarsadalmi"} title={"Társadalmi felelősségvállalás"}>
-                        <div className="flex flex-col w-3/4 h-full rounded-2xl">
+                        <div className="flex flex-col h-full rounded-2xl">
                             <PillarCard
                                 title="Társadalmi felelősség"
                                 description="Egy rajkos társadalmi szinten gondolkodik: Bővíti ismereteit a közélet és közpolitika terén, érzékenyen kapcsolódik a mindenkori társadalmi problémákhoz."

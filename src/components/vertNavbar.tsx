@@ -39,10 +39,10 @@ const TableOfContents = () => {
     ]
 
     return (
-        <nav className="sticky top-4 self-start p-4">
-            <ul className="space-y-2">
+        <nav className="fixed top-4 self-start p-4 backdrop-blur-md bg-white/30 rounded-lg shadow-lg h-full justify-between z-20">
+            <ul className="flex flex-col justify-center h-full">
                 {sections.map((section) => (
-                    <li key={section.id}>
+                    <li key={section.id} className="">
                         <button
                             onClick={() => scrollToSection(section.id)}
                             className={cn(

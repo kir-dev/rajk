@@ -2,6 +2,7 @@
 
 import {ArrowRightIcon, LucideIcon} from "lucide-react"
 import ActionButton from "@/components/ActionButton";
+import WawyBorder from "@/components/WawyBorder";
 
 interface PillarCardProps {
     title: string
@@ -13,7 +14,7 @@ interface PillarCardProps {
 
 export function PillarCard({ title, description, icon: Icon, buttonText, onAction }: PillarCardProps) {
     return (
-        <div className="flex flex-col gap-4 h-full transition-all font-bold duration-200 hover:shadow-md text-black border-2 rounded-2xl p-4">
+        <div className="flex flex-col gap-4 h-full transition-all font-bold duration-200 hover:shadow-md text-black border-2 rounded-2xl mb-35">
             <div className="flex flex-col items-center h-full rounded-2xl ">
                 <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-2xl">
                     <Icon className="w-12 h-12 rounded-2xl text-rajk-green" />

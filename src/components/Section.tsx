@@ -6,9 +6,9 @@ interface SectionProps {
     children: ReactNode
 }
 
-const Section = forwardRef<HTMLElement, SectionProps>(({ id, title, children }, ref) => {
+const Section = forwardRef<HTMLElement, SectionProps>(({ id, children }, ref) => {
     return (
-        <section id={id} className="py-10" ref={ref}>
+        <section id={id} className="py-10 w-full" ref={ref}>
             {children}
         </section>
     )
