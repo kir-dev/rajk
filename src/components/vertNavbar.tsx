@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react"
 import cn from "@/utils/concatenate";
+import {Icon, LucideIcon} from "lucide-react";
+import {GraduationCap, UsersRound, Handshake} from "lucide-react";
 
 const TableOfContents = () => {
     const [activeSection, setActiveSection] = useState("")
@@ -32,30 +34,35 @@ const TableOfContents = () => {
         }
     }
 
+    const icons: LucideIcon[] = [GraduationCap, UsersRound, Handshake]
+
     const sections = [
-        { id: "kozosseg", title: "Közösség" },
-        { id: "szakma", title: "Szakma" },
-        { id: "tarsadalmi", title: "Társadalmi felelősségvállaás" },
+        { id: "kozosseg", title: "Közösség", Icon: UsersRound },
+        { id: "szakma", title: "Statistics", Icon: GraduationCap },
+        { id: "tarsadalmi", title: "Társadalmi felelősségvállalás", Icon: Handshake },
     ]
 
     return (
         <nav className="sticky top-4 self-start p-4 backdrop-blur-md bg-white/30 rounded-lg shadow-lg h-full justify-between z-20">
-            <ul className="flex flex-col justify-center h-full space-y-4">
-                {sections.map((section) => (
-                    <li key={section.id} className="">
-                        <button
-                            onClick={() => scrollToSection(section.id)}
-                            className={cn(
-                                "text-sm transition-colors pl-2 border-l-2 text-left",
-                                activeSection === section.id
-                                    ? "text-[#022029] border-[#022029]"
-                                    : "text-[#02202999] hover:text-[#022029cc] border-transparent",
-                            )}
-                        >
-                            {section.title}
-                        </button>
-                    </li>
-                ))}
+            <ul className="flex flex-col justify-start h-full space-y-4 relative">
+                <div className="bg-rajk-green sticky top-1/2 space-y-4 p-4 rounded-lg shadow-lg text-white">
+                    {sections.map((section) => (
+                        <li key={section.id} className="flex flex-row">
+                            <section.Icon className="w-7 h-7 rounded-2xl text-white" />
+                            <button
+                                onClick={() => scrollToSection(section.id)}
+                                className={cn(
+                                    "text-sm transition-colors pl-2 border-l-2 text-left text-white",
+                                    activeSection === section.id
+                                        ? "text-[#022029] border-[#022029]"
+                                        : "text-[#02202999] hover:text-[#022029cc] border-transparent",
+                                )}
+                            >
+                                - {section.title}
+                            </button>
+                        </li>
+                    ))}
+                </div>
             </ul>
         </nav>
     )
