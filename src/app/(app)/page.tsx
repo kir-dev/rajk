@@ -19,10 +19,9 @@ export default function Home() {
                     className="aspect-video w-full"
                 />
             </div>
-            <div className="flex flex-row h-fit w-full">
+            <div className="flex flex-row h-fit w-full relative">
                 <div className="bg-rajk-green relative">
                     <VertNavbar />
-                    <WawyBorder direction={"bottom"} />
                 </div>
                 <div className="bg-foreground h-full container mx-auto flex flex-col">
                     <Section id={"kozosseg"} title={"Közösség"}>
@@ -33,7 +32,7 @@ export default function Home() {
                                 icon={UsersRound}
                                 buttonText="Tovább"
                             />
-                            <Statistics />
+                            <Statistics isLast={false} />
                         </div>
                     </Section>
                     <Section id={"szakma"} title={"Szakma"}>
@@ -44,7 +43,7 @@ export default function Home() {
                                 icon={GraduationCap}
                                 buttonText="Tovább"
                             />
-                            <Statistics />
+                            <Statistics isLast={false} />
                         </div>
                     </Section>
                     <Section id={"tarsadalmi"} title={"Társadalmi felelősségvállalás"}>
@@ -55,10 +54,11 @@ export default function Home() {
                                 icon={Handshake}
                                 buttonText="Tovább"
                             />
-                            <Statistics />
+                            <Statistics isLast={true} />
                         </div>
                     </Section>
                 </div>
+                <WawyBorder direction={"bottom"}/>
             </div>
         </div>
     );

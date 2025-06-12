@@ -14,7 +14,7 @@ interface PillarCardProps {
 
 export function PillarCard({ title, description, icon: Icon, buttonText, onAction }: PillarCardProps) {
     return (
-        <div className="flex flex-col gap-4 h-full w-full transition-all font-bold duration-200 text-black rounded-2xl mb-20">
+        <div className="flex flex-col gap-4 h-full w-full pt-10 transition-all font-bold duration-200 text-black rounded-2xl mb-20">
             <div className="flex flex-col items-center h-full rounded-2xl ">
                 <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-2xl">
                     <Icon className="w-12 h-12 rounded-2xl text-rajk-green" />

@@ -8,7 +8,7 @@ interface SectionProps {
 
 const Section = forwardRef<HTMLElement, SectionProps>(({ id, children }, ref) => {
     return (
-        <section id={id} className="py-10 w-full" ref={ref}>
+        <section id={id} className="pt-10 w-full" ref={ref}>
             {children}
         </section>
     )

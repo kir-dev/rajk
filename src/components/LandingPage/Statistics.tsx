@@ -1,6 +1,10 @@
 import WawyBorder from "@/components/WawyBorder";
 
-export default function Statistics(){
+interface StatisticsProps {
+    isLast?: boolean;
+}
+
+export default function Statistics(props: StatisticsProps) {
     return(
         <div className="relative">
             <WawyBorder direction={"top"}/>
@@ -37,7 +41,7 @@ export default function Statistics(){
                     </div>
                 </div>
             </div>
-            <WawyBorder direction={"bottom"}/>
+            {props.isLast ? null : <WawyBorder direction={"bottom"}/>}
         </div>
     )
 }
