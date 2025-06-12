@@ -1,17 +1,15 @@
 'use client'
 
-import ActionButton from "@/components/ActionButton";
-import {ArrowRight, GraduationCap, UsersRound, Handshake} from "lucide-react";
-import SubTitle from "@/components/SubTitle";
-import IconTitle from "@/components/IconTitle";
+import {GraduationCap, UsersRound, Handshake} from "lucide-react";
 import VertNavbar from "@/components/vertNavbar";
 import Section from "@/components/Section";
 import {PillarCard} from "@/components/PillarCard";
 import Statistics from "@/components/LandingPage/Statistics";
+import WawyBorder from "@/components/WawyBorder";
 
 export default function Home() {
     return (
-        <div className="min-h-screen flex flex-col pb-30 bg-foreground">
+        <div className="min-h-screen flex flex-col pb-40 bg-foreground">
             <div>
                 <iframe
                     src="https://www.youtube.com/embed/lJgPfSw4w2c?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1"
@@ -21,9 +19,10 @@ export default function Home() {
                     className="aspect-video w-full"
                 />
             </div>
-            <div className="flex flex-row h-fit w-full bg-foreground">
-                <div className="">
+            <div className="flex flex-row h-fit w-full">
+                <div className="bg-rajk-green relative">
                     <VertNavbar />
+                    <WawyBorder direction={"bottom"} />
                 </div>
                 <div className="bg-foreground h-full container mx-auto flex flex-col">
                     <Section id={"kozosseg"} title={"Közösség"}>
@@ -37,10 +36,10 @@ export default function Home() {
                             <Statistics />
                         </div>
                     </Section>
-                    <Section id={"szakma"} title={"Statistics"}>
+                    <Section id={"szakma"} title={"Szakma"}>
                         <div className="flex flex-col h-full rounded-2xl">
                             <PillarCard
-                                title="Statistics"
+                                title="Szakma"
                                 description="A Rajk segíti tagjait a fejlődésben, hogy célokat tűzzenek maguk elé és el is érjék azokat. Felkészültté teszi őket a társadalom egészét érintő kérdésekben is."
                                 icon={GraduationCap}
                                 buttonText="Tovább"

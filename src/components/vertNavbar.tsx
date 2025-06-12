@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import cn from "@/utils/concatenate";
-import {Icon, LucideIcon} from "lucide-react";
 import {GraduationCap, UsersRound, Handshake} from "lucide-react";
 
 const TableOfContents = () => {
@@ -34,18 +33,16 @@ const TableOfContents = () => {
         }
     }
 
-    const icons: LucideIcon[] = [GraduationCap, UsersRound, Handshake]
-
     const sections = [
         { id: "kozosseg", title: "Közösség", Icon: UsersRound },
-        { id: "szakma", title: "Statistics", Icon: GraduationCap },
+        { id: "szakma", title: "Szakma", Icon: GraduationCap },
         { id: "tarsadalmi", title: "Társadalmi felelősségvállalás", Icon: Handshake },
     ]
 
     return (
-        <nav className="sticky top-4 self-start p-4 backdrop-blur-md bg-white/30 rounded-lg shadow-lg h-full justify-between z-20">
+        <nav className="sticky top-1/2 self-start h-full justify-between z-20 pb-5">
             <ul className="flex flex-col justify-start h-full space-y-4 relative">
-                <div className="bg-rajk-green sticky top-1/2 space-y-4 p-4 rounded-lg shadow-lg text-white">
+                <div className="bg-rajk-green sticky top-1/2 space-y-4 p-4 rounded-lg text-white">
                     {sections.map((section) => (
                         <li key={section.id} className="flex flex-row">
                             <section.Icon className="w-7 h-7 rounded-2xl text-white" />
