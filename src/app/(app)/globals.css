@@ -5,13 +5,24 @@
     --foreground: #171717;*/
     --background: #0a0a0a;
     --foreground: #ededed;
-    --rajk-green: #23a455;
+    --rajk-green: #1C9647;
+    --rajk-cream: #FBFBEF;
+    --rajk-blue: #97D7FB;
+    --rajk-purple: #CDB3EE;
+
+    --bg-zold: url('/public/bg_zold.png');
+    --bg-kek: url('/public/bg_kek.png');
+    --bg-lila: url('/public/bg_lila.png');
+    --bg-bezs: url('/public/bg_bezs.png');
 }
 
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-rajk-green: var(--rajk-green);
+    --color-rajk-cream: var(--rajk-cream);
+    --color-rajk-blue: var(--rajk-blue);
+    --color-rajk-purple: var(--rajk-purple);
     --font-roboto-condensed: var(--font-roboto-condensed);
     --font-open-sans: var(--font-open-sans);
     --font-display: var(--font-roboto-condensed);

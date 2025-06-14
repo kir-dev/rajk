@@ -2,18 +2,23 @@ import WawyBorder from "@/components/WawyBorder";
 
 interface StatisticsProps {
     isLast?: boolean;
+    color: "green" | "blue" | "purple" | "cream";
+    szin: "zold" | "kek" | "lila" | "bezs";
 }
 
 export default function Statistics(props: StatisticsProps) {
+    console.log(props.color);
+    console.log(props.szin);
+    console.log('/bg_' + props.szin + '.png');
     return(
         <div className="relative">
-            <WawyBorder direction={"top"}/>
-            <div className="bg-rajk-green text-white py-16 px-8">
+            <WawyBorder direction={"top"} color={props.color} szin={props.szin}/>
+            <div className={`bg-[url('/public/bg_zold.png')] text-white py-16 px-8`}>
                 <div className="max-w-6xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-16">
                         <h2 className="text-4xl md:text-5xl font-bold mb-2">SZAKMA</h2>
-                        <div className="w-20 h-1 bg-white mx-auto"></div>
+                        <div className="w-20 h-1 mx-auto"></div>
                     </div>
 
                     {/* Statistics Grid */}
@@ -41,7 +46,7 @@ export default function Statistics(props: StatisticsProps) {
                     </div>
                 </div>
             </div>
-            {props.isLast ? null : <WawyBorder direction={"bottom"}/>}
+            {props.isLast ? null : <WawyBorder direction={"bottom"} color={props.color}/>}
         </div>
     )
 }

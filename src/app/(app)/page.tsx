@@ -20,7 +20,8 @@ export default function Home() {
                 />
             </div>
             <div className="flex flex-row h-fit w-full relative">
-                <div className="bg-rajk-green relative">
+                <div className="bg-[url('/flekk_zold.png')] border-2 border-r-black relative">
+                    <div className="w-1 h-full pb-5 ml-2 bg-rajk-cream absolute" />
                     <VertNavbar />
                 </div>
                 <div className="bg-foreground h-full container mx-auto flex flex-col">
@@ -32,7 +33,7 @@ export default function Home() {
                                 icon={UsersRound}
                                 buttonText="Tovább"
                             />
-                            <Statistics isLast={false} />
+                            <Statistics isLast={false} color={"purple"} szin={'lila'} />
                         </div>
                     </Section>
                     <Section id={"szakma"} title={"Szakma"}>
@@ -43,7 +44,7 @@ export default function Home() {
                                 icon={GraduationCap}
                                 buttonText="Tovább"
                             />
-                            <Statistics isLast={false} />
+                            <Statistics isLast={false} color={"blue"} szin={"kek"} />
                         </div>
                     </Section>
                     <Section id={"tarsadalmi"} title={"Társadalmi felelősségvállalás"}>
@@ -54,7 +55,7 @@ export default function Home() {
                                 icon={Handshake}
                                 buttonText="Tovább"
                             />
-                            <Statistics isLast={true} />
+                            <Statistics isLast={true} color={"green"} szin={"zold"} />
                         </div>
                     </Section>
                 </div>
