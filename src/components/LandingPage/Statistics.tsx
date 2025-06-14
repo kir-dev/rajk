@@ -7,13 +7,20 @@ interface StatisticsProps {
 }
 
 export default function Statistics(props: StatisticsProps) {
-    console.log(props.color);
-    console.log(props.szin);
-    console.log('/bg_' + props.szin + '.png');
+    const bgClass = (() => {
+        switch (props.szin) {
+            case "bezs": return "bg-bezs";
+            case "kek": return "bg-kek";
+            case "lila": return "bg-lila";
+            case "zold": return "bg-zold";
+            default: return "bg-zold";
+        }
+    })();
+
     return(
         <div className="relative">
             <WawyBorder direction={"top"} color={props.color} szin={props.szin}/>
-            <div className={`bg-[url('/public/bg_zold.png')] text-white py-16 px-8`}>
+            <div className={`${bgClass} text-white py-16 px-8`}>
                 <div className="max-w-6xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-16">
@@ -46,7 +53,7 @@ export default function Statistics(props: StatisticsProps) {
                     </div>
                 </div>
             </div>
-            {props.isLast ? null : <WawyBorder direction={"bottom"} color={props.color}/>}
+            {props.isLast ? null : <WawyBorder direction={"top"} color={props.color} szin={props.szin}/>}
         </div>
     )
 }

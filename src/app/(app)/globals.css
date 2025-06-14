@@ -9,11 +9,33 @@
     --rajk-cream: #FBFBEF;
     --rajk-blue: #97D7FB;
     --rajk-purple: #CDB3EE;
+}
 
-    --bg-zold: url('/public/bg_zold.png');
-    --bg-kek: url('/public/bg_kek.png');
-    --bg-lila: url('/public/bg_lila.png');
-    --bg-bezs: url('/public/bg_bezs.png');
+/* Define specific background classes instead of CSS variables */
+.bg-flekk-zold {
+    background-image: url('/bg_zold.png');
+}
+.bg-flekk-kek {
+    background-image: url('/flekk_kek.png');
+}
+.bg-flekk-lila {
+    background-image: url('/flekk_lila.png');
+}
+.bg-flekk-bezs {
+    background-image: url('/bg_bezs.png');
+}
+
+.bg-zold {
+    background-image: url('/lap_zold.png');
+}
+.bg-kek {
+    background-image: url('/lap_kek.png');
+}
+.bg-lila {
+    background-image: url('/lap_lila.png');
+}
+.bg-bezs {
+    background-image: url('/lap_bezs.png');
 }
 
 @theme inline {

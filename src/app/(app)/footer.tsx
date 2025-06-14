@@ -38,7 +38,7 @@ export default function Footer() {
     return (
         <footer className = "relative bg-rajk-green text-white w-full">
             {/* Wavy border */}
-            <WawyBorder direction={"top"}/>
+            <WawyBorder direction={"top"} color={"green"}/>
             
             <div className = "px-6 pt-4 pb-8 border w-full">
                 {/* Logo and left column */}

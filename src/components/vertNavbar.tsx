@@ -32,11 +32,11 @@ const TableOfContents = () => {
             <ul className="flex flex-col justify-start h-full space-y-4 relative">
                 <div className="sticky top-1/2 space-y-4 p-4 rounded-lg text-white">
                     {sections.map((section) => (
-                        <li key={section.id} className="flex flex-row bg-rajk-purple rounded-2xl">
+                        <li key={section.id} className="flex flex-row bg-[url('/bg_lila.png')] rounded-2xl">
                             <button
                                 onClick={() => scrollToSection(section.id)}
                                 className={cn(
-                                    "transition-colors pl-2 text-left text-foreground flex flex-col hover:text-blue-950",
+                                    "transition-colors p-2 text-left text-foreground flex flex-col hover:text-blue-950",
                                     activeSection === section.id
                                         ? "font-bold text-lg"
                                         : "text-white",
