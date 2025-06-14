@@ -53,7 +53,7 @@ export default function Statistics(props: StatisticsProps) {
                     </div>
                 </div>
             </div>
-            {props.isLast ? null : <WawyBorder direction={"top"} color={props.color} szin={props.szin}/>}
+            {props.isLast ? null : <WawyBorder direction={"bottom"} color={props.color} szin={props.szin}/>}
         </div>
     )
 }

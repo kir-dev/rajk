@@ -11,14 +11,14 @@ export default function WawyBorder(props: WawyBorderProps) {
             case "kek": return "/lap_kek.png";
             case "lila": return "/lap_lila.png";
             case "bezs": return "/lap_bezs.png";
-            default: return "";
+            default: return "/lap_zold.png";
         }
     };
 
     const bgImage = getBgImage();
 
     return (
-        <div className = {`absolute left-0 w-full overflow-hidden leading-0 transform ${(props.direction === "top") ? "translate-y-[-98%] top-0" : "translate-y-[98%] rotate-180 bottom-0"} z-10 bg-foreground`}>
+        <div className = {`absolute left-0 w-full overflow-hidden leading-none transform ${(props.direction === "top") ? "translate-y-[-98%] top-0" : "translate-y-[98%] rotate-180 bottom-0"} z-10 bg-foreground`}>
             <svg
                 className = "relative block w-full h-[70px]"
                 data-name = "Layer 1"

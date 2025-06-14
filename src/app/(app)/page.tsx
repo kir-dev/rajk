@@ -20,7 +20,7 @@ export default function Home() {
                 />
             </div>
             <div className="flex flex-row h-fit w-full relative">
-                <div className="bg-[url('/flekk_zold.png')] border-2 border-r-black relative">
+                <div className="bg-[url('/flekk_zold.png')] border-r-2 border-r-black relative">
                     <VertNavbar />
                 </div>
                 <div className="bg-foreground h-full container mx-auto flex flex-col">

@@ -28,17 +28,17 @@ const TableOfContents = () => {
     ]
 
     return (
-        <nav className="sticky top-1/2 self-start h-full justify-between z-20 pb-5">
+        <nav className="sticky top-1/3 self-start h-full justify-between z-20 pb-5">
             <ul className="flex flex-col justify-start h-full space-y-4 relative">
                 <div className="sticky top-1/2 space-y-4 p-4 rounded-lg text-white">
                     {sections.map((section) => (
-                        <li key={section.id} className="flex flex-row bg-[url('/bg_lila.png')] rounded-2xl">
+                        <li key={section.id} className="flex flex-row">
                             <button
                                 onClick={() => scrollToSection(section.id)}
                                 className={cn(
-                                    "transition-colors p-2 text-left text-foreground flex flex-col hover:text-blue-950",
+                                    "transition-all duration-200 p-2 text-left text-foreground flex flex-col hover: hover:text-blue-950 hover:scale-110 transform bg-[url('/bg_kek.png')] rounded-2xl w-full",
                                     activeSection === section.id
-                                        ? "font-bold text-lg"
+                                        ? "font-bold text-lg bg-[url('/bg_lila.png')]"
                                         : "text-white",
                                 )}
                             >
