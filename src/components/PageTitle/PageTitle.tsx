@@ -11,11 +11,11 @@ export default function PageTitle({text, className}: {
             {/* Background strips */}
             <div
                 className = "absolute top-0 left-0 w-full h-full -z-10 flex flex-col gap-4 pointer-events-none bg-rajk-green">
-                <Strip text = {"Rajk"} color={'purple'}/>
-                <Strip text = {text}  color={'blue'}/>
-                <Strip text = {text}  color={'blue'}/>
-                <Strip text = {"Sose érhet véget"}  color={'purple'}/>
-                <Strip text = {text}  color={'blue'}/>
+                <Strip text = {""}  color={2} rotation={76}/>
+                <Strip text = {"Rajk"} color={1}/>
+                <Strip text = {text}  color={0}/>
+                <Strip text = {"Sose érhet véget"}  color={1}/>
+                <Strip text = {text}  color={0}/>
             </div>
             
             <div className = 'py-2 pb-4 px-8 bg-rajk-cream flex flex-col items-center '>

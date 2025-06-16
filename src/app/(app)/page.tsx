@@ -1,6 +1,8 @@
 import ActionButton from "@/components/ActionButton";
 import {ArrowRight} from "lucide-react";
 import SubTitle from "@/components/PageTitle/SubTitle";
+import PageTitle from "@/components/PageTitle/PageTitle";
+import React from "react";
 
 export default function Home() {
     return (<>
@@ -14,13 +16,13 @@ export default function Home() {
                 />
             </div>
             <div className = 'h-screen w-full flex flex-col pt-32 items-center gap-8'>
-                <SubTitle text='Jelentkezz a Rajkba!'/>
-                <ActionButton href='/felveteli'>
+                <SubTitle text = 'Jelentkezz a Rajkba!'/>
+                <ActionButton href = '/felveteli'>
                     Menjünk
-                    <ArrowRight size={20} />
+                    <ArrowRight size = {20}/>
                 </ActionButton>
-                <p className='font-medium'>A régi weboldal további tartalmai sajnos átmenetileg nem elérthetőek :/</p>
             </div>
+            <PageTitle text = {"Galéria"}/>
         </>
     );
 }
