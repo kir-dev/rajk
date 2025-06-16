@@ -32,6 +32,11 @@ body {
     background: var(--background);
     color: var(--foreground);
     font-family: CabinetGrotesk, serif;
+    text-underline-offset: 0.25rem;
+}
+
+Link:hover {
+    text-decoration: underline;
 }
 
 @layer utilities {

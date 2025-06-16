@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import {ArrowUp, Facebook, Instagram, Youtube} from "lucide-react"
+import {ArrowUp} from "lucide-react"
 import {useEffect, useState} from "react"
 import Image from "next/image"
 
@@ -66,7 +66,7 @@ export default function Footer() {
                             className = "mb-4 -ml-4"
                         />
                         <div>
-                            <p>Rajk Szakkollégium Alapítvány</p>
+                            <p className = "font-bold">Rajk Szakkollégium Alapítvány</p>
                             <p>1085, Budapest, Horánszky u. 6.</p>
                             <p>Adószám: 19624806-2-42</p>
                             <p>Bankszámlaszám: 10700347-69549474-51100005 (CIB)</p>
@@ -74,9 +74,9 @@ export default function Footer() {
                     </div>
                     
                     <div>
-                        <h3 className = "text-xl font-semibold mb-4">Elérhetőségünk</h3>
+                        <h3 className = "text-xl font-bold mb-6">Elérhetőségünk</h3>
                         <div>
-                            <p className = "">diakbizottsag@rajk.eu</p>
+                            <p className = "font-bold">diakbizottsag@rajk.eu</p>
                             <p>Diákbizottság</p>
                             <p className = "mt-6 font-bold">+36303508715</p>
                             <p>Főző Zsolt, kollégiumi igazgató</p>
@@ -84,20 +84,23 @@ export default function Footer() {
                     </div>
                     
                     {/* Social media icons */}
-                    <div className = "flex justify-end mt-16 mr-24 gap-8">
-                        <Link href = "#" className = "hover:opacity-80 transition-opacity">
-                            <Facebook size = {28}/>
+                    <div className = "flex justify-end mt-16 md:mr-24 gap-8">
+                        <Link href = "https://www.facebook.com/rajkofficial" className = "hover:underline font-bold"
+                              target = "_blank">
+                            Facebook
                         </Link>
-                        <Link href = "#" className = "hover:opacity-80 transition-opacity">
-                            <Instagram size = {28}/>
+                        <Link href = "https://www.instagram.com/rajkofficial/" className = "hover:underline font-bold"
+                              target = "_blank">
+                            Instagram
                         </Link>
-                        <Link href = "#" className = "hover:opacity-80 transition-opacity">
-                            <Youtube size = {28}/>
+                        <Link href = "https://kir-dev.hu" className = "hover:underline"
+                              target = "_blank">
+                            Made with ❤️ by Kir-Dev
                         </Link>
                         {showScrollTop && (
                             <button
                                 onClick = {scrollToTop}
-                                className = "fixed bottom-8 right-8 bg-white text-rajk-green p-3 rounded-md shadow-md hover:bg-gray-100 transition-all"
+                                className = "fixed bottom-8 right-8 bg-white text-rajk-green p-3 rounded-md shadow-md hover:bg-gray-100 transition-all max-md:hidden"
                                 aria-label = "Scroll to top"
                             >
                                 <ArrowUp size = {24}/>
