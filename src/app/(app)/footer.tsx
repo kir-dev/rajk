@@ -59,11 +59,11 @@ export default function Footer() {
                     className = "flex items-end justify-between max-lg:flex-col max-lg:items-start gap-8 w-full">
                     <div>
                         <Image
-                            src = "/rajk_logo2_white.png"
+                            src = "/logo-white/Rajk_logo_2025_white_a.svg"
                             alt = "Rajk Szakkollégium Logo"
-                            width = {150}
-                            height = {150}
-                            className = "mb-4"
+                            width = {200}
+                            height = {200}
+                            className = "mb-4 -ml-4"
                         />
                         <div>
                             <p>Rajk Szakkollégium Alapítvány</p>
@@ -76,7 +76,7 @@ export default function Footer() {
                     <div>
                         <h3 className = "text-xl font-semibold mb-4">Elérhetőségünk</h3>
                         <div>
-                            <p className = "font-bold">diakbizottsag@rajk.eu</p>
+                            <p className = "">diakbizottsag@rajk.eu</p>
                             <p>Diákbizottság</p>
                             <p className = "mt-6 font-bold">+36303508715</p>
                             <p>Főző Zsolt, kollégiumi igazgató</p>
