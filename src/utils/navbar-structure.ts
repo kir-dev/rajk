@@ -8,7 +8,7 @@ export const navItems = [
       { label: 'Kisfilmek', href: '/videos' },
     ],
   },
-  { label: 'Szakma', href: '/profession' },
+  { label: 'Szakma', href: '/szakma' },
   { label: 'Társasadalmi felelősségvállalás', href: '/social-responsibility' },
   {
     label: 'Díjak',

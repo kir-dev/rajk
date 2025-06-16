@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import cn from "@/utils/concatenate";
 import {GraduationCap, UsersRound, Handshake} from "lucide-react";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
+import WawyBorder from "@/components/WawyBorder";
 
 const TableOfContents = () => {
     const [activeSection, setActiveSection] = useState("")
@@ -28,22 +29,25 @@ const TableOfContents = () => {
     ]
 
     return (
-        <nav className="sticky top-1/3 self-start h-full justify-between z-20 pb-5">
-            <ul className="flex flex-col justify-start h-full space-y-4 relative">
-                <div className="sticky top-1/2 space-y-4 p-4 rounded-lg text-white">
+        <nav className="sticky top-1/2 self-start h-full z-20 pb-5 px-4">
+            <ul className="flex flex-col justify-start h-full space-y-6 relative">
+                <div className="sticky top-1/2 space-y-6 p-5 rounded-lg backdrop-blur-sm bg-black/20">
                     {sections.map((section) => (
-                        <li key={section.id} className="flex flex-row">
+                        <li key={section.id}>
                             <button
                                 onClick={() => scrollToSection(section.id)}
                                 className={cn(
-                                    "transition-all duration-200 p-2 text-left text-foreground flex flex-col hover: hover:text-blue-950 hover:scale-110 transform bg-[url('/bg_kek.png')] rounded-2xl w-full",
+                                    "transition-all duration-300 p-3 rounded-xl text-left flex items-center gap-3 hover:bg-white/10 w-full",
                                     activeSection === section.id
-                                        ? "font-bold text-lg bg-[url('/bg_lila.png')]"
-                                        : "text-white",
+                                        ? "font-bold bg-white/20 shadow-lg transform scale-105"
+                                        : "text-white/80",
                                 )}
                             >
-                                <section.Icon className="w-7 h-7 mr-2 rounded-2xl" />
-                                {section.title}
+                                <section.Icon className={`w-6 h-6 ${activeSection === section.id ? 'text-rajk-green' : 'text-white/70'}`} />
+                                <span>{section.title}</span>
+                                {activeSection === section.id && (
+                                    <div className="ml-auto w-2 h-2 rounded-full bg-rajk-green animate-pulse"></div>
+                                )}
                             </button>
                         </li>
                     ))}
