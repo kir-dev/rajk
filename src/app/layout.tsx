@@ -1,6 +1,6 @@
 import type {Metadata} from "next";
 import {Open_Sans, Roboto_Condensed} from "next/font/google";
-import "./(app)/globals.css";
+import "./(app)/styles/globals.css";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/app/(app)/footer";
 

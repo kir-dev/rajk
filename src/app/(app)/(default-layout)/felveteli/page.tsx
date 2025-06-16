@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import {Download} from "lucide-react";
 import Countdown from "@/components/countDown";
 import ActionButton from "@/components/ActionButton";
-import {EmailReg} from "@/components/emailReg";
+import {EmailReg} from "@/utils/emailReg";
 
 export default function ApplyPage() {
     const [emailReg, setEmailReg] = useState(false);

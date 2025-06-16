@@ -1,20 +1,26 @@
 @import "tailwindcss";
+@import './cabinet-grotesk.css';
 
 :root {
 /*    --background: #ffffff;
     --foreground: #171717;*/
     --background: #0a0a0a;
     --foreground: #ededed;
-    --rajk-green: #23a455;
+    --rajk-green: #1c9647;
+    --rajk-blue: #97d7fb;
+    --rajk-purple: #cdb3ee;
+    --rajk-cream: #fbfbef;
 }
 
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-rajk-green: var(--rajk-green);
+    --color-rajk-blue: var(--rajk-blue);
+    --color-rajk-purple: var(--rajk-purple);
+    --color-rajk-cream: var(--rajk-cream);
     --font-roboto-condensed: var(--font-roboto-condensed);
     --font-open-sans: var(--font-open-sans);
-    --font-display: var(--font-roboto-condensed);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,7 +33,7 @@
 body {
     background: var(--background);
     color: var(--foreground);
-    font-family: var(--font-open-sans), serif;
+    font-family: CabinetGrotesk-Bold, serif;
 }
 
 @layer utilities {
