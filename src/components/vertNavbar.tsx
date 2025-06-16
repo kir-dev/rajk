@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import cn from "@/utils/concatenate";
 import {GraduationCap, UsersRound, Handshake} from "lucide-react";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
-import WawyBorder from "@/components/WawyBorder";
 
 const TableOfContents = () => {
     const [activeSection, setActiveSection] = useState("")
@@ -23,13 +22,13 @@ const TableOfContents = () => {
     }
 
     const sections = [
-        { id: "kozosseg", title: "Közösség", Icon: UsersRound },
+        { id: "rolunk", title: "Közösség", Icon: UsersRound },
         { id: "szakma", title: "Szakma", Icon: GraduationCap },
         { id: "tarsadalmi", title: "Társadalmi felelősség", Icon: Handshake },
     ]
 
     return (
-        <nav className="sticky top-1/2 self-start h-full z-20 pb-5 px-4">
+        <nav className="hidden md:block sticky top-1/2 self-start h-full z-20 pb-5 px-4 bg-bezs rounded-br-2xl">
             <ul className="flex flex-col justify-start h-full space-y-6 relative">
                 <div className="sticky top-1/2 space-y-6 p-5 rounded-lg backdrop-blur-sm bg-black/20">
                     {sections.map((section) => (

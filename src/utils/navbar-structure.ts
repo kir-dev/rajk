@@ -1,8 +1,9 @@
 export const navItems = [
   {
     label: 'Rólunk',
-    href: '/about',
+    href: '/rolunk',
     subItems: [
+      { label: 'Intézmény', href: '/rolunk/intezmeny' },
       { label: 'Közösség', href: '/community' },
       { label: 'Alumni', href: '/alumni' },
       { label: 'Kisfilmek', href: '/videos' },
