@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export default function NavBar() {
     return (
-        <div className='flex flex-col relative'>
+        <div className='flex flex-col relative text-background'>
             {/*<ExtraNavBarStrip></ExtraNavBarStrip>*/}
             <div className = 'bg-rajk-green w-full py-2 px-4 flex justify-between  '>
                 <Link href={'/'}>

@@ -5,7 +5,7 @@ export const navItems = [
     subItems: [
       { label: 'Közösség', href: '/community' },
       { label: 'Alumni', href: '/alumni' },
-      { label: 'Kisfilmek', href: '/videos' },
+      { label: 'Galéria', href: '/galeria' },
     ],
   },
   { label: 'Szakma', href: '/profession' },
