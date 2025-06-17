@@ -1,17 +1,16 @@
 import type {Metadata} from "next";
-import {Open_Sans, Roboto_Condensed} from "next/font/google";
-import "./(app)/globals.css";
+import "./(app)/styles/globals.css";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/app/(app)/footer";
 
-const robotoCondensed = Roboto_Condensed({
+/*const robotoCondensed = Roboto_Condensed({
     variable: "--font-roboto-condensed",
     subsets: ["latin"],
 });
 const openSans = Open_Sans({
     variable: "--font-open-sans",
     subsets: ["latin"],
-});
+});*/
 
 
 export const metadata: Metadata = {
@@ -30,10 +29,10 @@ export default function RootLayout({
     return (
         <html lang = "en">
             <head>
-                <script defer data-domain = "rajk.kir-dev.hu" src = "https://visit.kir-dev.hu/js/script.js"></script>
+                <script defer data-domain = "rajk.kir-dev.hu" src = {"https://visit.kir-dev.hu/js/script.js"}></script>
             </head>
             <body
-                className = {`${robotoCondensed.variable} ${openSans.variable} antialiased font-open-sans`}
+                className = {`antialiased flex flex-col justify-between min-h-screen`}
             >
                 <NavBar/>
                 {children}

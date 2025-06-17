@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import {ArrowUp, Facebook, Instagram, Youtube} from "lucide-react"
+import {ArrowUp} from "lucide-react"
 import {useEffect, useState} from "react"
 import Image from "next/image"
 import WawyBorder from "@/components/WawyBorder";
@@ -39,7 +39,7 @@ export default function Footer() {
         <footer className = "relative bg-rajk-green text-white w-full">
             {/* Wavy border */}
             <WawyBorder direction={"top"} color={"green"}/>
-            
+
             <div className = "px-6 pt-4 pb-8 border w-full">
                 {/* Logo and left column */}
                 <div
@@ -59,7 +59,7 @@ export default function Footer() {
                             <p>Bankszámlaszám: 10700347-69549474-51100005 (CIB)</p>
                         </div>
                     </div>
-                    
+
                     <div>
                         <h3 className = "text-xl font-semibold mb-4">Elérhetőségünk</h3>
                         <div>
@@ -69,7 +69,7 @@ export default function Footer() {
                             <p>Főző Zsolt, kollégiumi igazgató</p>
                         </div>
                     </div>
-                    
+
                     {/* Social media icons */}
                     <div className = "flex justify-end mt-16 mr-24 gap-8">
                         <Link href = "#" className = "hover:opacity-80 transition-opacity">

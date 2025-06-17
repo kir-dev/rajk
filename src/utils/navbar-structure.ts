@@ -6,7 +6,7 @@ export const navItems = [
       { label: 'Intézmény', href: '/rolunk/intezmeny' },
       { label: 'Közösség', href: '/community' },
       { label: 'Alumni', href: '/alumni' },
-      { label: 'Kisfilmek', href: '/videos' },
+      { label: 'Galéria', href: '/galeria' },
     ],
   },
   { label: 'Szakma', href: '/szakma' },

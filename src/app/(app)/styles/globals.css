@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import './cabinet-grotesk.css';
 
 :root {
 /*    --background: #ffffff;
@@ -81,20 +82,24 @@
     --color-rajk-purple: var(--rajk-purple);
     --font-roboto-condensed: var(--font-roboto-condensed);
     --font-open-sans: var(--font-open-sans);
-    --font-display: var(--font-roboto-condensed);
 }
 
-@media (prefers-color-scheme: dark) {
+/*@media (prefers-color-scheme: dark) {
     :root {
         --background: #0a0a0a;
         --foreground: #ededed;
     }
-}
+}*/
 
 body {
     background: var(--background);
     color: var(--foreground);
-    font-family: var(--font-open-sans), serif;
+    font-family: CabinetGrotesk, serif;
+    text-underline-offset: 0.25rem;
+}
+
+Link:hover {
+    text-decoration: underline;
 }
 
 @layer utilities {

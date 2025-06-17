@@ -1,4 +1,4 @@
-import './(app)/globals.css';
+import './(app)/styles/globals.css';
 import ActionButton from "@/components/ActionButton";
 import {ArrowRight} from "lucide-react";
 import BuildingSVG from "@/components/BuildingSVG";
