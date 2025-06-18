@@ -4,8 +4,8 @@ import {Person} from "@/payload-types";
 export default function MemberGrid({members} : {members: Person[]}) {
     return (<div className='grid gap-2 grid-cols-2 md:grid-cols-4 w-fit'>
         {
-            members.map((member) => (
-                    <div key = {member.name + member.picture} className='inline-block w-fit'>
+            members.map((member, index) => (
+                    <div key = {index} className='inline-block w-fit'>
                         <MemberPicture member={member}/>
                     </div>
                 )

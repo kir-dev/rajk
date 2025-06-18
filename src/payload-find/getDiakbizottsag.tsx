@@ -1,20 +1,45 @@
-import {getPayload} from "payload";
+import { getPayload } from "payload";
 import config from "@payload-config";
+import { Person } from "@/payload-types";
 
-export default async function getDiakbizottsag(){
+export default async function getGroupMembers(groupName: string): Promise<Person[]> {
     const payload = await getPayload({ config });
-    const diakbizottsag = await payload.find({
+
+    // First find the Diákbizottság group to get member IDs
+    const group = await payload.find({
         collection: "groups",
         where: {
             name: {
-                equals: "Diákbizottság"
+                equals: groupName
             }
         },
         depth: 1,
     });
-    if (diakbizottsag.docs && diakbizottsag.docs.length > 0) {
-        // Return the members of the first matching group
-        return diakbizottsag.docs[0].members || [];
+
+    if (!group.docs || group.docs.length === 0) {
+        return [];
     }
-    return [];
+
+    // Extract member IDs
+    const memberEntries = group.docs[0].members || [];
+    const memberIds = memberEntries
+        .filter(entry => entry && entry.member)
+        .map(entry => typeof entry.member === 'object' ? entry.member.id : entry.member);
+
+    if (memberIds.length === 0) {
+        return [];
+    }
+
+    // Directly query the people collection with their pictures
+    const peopleResult = await payload.find({
+        collection: "people",
+        where: {
+            id: {
+                in: memberIds
+            }
+        },
+        depth: 1, // Ensure pictures are populated
+    });
+
+    return peopleResult.docs as Person[];
 }

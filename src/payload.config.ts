@@ -20,6 +20,7 @@ import {Reports} from "@/collections/Reports";
 import {Apply_Timeline_Event} from "@/collections/Apply_Timeline_Event";
 import {About_Timeline_Event} from "@/collections/About_Timeline_Event";
 import {Applicants} from "@/collections/Applicants";
+import {Events} from "@/collections/Events";
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -45,6 +46,7 @@ export default buildConfig({
     Reports,
     Apply_Timeline_Event,
     About_Timeline_Event,
+    Events,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

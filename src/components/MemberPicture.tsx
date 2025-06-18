@@ -1,16 +1,15 @@
 import React from "react";
 import Image from 'next/image'
 import {Person} from "@/../src/payload-types";
-import {isMedia} from "@/utils/isMedia";
 
 export default function MemberPicture({ member }: { member: Person }) {
+    const featuredImage = member.picture && typeof member.picture === "object"
+        ? member.picture
+        : null;
     return (
         <div className="relative w-32 h-32 rounded-full overflow-hidden group">
             <Image
-                src={
-                    isMedia(member.picture) ? member.picture.url! :
-                    "https://kir-dev.hu/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fxxexxe77%2Fproduction%2F95d876398ac24417d96adcf29638af89e44d0c98-2395x2395.jpg%3Fauto%3Dformat&w=1080&q=75"
-                }
+                src={featuredImage?.url || "/koli.png"}
                 alt="https://kir-dev.hu/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fxxexxe77%2Fproduction%2F95d876398ac24417d96adcf29638af89e44d0c98-2395x2395.jpg%3Fauto%3Dformat&w=1080&q=75"
                 layout="fill"
                 objectFit="cover"

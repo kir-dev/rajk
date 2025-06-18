@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import {ArrowUp} from "lucide-react"
+import {ArrowUp, Facebook, Instagram, Youtube} from "lucide-react"
 import {useEffect, useState} from "react"
 import Image from "next/image"
 import WawyBorder from "@/components/WawyBorder";

@@ -10,7 +10,7 @@ export default function IconTitle({
     iconAnimation?: string;
 }) {
     return (
-        <h2 className={`text-3xl font-bold my-2 inline-block ${className}`}>
+        <h2 className={`text-3xl font-bold my-5 inline-block ${className}`}>
                 <span className="flex items-center justify-center gap-3">
                     <Icon className={`h-8 w-8 text-rajk-green ${iconAnimation}`} />
                     <span className="underline decoration-rajk-green decoration-2 underline-offset-8 ">{title}</span>
