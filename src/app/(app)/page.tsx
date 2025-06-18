@@ -38,7 +38,7 @@ export default function Home() {
                                 description="A rajkosság egy életre szól. Közös élmények sokasága kovácsolja össze az itt végzetteket, ez a kapcsolat pedig a végzés után sem ér véget: A kollégium mindig visszavárja végzettjeit."
                                 icon={UsersRound}
                                 buttonText="Tovább"
-                                href={"/rolunk"}
+                                href={"/rolunk/kozosseg"}
                             />
                             <Statistics isLast={false} color={"purple"} szin={"lila"} />
                         </div>
@@ -101,15 +101,15 @@ export default function Home() {
                                     <h4 className="text-lg font-semibold text-rajk-green">Megközelítés</h4>
                                     <ul className=" space-y-1">
                                         <li className="flex items-center gap-2">
-                                            <span className="inline-block w-8 h-8 p-1 rounded-full bg-red-500  text-white text-center font-bold">M3</span>
+                                            <span className="inline-block w-9 h-9 p-1 rounded-full bg-red-500  text-white text-center font-bold">M3</span>
                                             <span>Kálvin tér (5 perc séta)</span>
                                         </li>
                                         <li className="flex items-center gap-2">
-                                            <span className="inline-block w-8 h-8 p-1 rounded-full bg-green-600 text-white text-center font-bold">M4</span>
+                                            <span className="inline-block w-9 h-9 p-1 rounded-full bg-green-600 text-white text-center font-bold">M4</span>
                                             <span>Kálvin tér (5 perc séta)</span>
                                         </li>
                                         <li className="flex items-center gap-2">
-                                            <span className="inline-block w-8 h-8 p-1 rounded-full bg-yellow-600 text-white text-center font-bold">4-6</span>
+                                            <span className="inline-block w-9 h-9 p-1 rounded-full bg-yellow-600 text-white text-center font-bold">4-6</span>
                                             <span>Rákóczi tér (5 perc séta)</span>
                                         </li>
                                     </ul>
