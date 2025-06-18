@@ -15,7 +15,7 @@ export default function MultiImageCarousel(props: MultiImageCarouselProps) {
     const [isPlaying, setIsPlaying] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
     const [imagesPerView, setImagesPerView] = useState(4)
-    const [events, setEvents] = useState<Event[]>(props.events || [])
+    const events = props.events || []
 
     //const images = events.map(event => event.picture).flat().filter(image => image !== null && typeof image !== "number");
 

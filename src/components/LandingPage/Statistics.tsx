@@ -40,6 +40,9 @@ export default function Statistics(props: StatisticsProps) {
     useEffect(() => {
         if (!statsRef.current) return;
 
+        // Store a reference to the current DOM node
+        const currentRef = statsRef.current;
+
         const observer = new IntersectionObserver(
             (entries) => {
                 // If the stats component is in view and animation hasn't run yet
@@ -51,17 +54,11 @@ export default function Statistics(props: StatisticsProps) {
                     const fps = 30;
                     const totalFrames = animationDuration / (1000 / fps);
 
-                    // Increment values for each step
-                    const courseStep = finalValues.courses / totalFrames;
-                    const tdkSubmittedStep = finalValues.tdkSubmitted / totalFrames;
-                    const tdkWinnersStep = finalValues.tdkWinners / totalFrames;
-
                     let frame = 0;
 
                     const interval = setInterval(() => {
+                        // Animation code unchanged...
                         frame++;
-
-                        // Calculate new values with easeOutExpo animation
                         const progress = 1 - Math.pow(2, -10 * frame / totalFrames);
 
                         setCourseCount(Math.min(
@@ -79,7 +76,6 @@ export default function Statistics(props: StatisticsProps) {
                             finalValues.tdkWinners
                         ));
 
-                        // Clear interval when animation completes
                         if (frame >= totalFrames) {
                             clearInterval(interval);
                         }
@@ -88,13 +84,14 @@ export default function Statistics(props: StatisticsProps) {
                     return () => clearInterval(interval);
                 }
             },
-            { threshold: 0.6 } // Trigger when 20% of element is visible
+            { threshold: 0.6 }
         );
 
-        observer.observe(statsRef.current);
+        observer.observe(currentRef);
 
         return () => {
-            if (statsRef.current) observer.unobserve(statsRef.current);
+            // Use the captured reference in cleanup
+            observer.unobserve(currentRef);
         };
     }, [finalValues.courses, finalValues.tdkSubmitted, finalValues.tdkWinners]);
 
