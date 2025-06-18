@@ -1,6 +1,6 @@
 import {getPayload} from "payload";
 import config from "@payload-config";
-import MultiImageCarousel from "@/components/MultiImageCarousel";
+import {Media} from "@/payload-types";
 
 export default async function getEvents(){
     const payload = await getPayload({ config });
@@ -8,7 +8,11 @@ export default async function getEvents(){
         collection: "events",
     });
 
-    return (
-        <MultiImageCarousel events={events.docs} />
-    )
+    const mediaData = {
+        docs: events.docs.map((event) => ({
+            url: (event.picture as Media).url ?? '',
+            alt: (event.picture as Media).alt ?? ''
+        }))
+    };
+    return mediaData;
 }
