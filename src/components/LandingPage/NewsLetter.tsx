@@ -12,7 +12,7 @@ export default function NewsLetter() {
                 />
                 <button
                     type="submit"
-                    className="bg-kek text-white py-3 rounded-lg hover:bg-rajk-blue hover:scale-105 duration-400 transition"
+                    className="bg-lila text-white py-3 rounded-lg hover:bg-rajk-blue hover:scale-105 duration-400 transition"
                 >
                     Feliratkozás
                 </button>
