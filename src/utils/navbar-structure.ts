@@ -1,14 +1,15 @@
 export const navItems = [
   {
     label: 'Rólunk',
-    href: '/about',
+    href: '/rolunk',
     subItems: [
-      { label: 'Közösség', href: '/community' },
+      { label: 'Intézmény', href: '/rolunk/intezmeny' },
+      { label: 'Közösség', href: '/rolunk/kozosseg' },
       { label: 'Alumni', href: '/alumni' },
       { label: 'Galéria', href: '/galeria' },
     ],
   },
-  { label: 'Szakma', href: '/profession' },
+  { label: 'Szakma', href: '/szakma' },
   { label: 'Társasadalmi felelősségvállalás', href: '/social-responsibility' },
   {
     label: 'Díjak',
