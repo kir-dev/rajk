@@ -57,7 +57,6 @@ export default function Statistics(props: StatisticsProps) {
                     let frame = 0;
 
                     const interval = setInterval(() => {
-                        // Animation code unchanged...
                         frame++;
                         const progress = 1 - Math.pow(2, -10 * frame / totalFrames);
 
@@ -90,16 +89,16 @@ export default function Statistics(props: StatisticsProps) {
         observer.observe(currentRef);
 
         return () => {
-            // Use the captured reference in cleanup
             observer.unobserve(currentRef);
         };
     }, [finalValues.courses, finalValues.tdkSubmitted, finalValues.tdkWinners]);
 
     return(
-        <div className="relative">
+        <div className="relative w-full">
             <WawyBorder direction={"top"} color={props.color} szin={props.szin}/>
-            <div className={`${bgClass} text-white py-16 px-8`}>
-                <div className="max-w-6xl mx-auto" ref={statsRef}>
+            <div className={`${bgClass} text-white py-16 w-full`}>
+                {/* Content container with adjusted positioning */}
+                <div className="max-w-6xl mx-auto md:ml-[calc(50%_-_30rem)] px-8" ref={statsRef}>
                     {/* Header */}
                     <div className="text-center mb-16">
                         <h2 className="text-4xl md:text-5xl font-bold mb-2">SZAKMA</h2>
@@ -109,7 +108,7 @@ export default function Statistics(props: StatisticsProps) {
                     {/* Statistics Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
                         {/* First Stat */}
-                        <div className="space-y-4 animate-count-up" style={{animationDelay: '1.0s'}}>
+                        <div className="space-y-4">
                             <p className="text-lg md:text-xl font-light">A 2022/23-es tanévben</p>
                             <div className="text-6xl md:text-7xl font-bold relative">
                                 <span className="inline-block transform transition-all hover:scale-110 duration-300">
@@ -121,7 +120,7 @@ export default function Statistics(props: StatisticsProps) {
                         </div>
 
                         {/* Second Stat */}
-                        <div className="space-y-4 animate-count-up" style={{animationDelay: '0.4s'}}>
+                        <div className="space-y-4">
                             <p className="text-lg md:text-xl font-light">Az elmúlt 5 évben</p>
                             <div className="text-6xl md:text-7xl font-bold relative">
                                 <span className="inline-block transform transition-all hover:scale-110 duration-300">
@@ -133,7 +132,7 @@ export default function Statistics(props: StatisticsProps) {
                         </div>
 
                         {/* Third Stat */}
-                        <div className="space-y-4 animate-count-up" style={{animationDelay: '0.6s'}}>
+                        <div className="space-y-4">
                             <p className="text-lg md:text-xl font-light">Az elmúlt 5 év alatt</p>
                             <div className="text-6xl md:text-7xl font-bold relative">
                                 <span className="inline-block transform transition-all hover:scale-110 duration-300">

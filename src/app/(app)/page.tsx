@@ -16,7 +16,7 @@ export default function Home() {
     const rajkMapLink = "https://www.google.com/maps/place/Rajk+Szakkollégium/@47.566434,19.0794354,323527m/data=!3m1!1e3!4m6!3m5!1s0x4741dc5c16189aab:0xa4ca0fbc0eb330af!8m2!3d47.4924152!4d19.06774!16zL20vMDkyenc3?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D"
 
     return (
-        <div className="min-h-screen flex flex-col pb-40 bg-bezs">
+        <div className="min-h-screen min-w-screen flex flex-col pb-40 bg-bezs">
             <div>
                 <iframe
                     src="https://www.youtube.com/embed/lJgPfSw4w2c?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1"
@@ -27,11 +27,10 @@ export default function Home() {
                 />
             </div>
             <div className="flex flex-row h-fit w-full relative">
-                <div className="relative rounded-2xl">
-                    <div className="absolute bottom-0 h-full w-full bg-zold z-0 md:block hidden"/>
+                <div className="absolute left-0 top-0 h-full z-30 md:block hidden">
                     <VertNavbar />
                 </div>
-                <div className="bg-foreground h-full container mx-auto flex flex-col">
+                <div className="bg-foreground h-full w-full flex flex-col">
                     <Section id={"rolunk"} title={"Közösség"}>
                         <div className="flex flex-col w-full h-full rounded-2xl">
                             <PillarCard

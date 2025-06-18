@@ -28,9 +28,9 @@ const TableOfContents = () => {
     ]
 
     return (
-        <nav className="hidden md:block sticky top-1/2 self-start h-full z-20 pb-5 px-4 bg-bezs rounded-br-2xl">
+        <nav className="hidden md:block sticky top-1/2 self-start h-full z-20 pb-5 px-4 w-[260px] backdrop-blur-sm bg-black/20 rounded-br-2xl">
             <ul className="flex flex-col justify-start h-full space-y-6 relative">
-                <div className="sticky top-1/2 space-y-6 p-5 rounded-lg backdrop-blur-sm bg-black/20">
+                <div className="sticky top-1/2 space-y-6 p-5 rounded-lg backdrop-blur-sm bg-black/20 w-full">
                     {sections.map((section) => (
                         <li key={section.id}>
                             <button
@@ -42,8 +42,8 @@ const TableOfContents = () => {
                                         : "text-white/80",
                                 )}
                             >
-                                <section.Icon className={`w-6 h-6 ${activeSection === section.id ? 'text-rajk-green' : 'text-white/70'}`} />
-                                <span>{section.title}</span>
+                                <section.Icon className={`w-6 h-6 flex-shrink-0 ${activeSection === section.id ? 'text-rajk-green' : 'text-white/70'}`} />
+                                <span className="truncate">{section.title}</span>
                                 {activeSection === section.id && (
                                     <div className="ml-auto w-2 h-2 rounded-full bg-rajk-green animate-pulse"></div>
                                 )}
