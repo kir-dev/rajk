@@ -10,11 +10,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@payloadcms/db-postgres": "^3.31.0",
-    "@payloadcms/db-vercel-postgres": "^3.34.0",
-    "@payloadcms/next": "^3.31.0",
-    "@payloadcms/payload-cloud": "^3.31.0",
-    "@payloadcms/richtext-lexical": "^3.31.0",
+    "@payloadcms/db-postgres": "^3.40.0",
+    "@payloadcms/db-vercel-postgres": "^3.40.0",
+    "@payloadcms/next": "^3.40.0",
+    "@payloadcms/payload-cloud": "^3.40.0",
+    "@payloadcms/richtext-lexical": "^3.40.0",
+    "@payloadcms/storage-s3": "^3.40.0",
     "@prisma/client": "^6.6.0",
     "@shadcn/ui": "^0.0.4",
     "add": "^2.0.6",

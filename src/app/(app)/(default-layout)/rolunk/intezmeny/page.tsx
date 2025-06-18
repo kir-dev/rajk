@@ -1,7 +1,6 @@
 import {HeartHandshake, LibraryBig, PenTool, UsersRound} from "lucide-react";
 import IconTitle from "@/components/IconTitle";
 import Timeline from "@/components/Intezmeny/Timeline";
-import Mukodes from "@/components/Intezmeny/Mukodes";
 import Nevvalasztas from "@/components/Intezmeny/Nevvalasztas";
 import MemberGrid from "@/components/MemberGrid";
 import getGroupMembers from "@/payload-find/getDiakbizottsag";
@@ -12,8 +11,6 @@ export default async function RolunkPage() {
 
     return (
         <div className="min-h-screen flex flex-col pb-40 bg-bezs text-black">
-            <IconTitle title={"Működésünk"} Icon={LibraryBig} />
-            <Mukodes/>
             <div className="w-full bg-kek min-h-screen text-white text-center">
                 <IconTitle title={"A névről"} Icon={PenTool} />
                 <Nevvalasztas/>
