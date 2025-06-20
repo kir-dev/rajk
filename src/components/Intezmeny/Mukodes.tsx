@@ -6,7 +6,7 @@ import InteractiveBuilding from "@/components/Intezmeny/InteractiveBuilding";
 export default function Mukodes() {
     return (
         <div className="container mx-auto">
-            <div className="grid grid-cols-3 grid-rows-2 gap-10 mt-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-10 mt-3 px-4">
                 <div className="relative">
                     <InteractiveBuilding/>
                 </div>

@@ -79,7 +79,7 @@ export default function LandingPage(props: LandingPageProps) {
             </div>
             <IconTitle className="mt-20 text-black" title={"Események"} Icon={Calendar}/>
             <MyCarousel data={props.data}/>
-            <div className="my-25">
+            <div className="my-25 mx-4">
                 <NewsLetter/>
             </div>
             <Section id="location" title="">
