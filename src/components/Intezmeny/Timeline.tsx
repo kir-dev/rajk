@@ -2,8 +2,12 @@ import {RichText} from "@payloadcms/richtext-lexical/react";
 import Image from "next/image";
 import getAboutTimelineEvents from "@/payload-find/getAboutTimelineEvents";
 
-export default async function Timeline() {
-    const eventsData = await getAboutTimelineEvents();
+interface TimelineProps {
+    timeline: ("about-timeline-event" | "apply-timeline-event")
+}
+
+export default async function Timeline(props: TimelineProps) {
+    const eventsData = await getAboutTimelineEvents(props.timeline);
     const events = eventsData.docs || [];
 
     return (
@@ -18,9 +22,26 @@ export default async function Timeline() {
         <div className="grid grid-cols-1 gap-16">
             {events.map((event, index) => {
                 const isEven = index % 2 === 0;
-                const featuredImage = event.logo && typeof event.logo === "object"
-                    ? event.logo
-                    : null;
+                let featuredImageUrl
+                if ("logo" in event) {
+                    const featuredImage = event.logo && typeof event.logo === "object"
+                        ? event.logo
+                        : null;
+                    featuredImageUrl = featuredImage?.url || "/placeholder.svg";
+                } else {
+                    featuredImageUrl = "/calendar.svg";
+                }
+
+                // Extract month name from the date
+                const date = new Date(event.date);
+                const year = date.getFullYear();
+                const monthName = date.toLocaleString('hu-HU', { month: 'long' });
+                let displayedExtraText = "";
+                if (props.timeline === "apply-timeline-event") {
+                    displayedExtraText = `${monthName}`;
+                } else if (props.timeline === "about-timeline-event") {
+                    displayedExtraText = `${year}`;
+                }
 
                 return (
                     <div key={event.id} className="grid grid-cols-1 md:grid-cols-9 items-center">
@@ -37,11 +58,20 @@ export default async function Timeline() {
 
                         {/* Timeline marker */}
                         <div className="col-span-1 col-start-5 relative flex md:justify-center justify-start pl-5 md:pl-0">
-                            <Image src={featuredImage?.url || "/placeholder.svg"}
+                            <Image src={featuredImageUrl}
                                    className="w-10 h-10 p-2 bg-rajk-green rounded-full border-4 border-rajk-blue"
                                    alt={event.name}
                                    width={24} height={24}
                             />
+                            {/* Month name - only visible on desktop */}
+                            <div className={`hidden md:block absolute text-rajk-green font-black text-2xl -translate-y-1/2 top-1/2 ${isEven ? 'left-30' : 'right-30'}`}>
+                                {displayedExtraText}
+                            </div>
+
+                            {/* Month name for mobile */}
+                            <div className="md:hidden absolute font-medium text-sm left-12 -translate-y-1/2 top-1/2">
+                                {displayedExtraText}
+                            </div>
                         </div>
 
                         {/* Right side content */}
