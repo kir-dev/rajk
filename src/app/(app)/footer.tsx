@@ -36,11 +36,11 @@ export default function Footer() {
     }
     
     return (
-        <footer className = "relative bg-rajk-green text-white w-full">
+        <footer className = "relative bg-zold text-white w-full">
             {/* Wavy border */}
-            <WawyBorder direction={"top"} color={"green"}/>
+            <WawyBorder direction={"top"} color={"green"} szin={"zold"}/>
 
-            <div className = "px-6 pt-4 pb-8 border w-full">
+            <div className = "px-6 pt-4 pb-8 w-full">
                 {/* Logo and left column */}
                 <div
                     className = "flex items-end justify-between max-lg:flex-col max-lg:items-start gap-8 w-full">

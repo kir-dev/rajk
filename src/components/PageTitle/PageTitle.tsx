@@ -20,7 +20,7 @@ export default function PageTitle({text, className}: {
             
             <div className = 'py-2 pb-4 px-8 bg-rajk-cream flex flex-col items-center '>
                 
-                <h2 className = "text-foreground font-bold text-6xl mt-4 mb-2 z-10">{text}</h2>
+                <h2 className = "text-rajk-blue font-bold text-6xl mt-4 mb-2 z-10">{text}</h2>
                 <div className = "bg-rajk-green w-20 h-1 z-10"></div>
             </div>
         </div>

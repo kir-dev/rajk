@@ -9,9 +9,9 @@ import Link from "next/link";
 
 export default function NavBar() {
     return (
-        <div className='flex flex-col relative text-background'>
+        <div className='flex flex-col relative text-white'>
             {/*<ExtraNavBarStrip></ExtraNavBarStrip>*/}
-            <div className = 'bg-rajk-green w-full py-2 px-4 flex justify-between  '>
+            <div className = 'bg-zold w-full py-2 px-4 flex justify-between  '>
                 <Link href={'/'}>
                     <div className='mb-1'>
                         <Image height = {140} width = {140} src = '/logo-white/Rajk_logo_2025_white_a.svg' alt = 'Rajka'></Image>
