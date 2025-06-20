@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {BiSolidLeftArrow, BiSolidRightArrow} from "react-icons/bi";
+import Image from "next/image";
 
 
 const NextArrow = (props: { onClick?: () => void }) => {
@@ -56,7 +57,7 @@ export function MyCarousel({data}: { data: { docs: { url: string; alt: string }[
             <TypedSlider {...settings}>
                 {data.docs.map((doc, index) => (
                     <div key={index} className="p-2 flex h-64 w-auto outline-none">
-                        <img src={doc.url} alt={doc.alt} className="object-cover h-full w-auto"/>
+                        <Image src={doc.url} alt={doc.alt} width={20} height={20} className="object-cover h-full w-auto"/>
                     </div>
                 ))}
             </TypedSlider>
