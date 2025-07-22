@@ -56,7 +56,7 @@ export function MyCarousel({data}: { data: { docs: { url: string; alt: string }[
         <div className="slider-container" id="carousel">
             <TypedSlider {...settings}>
                 {data.docs.map((doc, index) => (
-                    <div key={index} className="p-2 flex h-64 w-auto outline-none">
+                    <div key={index} className="transition-all duration-300 ease-in-out hover:scale-105 p-2 flex h-64 w-auto outline-none">
                         <Image src={doc.url} alt={doc.alt} width={20} height={20} className="object-cover h-full w-auto"/>
                     </div>
                 ))}

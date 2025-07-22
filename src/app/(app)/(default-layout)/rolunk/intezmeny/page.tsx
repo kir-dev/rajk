@@ -15,10 +15,6 @@ export default async function RolunkPage() {
         <div>
             <PageTitle text = {"Intézmény"}/>
             <div className="min-h-screen flex flex-col pb-40 bg-bezs text-black">
-                <div className="w-full bg-kek min-h-screen text-white text-center">
-                    <IconTitle title={"A névről"} Icon={PenTool} />
-                    <Nevvalasztas/>
-                </div>
                 <IconTitle title={"Történetünk"} Icon={LibraryBig} />
                 <Timeline timeline={"about-timeline-event"} />
                 <div className="w-full flex flex-col mt-20 items-center">

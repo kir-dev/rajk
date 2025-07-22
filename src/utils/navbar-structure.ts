@@ -20,6 +20,6 @@ export const navItems = [
     ],
   },
   { label: 'Nemzetközi kapcsolataink', href: '/international-relations' },
-  { label: 'Jelentkezés', href: '/felveteli', bordered: true },
+  { label: 'Felvételi', href: '/felveteli', bordered: true },
   { label: 'Támogatás', href: '/support', bordered: true },
 ];
