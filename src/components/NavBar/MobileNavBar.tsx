@@ -22,14 +22,16 @@ export default function MobileNavBar() {
                   text={item.label}
                   href={item.href}
                   bordered={item.bordered}
+                  onClick={() => setMenuOpen(false)}
                 />
                 {item.subItems && (
                   <div className="ml-4 mt-1 flex flex-col gap-0 w-full">
                     {item.subItems.map((sub) => (
                       <NavBarItem
                         key={sub.href}
-                        text={`↳ ${sub.label}`}
+                        text={`${sub.label}`}
                         href={sub.href}
+                        onClick={() => setMenuOpen(false)}
                       />
                     ))}
                   </div>

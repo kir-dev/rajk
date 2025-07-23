@@ -16,7 +16,7 @@ interface PillarCardProps {
 export function PillarCard({ title, description, icon: Icon, buttonText, href }: PillarCardProps) {
     return (
         <div className="container mx-auto px-4">
-            <div className="group flex flex-col gap-4 h-full w-full max-w-6xl mx-auto md:ml-[calc(50%_-_30rem)] p-6 transition-all duration-300 text-black rounded-2xl mb-20 hover:shadow-lg hover:-translate-y-1 mt-10">
+            <div className="group flex flex-col gap-4 h-full w-full max-w-6xl mx-auto p-6 transition-all duration-300 text-black rounded-2xl mb-20 hover:shadow-lg hover:-translate-y-1 mt-10">
                 <div className="flex flex-col md:flex-row items-center gap-6">
                     <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-rajk-green to-green-600 text-white p-4 group-hover:scale-110 transition-transform duration-300">
                         <Icon className="w-8 h-8" />

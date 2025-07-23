@@ -46,7 +46,7 @@ export default function Footer() {
                     className = "flex items-end justify-between max-lg:flex-col max-lg:items-start gap-8 w-full">
                     <div>
                         <Image
-                            src = "/rajk_logo2_white.png"
+                            src = "/logo-white/Rajk_logo_2025_white_a.svg"
                             alt = "Rajk Szakkollégium Logo"
                             width = {150}
                             height = {150}

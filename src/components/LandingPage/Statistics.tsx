@@ -98,7 +98,7 @@ export default function Statistics(props: StatisticsProps) {
             <WawyBorder direction={"top"} color={props.color} szin={props.szin}/>
             <div className={`${bgClass} text-white py-16 w-full`}>
                 {/* Content container with adjusted positioning */}
-                <div className="max-w-6xl mx-auto md:ml-[calc(50%_-_30rem)] px-8" ref={statsRef}>
+                <div className="max-w-6xl mx-auto px-8" ref={statsRef}>
                     {/* Header */}
                     <div className="text-center mb-16">
                         <h2 className="text-4xl md:text-5xl font-bold mb-2">SZAKMA</h2>

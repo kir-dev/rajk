@@ -7,7 +7,6 @@ import {Calendar, ExternalLink, GraduationCap, Handshake, MapPin, UsersRound} fr
 import Statistics from "@/components/LandingPage/Statistics";
 import WawyBorder from "@/components/WawyBorder";
 import MyCarousel from "@/components/MyCarousel";
-import NewsLetter from "@/components/LandingPage/NewsLetter";
 import IconTitle from "@/components/IconTitle";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -25,16 +24,18 @@ export default function LandingPage(props: LandingPageProps) {
     return (
         <div className="min-h-screen min-w-screen flex flex-col pb-40 bg-bezs">
             <div>
-                <iframe
-                    src="https://www.youtube.com/embed/lJgPfSw4w2c?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1"
-                    title="YouTube video player"
-                    allow="autoplay; encrypted-media"
-                    allowFullScreen
-                    className="aspect-video w-full"
-                />
+                <Section id={"video"} title={"Videó"}>
+                    <iframe
+                        src="https://www.youtube.com/embed/lJgPfSw4w2c?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1"
+                        title="YouTube video player"
+                        allow="autoplay; encrypted-media"
+                        allowFullScreen
+                        className="aspect-video w-full"
+                    />
+                </Section>
             </div>
             <div className="flex flex-row h-fit w-full relative">
-                <div className="absolute left-0 top-0 h-full z-30 md:block hidden">
+                <div className="absolute left-0 top-0 h-full z-30 md:block">
                     <VertNavbar />
                 </div>
                 <div className="bg-foreground h-full w-full flex flex-col">
@@ -77,14 +78,14 @@ export default function LandingPage(props: LandingPageProps) {
                 </div>
                 <WawyBorder direction={"bottom"} color={"green"} szin={"zold"} />
             </div>
-            <IconTitle className="mt-20 text-black" title={"Események"} Icon={Calendar}/>
-            <MyCarousel data={props.data}/>
-            <div className="my-25">
-                <NewsLetter/>
-            </div>
-            <Section id="location" title="">
-                <div className="relative bg-transparent text-black py-16 px-4 sm:px-6 lg:px-8 rounded-3xl mt-10 mb-20 overflow-hidden">
-                    <div className="absolute inset-0  backdrop-blur-sm"></div>
+            <Section id={"events"} title={"Események"}>
+                <div className="w-full flex justify-center">
+                    <IconTitle className="mt-20 text-black" title={"Események"} Icon={Calendar}/>
+                </div>
+                <MyCarousel data={props.data}/>
+            </Section>
+            <Section id="location" title="Helyszín">
+                <div className="relative bg-bezs text-black py-16 px-4 sm:px-6 lg:px-8 rounded-3xl mt-10 mb-20 overflow-hidden">
                     <div className="relative max-w-7xl mx-auto">
                         <div className="text-center mb-12">
                             <IconTitle title={"Hol vagyunk?"} Icon={MapPin} iconAnimation={"animate-bounce"}/>
