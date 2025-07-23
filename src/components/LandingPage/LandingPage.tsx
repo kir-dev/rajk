@@ -83,8 +83,7 @@ export default function LandingPage(props: LandingPageProps) {
                 <MyCarousel data={props.data}/>
             </Section>
             <Section id="location" title="Helyszín">
-                <div className="relative bg-transparent text-black py-16 px-4 sm:px-6 lg:px-8 rounded-3xl mt-10 mb-20 overflow-hidden">
-                    <div className="absolute inset-0  backdrop-blur-sm"></div>
+                <div className="relative bg-bezs text-black py-16 px-4 sm:px-6 lg:px-8 rounded-3xl mt-10 mb-20 overflow-hidden">
                     <div className="relative max-w-7xl mx-auto">
                         <div className="text-center mb-12">
                             <IconTitle title={"Hol vagyunk?"} Icon={MapPin} iconAnimation={"animate-bounce"}/>
