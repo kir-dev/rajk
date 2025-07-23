@@ -68,7 +68,7 @@ function DesktopTimelineItem({ event, displayedExtraText, featuredImageUrl, isEv
                     alt={event.name}
                     width={24} height={24}
                 />
-                <div className={`absolute text-rajk-green font-black text-2xl -translate-y-1/2 top-1/2 ${isEven ? 'left-16' : 'right-16'}`}>
+                <div className={`absolute text-rajk-green font-black text-2xl -translate-y-1/2 top-1/2 ${isEven ? 'left-30' : 'right-30'}`}>
                     {displayedExtraText}
                 </div>
             </div>

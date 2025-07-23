@@ -10,7 +10,7 @@ export default function PageTitle({text, className}: {
         <div className = {cn('relative w-full flex flex-col items-center h-fit py-32 overflow-hidden', className)}>
             {/* Background strips */}
             <div
-                className = "absolute top-0 left-0 w-full h-full -z-10 flex flex-col gap-4 pointer-events-none bg-rajk-green">
+                className = "absolute top-0 left-0 w-full h-full -z-10 flex flex-col gap-4 pointer-events-none bg-zold">
                 <Strip text = {""}  color={2} rotation={76}/>
                 <Strip text = {"Rajk"} color={1}/>
                 <Strip text = {text}  color={0}/>
