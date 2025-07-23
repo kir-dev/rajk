@@ -2,8 +2,17 @@
 
 import { useEffect, useState } from "react"
 import cn from "@/utils/concatenate"
-import { GraduationCap, UsersRound, Handshake } from "lucide-react"
+import {GraduationCap, UsersRound, Handshake, Calendar, MapPin} from "lucide-react"
 import useIntersectionObserver from "@/hooks/useIntersectionObserver"
+
+// Define sections outside the component to prevent re-creation on each render
+const sections = [
+    { id: "rolunk", title: "Közösség", Icon: UsersRound },
+    { id: "szakma", title: "Szakma", Icon: GraduationCap },
+    { id: "tarsadalmi", title: "Társadalmi felelősség", Icon: Handshake },
+    { id: "events", title: "Események", Icon: Calendar },
+    { id: "location", title: "Helyszín", Icon: MapPin },
+]
 
 const VertNavbar = () => {
     const [activeSection, setActiveSection] = useState("")
@@ -11,23 +20,19 @@ const VertNavbar = () => {
 
     useIntersectionObserver(setActiveSection)
 
-    const sections = [
-        { id: "rolunk", title: "Közösség", Icon: UsersRound },
-        { id: "szakma", title: "Szakma", Icon: GraduationCap },
-        { id: "tarsadalmi", title: "Társadalmi felelősség", Icon: Handshake },
-    ]
-
     useEffect(() => {
         const activeIndex = sections.findIndex(s => s.id === activeSection)
         if (activeIndex !== -1) {
-            // Each icon container is 48px tall (h-12)
+            // Each icon container is 48px tall (h-12), and the space-y-2 adds 8px between them.
+            // Total height per item is 40px (h-10) + 8px (space-y-2) = 48px.
+            // The pill moves based on this total height.
             const newY = activeIndex * 48
             setActivePillStyle({ transform: `translateY(${newY}px)`, opacity: 1 })
         } else {
-            // Hide the pill if no section is active
+            // Optionally hide the pill if no section is active or default to the first
             setActivePillStyle({ transform: 'translateY(0px)', opacity: 0 })
         }
-    }, [activeSection, sections])
+    }, [activeSection]) // Dependency array now only includes activeSection
 
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id)

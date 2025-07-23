@@ -76,9 +76,13 @@ export default function LandingPage(props: LandingPageProps) {
                 </div>
                 <WawyBorder direction={"bottom"} color={"green"} szin={"zold"} />
             </div>
-            <IconTitle className="mt-20 text-black" title={"Események"} Icon={Calendar}/>
-            <MyCarousel data={props.data}/>
-            <Section id="location" title="">
+            <Section id={"events"} title={"Események"}>
+                <div className="w-full flex justify-center">
+                    <IconTitle className="mt-20 text-black" title={"Események"} Icon={Calendar}/>
+                </div>
+                <MyCarousel data={props.data}/>
+            </Section>
+            <Section id="location" title="Helyszín">
                 <div className="relative bg-transparent text-black py-16 px-4 sm:px-6 lg:px-8 rounded-3xl mt-10 mb-20 overflow-hidden">
                     <div className="absolute inset-0  backdrop-blur-sm"></div>
                     <div className="relative max-w-7xl mx-auto">
