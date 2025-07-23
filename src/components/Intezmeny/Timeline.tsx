@@ -1,21 +1,13 @@
 import {RichText} from "@payloadcms/richtext-lexical/react";
 import Image from "next/image";
 import getAboutTimelineEvents from "@/payload-find/getAboutTimelineEvents";
+import {AboutTimelineEvent, ApplyTimelineEvent} from "@/payload-types";
 
 interface TimelineProps {
     timeline: ("about-timeline-event" | "apply-timeline-event")
 }
 
-// Define types for the timeline event
-interface TimelineEvent {
-    id: string;
-    name: string;
-    description: any; // RichText data
-    date: string;
-    logo?: {
-        url: string;
-    } | null;
-}
+type TimelineEvent = AboutTimelineEvent | ApplyTimelineEvent;
 
 // Props for mobile timeline item
 interface TimelineItemProps {

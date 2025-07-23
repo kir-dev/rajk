@@ -1,7 +1,6 @@
-import {HeartHandshake, LibraryBig, PenTool, UsersRound} from "lucide-react";
+import {HeartHandshake, LibraryBig, UsersRound} from "lucide-react";
 import IconTitle from "@/components/IconTitle";
 import Timeline from "@/components/Intezmeny/Timeline";
-import Nevvalasztas from "@/components/Intezmeny/Nevvalasztas";
 import MemberGrid from "@/components/MemberGrid";
 import getGroupMembers from "@/payload-find/getDiakbizottsag";
 import PageTitle from "@/components/PageTitle/PageTitle";

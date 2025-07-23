@@ -7,7 +7,6 @@ import {Calendar, ExternalLink, GraduationCap, Handshake, MapPin, UsersRound} fr
 import Statistics from "@/components/LandingPage/Statistics";
 import WawyBorder from "@/components/WawyBorder";
 import MyCarousel from "@/components/MyCarousel";
-import NewsLetter from "@/components/LandingPage/NewsLetter";
 import IconTitle from "@/components/IconTitle";
 import Link from "next/link";
 import dynamic from "next/dynamic";
