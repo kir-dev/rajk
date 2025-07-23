@@ -7,7 +7,6 @@ import {Calendar, ExternalLink, GraduationCap, Handshake, MapPin, UsersRound} fr
 import Statistics from "@/components/LandingPage/Statistics";
 import WawyBorder from "@/components/WawyBorder";
 import MyCarousel from "@/components/MyCarousel";
-import NewsLetter from "@/components/LandingPage/NewsLetter";
 import IconTitle from "@/components/IconTitle";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -79,9 +78,6 @@ export default function LandingPage(props: LandingPageProps) {
             </div>
             <IconTitle className="mt-20 text-black" title={"Események"} Icon={Calendar}/>
             <MyCarousel data={props.data}/>
-            <div className="my-25">
-                <NewsLetter/>
-            </div>
             <Section id="location" title="">
                 <div className="relative bg-transparent text-black py-16 px-4 sm:px-6 lg:px-8 rounded-3xl mt-10 mb-20 overflow-hidden">
                     <div className="absolute inset-0  backdrop-blur-sm"></div>

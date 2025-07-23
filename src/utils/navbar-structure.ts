@@ -5,7 +5,6 @@ export const navItems = [
     subItems: [
       { label: 'Intézmény', href: '/rolunk/intezmeny' },
       { label: 'Közösség', href: '/rolunk/kozosseg' },
-      { label: 'Alumni', href: '/alumni' },
       { label: 'Galéria', href: '/galeria' },
     ],
   },
@@ -21,6 +20,6 @@ export const navItems = [
     ],
   },
   { label: 'Nemzetközi kapcsolataink', href: '/international-relations' },
-  { label: 'Jelentkezés', href: '/felveteli', bordered: true },
+  { label: 'Felvételi', href: '/felveteli', bordered: true },
   { label: 'Támogatás', href: '/support', bordered: true },
 ];
