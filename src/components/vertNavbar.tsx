@@ -4,9 +4,11 @@ import { useEffect, useState } from "react"
 import cn from "@/utils/concatenate"
 import {GraduationCap, UsersRound, Handshake, Calendar, MapPin} from "lucide-react"
 import useIntersectionObserver from "@/hooks/useIntersectionObserver"
+import Image from "next/image";
 
 // Define sections outside the component to prevent re-creation on each render
 const sections = [
+    { id: "video", title: "Videó", Icon: "/rajk_strucc_black.png" },
     { id: "rolunk", title: "Közösség", Icon: UsersRound },
     { id: "szakma", title: "Szakma", Icon: GraduationCap },
     { id: "tarsadalmi", title: "Társadalmi felelősség", Icon: Handshake },
@@ -59,14 +61,29 @@ const VertNavbar = () => {
                             className="group relative flex items-center justify-center h-10 w-10 rounded-full"
                             aria-label={`Navigate to ${section.title}`}
                         >
-                            <section.Icon
-                                className={cn(
-                                    "w-5 h-5 transition-colors duration-300",
-                                    activeSection === section.id
+                            {section.Icon && typeof section.Icon === "string" ? (
+                                <Image
+                                    width={200}
+                                    height={200}
+                                    src={section.Icon}
+                                    alt={section.title}
+                                    className={cn(
+                                        "w-10 h-10 transition-opacity duration-300",
+                                        activeSection === section.id
+                                            ? "opacity-100"
+                                            : "opacity-50 group-hover:opacity-100"
+                                    )}
+                                />
+                            ) : (
+                                <section.Icon
+                                    className={cn(
+                                        "w-5 h-5 transition-colors duration-300",
+                                        activeSection === section.id
                                         ? "text-rajk-green"
                                         : "text-gray-500 group-hover:text-rajk-green"
-                                )}
-                            />
+                                    )}
+                                />
+                            )}
 
                             {/* Tooltip Label */}
                             <div

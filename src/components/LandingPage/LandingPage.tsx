@@ -24,16 +24,18 @@ export default function LandingPage(props: LandingPageProps) {
     return (
         <div className="min-h-screen min-w-screen flex flex-col pb-40 bg-bezs">
             <div>
-                <iframe
-                    src="https://www.youtube.com/embed/lJgPfSw4w2c?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1"
-                    title="YouTube video player"
-                    allow="autoplay; encrypted-media"
-                    allowFullScreen
-                    className="aspect-video w-full"
-                />
+                <Section id={"video"} title={"Videó"}>
+                    <iframe
+                        src="https://www.youtube.com/embed/lJgPfSw4w2c?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1"
+                        title="YouTube video player"
+                        allow="autoplay; encrypted-media"
+                        allowFullScreen
+                        className="aspect-video w-full"
+                    />
+                </Section>
             </div>
             <div className="flex flex-row h-fit w-full relative">
-                <div className="absolute left-0 top-0 h-full z-30 md:block hidden">
+                <div className="absolute left-0 top-0 h-full z-30 md:block">
                     <VertNavbar />
                 </div>
                 <div className="bg-foreground h-full w-full flex flex-col">
