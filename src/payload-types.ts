@@ -80,6 +80,7 @@ export interface Config {
     reports: Report;
     'apply-timeline-event': ApplyTimelineEvent;
     'about-timeline-event': AboutTimelineEvent;
+    'stripe-transactions': StripeTransaction;
     events: Event;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -100,6 +101,7 @@ export interface Config {
     reports: ReportsSelect<false> | ReportsSelect<true>;
     'apply-timeline-event': ApplyTimelineEventSelect<false> | ApplyTimelineEventSelect<true>;
     'about-timeline-event': AboutTimelineEventSelect<false> | AboutTimelineEventSelect<true>;
+    'stripe-transactions': StripeTransactionsSelect<false> | StripeTransactionsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -420,6 +422,33 @@ export interface AboutTimelineEvent {
   createdAt: string;
 }
 /**
+ * Szponzorok, akik támogatják a szakkollégiumot.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stripe-transactions".
+ */
+export interface StripeTransaction {
+  id: number;
+  donorName?: string | null;
+  formattedAmount?: string | null;
+  currency?: string | null;
+  donorEmail?: string | null;
+  stripePaymentIntentId: string;
+  amount?: number | null;
+  metadata?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  status: 'succeeded' | 'failed';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Események és eseményekkel kapcsolatos információk
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -491,6 +520,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'about-timeline-event';
         value: number | AboutTimelineEvent;
+      } | null)
+    | ({
+        relationTo: 'stripe-transactions';
+        value: number | StripeTransaction;
       } | null)
     | ({
         relationTo: 'events';
@@ -709,6 +742,22 @@ export interface AboutTimelineEventSelect<T extends boolean = true> {
   date?: T;
   description?: T;
   logo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stripe-transactions_select".
+ */
+export interface StripeTransactionsSelect<T extends boolean = true> {
+  donorName?: T;
+  formattedAmount?: T;
+  currency?: T;
+  donorEmail?: T;
+  stripePaymentIntentId?: T;
+  amount?: T;
+  metadata?: T;
+  status?: T;
   updatedAt?: T;
   createdAt?: T;
 }

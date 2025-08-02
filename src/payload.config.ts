@@ -22,6 +22,8 @@ import {Apply_Timeline_Event} from "@/collections/Apply_Timeline_Event";
 import {About_Timeline_Event} from "@/collections/About_Timeline_Event";
 import {Applicants} from "@/collections/Applicants";
 import {Events} from "@/collections/Events";
+import {stripePlugin} from "@payloadcms/plugin-stripe";
+import {StripeTransactions} from "@/collections/Stripe-Transactions";
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -47,6 +49,7 @@ export default buildConfig({
     Reports,
     Apply_Timeline_Event,
     About_Timeline_Event,
+    StripeTransactions,
     Events,
   ],
   editor: lexicalEditor(),
@@ -80,5 +83,9 @@ export default buildConfig({
       clientUploads: true,
     }),
     // storage-adapter-placeholder
+    stripePlugin({
+      stripeSecretKey: process.env.STRIPE_SECRET_KEY!,
+      rest: true,
+    })
   ],
 });
