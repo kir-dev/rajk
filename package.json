@@ -10,6 +10,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@innovixx/payload-color-picker-field": "^2.0.2",
+    "@modernaut/payload-color-swatch-field": "^1.2.1",
     "@payloadcms/db-postgres": "^3.43.0",
     "@payloadcms/db-vercel-postgres": "3.43.0",
     "@payloadcms/next": "3.43.0",
@@ -25,6 +27,7 @@
     "button": "^1.1.1",
     "card": "^2.5.4",
     "express": "^5.1.0",
+    "framer-motion": "^12.23.12",
     "graphql": "^16.8.1",
     "init": "^0.1.2",
     "leaflet": "^1.9.4",

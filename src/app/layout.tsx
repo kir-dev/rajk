@@ -34,9 +34,9 @@ export default function RootLayout({
             <body
                 className = {`antialiased flex flex-col justify-between min-h-screen`}
             >
-                <NavBar/>
+                <NavBar />
                 {children}
-                <Footer/>
+                <Footer />
             </body>
         </html>
     );
