@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang = "en">
-            <head>
+            <head title={"Rajk Szakkollégium"}>
                 <script defer data-domain = "rajk.kir-dev.hu" src = {"https://visit.kir-dev.hu/js/script.js"}></script>
             </head>
             <body
