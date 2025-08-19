@@ -20,6 +20,8 @@ interface LandingPageProps {
 export default function LandingPage(props: LandingPageProps) {
     const Map = dynamic(() => import('@/components/LandingPage/Map'), { ssr: false });
     const rajkMapLink = "https://www.google.com/maps/place/Rajk+Szakkollégium/@47.566434,19.0794354,323527m/data=!3m1!1e3!4m6!3m5!1s0x4741dc5c16189aab:0xa4ca0fbc0eb330af!8m2!3d47.4924152!4d19.06774!16zL20vMDkyenc3?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D"
+    const thisYear = new Date().getFullYear();
+    const lastYear = thisYear - 1;
 
     return (
         <div className="min-h-screen min-w-screen flex flex-col pb-40 bg-bezs">
@@ -43,36 +45,60 @@ export default function LandingPage(props: LandingPageProps) {
                         <div className="flex flex-col w-full h-full rounded-2xl">
                             <PillarCard
                                 title="Közösség"
-                                description="A rajkosság egy életre szól. Közös élmények sokasága kovácsolja össze az itt végzetteket, ez a kapcsolat pedig a végzés után sem ér véget: A kollégium mindig visszavárja végzettjeit."
+                                description="A Rajk mindenekelőtt egy összetartó közösség. A közös lakhatás, a mindennapok megélése és az általunk szervezett programok olyan bizalmi közeget teremtenek, ahol a tagok folyamatosan tanulnak egymástól, és számíthatnak egymás támogatására. Ehhez szorosan kapcsolódik az is, hogy a kollégium működését mi magunk irányítjuk: a közös döntések nemcsak felelősséget jelentenek, hanem valódi közösségi élményt adnak. Ennek köszönhető, hogy az itt kialakuló kötelékek a végzés után is megmaradnak – ezt az aktív alumni közösség is jól mutatja."
                                 icon={UsersRound}
                                 buttonText="Tovább"
                                 href={"/rolunk/kozosseg"}
                             />
-                            <Statistics isLast={false} color={"purple"} szin={"lila"} />
+                            <Statistics isLast={false} color={"purple"} szin={"lila"} title={"Közösség"}
+                                data={
+                                    [
+                                        ["Alumni közösség", 1500, ""],
+                                        ["Aktív tagok száma", 200, ""],
+                                        ["Éves rendezvények", 30, ""]
+                                    ]
+                                }
+                            />
                         </div>
                     </Section>
                     <Section id={"szakma"} title={"Szakma"}>
                         <div className="flex flex-col h-full rounded-2xl">
                             <PillarCard
                                 title="Szakma"
-                                description="A Rajk segíti tagjait a fejlődésben, hogy célokat tűzzenek maguk elé és el is érjék azokat. Felkészültté teszi őket a társadalom egészét érintő kérdésekben is."
+                                description="A Rajk már alapításakor eltért a hagyományos egyetemi oktatási modelltől: a kurzusrendszert a hallgatók maguk alakították ki, interaktív, 4–8 fős szemináriumokra építve. Így kerülhettek be olyan, nemzetközi szinten is élvonalbeli tárgyak – mint az ökonometria vagy a vállalatértékelés –, amelyek akkoriban Magyarországon még nem, vagy csak más formában voltak elérhetők. Ezt a szemléletet ma is tovább visszük: a tagok határozzák meg a kurzusok irányait, részt vesznek a mentorprogramok és az akadémiai díjak szervezésében, miközben elismert hazai és nemzetközi oktatóktól tanulnak. Évente több mint ötven szakmai kurzus valósul meg a kollégisták kezdeményezése nyomán, alumnik, partnereink és állandó tanáraink támogatásával."
                                 icon={GraduationCap}
                                 buttonText="Tovább"
                                 href={"/szakma"}
                             />
-                            <Statistics isLast={false} color={"blue"} szin={"kek"} />
+                            <Statistics isLast={false} color={"blue"} szin={"kek"} title={"Szakma"}
+                                data={
+                                    [
+                                        [`${lastYear}/${thisYear}-ös tanévben`, 48, "kurzus"],
+                                        ["Az elmúlt 5 évben", 156, "leadott TDK"],
+                                        [`${thisYear}-ben`, 17, "OTDK helyezés"]
+                                    ]
+                                }
+                            />
                         </div>
                     </Section>
                     <Section id={"tarsadalmi"} title={"Társadalmi felelősségvállalás"}>
                         <div className="flex flex-col h-full rounded-2xl">
                             <PillarCard
                                 title="Társadalmi felelősség"
-                                description="Egy rajkos társadalmi szinten gondolkodik: Bővíti ismereteit a közélet és közpolitika terén, érzékenyen kapcsolódik a mindenkori társadalmi problémákhoz."
+                                description="A Rajk mindig is érzékenyen reagált a közéleti folyamatokra – a rendszerváltás előtti fórumoktól egészen a napjainkban felmerülő társadalmi kérdésekig. A kollégiumban rendszeresen tartunk előadásokat, vitákat és saját kezdeményezésű projekteket, amelyek arra ösztönöznek, hogy túllépjünk a szűken vett szakmai nézőponton, és felelősen gondolkodjunk a közélet és a társadalom egészéről. A cél nem pusztán az ismeretszerzés, hanem az, hogy a tagok készek legyenek aktívan alakítani a környezetüket – és ez a szemlélet a végzés után is meghatározza a rajkosok gondolkodását."
                                 icon={Handshake}
                                 buttonText="Tovább"
                                 href={"/tarsadalmi-felelossegvallalas"}
                             />
-                            <Statistics isLast={true} color={"green"} szin={"zold"} />
+                            <Statistics isLast={true} color={"green"} szin={"zold"} title={"Társadalmi felelősségvállalás"}
+                                data={
+                                    [
+                                        ["Szabó Kálmán Tehetségprogram ösztöndíjasok száma", 10, ""],
+                                        ["Az elmúlt 5 évben", 4, "Társadalmi Felelősségvállalás Projekt"],
+                                        ["Támogatott lakhatással rendelkező kollégisták száma:", 500, ""]
+                                    ]
+                                }
+                            />
                         </div>
                     </Section>
                 </div>

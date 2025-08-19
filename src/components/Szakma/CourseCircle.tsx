@@ -74,6 +74,7 @@ export const CourseCircle = ({
     const handleClick = () => {
         window.open(link, '_blank');
     };
+    console.log("CourseCircle rendered with category:", (category as CourseCategory).color);
 
     return (
         <div
@@ -90,13 +91,13 @@ export const CourseCircle = ({
             <div className="relative">
                 <motion.div
                     className={`
-                        w-12 h-12 md:w-16 md:h-16 
-                        ${(category as CourseCategory).color}
-                        bg-zold 
+                        w-12 h-12 md:w-16 md:h-16
                         rounded-full 
+                        border-2 border-white
                         flex items-center justify-center 
                         transition-all duration-300
                         shadow-lg hover:shadow-xl
+                        bg-[${(category as CourseCategory).color}]
                     `}
                     initial={{ scale: 0, opacity: 0 }}
                     animate={isVisible ? {
@@ -125,8 +126,7 @@ export const CourseCircle = ({
                                 absolute -top-16 left-1/2 transform -translate-x-1/2
                                 bg-white backdrop-blur-sm bg-opacity-95 border border-gray-200 
                                 rounded-lg px-4 py-3
-                                text-sm font-medium bg-${(category as CourseCategory).color}
-                                bg-zold
+                                text-sm font-medium bg-[${(category as CourseCategory).color}]
                                 shadow-xl z-10
                                 max-w-[180px] md:max-w-[220px]
                                 pointer-events-none
@@ -136,7 +136,7 @@ export const CourseCircle = ({
                             exit={{ opacity: 0, y: 10, scale: 0.9 }}
                             transition={{ duration: 0.2 }}
                         >
-                            <div className="font-semibold mb-1">{title}</div>
+                            <div className="font-semibold mb-1 text-black font-bold">{title}</div>
                             {description && <p className="text-xs text-gray-600 line-clamp-2">{description}</p>}
                             {/* Tooltip Arrow */}
                             <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-8 border-transparent border-t-white"></div>
@@ -148,7 +148,7 @@ export const CourseCircle = ({
                 <AnimatePresence>
                     {isVisible && (
                         <motion.div
-                            className={`absolute inset-0 rounded-full border-2 bg-${(category as CourseCategory).color} bg-zold`}
+                            className={`absolute inset-0 rounded-full border-2 border-white bg-[${(category as CourseCategory).color}]`}
                             initial={{ scale: 1, opacity: 0.3 }}
                             animate={isHovered ? {
                                 scale: [1, 1.5, 1.8],

@@ -7,16 +7,11 @@ interface StatisticsProps {
     isLast?: boolean;
     color: "green" | "blue" | "purple" | "cream";
     szin: "zold" | "kek" | "lila" | "bezs";
+    title: string;
+    data: [[string, number, string], [string, number, string], [string, number, string]];
 }
 
 export default function Statistics(props: StatisticsProps) {
-    // Final values for the statistics
-    const finalValues = {
-        courses: 48,
-        tdkSubmitted: 201,
-        tdkWinners: 93
-    };
-
     // Current animated values
     const [courseCount, setCourseCount] = useState(0);
     const [tdkSubmittedCount, setTdkSubmittedCount] = useState(0);
@@ -61,18 +56,18 @@ export default function Statistics(props: StatisticsProps) {
                         const progress = 1 - Math.pow(2, -10 * frame / totalFrames);
 
                         setCourseCount(Math.min(
-                            Math.round(finalValues.courses * progress),
-                            finalValues.courses
+                            Math.round(props.data[0][1] * progress),
+                            props.data[0][1]
                         ));
 
                         setTdkSubmittedCount(Math.min(
-                            Math.round(finalValues.tdkSubmitted * progress),
-                            finalValues.tdkSubmitted
+                            Math.round(props.data[1][1] * progress),
+                            props.data[1][1]
                         ));
 
                         setTdkWinnersCount(Math.min(
-                            Math.round(finalValues.tdkWinners * progress),
-                            finalValues.tdkWinners
+                            Math.round(props.data[2][1] * progress),
+                            props.data[2][1]
                         ));
 
                         if (frame >= totalFrames) {
@@ -91,7 +86,7 @@ export default function Statistics(props: StatisticsProps) {
         return () => {
             observer.unobserve(currentRef);
         };
-    }, [finalValues.courses, finalValues.tdkSubmitted, finalValues.tdkWinners]);
+    }, [props.data[0][1], props.data[1][1], props.data[2][1]]);
 
     return(
         <div className="relative w-full">
@@ -101,7 +96,7 @@ export default function Statistics(props: StatisticsProps) {
                 <div className="max-w-6xl mx-auto px-8" ref={statsRef}>
                     {/* Header */}
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-bold mb-2">SZAKMA</h2>
+                        <h2 className="text-4xl md:text-5xl font-bold mb-2">{props.title}</h2>
                         <div className="w-20 h-1 mx-auto"></div>
                     </div>
 
@@ -109,38 +104,38 @@ export default function Statistics(props: StatisticsProps) {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
                         {/* First Stat */}
                         <div className="space-y-4">
-                            <p className="text-lg md:text-xl font-light">A 2022/23-es tanévben</p>
+                            <p className="text-lg md:text-xl font-light">{props.data[0][0]}</p>
                             <div className="text-6xl md:text-7xl font-bold relative">
                                 <span className="inline-block transform transition-all hover:scale-110 duration-300">
                                     {courseCount}
                                 </span>
                                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-white opacity-50"></div>
                             </div>
-                            <p className="text-lg md:text-xl font-light">Kurzus</p>
+                            <p className="text-lg md:text-xl font-light">{props.data[0][2]}</p>
                         </div>
 
                         {/* Second Stat */}
                         <div className="space-y-4">
-                            <p className="text-lg md:text-xl font-light">Az elmúlt 5 évben</p>
+                            <p className="text-lg md:text-xl font-light">{props.data[1][0]}</p>
                             <div className="text-6xl md:text-7xl font-bold relative">
                                 <span className="inline-block transform transition-all hover:scale-110 duration-300">
                                     {tdkSubmittedCount}
                                 </span>
                                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-white opacity-50"></div>
                             </div>
-                            <p className="text-lg md:text-xl font-light">Leadott TDK</p>
+                            <p className="text-lg md:text-xl font-light">{props.data[1][2]}</p>
                         </div>
 
                         {/* Third Stat */}
                         <div className="space-y-4">
-                            <p className="text-lg md:text-xl font-light">Az elmúlt 5 év alatt</p>
+                            <p className="text-lg md:text-xl font-light">{props.data[2][0]}</p>
                             <div className="text-6xl md:text-7xl font-bold relative">
                                 <span className="inline-block transform transition-all hover:scale-110 duration-300">
                                     {tdkWinnersCount}
                                 </span>
                                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-white opacity-50"></div>
                             </div>
-                            <p className="text-lg md:text-xl font-light">Helyezett TDK</p>
+                            <p className="text-lg md:text-xl font-light">{props.data[2][2]}</p>
                         </div>
                     </div>
                 </div>
