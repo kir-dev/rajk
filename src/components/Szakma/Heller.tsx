@@ -1,8 +1,8 @@
 import {Group, Person} from "@/payload-types";
 import {useEffect, useState} from "react";
 import getGroupMembers from "@/payload-find/getGroups";
-import {LeafDecoration} from "@/components/Szakma/LeafDecoration";
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/Card";
+import {Card, CardContent} from "@/components/Card";
+import Image from "next/image";
 
 export default function Heller() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -27,6 +27,7 @@ export default function Heller() {
     }, []);
 
     const members = awardees?.members || [];
+    members.sort((a, b) => new Date(a.joined_at || 0).getFullYear() - new Date(b.joined_at || 0).getFullYear())
     const memberCount = members.length;
     const columnSize = Math.ceil(memberCount / 3);
 
@@ -37,19 +38,18 @@ export default function Heller() {
     ];
 
     return (
-        <div className="flex items-center justify-center min-h-screen p-8">
+        <div className="flex items-center justify-center min-h-screen p-8 mb-20">
             <div className="relative p-8">
-                {/* Decorative leaves */}
-                <LeafDecoration className="z-50" position="top-left" />
-                <LeafDecoration className="z-50" position="top-right" />
-                <LeafDecoration className="z-50" position="bottom-left" />
-                <LeafDecoration className="z-50" position="bottom-right" />
+                <Image
+                    src={"/hellerdij.jpg"}
+                    alt={"Heller-díj background image"}
+                    width={500}
+                    height={500}
+                    className="absolute"
+                />
 
                 {/* Main card */}
                 <Card className="relative z-10 max-w-4xl">
-                    <CardHeader>
-                        <CardTitle className="text-center">Heller-díjasok</CardTitle>
-                    </CardHeader>
                     <CardContent>
                         {loading ? (
                             <div className="flex justify-center py-8">
