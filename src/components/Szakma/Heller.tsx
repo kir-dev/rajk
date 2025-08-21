@@ -1,11 +1,12 @@
 import {Group, Person} from "@/payload-types";
 import {useEffect, useState} from "react";
-import Image from "next/image";
 import getGroupMembers from "@/payload-find/getGroups";
+import {LeafDecoration} from "@/components/Szakma/LeafDecoration";
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/Card";
 
 export default function Heller() {
     const [loading, setLoading] = useState<boolean>(true);
-    const [awardees, setAwards] = useState<Group>();
+    const [awardees, setAwards] = useState<Group | null>(null);
 
     useEffect(() => {
         async function fetchAwards() {
@@ -13,7 +14,7 @@ export default function Heller() {
             try {
                 const response = await getGroupMembers("Heller-díj");
                 if (!response) {
-                    throw new Error("No awardees found");
+                    setAwards(null);
                 }
                 setAwards(response);
             } catch (error){
@@ -23,37 +24,66 @@ export default function Heller() {
             }
         }
         fetchAwards();
-    }, [])
+    }, []);
+
+    const members = awardees?.members || [];
+    const memberCount = members.length;
+    const columnSize = Math.ceil(memberCount / 3);
+
+    const columns = [
+        members.slice(0, columnSize),
+        members.slice(columnSize, columnSize * 2),
+        members.slice(columnSize * 2)
+    ];
+
     return (
-        <div className="relative">
-          <Image
-            src={"/hellerdij.jpg"}
-            alt={"Heller-díj"}
-            width={500}
-            height={500}
-            className="rounded-lg mb-4"
-          />
-          <div className="absolute inset-10 -top-1/4 rounded-lg">
-            <div className="grid grid-cols-3 gap-2 p-4 h-full">
-              {awardees?.members?.map((awardee) => {
-                const memberName = typeof awardee.member === 'object' && awardee.member !== null
-                  ? (awardee.member as Person).name
-                  : 'Unknown';
+        <div className="flex items-center justify-center min-h-screen p-8">
+            <div className="relative p-8">
+                {/* Decorative leaves */}
+                <LeafDecoration className="z-50" position="top-left" />
+                <LeafDecoration className="z-50" position="top-right" />
+                <LeafDecoration className="z-50" position="bottom-left" />
+                <LeafDecoration className="z-50" position="bottom-right" />
 
-                const yearDisplay = awardee.joined_at
-                  ? new Date(awardee.joined_at).getFullYear()
-                  : 'N/A';
+                {/* Main card */}
+                <Card className="relative z-10 max-w-4xl">
+                    <CardHeader>
+                        <CardTitle className="text-center">Heller-díjasok</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        {loading ? (
+                            <div className="flex justify-center py-8">
+                                <p className="text-muted-foreground">Loading...</p>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                {columns.map((column, columnIndex) => (
+                                    <div key={columnIndex} className="space-y-3">
+                                        {column.map((awardee, personIndex) => {
+                                            const memberName = typeof awardee.member === 'object' && awardee.member !== null
+                                                ? (awardee.member as Person).name
+                                                : 'Unknown';
 
-                return (
-                  <div key={awardee.id} className="flex items-center justify-center">
-                    <p className="whitespace-nowrap overflow-hidden text-ellipsis px-2 py-1 bg-white/80 rounded text-black text-sm">
-                      {memberName} ({yearDisplay})
-                    </p>
-                  </div>
-                );
-              })}
+                                            const yearDisplay = awardee.joined_at
+                                                ? new Date(awardee.joined_at).getFullYear()
+                                                : 'N/A';
+
+                                            return (
+                                                <div key={personIndex} className="text-black">
+                                                    <span className="font-medium">{memberName}</span>
+                                                    <span className="text-muted-foreground ml-2">
+                                                        ({yearDisplay})
+                                                    </span>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </CardContent>
+                </Card>
             </div>
-          </div>
         </div>
-    )
+    );
 }
