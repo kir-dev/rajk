@@ -7,6 +7,7 @@ import {Course, CourseCategory} from "@/payload-types";
 import getCourses from "@/payload-find/getCourses";
 import getCourseCategories from "@/payload-find/getCourseCategories";
 import TDK from "@/components/Szakma/TDK";
+import IconTitle from "@/components/IconTitle";
 
 export default function SzakmaPage() {
     const [isMounted, setIsMounted] = useState(false);
@@ -44,7 +45,10 @@ export default function SzakmaPage() {
                     {/* Additional content can be added here */}
                 </div>
             )}
-            <TDK/>
+            <div className="flex flex-col items-center text-black">
+                <IconTitle title={"Büszkeségeink"} />
+                <TDK/>
+            </div>
         </main>
     );
 }
