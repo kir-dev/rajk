@@ -8,6 +8,8 @@ import getCourses from "@/payload-find/getCourses";
 import getCourseCategories from "@/payload-find/getCourseCategories";
 import TDK from "@/components/Szakma/TDK";
 import IconTitle from "@/components/IconTitle";
+import OdysseyProgram from "@/components/Szakma/Odyssey";
+import Heller from "@/components/Szakma/Heller";
 
 export default function SzakmaPage() {
     const [isMounted, setIsMounted] = useState(false);
@@ -25,7 +27,7 @@ export default function SzakmaPage() {
     }, []);
 
     return (
-        <main className="min-h-screen bg-bezs">
+        <main className="min-h-screen flex flex-col pb-40 bg-bezs text-black">
             {/* Page wrapper with nice padding and full height */}
             {isMounted ? (
                 <motion.div
@@ -48,6 +50,8 @@ export default function SzakmaPage() {
             <div className="flex flex-col items-center text-black">
                 <IconTitle title={"Büszkeségeink"} />
                 <TDK/>
+                <OdysseyProgram/>
+                <Heller/>
             </div>
         </main>
     );

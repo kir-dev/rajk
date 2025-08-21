@@ -84,6 +84,7 @@ export interface Config {
     events: Event;
     'course-categories': CourseCategory;
     courses: Course;
+    odyssey: Odyssey;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -107,6 +108,7 @@ export interface Config {
     events: EventsSelect<false> | EventsSelect<true>;
     'course-categories': CourseCategoriesSelect<false> | CourseCategoriesSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
+    odyssey: OdysseySelect<false> | OdysseySelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -557,6 +559,25 @@ export interface Course {
   createdAt: string;
 }
 /**
+ * Jelentések
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "odyssey".
+ */
+export interface Odyssey {
+  id: number;
+  participants?:
+    | {
+        participant: number | Person;
+        id?: string | null;
+      }[]
+    | null;
+  title: string;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
@@ -630,6 +651,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'courses';
         value: number | Course;
+      } | null)
+    | ({
+        relationTo: 'odyssey';
+        value: number | Odyssey;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -903,6 +928,22 @@ export interface CoursesSelect<T extends boolean = true> {
       };
   category?: T;
   displayOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "odyssey_select".
+ */
+export interface OdysseySelect<T extends boolean = true> {
+  participants?:
+    | T
+    | {
+        participant?: T;
+        id?: T;
+      };
+  title?: T;
+  description?: T;
   updatedAt?: T;
   createdAt?: T;
 }
