@@ -26,7 +26,13 @@ import {
     Layers
 } from 'lucide-react';
 
-const IconComponent = ({ iconName, className = "", size = 24 }) => {
+type IconName = 'BookOpen' | 'Calculator' | 'Globe' | 'Palette' | 'Code' |
+    'Users' | 'TrendingUp' | 'Lightbulb' | 'Target' | 'Database' |
+    'Settings' | 'Puzzle' | 'Monitor' | 'FileText' | 'Search' |
+    'BarChart' | 'Download' | 'MessageCircle' | 'PenTool' | 'Layers';
+
+
+const IconComponent = ({ iconName, className = "", size = 24 }: { iconName: IconName, className?: string, size: number}) => {
     const iconMap = {
         BookOpen, Calculator, Globe, Palette, Code, Users, TrendingUp, Lightbulb,
         Target, Database, Settings, Puzzle, Monitor, FileText, Search, BarChart,
@@ -38,7 +44,7 @@ const IconComponent = ({ iconName, className = "", size = 24 }) => {
 }
 
 interface CourseCircleProps {
-    icon: string;
+    icon: IconName;
     title: string;
     link: string;
     position: {
