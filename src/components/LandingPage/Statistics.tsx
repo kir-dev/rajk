@@ -86,7 +86,7 @@ export default function Statistics(props: StatisticsProps) {
         return () => {
             observer.unobserve(currentRef);
         };
-    }, [props.data[0][1], props.data[1][1], props.data[2][1]]);
+    }, [props.data]);
 
     return(
         <div className="relative w-full">

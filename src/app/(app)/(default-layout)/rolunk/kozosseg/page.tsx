@@ -1,8 +1,6 @@
-import {House, LibraryBig} from "lucide-react";
+import {LibraryBig} from "lucide-react";
 import IconTitle from "@/components/IconTitle";
 import Timeline from "@/components/Intezmeny/Timeline";
-import Mukodes from "@/components/Intezmeny/Mukodes";
-import PageTitle from "@/components/PageTitle/PageTitle";
 import React from "react";
 
 export default async function RolunkPage() {

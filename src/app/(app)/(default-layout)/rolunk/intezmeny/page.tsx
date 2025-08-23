@@ -1,15 +1,12 @@
-import {HeartHandshake, House, LibraryBig, UsersRound} from "lucide-react";
+import {HeartHandshake, House, LibraryBig} from "lucide-react";
 import IconTitle from "@/components/IconTitle";
 import Timeline from "@/components/Intezmeny/Timeline";
-import MemberGrid from "@/components/MemberGrid";
-import getGroupMembers from "@/payload-find/getGroups";
-import PageTitle from "@/components/PageTitle/PageTitle";
 import React from "react";
 import Mukodes from "@/components/Intezmeny/Mukodes";
 
 export default async function RolunkPage() {
-    const diakbizottsag = await getGroupMembers("Diákbizottság") || [];
-    const vezetoseg = await getGroupMembers("Vezetőség") || [];
+    //const diakbizottsag = await getGroupMembers("Diákbizottság") || [];
+    //const vezetoseg = await getGroupMembers("Vezetőség") || [];
 
     return (
         <div>

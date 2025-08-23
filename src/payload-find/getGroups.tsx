@@ -20,7 +20,7 @@ export default async function getGroupMembers(groupName: string) {
     if (!group.docs || group.docs.length === 0) {
         return null;
     }
-
+    /*
     // Extract member IDs
     const memberEntries = group.docs[0].members || [];
     const memberIds = memberEntries
@@ -40,7 +40,7 @@ export default async function getGroupMembers(groupName: string) {
             }
         },
         depth: 1, // Ensure pictures are populated
-    });
+    });*/
 
     if ( !group.docs[0] ) return null;
     return group.docs[0];
