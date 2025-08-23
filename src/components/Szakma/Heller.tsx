@@ -1,7 +1,6 @@
 import {Group, Person} from "@/payload-types";
 import {useEffect, useState} from "react";
 import getGroupMembers from "@/payload-find/getGroups";
-import {LeafDecoration} from "@/components/Szakma/LeafDecoration";
 import Image from "next/image";
 
 export default function Heller() {
