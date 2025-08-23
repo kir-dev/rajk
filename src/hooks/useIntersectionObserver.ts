@@ -12,7 +12,7 @@ const useIntersectionObserver = (setActiveSection: (id: string) => void) => {
             const visibleSections = Array.from(sections).filter(section => {
                 const rect = section.getBoundingClientRect()
                 const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0)
-                return visibleHeight / rect.height >= 0.4
+                return visibleHeight / rect.height >= 0.5
             })
             
             if (visibleSections.length === 0) return
