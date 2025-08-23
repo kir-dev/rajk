@@ -1,8 +1,9 @@
+'use server';
+
 import { getPayload } from "payload";
 import config from "@payload-config";
-import { Person } from "@/payload-types";
 
-export default async function getGroupMembers(groupName: string): Promise<Person[]> {
+export default async function getGroupMembers(groupName: string) {
     const payload = await getPayload({ config });
 
     // First find the Diákbizottság group to get member IDs
@@ -13,11 +14,11 @@ export default async function getGroupMembers(groupName: string): Promise<Person
                 equals: groupName
             }
         },
-        depth: 1,
+        depth: 2,
     });
 
     if (!group.docs || group.docs.length === 0) {
-        return [];
+        return null;
     }
 
     // Extract member IDs
@@ -27,7 +28,7 @@ export default async function getGroupMembers(groupName: string): Promise<Person
         .map(entry => typeof entry.member === 'object' ? entry.member.id : entry.member);
 
     if (memberIds.length === 0) {
-        return [];
+        return null;
     }
 
     // Directly query the people collection with their pictures
@@ -41,5 +42,6 @@ export default async function getGroupMembers(groupName: string): Promise<Person
         depth: 1, // Ensure pictures are populated
     });
 
-    return peopleResult.docs as Person[];
+    if ( !group.docs[0] ) return null;
+    return group.docs[0];
 }

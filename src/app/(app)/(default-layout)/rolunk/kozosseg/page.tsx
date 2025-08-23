@@ -8,10 +8,7 @@ import React from "react";
 export default async function RolunkPage() {
     return (
         <div>
-            <PageTitle text = {"Közösség"}/>
             <div className="min-h-screen flex flex-col pb-40 bg-bezs text-black">
-                <IconTitle className="mt-20" title={"Bentlakás"} Icon={House}/>
-                <Mukodes/>
                 <IconTitle title={"Felvételi folyamat"} Icon={LibraryBig} />
                 <Timeline timeline={"apply-timeline-event"} />
             </div>
