@@ -1,14 +1,15 @@
 import {getPayload} from "payload";
 import config from "@/payload.config";
+import {Award} from "@/payload-types";
 
 export async function fetchAwards() {
     const payload = await getPayload({config})
-    const members = await payload.find({
+    const awards = await payload.find({
         collection: "awards",
         limit: 20,
         depth: 0,
         sort: "-createdAt",
     });
     
-    return members.docs;
+    return awards.docs as Award[];
 }

@@ -1,10 +1,16 @@
 import AwardLandingSection from "@/components/Dijak/AwardLandingSection";
 import TitleNextToContent from "@/components/TitleNextToContent";
 import SubTitle from "@/components/PageTitle/SubTitle";
+import {fetchAwards} from "@/fetch/fetchAwards";
 
 
-export default function page() {
+export default async function page() {
+    
+    const awards = await fetchAwards();
+    
+    
     return (
+        
         <div className = "bg-black min-h-screen flex flex-col items-center py-20">
             <AwardLandingSection/>
             <TitleNextToContent title = "About the John von Neumann Award"

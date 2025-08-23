@@ -2245,17 +2245,17 @@
   resolved "https://registry.yarnpkg.com/@open-draft/until/-/until-2.1.0.tgz#0acf32f470af2ceaf47f095cdecd40d68666efda"
   integrity "sha1-Cs8y9HCvLOr0fwlc3s1A1oZm79o= sha512-U69T3ItWHvLwGg5eJ0n3I62nWuE6ilHlmz7zM0npLBRvPRd7e6NYmg54vvRtP5mZG7kZqZCFVdsTWo7BPtBujg=="
 
-"@payloadcms/db-postgres@^3.43.0":
-  version "3.49.1"
-  resolved "https://registry.yarnpkg.com/@payloadcms/db-postgres/-/db-postgres-3.49.1.tgz#c87c5e60583ce7f40c3f88f5b81b1a9ff980c525"
-  integrity "sha1-yHxeYFg85/QMP4j1uBsan/mAxSU= sha512-ytrMLrw796Z95yCAGaFIDl2YPYvkAAC9VcoErFgQ/ItgsB97X++ZnxpWljkN1flSVzbI5ZYPm/pq6vAN1VDbKg=="
+"@payloadcms/db-postgres@3.43.0":
+  version "3.43.0"
+  resolved "https://registry.yarnpkg.com/@payloadcms/db-postgres/-/db-postgres-3.43.0.tgz#f7790df1a36eb346e8891f6dbf0436f8475dc4f5"
+  integrity sha512-KfeAiNj0vvUuMjMMSqK14wwFPvpY0ySehZYLUiE8IkhUd6O5je5tDoVBELUyV5IxuCE+udE4yVZ6BddvCbWSNg==
   dependencies:
-    "@payloadcms/drizzle" "3.49.1"
+    "@payloadcms/drizzle" "3.43.0"
     "@types/pg" "8.10.2"
     console-table-printer "2.12.1"
-    drizzle-kit "0.31.4"
+    drizzle-kit "0.31.1"
     drizzle-orm "0.44.2"
-    pg "8.16.3"
+    pg "8.11.3"
     prompts "2.4.2"
     to-snake-case "1.0.0"
     uuid "10.0.0"
@@ -2279,18 +2279,6 @@
   version "3.43.0"
   resolved "https://registry.yarnpkg.com/@payloadcms/drizzle/-/drizzle-3.43.0.tgz#e488c5f13af0044d9819f249f2f58849aa66b38c"
   integrity "sha1-5IjF8TrwBE2YGfJJ8vWISapms4w= sha512-K8k7HyBzAShl2E1yYHhIr+QyxEtfvM/I1U6l2wlkt3j930ZHiOJzn+osToEsR1P+YDEqDUTjfX5rxxNohPk8aw=="
-  dependencies:
-    console-table-printer "2.12.1"
-    dequal "2.0.3"
-    drizzle-orm "0.44.2"
-    prompts "2.4.2"
-    to-snake-case "1.0.0"
-    uuid "9.0.0"
-
-"@payloadcms/drizzle@3.49.1":
-  version "3.49.1"
-  resolved "https://registry.yarnpkg.com/@payloadcms/drizzle/-/drizzle-3.49.1.tgz#35cd45fe9d261a11bbad00df50cb0633db66bd98"
-  integrity "sha1-Nc1F/p0mGhG7rQDfUMsGM9tmvZg= sha512-rOrmhWvsRO08tPuea2fNHf+cKwVwF6CuDhouJ5XouXgIzR0gyS1ryc/dmvSP/COFknObo52TQFHnb2oJm1Rifw=="
   dependencies:
     console-table-printer "2.12.1"
     dequal "2.0.3"
@@ -4623,16 +4611,6 @@ drizzle-kit@0.31.1:
     esbuild "^0.25.2"
     esbuild-register "^3.5.0"
 
-drizzle-kit@0.31.4:
-  version "0.31.4"
-  resolved "https://registry.yarnpkg.com/drizzle-kit/-/drizzle-kit-0.31.4.tgz#b4a23fae0ab8d64b262184aaf07f8cbdc2222751"
-  integrity "sha1-tKI/rgq41ksmIYSq8H+MvcIiJ1E= sha512-tCPWVZWZqWVx2XUsVpJRnH9Mx0ClVOf5YUHerZ5so1OKSlqww4zy1R5ksEdGRcO3tM3zj0PYN6V48TbQCL1RfA=="
-  dependencies:
-    "@drizzle-team/brocli" "^0.10.2"
-    "@esbuild-kit/esm-loader" "^2.5.5"
-    esbuild "^0.25.4"
-    esbuild-register "^3.5.0"
-
 drizzle-orm@0.44.2:
   version "0.44.2"
   resolved "https://registry.yarnpkg.com/drizzle-orm/-/drizzle-orm-0.44.2.tgz#f07658fa000e333070727f810175987295647d14"
@@ -4839,7 +4817,7 @@ esbuild-register@^3.5.0:
   dependencies:
     debug "^4.3.4"
 
-esbuild@^0.25.2, esbuild@^0.25.4:
+esbuild@^0.25.2:
   version "0.25.8"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.25.8.tgz#482d42198b427c9c2f3a81b63d7663aecb1dda07"
   integrity "sha1-SC1CGYtCfJwvOoG2PXZjrssd2gc= sha512-vVC0USHGtMi8+R4Kz8rt6JhEWLxsv9Rnu/lGYbPR8u47B+DCBksq9JarW0zOO7bs37hyOK1l2/oqtbciutL5+Q=="
@@ -6489,10 +6467,10 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-lucide-react@^0.488.0:
-  version "0.488.0"
-  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.488.0.tgz#1cd1fb9f653db018c48c465bb76eb20be40a69bd"
-  integrity "sha1-HNH7n2U9sBjEjEZbt26yC+QKab0= sha512-ronlL0MyKut4CEzBY/ai2ZpKPxyWO4jUqdAkm2GNK5Zn3Rj+swDz+3lvyAUXN0PNqPKIX6XM9Xadwz/skLs/pQ=="
+lucide-react@^0.519.0:
+  version "0.519.0"
+  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.519.0.tgz#f7524019a2fae51ac76fb819f835012d1e785287"
+  integrity sha512-cLJyjRKBJFzaZ/+1oIeQaH7XUdxKOYU3uANcGSrKdIZWElmNbRAm8RXKiTJS7AWLCBOS8b7A497Al/kCHozd+A==
 
 lucide@^0.507.0:
   version "0.507.0"
@@ -7426,12 +7404,12 @@ perfect-debounce@^1.0.0:
   resolved "https://registry.yarnpkg.com/perfect-debounce/-/perfect-debounce-1.0.0.tgz#9c2e8bc30b169cc984a58b7d5b28049839591d2a"
   integrity "sha1-nC6LwwsWnMmEpYt9WygEmDlZHSo= sha512-xCy9V055GLEqoFaHoC1SoLIaLmWctgCUaBaWxDZ7/Zx4CTyX7cJQLJOok/orfjZAh9kEYpjJa4d0KcJmCbctZA=="
 
-pg-cloudflare@^1.1.1, pg-cloudflare@^1.2.7:
+pg-cloudflare@^1.1.1:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/pg-cloudflare/-/pg-cloudflare-1.2.7.tgz#a1f3d226bab2c45ae75ea54d65ec05ac6cfafbef"
   integrity "sha1-ofPSJrqyxFrnXqVNZewFrGz6++8= sha512-YgCtzMH0ptvZJslLM1ffsY4EuGaU0cx4XSdXLRFae8bPP4dS5xL1tNB3k2o/N64cHJpwU7dxKli/nZ2lUa5fLg=="
 
-pg-connection-string@^2.6.2, pg-connection-string@^2.9.1:
+pg-connection-string@^2.6.2:
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/pg-connection-string/-/pg-connection-string-2.9.1.tgz#bb1fd0011e2eb76ac17360dc8fa183b2d3465238"
   integrity "sha1-ux/QAR4ut2rBc2Dcj6GDstNGUjg= sha512-nkc6NpDcvPVpZXxrreI/FOtX3XemeLl8E0qFr6F2Lrm/I8WOnaWNhIPK2Z7OHpw7gh5XJThi6j6ppgNoaT1w4w=="
@@ -7446,17 +7424,17 @@ pg-numeric@1.0.2:
   resolved "https://registry.yarnpkg.com/pg-numeric/-/pg-numeric-1.0.2.tgz#816d9a44026086ae8ae74839acd6a09b0636aa3a"
   integrity "sha1-gW2aRAJghq6K50g5rNagmwY2qjo= sha512-BM/Thnrw5jm2kKLE5uJkXqqExRUY/toLHda65XgFTBTFYZyopbKjBe29Ii3RbkvlsMoFwD+tHeGaCjjv0gHlyw=="
 
-pg-pool@^3.10.1, pg-pool@^3.6.1:
+pg-pool@^3.6.1:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/pg-pool/-/pg-pool-3.10.1.tgz#481047c720be2d624792100cac1816f8850d31b2"
   integrity "sha1-SBBHxyC+LWJHkhAMrBgW+IUNMbI= sha512-Tu8jMlcX+9d8+QVzKIvM/uJtp07PKr82IUOYEphaWcoBhIYkoHpLXN3qO59nAI11ripznDsEzEv8nUxBVWajGg=="
 
-pg-protocol@*, pg-protocol@^1.10.3, pg-protocol@^1.6.0:
+pg-protocol@*, pg-protocol@^1.6.0:
   version "1.10.3"
   resolved "https://registry.yarnpkg.com/pg-protocol/-/pg-protocol-1.10.3.tgz#ac9e4778ad3f84d0c5670583bab976ea0a34f69f"
   integrity "sha1-rJ5HeK0/hNDFZwWDurl26go09p8= sha512-6DIBgBQaTKDJyxnXaLiLR8wBpQQcGWuAESkRBX/t6OwA8YsqP+iVSiond2EDy6Y/dsGk8rh/jtax3js5NeV7JQ=="
 
-pg-types@2.2.0, pg-types@^2.1.0:
+pg-types@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/pg-types/-/pg-types-2.2.0.tgz#2d0250d636454f7cfa3b6ae0382fdfa8063254a3"
   integrity "sha1-LQJQ1jZFT3z6O2rgOC/fqAYyVKM= sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA=="
@@ -7495,20 +7473,7 @@ pg@8.11.3:
   optionalDependencies:
     pg-cloudflare "^1.1.1"
 
-pg@8.16.3:
-  version "8.16.3"
-  resolved "https://registry.yarnpkg.com/pg/-/pg-8.16.3.tgz#160741d0b44fdf64680e45374b06d632e86c99fd"
-  integrity "sha1-FgdB0LRP32RoDkU3SwbWMuhsmf0= sha512-enxc1h0jA/aq5oSDMvqyW3q89ra6XIIDZgCX9vkMrnz5DFTw/Ny3Li2lFQ+pt3L6MCgm/5o2o8HW9hiJji+xvw=="
-  dependencies:
-    pg-connection-string "^2.9.1"
-    pg-pool "^3.10.1"
-    pg-protocol "^1.10.3"
-    pg-types "2.2.0"
-    pgpass "1.0.5"
-  optionalDependencies:
-    pg-cloudflare "^1.2.7"
-
-pgpass@1.0.5, pgpass@1.x:
+pgpass@1.x:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/pgpass/-/pgpass-1.0.5.tgz#9b873e4a564bb10fa7a7dbd55312728d422a223d"
   integrity "sha1-m4c+SlZLsQ+np9vVUxJyjUIqIj0= sha512-FdW9r/jQZhSeohs1Z3sI1yxFQNFvMcnmfuj4WBMUTxOrAyLMaTcE1aAMBiTlbMNaXvBCQuVi0R7hd8udDSP7ug=="

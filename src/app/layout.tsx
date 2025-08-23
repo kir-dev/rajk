@@ -1,15 +1,6 @@
 import type {Metadata} from "next";
 import "./(app)/styles/globals.css";
 
-/*const robotoCondensed = Roboto_Condensed({
-    variable: "--font-roboto-condensed",
-    subsets: ["latin"],
-});
-const openSans = Open_Sans({
-    variable: "--font-open-sans",
-    subsets: ["latin"],
-});*/
-
 
 export const metadata: Metadata = {
     title: "Rajk",
