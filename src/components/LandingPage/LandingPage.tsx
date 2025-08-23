@@ -38,7 +38,7 @@ export default function LandingPage(props: LandingPageProps) {
             </div>
             <div className="flex flex-row h-fit w-full relative">
                 <div className="absolute left-0 top-0 h-full z-30 md:block">
-                    <VertNavbar />
+                    <VertNavbar sections={[]}/>
                 </div>
                 <div className="bg-foreground h-full w-full flex flex-col">
                     <Section id={"rolunk"} title={"Közösség"}>
