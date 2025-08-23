@@ -33,11 +33,14 @@ export default async function page() {
         <div>
             <PageTitle text = {"Díjak"}/>
             <div className = "flex flex-col pb-40 bg-bezs text-black items-center">
-                <Description text={"Ja am osztunk díjakat is , nagyon menő az összes."}/>
-                {awards.map((award) => (
-                    <PillarCard key = {award.id} title = {award.name} description = {award.name}
-                                lucideIconName = {"Award"} buttonText={"Felfedezés"} href={"/dijak/"+award.id}/>
-                ))}
+                <Description text = {"Ja am osztunk díjakat is , nagyon menő az összes."}/>
+                {awards.map((award) =>
+                    <>
+                        <PillarCard key = {award.id} title = {award.name} description = {award.name}
+                                    lucideIconName = {"Award"} buttonText = {"Felfedezés"}
+                                    href = {"/dijak/" + award.id} image={award.logo}/>
+                    </>
+                )}
             </div>
         </div>
     </>)

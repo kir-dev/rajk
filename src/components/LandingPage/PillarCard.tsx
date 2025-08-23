@@ -3,6 +3,8 @@
 import ActionButton from "@/components/ActionButton";
 import Image from "next/image";
 import {DynamicLucideIcon} from "@/components/DynamicLucideIcon";
+import {Media} from "@/payload-types";
+import {isMedia} from "@/utils/isMedia";
 
 interface PillarCardProps {
     title: string
@@ -10,11 +12,12 @@ interface PillarCardProps {
     lucideIconName: string
     buttonText: string
     href?: string
-    onAction?: () => void
+    onAction?: () => void,
+    image?: number | Media
 }
 
 
-export function PillarCard({ title, description, lucideIconName, buttonText, href }: PillarCardProps) {
+export function PillarCard({ title, description, lucideIconName, buttonText, href, image }: PillarCardProps) {
     return (
         <div className="container mx-auto px-4">
             <div className="group flex flex-col gap-4 h-full w-full max-w-6xl mx-auto p-6 transition-all duration-300 text-black rounded-2xl mb-20 hover:shadow-lg hover:-translate-y-1 mt-10">
@@ -34,8 +37,8 @@ export function PillarCard({ title, description, lucideIconName, buttonText, hre
                     </div>
                     <div className="flex-shrink-0 overflow-hidden rounded-2xl h-[200px] w-[200px] relative md:mr-4">
                         <Image
-                            src="/koli.png"
-                            alt="Koli"
+                            src={(image && isMedia(image)) ? ((image as Media).url || "") : "/koli.jpg"}
+                            alt="Image"
                             fill
                             className="object-cover transition-transform duration-500 group-hover:scale-110"
                         />
