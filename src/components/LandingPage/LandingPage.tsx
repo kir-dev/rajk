@@ -3,7 +3,7 @@
 import VertNavbar from "@/components/vertNavbar";
 import Section from "@/components/Section";
 import {PillarCard} from "@/components/LandingPage/PillarCard";
-import {Calendar, ExternalLink, GraduationCap, Handshake, MapPin, UsersRound} from "lucide-react";
+import {Calendar, ExternalLink, MapPin} from "lucide-react";
 import Statistics from "@/components/LandingPage/Statistics";
 import WawyBorder from "@/components/WawyBorder";
 import MyCarousel from "@/components/MyCarousel";
@@ -46,7 +46,7 @@ export default function LandingPage(props: LandingPageProps) {
                             <PillarCard
                                 title="Közösség"
                                 description="A Rajk mindenekelőtt egy összetartó közösség. A közös lakhatás, a mindennapok megélése és az általunk szervezett programok olyan bizalmi közeget teremtenek, ahol a tagok folyamatosan tanulnak egymástól, és számíthatnak egymás támogatására. Ehhez szorosan kapcsolódik az is, hogy a kollégium működését mi magunk irányítjuk: a közös döntések nemcsak felelősséget jelentenek, hanem valódi közösségi élményt adnak. Ennek köszönhető, hogy az itt kialakuló kötelékek a végzés után is megmaradnak – ezt az aktív alumni közösség is jól mutatja."
-                                lucideIconName ={UsersRound}
+                                lucideIconName = "UsersRound"
                                 buttonText="Tovább"
                                 href={"/rolunk/kozosseg"}
                             />
@@ -66,7 +66,7 @@ export default function LandingPage(props: LandingPageProps) {
                             <PillarCard
                                 title="Szakma"
                                 description="A Rajk már alapításakor eltért a hagyományos egyetemi oktatási modelltől: a kurzusrendszert a hallgatók maguk alakították ki, interaktív, 4–8 fős szemináriumokra építve. Így kerülhettek be olyan, nemzetközi szinten is élvonalbeli tárgyak – mint az ökonometria vagy a vállalatértékelés –, amelyek akkoriban Magyarországon még nem, vagy csak más formában voltak elérhetők. Ezt a szemléletet ma is tovább visszük: a tagok határozzák meg a kurzusok irányait, részt vesznek a mentorprogramok és az akadémiai díjak szervezésében, miközben elismert hazai és nemzetközi oktatóktól tanulnak. Évente több mint ötven szakmai kurzus valósul meg a kollégisták kezdeményezése nyomán, alumnik, partnereink és állandó tanáraink támogatásával."
-                                lucideIconName ={GraduationCap}
+                                lucideIconName = "GraduationCap"
                                 buttonText="Tovább"
                                 href={"/szakma"}
                             />
@@ -86,7 +86,7 @@ export default function LandingPage(props: LandingPageProps) {
                             <PillarCard
                                 title="Társadalmi felelősség"
                                 description="A Rajk mindig is érzékenyen reagált a közéleti folyamatokra – a rendszerváltás előtti fórumoktól egészen a napjainkban felmerülő társadalmi kérdésekig. A kollégiumban rendszeresen tartunk előadásokat, vitákat és saját kezdeményezésű projekteket, amelyek arra ösztönöznek, hogy túllépjünk a szűken vett szakmai nézőponton, és felelősen gondolkodjunk a közélet és a társadalom egészéről. A cél nem pusztán az ismeretszerzés, hanem az, hogy a tagok készek legyenek aktívan alakítani a környezetüket – és ez a szemlélet a végzés után is meghatározza a rajkosok gondolkodását."
-                                lucideIconName ={Handshake}
+                                lucideIconName = "Handshake"
                                 buttonText="Tovább"
                                 href={"/tarsadalmi-felelossegvallalas"}
                             />
