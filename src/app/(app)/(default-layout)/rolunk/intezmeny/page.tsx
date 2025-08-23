@@ -26,7 +26,6 @@ export default async function RolunkPage() {
                 </div>
                 <div className="w-full flex flex-col mt-20 items-center">
                     <IconTitle title={"Támogatóink"} Icon={HeartHandshake}/>
-
                 </div>
             </div>
         </div>

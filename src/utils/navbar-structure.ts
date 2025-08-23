@@ -12,11 +12,11 @@ export const navItems = [
   { label: 'Társasadalmi felelősségvállalás', href: '/social-responsibility' },
   {
     label: 'Díjak',
-    href: '/awards',
+    href: '/dijak',
     subItems: [
-      { label: 'John von Neumann Award', href: '/awards/neumann' },
-      { label: 'Herbert Simon Award', href: '/awards/herbert' },
-      { label: 'Kaliforniától Budapestig', href: '/awards/california' },
+      { label: 'John von Neumann Award', href: '/dijak/john-von-neumann' },
+      { label: 'Herbert Simon Award', href: '/dijak/herbert-simon' },
+      { label: 'Kaliforniától Budapestig', href: '/dijak/californiatol-budapestig' },
     ],
   },
   { label: 'Nemzetközi kapcsolataink', href: '/international-relations' },
