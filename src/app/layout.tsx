@@ -1,16 +1,5 @@
 import type {Metadata} from "next";
 import "./(app)/styles/globals.css";
-import NavBar from "@/components/NavBar/NavBar";
-import Footer from "@/app/(app)/footer";
-
-/*const robotoCondensed = Roboto_Condensed({
-    variable: "--font-roboto-condensed",
-    subsets: ["latin"],
-});
-const openSans = Open_Sans({
-    variable: "--font-open-sans",
-    subsets: ["latin"],
-});*/
 
 
 export const metadata: Metadata = {
@@ -34,9 +23,7 @@ export default function RootLayout({
             <body
                 className = {`antialiased flex flex-col justify-between min-h-screen`}
             >
-                <NavBar/>
                 {children}
-                <Footer/>
             </body>
         </html>
     );

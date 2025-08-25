@@ -47,7 +47,7 @@ export default function InteractiveBuilding() {
     const [hoveredHotspot, setHoveredHotspot] = useState<string | null>(null)
 
     return (
-        <div className="relative w-full max-w-4xl mx-auto bg-transparent rounded-lg">
+        <div className="relative w-full max-w-4xl bg-transparent rounded-lg">
             {/* Building Image */}
             <div className="relative aspect-square w-full">
                 <BuildingSVG className={"h-full w-full"} />

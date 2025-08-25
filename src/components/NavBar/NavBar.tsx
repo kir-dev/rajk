@@ -50,6 +50,8 @@ export default function NavBar() {
                             <div key={item.label}>
                                 {item.subItems && (
                                     <NavBarDropDown text={item.label}
+                                                    href={item.href}
+                                                    bordered={item.bordered}
                                                     subCategories={item.subItems.map((sub) => [`${sub.label}`, sub.href])}/>
                                 )}
                                 {!item.subItems && (

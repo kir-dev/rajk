@@ -1,14 +1,23 @@
-import { type ReactNode, forwardRef } from "react"
+import {forwardRef, type ReactNode} from "react"
+import cn from "@/utils/concatenate";
 
-interface SectionProps {
+export interface SectionProps {
     id: string
     title: string
     children: ReactNode
+    lucideIconName?: string,
+    className?: string
 }
 
-const Section = forwardRef<HTMLElement, SectionProps>(({ id, children }, ref) => {
+export interface SectionLabelProps {
+    id: string
+    title: string
+    lucideIconName?: string
+}
+
+const Section = forwardRef<HTMLElement, SectionProps>(({ id, children, className }, ref) => {
     return (
-        <section id={id} className="pt-10 w-full" ref={ref}>
+        <section id={id} className={cn("pt-10 w-full h-fit scroll-mt-8 mb-16",className)} ref={ref}>
             {children}
         </section>
     )
