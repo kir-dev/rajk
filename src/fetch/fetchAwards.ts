@@ -18,7 +18,7 @@ export async function fetchAward(id: string) {
     const award = await payload.findByID({
         collection: "awards",
         id: id,
-        depth: 1,
+        depth: 2,
     });
     
     return award as Award;

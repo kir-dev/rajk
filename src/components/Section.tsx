@@ -17,7 +17,7 @@ export interface SectionLabelProps {
 
 const Section = forwardRef<HTMLElement, SectionProps>(({ id, children, className }, ref) => {
     return (
-        <section id={id} className={cn("pt-10 w-full h-fit scroll-mt-8",className)} ref={ref}>
+        <section id={id} className={cn("pt-10 w-full h-fit scroll-mt-8 mb-16",className)} ref={ref}>
             {children}
         </section>
     )

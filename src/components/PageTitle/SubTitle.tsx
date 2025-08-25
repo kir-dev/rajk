@@ -10,7 +10,7 @@ export default function SubTitle(
 ) {
     return (<div className = {cn('w-full flex flex-col items-center', className)}>
         {text && <h2 className = "font-bold text-3xl mt-4 mb-2">{text}</h2>}
-        {!text && children}
-        <div className = 'bg-rajk-green w-20 h-1'></div>
+        <div className = 'bg-rajk-green w-20 h-1 mb-8'></div>
+        {children}
     </div>)
 }

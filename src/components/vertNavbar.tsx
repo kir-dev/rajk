@@ -69,7 +69,7 @@ export function VertNavbar({sections}: { sections: SectionLabelProps[] }) {
                                 "group flex items-center h-10 px-2 rounded-lg transition-colors duration-300",
                                 activeSection === section.id
                                     ? "text-rajk-green"
-                                    : "text-gray-500 hover:text-rajk-green"
+                                    : "text-gray-800 hover:text-rajk-green"
                             )}
                             aria-label = {`Navigate to ${section.title}`}
                         >
@@ -101,7 +101,7 @@ export function VertNavbar({sections}: { sections: SectionLabelProps[] }) {
                             
                             {/* Section Title */}
                             <span
-                                className = "text-sm font-medium inline-block max-w-0 opacity-0 transition-all duration-500 ease-in-out ml-0 group-hover:max-w-xs group-hover:ml-2 group-hover:opacity-100 text-nowrap"
+                                className = "text-sm font-medium inline-block max-w-0 opacity-0 transition-all duration-500 ease-in-out ml-0 group-hover:max-w-xs group-hover:ml-3 group-hover:opacity-100 text-nowrap"
                             >
                                 {section.title}
                             </span>

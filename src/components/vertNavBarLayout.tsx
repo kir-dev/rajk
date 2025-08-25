@@ -21,7 +21,7 @@ export default function VertNavBarLayout({children}: { children: React.ReactNode
             <div className = "absolute left-0 top-0 h-full z-30 md:block max-md:hidden">
                 <VertNavbar sections = {sections}/>
             </div>
-            <div className = "h-fit w-full flex flex-col">
+            <div className = "h-fit w-full flex flex-col px-4">
                 {children}
             </div>
         </div>
