@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import PageTitle from "@/components/PageTitle/PageTitle";
 
 export default function GalleryPage() {
     const images = [
@@ -14,7 +13,6 @@ export default function GalleryPage() {
     
     return (
         <>
-            <PageTitle text = {"Galéria"}/>
             <div className = "w-full">
                 <div className = "flex flex-col w-full items-center">
                     {images.map((image, index) => (
