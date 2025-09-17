@@ -8,7 +8,13 @@ export const navItems = [
       { label: 'Galéria', href: '/galeria' },
     ],
   },
-  { label: 'Szakma', href: '/szakma' },
+  {
+    label: 'Szakma',
+    href: '/szakma',
+    subItems: [
+      { label: 'Nemzetközi kapcsolataink', href: '/szakma/nemzetkozi-kapcsolatok' },
+    ],
+  },
   { label: 'Társasadalmi felelősségvállalás', href: '/social-responsibility' },
   {
     label: 'Díjak',
@@ -19,7 +25,7 @@ export const navItems = [
       { label: 'Kaliforniától Budapestig', href: '/awards/california' },
     ],
   },
-  { label: 'Nemzetközi kapcsolataink', href: '/international-relations' },
+  { label: '', href: '/international-relations' },
   { label: 'Felvételi', href: '/felveteli', bordered: true },
   { label: 'Támogatás', href: '/tamogass', bordered: true },
 ];

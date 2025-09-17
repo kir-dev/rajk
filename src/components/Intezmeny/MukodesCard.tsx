@@ -6,7 +6,7 @@ interface MukodesCardProps {
 
 export default function MukodesCard(props: MukodesCardProps) {
     return (
-        <div className="flex flex-col space-x-2">
+        <div className="flex flex-col w-full">
             <div className="rounded-full self-center p-2 bg-rajk-green">
                 <props.Icon className="w-25 h-25 p-4 text-white"/>
             </div>
