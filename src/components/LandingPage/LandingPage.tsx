@@ -24,7 +24,7 @@ export default function LandingPage(props: LandingPageProps) {
     const lastYear = thisYear - 1;
 
     return (
-        <div className="min-h-screen min-w-screen flex flex-col pb-40 bg-bezs">
+        <div className="min-h-screen min-w-full flex flex-col pb-40 bg-bezs">
             <div>
                 <Section id={"video"} title={"Videó"}>
                     <iframe
@@ -32,12 +32,12 @@ export default function LandingPage(props: LandingPageProps) {
                         title="YouTube video player"
                         allow="autoplay; encrypted-media"
                         allowFullScreen
-                        className="aspect-video w-full"
+                        className="aspect-video w-full max-w-full"
                     />
                 </Section>
             </div>
-            <div className="flex flex-row h-fit w-full relative">
-                <div className="absolute left-0 top-0 h-full z-30 md:block">
+            <div className="flex flex-col lg:flex-row h-fit w-full relative">
+                <div className="absolute left-0 top-0 h-full z-30 hidden md:block">
                     <VertNavbar />
                 </div>
                 <div className="bg-foreground h-full w-full flex flex-col">
@@ -108,39 +108,38 @@ export default function LandingPage(props: LandingPageProps) {
                 <WawyBorder direction={"bottom"} color={"green"} szin={"zold"} />
             </div>
             <Section id={"events"} title={"Események"}>
-                <div className="w-full flex justify-center">
-                    <IconTitle className="mt-20 text-black" title={"Események"} Icon={Calendar}/>
+                <div className="w-full flex flex-col items-center justify-center">
+                    <IconTitle className="mt-10 text-black text-center" title={"Események"} Icon={Calendar}/>
+                    <div className="w-full max-w-full overflow-x-auto">
+                        <MyCarousel data={props.data}/>
+                    </div>
                 </div>
-                <MyCarousel data={props.data}/>
             </Section>
             <Section id="location" title="Helyszín">
-                <div className="relative bg-bezs text-black py-16 px-4 sm:px-6 lg:px-8 rounded-3xl mt-10 mb-20 overflow-hidden">
+                <div className="relative bg-bezs text-black py-8 px-2 sm:px-6 lg:px-8 rounded-3xl mt-10 mb-20 overflow-hidden">
                     <div className="relative max-w-7xl mx-auto">
-                        <div className="text-center mb-12">
+                        <div className="text-center mb-8">
                             <IconTitle title={"Hol vagyunk?"} Icon={MapPin} iconAnimation={"animate-bounce"}/>
-                            <p className="mt-6  text-lg max-w-2xl mx-auto opacity-80">
+                            <p className="mt-4 text-base sm:text-lg max-w-2xl mx-auto opacity-80">
                                 Látogass el hozzánk a Horánszky utcába, ahol mindig nyitott ajtókkal várunk minden érdeklődőt!
                             </p>
                         </div>
-
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-center">
-                            <div className="lg:col-span-2 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(28,150,71,0.3)] transition-all duration-500 hover:shadow-[0_0_50px_rgba(28,150,71,0.5)]">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                            <div className="lg:col-span-2 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(28,150,71,0.3)] transition-all duration-500 hover:shadow-[0_0_50px_rgba(28,150,71,0.5)] w-full h-64 sm:h-96">
                                 <Link href={rajkMapLink} target="_blank" className="block h-full w-full">
                                     <Map />
                                 </Link>
                             </div>
-
-                            <div className=" p-8 rounded-2xl border border-rajk-green/20 hover:border-rajk-green/40 transition-all duration-300 flex flex-col space-y-6">
+                            <div className="p-4 sm:p-8 rounded-2xl border border-rajk-green/20 hover:border-rajk-green/40 transition-all duration-300 flex flex-col space-y-4 sm:space-y-6">
                                 <div className="flex flex-col space-y-2">
-                                    <h3 className="text-xl font-bold text-rajk-green">Rajk Szakkollégium</h3>
+                                    <h3 className="text-lg sm:text-xl font-bold text-rajk-green">Rajk Szakkollégium</h3>
                                     <p className="">1085 Budapest, Horánszky utca 6.</p>
                                 </div>
-
                                 <div className="flex flex-col space-y-2">
-                                    <h4 className="text-lg font-semibold text-rajk-green">Megközelítés</h4>
-                                    <ul className=" space-y-1">
+                                    <h4 className="text-base sm:text-lg font-semibold text-rajk-green">Megközelítés</h4>
+                                    <ul className="space-y-1">
                                         <li className="flex items-center gap-2">
-                                            <span className="inline-block w-9 h-9 p-1 rounded-full bg-blue-900  text-white text-center font-bold">M3</span>
+                                            <span className="inline-block w-9 h-9 p-1 rounded-full bg-blue-900 text-white text-center font-bold">M3</span>
                                             <span>Kálvin tér (5 perc séta)</span>
                                         </li>
                                         <li className="flex items-center gap-2">
@@ -153,11 +152,10 @@ export default function LandingPage(props: LandingPageProps) {
                                         </li>
                                     </ul>
                                 </div>
-
                                 <Link
                                     href={rajkMapLink}
                                     target="_blank"
-                                    className="group bg-rajk-green/90 hover:bg-rajk-green text-white font-bold py-3 px-6 rounded-lg mt-4 flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg"
+                                    className="group bg-rajk-green/90 hover:bg-rajk-green text-white font-bold py-3 px-6 rounded-lg mt-4 flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg text-center"
                                 >
                                     <span>Útvonaltervezés</span>
                                     <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
