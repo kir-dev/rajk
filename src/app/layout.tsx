@@ -32,9 +32,9 @@ export default function RootLayout({
                 <script defer data-domain = "rajk.kir-dev.hu" src = {"https://visit.kir-dev.hu/js/script.js"}></script>
             </head>
             <body
-                className = {`antialiased flex flex-col justify-between min-h-screen`}
+                className = {`antialiased flex flex-col justify-between min-h-screen bg-bezs`}
             >
-                <NavBar />
+                <NavBar/>
                 {children}
                 <Footer />
             </body>

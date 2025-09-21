@@ -11,9 +11,9 @@ export const navItems = [
   {
     label: 'Szakma',
     href: '/szakma',
-    subItems: [
+    /*subItems: [
       { label: 'Nemzetközi kapcsolataink', href: '/szakma/nemzetkozi-kapcsolatok' },
-    ],
+    ],*/
   },
   { label: 'Társasadalmi felelősségvállalás', href: '/social-responsibility' },
   {

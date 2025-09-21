@@ -10,10 +10,10 @@ export default async function RolunkPage() {
 
     return (
         <div>
-            <div className="min-h-screen flex flex-col pb-40 bg-bezs text-black">
+            <div className="min-h-screen flex flex-col pb-40 bg-bezs pt-20 text-black">
                 <IconTitle title={"Történetünk"} Icon={LibraryBig} />
                 <Timeline timeline={"about-timeline-event"} />
-                <IconTitle className="mt-20" title={"Bentlakás"} Icon={House}/>
+                {/*<IconTitle className="mt-20" title={"Bentlakás"} Icon={House}/>*/}
                 <Mukodes/>
                 {/*<div className="w-full flex flex-col mt-20 items-center">
                     <IconTitle title={"Diákbizottság"} Icon={UsersRound}/>
@@ -23,10 +23,6 @@ export default async function RolunkPage() {
                     <IconTitle title={"Vezetőség"} Icon={UsersRound}/>
                     <MemberGrid members={vezetoseg}/>
                 </div>*/}
-                <div className="w-full flex flex-col mt-20 items-center">
-                    <IconTitle title={"Támogatóink"} Icon={HeartHandshake}/>
-
-                </div>
             </div>
         </div>
     );

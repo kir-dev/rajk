@@ -35,7 +35,7 @@ export default function NavBar() {
     }, [prevScrollPos]);
 
     return (
-        <div className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
+        <div className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 bg-bezs ${
             visible ? 'translate-y-0' : '-translate-y-full'
         } ${!atTop ? 'shadow-md' : ''}`}>
             <div className='flex flex-col relative text-white'>

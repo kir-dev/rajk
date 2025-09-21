@@ -49,13 +49,14 @@ export default function LandingPage(props: LandingPageProps) {
                                 icon={UsersRound}
                                 buttonText="Tovább"
                                 href={"/rolunk/kozosseg"}
+                                imageSrc={"/Mainpage_kozosseg.jpg"}
                             />
                             <Statistics isLast={false} color={"purple"} szin={"lila"} title={"Közösség"}
                                 data={
                                     [
-                                        ["Alumni közösség", 1500, ""],
-                                        ["Aktív tagok száma", 200, ""],
-                                        ["Éves rendezvények", 30, ""]
+                                        ["Az alapítás számítva ", 55, " évnyi csodálatos közös emlék"],
+                                        ["1970-től mostanáig ", 904, " kiosztott alumni plakett"],
+                                        ["A 2025/2026-os tanévben ", 95, " jelenlegi szakkollégista"]
                                     ]
                                 }
                             />
@@ -69,6 +70,7 @@ export default function LandingPage(props: LandingPageProps) {
                                 icon={GraduationCap}
                                 buttonText="Tovább"
                                 href={"/szakma"}
+                                imageSrc={"/Mainpage_szakma.jpg"}
                             />
                             <Statistics isLast={false} color={"blue"} szin={"kek"} title={"Szakma"}
                                 data={
@@ -89,13 +91,14 @@ export default function LandingPage(props: LandingPageProps) {
                                 icon={Handshake}
                                 buttonText="Tovább"
                                 href={"/tarsadalmi-felelossegvallalas"}
+                                imageSrc={"/Mainpage_tarsifel.jpg"}
                             />
                             <Statistics isLast={true} color={"green"} szin={"zold"} title={"Társadalmi felelősségvállalás"}
                                 data={
                                     [
-                                        ["Szabó Kálmán Tehetségprogram ösztöndíjasok száma", 10, ""],
-                                        ["Az elmúlt 5 évben", 4, "Társadalmi Felelősségvállalás Projekt"],
-                                        ["Támogatott lakhatással rendelkező kollégisták száma:", 500, ""]
+                                        ["15 év alatt ", 123, " Szabó Kálmán Tehetségprogram ösztöndíjas"],
+                                        ["Az elmúlt években", 4, " Társadalmi Felelősségvállalás Projekt"],
+                                        ["Anyagi helyzet alapján", 4, " választható kollégiumi-díj sáv\n"]
                                     ]
                                 }
                             />
