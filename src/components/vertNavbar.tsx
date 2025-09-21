@@ -4,11 +4,10 @@ import { useEffect, useState } from "react"
 import cn from "@/utils/concatenate"
 import {GraduationCap, UsersRound, Handshake, Calendar, MapPin} from "lucide-react"
 import useIntersectionObserver from "@/hooks/useIntersectionObserver"
-import Image from "next/image";
 
 // Define sections outside the component to prevent re-creation on each render
 const sections = [
-    { id: "video", title: "", Icon: "/rajk_strucc_black.png" },
+    //{ id: "video", title: "", Icon: "/rajk_strucc_black.png" },
     { id: "rolunk", title: "Közösség", Icon: UsersRound },
     { id: "szakma", title: "Szakma", Icon: GraduationCap },
     { id: "tarsadalmi", title: "Társadalmi érzékenység", Icon: Handshake },
@@ -63,7 +62,7 @@ const VertNavbar = () => {
                             )}
                             aria-label={`Navigate to ${section.title}`}
                         >
-                            {/* Icon/Image */}
+                            {/* Icon/Image
                             <div className="flex items-center justify-center w-10 h-10 mr-3">
                                 {typeof section.Icon === "string" ? (
                                     <Image
@@ -84,6 +83,7 @@ const VertNavbar = () => {
                                     />
                                 )}
                             </div>
+                            */}
 
                             {/* Section Title */}
                             <span className="text-sm font-medium whitespace-nowrap">
