@@ -80,6 +80,11 @@ export interface Config {
     reports: Report;
     'apply-timeline-event': ApplyTimelineEvent;
     'about-timeline-event': AboutTimelineEvent;
+    'stripe-transactions': StripeTransaction;
+    events: Event;
+    'course-categories': CourseCategory;
+    courses: Course;
+    odyssey: Odyssey;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -99,6 +104,11 @@ export interface Config {
     reports: ReportsSelect<false> | ReportsSelect<true>;
     'apply-timeline-event': ApplyTimelineEventSelect<false> | ApplyTimelineEventSelect<true>;
     'about-timeline-event': AboutTimelineEventSelect<false> | AboutTimelineEventSelect<true>;
+    'stripe-transactions': StripeTransactionsSelect<false> | StripeTransactionsSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    'course-categories': CourseCategoriesSelect<false> | CourseCategoriesSelect<true>;
+    courses: CoursesSelect<false> | CoursesSelect<true>;
+    odyssey: OdysseySelect<false> | OdysseySelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -418,6 +428,156 @@ export interface AboutTimelineEvent {
   createdAt: string;
 }
 /**
+ * Szponzorok, akik támogatják a szakkollégiumot.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stripe-transactions".
+ */
+export interface StripeTransaction {
+  id: number;
+  donorName?: string | null;
+  formattedAmount?: string | null;
+  currency?: string | null;
+  donorEmail?: string | null;
+  stripePaymentIntentId: string;
+  amount?: number | null;
+  metadata?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  status: 'succeeded' | 'failed';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Események és eseményekkel kapcsolatos információk
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  name: string;
+  picture: number | Media;
+  description: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "course-categories".
+ */
+export interface CourseCategory {
+  /**
+   * The display name of the category
+   */
+  name: string;
+  /**
+   * Unique identifier for the category (e.g., "arts", "science")
+   */
+  id: string;
+  /**
+   * A color code for the category, e.g. "#ff5733"
+   */
+  color: string;
+  /**
+   * A brief description of this course category
+   */
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "courses".
+ */
+export interface Course {
+  id: number;
+  /**
+   * The name of the course
+   */
+  title: string;
+  /**
+   * A brief description of the course
+   */
+  description?: string | null;
+  /**
+   * Link to the course details
+   */
+  link?: string | null;
+  /**
+   * Icon to represent the course
+   */
+  icon:
+    | 'BookOpen'
+    | 'Calculator'
+    | 'Globe'
+    | 'Palette'
+    | 'Code'
+    | 'Users'
+    | 'TrendingUp'
+    | 'Lightbulb'
+    | 'Target'
+    | 'Database'
+    | 'Settings'
+    | 'Puzzle'
+    | 'Monitor'
+    | 'FileText'
+    | 'Search'
+    | 'BarChart'
+    | 'Download'
+    | 'MessageCircle'
+    | 'PenTool'
+    | 'Layers';
+  /**
+   * Position on the course map
+   */
+  position: {
+    /**
+     * Top position (e.g., "50%")
+     */
+    top: string;
+    /**
+     * Left position (e.g., "50%")
+     */
+    left: string;
+  };
+  /**
+   * The category this course belongs to
+   */
+  category: string | CourseCategory;
+  /**
+   * Controls the order in which courses appear (lower numbers appear first)
+   */
+  displayOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Jelentések
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "odyssey".
+ */
+export interface Odyssey {
+  id: number;
+  participants?:
+    | {
+        participant: number | Person;
+        id?: string | null;
+      }[]
+    | null;
+  title: string;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
@@ -475,6 +635,26 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'about-timeline-event';
         value: number | AboutTimelineEvent;
+      } | null)
+    | ({
+        relationTo: 'stripe-transactions';
+        value: number | StripeTransaction;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'course-categories';
+        value: string | CourseCategory;
+      } | null)
+    | ({
+        relationTo: 'courses';
+        value: number | Course;
+      } | null)
+    | ({
+        relationTo: 'odyssey';
+        value: number | Odyssey;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -689,6 +869,81 @@ export interface AboutTimelineEventSelect<T extends boolean = true> {
   date?: T;
   description?: T;
   logo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stripe-transactions_select".
+ */
+export interface StripeTransactionsSelect<T extends boolean = true> {
+  donorName?: T;
+  formattedAmount?: T;
+  currency?: T;
+  donorEmail?: T;
+  stripePaymentIntentId?: T;
+  amount?: T;
+  metadata?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  name?: T;
+  picture?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "course-categories_select".
+ */
+export interface CourseCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  id?: T;
+  color?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "courses_select".
+ */
+export interface CoursesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  link?: T;
+  icon?: T;
+  position?:
+    | T
+    | {
+        top?: T;
+        left?: T;
+      };
+  category?: T;
+  displayOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "odyssey_select".
+ */
+export interface OdysseySelect<T extends boolean = true> {
+  participants?:
+    | T
+    | {
+        participant?: T;
+        id?: T;
+      };
+  title?: T;
+  description?: T;
   updatedAt?: T;
   createdAt?: T;
 }
