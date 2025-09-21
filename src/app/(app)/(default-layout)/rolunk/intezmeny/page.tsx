@@ -1,4 +1,4 @@
-import {HeartHandshake, House, LibraryBig} from "lucide-react";
+import {LibraryBig} from "lucide-react";
 import IconTitle from "@/components/IconTitle";
 import Timeline from "@/components/Intezmeny/Timeline";
 import React from "react";
