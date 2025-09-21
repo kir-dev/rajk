@@ -24,24 +24,24 @@ interface DesktopTimelineItemProps extends TimelineItemProps {
 // Helper component for timeline items on mobile
 function MobileTimelineItem({ event, displayedExtraText, featuredImageUrl }: TimelineItemProps) {
     return (
-        <div className="flex flex-col md:hidden">
+        <div className="flex flex-col md:hidden mb-10">
             {/* Timeline item header with icon and date */}
-            <div className="flex items-center mb-4 relative pl-16">
+            <div className="flex items-center mb-4 relative pl-20">
                 <div className="absolute left-4 top-1/2 -translate-y-1/2">
                     <Image
                         src={featuredImageUrl}
-                        className="w-10 h-10 p-2 bg-rajk-green rounded-full border-4 border-rajk-blue"
+                        className="w-14 h-14 p-2 bg-rajk-green rounded-full border-4 border-rajk-blue"
                         alt={event.name}
-                        width={24} height={24}
+                        width={56} height={56}
                     />
                 </div>
-                <span className="font-bold text-rajk-green text-xl">{displayedExtraText}</span>
+                <span className="font-bold text-rajk-green text-2xl ml-2">{displayedExtraText}</span>
             </div>
 
             {/* Content box */}
-            <div className="bg-white rounded-2xl p-6 shadow-md ml-16 mb-8">
-                <p className="text-lg font-bold mb-4">{event.name}</p>
-                <RichText data={event.description} className="text-md mb-2"/>
+            <div className="bg-white rounded-2xl p-6 shadow-md ml-20 mb-2">
+                <p className="text-xl font-bold mb-4">{event.name}</p>
+                <RichText data={event.description} className="text-base mb-2"/>
             </div>
         </div>
     );

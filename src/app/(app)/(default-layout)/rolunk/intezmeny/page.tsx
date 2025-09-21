@@ -10,19 +10,10 @@ export default async function RolunkPage() {
 
     return (
         <div>
-            <div className="min-h-screen flex flex-col pb-40 bg-bezs pt-20 text-black">
+            <div className="min-h-screen flex flex-col pb-40 pt-20 text-black px-2 sm:px-6">
                 <IconTitle title={"Történetünk"} Icon={LibraryBig} />
                 <Timeline timeline={"about-timeline-event"} />
-                {/*<IconTitle className="mt-20" title={"Bentlakás"} Icon={House}/>*/}
                 <Mukodes/>
-                {/*<div className="w-full flex flex-col mt-20 items-center">
-                    <IconTitle title={"Diákbizottság"} Icon={UsersRound}/>
-                    <MemberGrid members={diakbizottsag}/>
-                </div>
-                <div className="w-full flex flex-col mt-20 items-center">
-                    <IconTitle title={"Vezetőség"} Icon={UsersRound}/>
-                    <MemberGrid members={vezetoseg}/>
-                </div>*/}
             </div>
         </div>
     );
