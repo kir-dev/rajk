@@ -91,7 +91,7 @@ export default function LandingPage(props: LandingPageProps) {
                                 icon={Handshake}
                                 buttonText="Tovább"
                                 href={"/tarsadalmi-felelossegvallalas"}
-                                imageSrc={"/Mainpage_tarsifel.jpg"}
+                                imageSrc={"/Mainpage_Tarsifel.jpg"}
                             />
                             <Statistics isLast={true} color={"green"} szin={"zold"} title={"Társadalmi felelősségvállalás"}
                                 data={
