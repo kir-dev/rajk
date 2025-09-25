@@ -3,8 +3,12 @@
 import React, {useEffect} from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { useLanguage } from '@/components/LanguageProvider';
+import { t } from '@/lib/utils';
 
 export default function Map() {
+    const { lang } = useLanguage();
+
     useEffect(() => {
         if (typeof window !== "undefined") {
             // Check if map container exists
@@ -53,7 +57,8 @@ export default function Map() {
             });
 
             const marker = L.marker(rajkCoordinates, { icon: customIcon }).addTo(map);
-            marker.bindPopup('<strong>Rajk Szakkollégium</strong><br>Budapest, Horánszky utca 6').openPopup();
+            const popupHtml = `<strong>Rajk Szakkollégium</strong><br>${t(lang, 'Budapest, Horánszky utca 6', 'Budapest, Horánszky Street 6')}`;
+            marker.bindPopup(popupHtml).openPopup();
 
             // Force map to update its size after rendering
             setTimeout(() => {
@@ -64,7 +69,7 @@ export default function Map() {
                 map.remove();
             };
         }
-    }, []);
+    }, [lang]);
 
     return (
         <>
