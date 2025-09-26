@@ -10,8 +10,11 @@ import TDK from "@/components/Szakma/TDK";
 import IconTitle from "@/components/IconTitle";
 import OdysseyProgram from "@/components/Szakma/Odyssey";
 import Heller from "@/components/Szakma/Heller";
+import { useLanguage } from '@/components/LanguageProvider';
+import { t } from '@/lib/utils';
 
 export default function SzakmaPage() {
+    const { lang } = useLanguage();
     const [isMounted, setIsMounted] = useState(false);
     const [courses, setCourses] = useState<Course[]>([]);
     const [categories, setCategories] = useState<CourseCategory[]>([]);
@@ -48,7 +51,7 @@ export default function SzakmaPage() {
                 </div>
             )}
             <div className="flex flex-col items-center text-black">
-                <IconTitle title={"Büszkeségeink"} />
+                <IconTitle title={t(lang, 'Büszkeségeink', 'Our achievements')} />
                 <TDK/>
                 <OdysseyProgram/>
                 <Heller/>

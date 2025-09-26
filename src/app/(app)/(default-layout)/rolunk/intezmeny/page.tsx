@@ -1,4 +1,5 @@
 import {LibraryBig} from "lucide-react";
+export const dynamic = "force-dynamic";
 import IconTitle from "@/components/IconTitle";
 import Timeline from "@/components/Intezmeny/Timeline";
 import React from "react";
