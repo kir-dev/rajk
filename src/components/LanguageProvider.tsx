@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export type Lang = "HU" | "EN";
 
@@ -16,11 +17,14 @@ export function LanguageProvider({
   children: React.ReactNode;
 }) {
   const [lang, setLangState] = useState<Lang>(initialLang);
+  const router = useRouter();
 
   const setLang = (l: Lang) => {
     setLangState(l);
     // persist for 1 year
     document.cookie = `lang=${l}; path=/; max-age=31536000; samesite=lax`;
+    // Revalidate server components that read the cookie
+    router.refresh();
   };
 
   // hydrate from cookie on the client if present
