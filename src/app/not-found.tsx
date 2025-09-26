@@ -9,7 +9,7 @@ import type { Lang } from '@/components/LanguageProvider';
 export const dynamic = 'force-dynamic';
 
 export default async function NotFound() {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const cookieLang = cookieStore.get('lang')?.value;
     const lang: Lang = cookieLang === 'EN' ? 'EN' : 'HU';
 

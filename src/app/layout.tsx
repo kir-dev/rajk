@@ -24,12 +24,12 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
                                        children,
                                    }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const cookieLang = cookieStore.get("lang")?.value;
     const initialLang = cookieLang === "EN" ? "EN" : "HU";
 
