@@ -6,8 +6,10 @@ import { cookies } from 'next/headers';
 import { t } from '@/lib/utils';
 import type { Lang } from '@/components/LanguageProvider';
 
+export const dynamic = 'force-dynamic';
+
 export default async function NotFound() {
-    const cookieStore = await cookies();
+    const cookieStore = cookies();
     const cookieLang = cookieStore.get('lang')?.value;
     const lang: Lang = cookieLang === 'EN' ? 'EN' : 'HU';
 

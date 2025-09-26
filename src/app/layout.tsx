@@ -1,4 +1,5 @@
 import type {Metadata} from "next";
+export const dynamic = "force-dynamic";
 import "./(app)/styles/globals.css";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/app/(app)/footer";
@@ -23,12 +24,12 @@ export const metadata: Metadata = {
     },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
                                        children,
                                    }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const cookieStore = await cookies();
+    const cookieStore = cookies();
     const cookieLang = cookieStore.get("lang")?.value;
     const initialLang = cookieLang === "EN" ? "EN" : "HU";
 

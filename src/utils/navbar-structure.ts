@@ -27,7 +27,7 @@ export function getNavItems(lang: Lang): NavItem[] {
         { label: HU ? 'Nemzetközi kapcsolataink' : 'Our international relations', href: '/szakma/nemzetkozi-kapcsolatok' },
       ],*/
     },
-    { label: HU ? "Társasadalmi felelősségvállalás" : "Social Responsibility", href: "/social-responsibility" },
+    { label: HU ? "Társadalmi felelősségvállalás" : "Social Responsibility", href: "/social-responsibility" },
     {
       label: HU ? "Díjak" : "Awards",
       href: "/awards",
@@ -42,4 +42,3 @@ export function getNavItems(lang: Lang): NavItem[] {
     { label: HU ? "Támogatás" : "Support", href: "/tamogass", bordered: true },
   ];
 }
-
