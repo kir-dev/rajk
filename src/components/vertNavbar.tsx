@@ -4,21 +4,30 @@ import { useEffect, useState } from "react"
 import cn from "@/utils/concatenate"
 import {GraduationCap, UsersRound, Handshake, Calendar, MapPin} from "lucide-react"
 import useIntersectionObserver from "@/hooks/useIntersectionObserver"
-import Image from "next/image";
+import { useLanguage } from "@/components/LanguageProvider"
+import { t } from "@/lib/utils"
 
 // Define sections outside the component to prevent re-creation on each render
 const sections = [
-    { id: "video", title: "", Icon: "/rajk_strucc_black.png" },
-    { id: "rolunk", title: "Közösség", Icon: UsersRound },
-    { id: "szakma", title: "Szakma", Icon: GraduationCap },
-    { id: "tarsadalmi", title: "Társadalmi érzékenység", Icon: Handshake },
-    { id: "events", title: "Események", Icon: Calendar },
-    { id: "location", title: "Elérhetőség", Icon: MapPin },
-]
+    //{ id: "video", title: "", Icon: "/rajk_strucc_black.png" },
+    { id: "rolunk", Icon: UsersRound },
+    { id: "szakma", Icon: GraduationCap },
+    { id: "tarsadalmi", Icon: Handshake },
+    { id: "events", Icon: Calendar },
+    { id: "location", Icon: MapPin },
+] as const
+
+type SectionItem = typeof sections[number]
+
+function assertUnreachable(x: never): never {
+    void x
+    throw new Error("Unexpected section id")
+}
 
 const VertNavbar = () => {
     const [activeSection, setActiveSection] = useState("")
     const [activePillStyle, setActivePillStyle] = useState({ transform: 'translateY(0px)', opacity: 0 })
+    const { lang } = useLanguage()
 
     useIntersectionObserver(setActiveSection)
 
@@ -40,6 +49,23 @@ const VertNavbar = () => {
         }
     }
 
+    const getLabel = (s: SectionItem): string => {
+        switch (s.id) {
+            case "rolunk":
+                return t(lang, "Közösség", "Community")
+            case "szakma":
+                return t(lang, "Szakma", "Academics")
+            case "tarsadalmi":
+                return t(lang, "Társadalmi felelősségvállalás", "Social Responsibility")
+            case "events":
+                return t(lang, "Események", "Events")
+            case "location":
+                return t(lang, "Helyszín", "Location")
+            default:
+                return assertUnreachable(s as never)
+        }
+    }
+
     return (
         <div className="fixed left-5 top-1/2 -translate-y-1/2 z-30">
             <div className="relative p-2 rounded-xl bg-white/60 backdrop-blur-lg shadow-lg border border-white/30">
@@ -51,46 +77,27 @@ const VertNavbar = () => {
 
                 {/* Navigation Items with Icons and Text */}
                 <div className="relative z-10 flex flex-col space-y-2">
-                    {sections.map((section) => (
-                        <button
-                            key={section.id}
-                            onClick={() => scrollToSection(section.id)}
-                            className={cn(
-                                "group flex items-center h-10 px-3 rounded-lg transition-colors duration-300",
-                                activeSection === section.id
-                                    ? "text-rajk-green"
-                                    : "text-gray-500 hover:text-rajk-green"
-                            )}
-                            aria-label={`Navigate to ${section.title}`}
-                        >
-                            {/* Icon/Image */}
-                            <div className="flex items-center justify-center w-10 h-10 mr-3">
-                                {typeof section.Icon === "string" ? (
-                                    <Image
-                                        width={50}
-                                        height={50}
-                                        src={section.Icon}
-                                        alt=""
-                                        className={cn(
-                                            "w-10 h-10 transition-opacity duration-300",
-                                            activeSection === section.id
-                                                ? "opacity-100"
-                                                : "opacity-60 group-hover:opacity-100"
-                                        )}
-                                    />
-                                ) : (
-                                    <section.Icon
-                                        className="w-5 h-5"
-                                    />
+                    {sections.map((section) => {
+                        const label = getLabel(section)
+                        return (
+                            <button
+                                key={section.id}
+                                onClick={() => scrollToSection(section.id)}
+                                className={cn(
+                                    "group flex items-center h-10 px-3 rounded-lg transition-colors duration-300",
+                                    activeSection === section.id
+                                        ? "text-rajk-green"
+                                        : "text-gray-500 hover:text-rajk-green"
                                 )}
-                            </div>
-
-                            {/* Section Title */}
-                            <span className="text-sm font-medium whitespace-nowrap">
-                                {section.title}
-                            </span>
-                        </button>
-                    ))}
+                                aria-label={t(lang, `Ugrás ide: ${label}`, `Navigate to ${label}`)}
+                            >
+                                {/* Section Title */}
+                                <span className="text-sm font-medium whitespace-nowrap">
+                                    {label}
+                                </span>
+                            </button>
+                        )
+                    })}
                 </div>
             </div>
         </div>

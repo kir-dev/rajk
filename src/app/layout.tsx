@@ -2,6 +2,8 @@ import type {Metadata} from "next";
 import "./(app)/styles/globals.css";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/app/(app)/footer";
+import { cookies } from "next/headers";
+import { LanguageProvider } from "@/components/LanguageProvider";
 
 /*const robotoCondensed = Roboto_Condensed({
     variable: "--font-roboto-condensed",
@@ -21,22 +23,28 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
                                        children,
                                    }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const cookieStore = await cookies();
+    const cookieLang = cookieStore.get("lang")?.value;
+    const initialLang = cookieLang === "EN" ? "EN" : "HU";
+
     return (
-        <html lang = "en">
+        <html lang = {initialLang === "EN" ? "en" : "hu"}>
             <head title={"Rajk Szakkollégium"}>
                 <script defer data-domain = "rajk.kir-dev.hu" src = {"https://visit.kir-dev.hu/js/script.js"}></script>
             </head>
             <body
-                className = {`antialiased flex flex-col justify-between min-h-screen`}
+                className = {`antialiased flex flex-col justify-between min-h-screen bg-bezs`}
             >
-                <NavBar />
-                {children}
-                <Footer />
+                <LanguageProvider initialLang={initialLang}>
+                    <NavBar/>
+                    {children}
+                    <Footer />
+                </LanguageProvider>
             </body>
         </html>
     );
