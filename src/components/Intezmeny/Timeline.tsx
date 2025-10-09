@@ -5,6 +5,8 @@ import {AboutTimelineEvent, ApplyTimelineEvent} from "@/payload-types";
 import { cookies } from "next/headers";
 import { getLocale } from "@/lib/utils";
 
+export const dynamic = "force-dynamic";
+
 interface TimelineProps {
     timeline: ("about-timeline-event" | "apply-timeline-event")
 }

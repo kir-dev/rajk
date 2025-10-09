@@ -2,8 +2,11 @@ import {Group, Person} from "@/payload-types";
 import {useEffect, useState} from "react";
 import getGroupMembers from "@/payload-find/getGroups";
 import Image from "next/image";
+import { useLanguage } from '@/components/LanguageProvider';
+import { t } from '@/lib/utils';
 
 export default function Heller() {
+    const { lang } = useLanguage();
     const [loading, setLoading] = useState<boolean>(true);
     const [awardees, setAwards] = useState<Group | null>(null);
 
@@ -38,14 +41,14 @@ export default function Heller() {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-8 mb-20">
-            <h1 className="text-3xl font-bold mb-8 text-center">Heller-díj</h1>
+            <h1 className="text-3xl font-bold mb-8 text-center">{t(lang,'Heller-díj','Heller Prize')}</h1>
             <div className="relative p-16">
 
                 {/* Image with text overlay */}
                 <div className="relative">
                     <Image
                         src={"/hellerdij.jpg"}
-                        alt={"Heller-díj background image"}
+                        alt={t(lang,'Heller-díj háttérkép','Heller Prize background image')}
                         width={750}
                         height={750}
                         className="rounded-lg"
@@ -57,7 +60,7 @@ export default function Heller() {
 
                             {loading ? (
                                 <div className="flex justify-center py-4">
-                                    <p className="text-muted-foreground">Loading...</p>
+                                    <p className="text-muted-foreground">{t(lang,'Betöltés...','Loading...')}</p>
                                 </div>
                             ) : (
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
@@ -66,11 +69,11 @@ export default function Heller() {
                                             {column.map((awardee, personIndex) => {
                                                 const memberName = typeof awardee.member === 'object' && awardee.member !== null
                                                     ? (awardee.member as Person).name
-                                                    : 'Unknown';
+                                                    : t(lang,'Ismeretlen','Unknown');
 
                                                 const yearDisplay = awardee.joined_at
                                                     ? new Date(awardee.joined_at).getFullYear()
-                                                    : 'N/A';
+                                                    : t(lang,'N/A','N/A');
 
                                                 return (
                                                     <div key={personIndex} className="text-black text-sm">

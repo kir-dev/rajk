@@ -5,8 +5,11 @@ import Checkout from "@/components/Stripe/Checkout";
 import { useState } from "react";
 import ChooseAmount from "@/components/Stripe/ChooseAmount";
 import {GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
+import { useLanguage } from '@/components/LanguageProvider';
+import { t } from '@/lib/utils';
 
 export default function CheckoutPage() {
+    const { lang } = useLanguage();
     const [amount, setAmount] = useState<number>(500000); // Default 500,000 fillér (5000 HUF)
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -17,7 +20,7 @@ export default function CheckoutPage() {
 
     async function handleContinue(captchaToken: string) {
         if (!name || !email) {
-            setError('Kérjük, add meg a neved és email címed.');
+            setError(t(lang, 'Kérjük, add meg a neved és email címed.', 'Please enter your name and email.'));
             return;
         }
 
@@ -30,10 +33,10 @@ export default function CheckoutPage() {
                 setClientSecret(response.clientSecret);
                 setStep('payment');
             } else {
-                setError('Nem sikerült létrehozni a fizetési szándékot.');
+                setError(t(lang,'Nem sikerült létrehozni a fizetési szándékot.','Could not create payment intent.'));
             }
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'An unexpected error occurred');
+            setError(err instanceof Error ? err.message : t(lang,'Váratlan hiba történt','An unexpected error occurred'));
         } finally {
             setIsLoading(false);
         }
@@ -43,10 +46,12 @@ export default function CheckoutPage() {
         <div className="min-h-screen bg-bezs py-20 px-4">
             <div className="max-w-4xl mx-auto">
                 <div className="mb-8 text-center">
-                    <h1 className="text-3xl font-bold mb-3">Támogasd a Rajk Szakkollégiumot</h1>
+                    <h1 className="text-3xl font-bold mb-3">{t(lang,'Támogasd a Rajk Szakkollégiumot','Support Rajk College')}</h1>
                     <p className="text-gray-700 max-w-2xl mx-auto">
-                        Adományoddal hozzájárulsz a Rajk Szakkollégium működéséhez és programjaihoz.
-                        Segíts, hogy továbbra is biztosíthassuk a minőségi képzést a jövő generációinak.
+                        {t(lang,
+                           'Adományoddal hozzájárulsz a Rajk Szakkollégium működéséhez és programjaihoz. Segíts, hogy továbbra is biztosíthassuk a minőségi képzést a jövő generációinak.',
+                           'Your donation supports the operation and programs of Rajk College. Help us continue providing high-quality education for future generations.'
+                        )}
                     </p>
                 </div>
                 <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}>

@@ -1,4 +1,5 @@
 import type {Metadata} from "next";
+export const dynamic = "force-dynamic";
 import "./(app)/styles/globals.css";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/app/(app)/footer";

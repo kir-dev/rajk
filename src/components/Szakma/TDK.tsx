@@ -5,6 +5,8 @@ import Image from "next/image";
 import getTDKs from "@/payload-find/getTDKs";
 import { Person, Tdk } from "@/payload-types";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from '@/components/LanguageProvider';
+import { t } from '@/lib/utils';
 
 // Updated interface to match the data structure
 interface DropdownProps {
@@ -21,6 +23,7 @@ interface DropdownProps {
 
 // Improved dropdown component
 const Dropdown = ({ options, placement, placeholder = "Select an option", className = "" }: DropdownProps) => {
+    const { lang } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -57,9 +60,9 @@ const Dropdown = ({ options, placement, placeholder = "Select an option", classN
                 aria-haspopup="listbox"
                 aria-expanded={isOpen}
             >
-        <span className="flex items-center">
-          <span className="block font-medium">{placeholder}</span>
-        </span>
+                <span className="flex items-center">
+                  <span className="block font-medium">{t(lang, placeholder === 'Select an option' ? 'Válassz egyet' : placeholder, placeholder)}</span>
+                </span>
                 <motion.svg
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
@@ -106,7 +109,7 @@ const Dropdown = ({ options, placement, placeholder = "Select an option", classN
                                 ))}
                             </ul>
                         ) : (
-                            <div className="p-4 text-center text-gray-500">No entries found</div>
+                            <div className="p-4 text-center text-gray-500">{t(lang, 'Nincs találat', 'No entries found')}</div>
                         )}
                     </motion.div>
                 )}
@@ -116,6 +119,7 @@ const Dropdown = ({ options, placement, placeholder = "Select an option", classN
 };
 
 export default function TDK() {
+    const { lang } = useLanguage();
     const [tdks, setTdks] = useState<Tdk[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -142,7 +146,7 @@ export default function TDK() {
                 .filter((a): a is Person => typeof a === 'object' && a !== null)
                 .map(a => ({
                     id: a.id || 0,
-                    name: a.name || 'Unknown',
+                    name: a.name || t(lang,'Ismeretlen','Unknown'),
                     updatedAt: a.updatedAt || '',
                     createdAt: a.createdAt || ''
                 }));
@@ -150,7 +154,7 @@ export default function TDK() {
         if (typeof author === 'object') {
             return [{
                 id: (author as Person).id || 0,
-                name: (author as Person).name || 'Unknown',
+                name: (author as Person).name || t(lang,'Ismeretlen','Unknown'),
                 updatedAt: (author as Person).updatedAt || '',
                 createdAt: (author as Person).createdAt || ''
             }];
@@ -165,20 +169,20 @@ export default function TDK() {
             .map(tdk => ({
                 id: tdk.id,
                 author: convertToPersonArray(tdk.author),
-                title: tdk.title || "Untitled TDK",
-                sectionName: tdk.section_name || "Unknown Section",
+                title: tdk.title || t(lang, 'Cím nélkül', 'Untitled TDK'),
+                sectionName: tdk.section_name || t(lang, 'Ismeretlen szekció', 'Unknown Section'),
             }));
     };
 
     return (
         <div className="container mx-auto p-4 md:p-8 text-black">
-            <h1 className="text-3xl font-bold mb-8 text-center">TDK Eredmények</h1>
+            <h1 className="text-3xl font-bold mb-8 text-center">{t(lang, 'TDK Eredmények', 'TDK Results')}</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                 <div className="hidden md:block">
                     <Image
                         src="/tdk.png"
-                        alt="TDK Trophy"
+                        alt={t(lang, 'TDK Trófea', 'TDK Trophy')}
                         width={500}
                         height={500}
                         className="w-full max-w-md mx-auto rounded-lg"
@@ -188,26 +192,26 @@ export default function TDK() {
                 <div className="w-full">
                     {loading ? (
                         <div className="flex items-center justify-center h-40">
-                            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
+                            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500" aria-label={t(lang,'Betöltés...','Loading...')}></div>
                         </div>
                     ) : (
                         <>
                             <Dropdown
                                 options={processTdksByPlacement(1)}
                                 placement={1}
-                                placeholder="Első helyezettek"
+                                placeholder={t(lang,'Első helyezettek','First place awards')}
                                 className="mb-4"
                             />
                             <Dropdown
                                 options={processTdksByPlacement(2)}
                                 placement={2}
-                                placeholder="Második helyezettek"
+                                placeholder={t(lang,'Második helyezettek','Second place awards')}
                                 className="mb-4"
                             />
                             <Dropdown
                                 options={processTdksByPlacement(3)}
                                 placement={3}
-                                placeholder="Harmadik helyezettek"
+                                placeholder={t(lang,'Harmadik helyezettek','Third place awards')}
                             />
                         </>
                     )}

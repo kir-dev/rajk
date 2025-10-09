@@ -3,10 +3,13 @@
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { AlertCircle, CheckCircle, Loader2 } from "lucide-react";
+import { useLanguage } from '@/components/LanguageProvider';
+import { t } from '@/lib/utils';
 
 export default function PaymentForm() {
     const stripe = useStripe();
     const elements = useElements();
+    const { lang } = useLanguage();
 
     const [isProcessing, setIsProcessing] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -30,9 +33,9 @@ export default function PaymentForm() {
                 error.message?.includes('too many requests') ||
                 error.message?.includes('rate limit') ||
                 error.message?.includes('A kártyáját elutasítottuk.')) {
-                setErrorMessage('Túl sok kísérlet történt. Kérjük, próbáld újra később, vagy vedd fel velünk a kapcsolatot.');
+                setErrorMessage(t(lang,'Túl sok kísérlet történt. Kérjük, próbáld újra később, vagy vedd fel velünk a kapcsolatot.','Too many attempts. Please try again later or contact us.'));
             } else {
-                setErrorMessage(error.message || 'Payment failed. Please try again.');
+                setErrorMessage(error.message || t(lang,'A fizetés sikertelen. Próbáld újra.','Payment failed. Please try again.'));
             }
             setIsProcessing(false);
         } else if (paymentIntent?.status === 'succeeded') {
@@ -42,18 +45,18 @@ export default function PaymentForm() {
             }, 1500);
         } else {
             setIsProcessing(false);
-            setErrorMessage('Payment failed. Please try again.');
+            setErrorMessage(t(lang,'A fizetés sikertelen. Próbáld újra.','Payment failed. Please try again.'));
         }
     }
 
     return (
         <div className="w-full text-black max-w-md bg-white rounded-2xl border-2 border-black p-6 shadow-lg">
-            <h2 className="text-xl font-bold mb-4 text-center">Fizetési adatok</h2>
+            <h2 className="text-xl font-bold mb-4 text-center">{t(lang,'Fizetési adatok','Payment details')}</h2>
 
             {paymentSuccess ? (
                 <div className="flex flex-col items-center py-6">
                     <CheckCircle className="h-16 w-16 text-zold mb-4" />
-                    <p className="text-center font-medium">Sikeres fizetés! Átirányítás...</p>
+                    <p className="text-center font-medium">{t(lang,'Sikeres fizetés! Átirányítás...','Payment successful! Redirecting...')}</p>
                 </div>
             ) : (
                 <form onSubmit={handleSubmit} className="space-y-6" id="payment-form">
@@ -76,15 +79,18 @@ export default function PaymentForm() {
                         {isProcessing ? (
                             <>
                                 <Loader2 className="animate-spin mr-2 h-5 w-5" />
-                                <span>Feldolgozás...</span>
+                                <span>{t(lang,'Feldolgozás...','Processing...')}</span>
                             </>
                         ) : (
-                            <span>Fizetés</span>
+                            <span>{t(lang,'Fizetés','Pay')}</span>
                         )}
                     </button>
 
                     <p className="text-xs text-gray-500 text-center mt-4">
-                        A fizetés gombra kattintva elfogadod a feltételeket és hozzájárulsz az adomány feldolgozásához.
+                        {t(lang,
+                           'A fizetés gombra kattintva elfogadod a feltételeket és hozzájárulsz az adomány feldolgozásához.',
+                           'By clicking Pay you accept the terms and consent to processing your donation.'
+                        )}
                     </p>
                 </form>
             )}

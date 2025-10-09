@@ -152,7 +152,7 @@ export default function LandingPage(props: LandingPageProps) {
                             <div className="p-4 sm:p-8 rounded-2xl border border-rajk-green/20 hover:border-rajk-green/40 transition-all duration-300 flex flex-col space-y-4 sm:space-y-6">
                                 <div className="flex flex-col space-y-2">
                                     <h3 className="text-lg sm:text-xl font-bold text-rajk-green">Rajk Szakkollégium</h3>
-                                    <p className="">1085 Budapest, Horánszky utca 6.</p>
+                                    <p className="">{t(lang, "1085 Budapest, Horánszky utca 6.", "1085 Budapest, 6 Horánszky Street")}</p>
                                 </div>
                                 <div className="flex flex-col space-y-2">
                                     <h4 className="text-base sm:text-lg font-semibold text-rajk-green">{t(lang, "Megközelítés", "Getting there")}</h4>

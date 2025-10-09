@@ -57,7 +57,7 @@ export default function Footer() {
                         />
                         <div>
                             <p>Rajk Szakkollégium Alapítvány</p>
-                            <p>1085, Budapest, Horánszky u. 6.</p>
+                            <p>{t(lang, "1085, Budapest, Horánszky u. 6.", "1085 Budapest, 6 Horánszky Street")}</p>
                             <p>{t(lang, "Adószám", "Tax number")}: 19624806-2-42</p>
                             <p>{t(lang, "Bankszámlaszám", "Bank account")}: 10700347-69549474-51100005 (CIB)</p>
                         </div>
