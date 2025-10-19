@@ -46,8 +46,7 @@ export function CalendarDateCard({
         const uid = `${Date.now()}@example`;
         const dtStart = toICSDate(new Date(start));
         const dtEnd = toICSDate(new Date(end ?? new Date(new Date(start).getTime() + 60 * 60 * 1000)));
-        const tzLine = timezone ? `
-TZID:${timezone}` : "";
+        const tzLine = timezone ? `TZID:${timezone}` : "";
 
         const ics = [
             "BEGIN:VCALENDAR",
