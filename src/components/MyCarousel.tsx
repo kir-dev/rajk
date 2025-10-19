@@ -6,7 +6,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {BiSolidLeftArrow, BiSolidRightArrow} from "react-icons/bi";
 import Image from "next/image";
-
+import {Event} from "@/payload-types";
+import {isMedia} from "@/utils/isMedia";
 
 const NextArrow = (props: { onClick?: () => void }) => {
     const {onClick} = props;
@@ -34,7 +35,7 @@ const PrevArrow = (props: { onClick?: () => void }) => {
     );
 };
 
-export function MyCarousel({data}: { data: { docs: { url: string; alt: string }[] } }) {
+export function MyCarousel({data}: { data: Event[] } ) {
     const settings = {
         className: "overflow-hidden",
         variableWidth: true,
@@ -52,12 +53,18 @@ export function MyCarousel({data}: { data: { docs: { url: string; alt: string }[
     // Workaround for JSX typing issue
     const TypedSlider = Slider as unknown as React.ComponentType<any>; //eslint-disable-line
 
+    console.log(data)
+
     return (
         <div className="slider-container" id="carousel">
             <TypedSlider {...settings}>
-                {data.docs.map((doc, index) => (
-                    <div key={index} className="transition-all duration-300 ease-in-out hover:scale-105 p-2 flex h-64 w-auto outline-none">
-                        <Image src={doc.url} alt={doc.alt} width={20} height={20} className="object-cover h-full w-auto"/>
+                {data.map((doc) => (
+                    <div key={doc.id} className="transition-all duration-300 ease-in-out hover:scale-105 p-2 flex h-64 w-auto outline-none">
+                        <a href={`/esemenyek/${doc.id}`} className="block h-full w-full">
+                            {isMedia(doc.picture) ? (
+                                <Image src={doc.picture.url ?? "/rajk_strucc_black.png"} alt={doc.picture.alt ?? "/rajk_strucc_black.png"} width={20} height={20} className="object-cover h-full w-auto"/>
+                            ) : null}
+                        </a>
                     </div>
                 ))}
             </TypedSlider>

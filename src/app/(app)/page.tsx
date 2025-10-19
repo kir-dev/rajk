@@ -1,8 +1,8 @@
-import getEventsMedia from "@/payload-find/getEventsMedia";
 import LandingPage from "@/components/LandingPage/LandingPage";
+import getEvents from "@/payload-find/getEvents";
 
 export default async function Home() {
-    const data = await getEventsMedia()
+    const data = await getEvents()
 
     return (
         <LandingPage data={data} />

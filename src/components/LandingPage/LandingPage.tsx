@@ -10,11 +10,10 @@ import MyCarousel from "@/components/MyCarousel";
 import IconTitle from "@/components/IconTitle";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import {Event} from "@/payload-types";
 
 interface LandingPageProps {
-    data: {
-        docs: { url: string; alt: string }[];
-    };
+    data: Event[]
 }
 
 export default function LandingPage(props: LandingPageProps) {
