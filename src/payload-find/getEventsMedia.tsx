@@ -2,7 +2,7 @@ import {getPayload} from "payload";
 import config from "@payload-config";
 import {Media} from "@/payload-types";
 
-export default async function getEvents(){
+export default async function getEventsMedia(){
     const payload = await getPayload({ config });
     const events = await payload.find({
         collection: "events",

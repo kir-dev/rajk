@@ -458,7 +458,24 @@ export interface Event {
   id: number;
   name: string;
   picture: number | Media;
-  description: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  date: string;
+  location: string;
+  speakers?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -769,6 +786,9 @@ export interface EventsSelect<T extends boolean = true> {
   name?: T;
   picture?: T;
   description?: T;
+  date?: T;
+  location?: T;
+  speakers?: T;
   updatedAt?: T;
   createdAt?: T;
 }
