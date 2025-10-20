@@ -81,7 +81,12 @@ export default function LandingPage(props: LandingPageProps) {
                 <div className="w-full flex justify-center">
                     <IconTitle className="mt-20 text-black" title={"Események"} Icon={Calendar}/>
                 </div>
-                <MyCarousel data={props.data}/>
+                <MyCarousel data={props.data} clickable={true}/>
+                <div className="w-full flex justify-center">
+                    <Link href={"/esemenyek"} className="mt-8 inline-block bg-rajk-green/90 hover:bg-rajk-green text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg">
+                        Tovább az eseményekhez
+                    </Link>
+                </div>
             </Section>
             <Section id="location" title="Helyszín">
                 <div className="relative bg-bezs text-black py-16 px-4 sm:px-6 lg:px-8 rounded-3xl mt-10 mb-20 overflow-hidden">

@@ -19,16 +19,6 @@ export default async function EventDetails({
                     <div className="rich-text-content w-full">
                         <RichText data={event.description} />
                     </div>
-                    {event.date && (
-                        <p className="mb-4">
-                            <strong>Dátum:</strong> {new Date(event.date).toLocaleDateString()}
-                        </p>
-                    )}
-                    {event.location && (
-                        <p className="mb-4">
-                            <strong>Helyszín:</strong> {event.location}
-                        </p>
-                    )}
                 </div>
                 <CalendarDateCard title={event.name} start={event.date}/>
             </div>

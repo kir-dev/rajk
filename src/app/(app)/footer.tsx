@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import {ArrowUp, Facebook, Instagram, Youtube} from "lucide-react"
+import {ArrowUp, Facebook, Instagram, Youtube, Linkedin} from "lucide-react"
 import {useEffect, useState} from "react"
 import Image from "next/image"
 import WawyBorder from "@/components/WawyBorder";
@@ -66,20 +66,23 @@ export default function Footer() {
                             <p className = "font-bold">diakbizottsag@rajk.eu</p>
                             <p>Diákbizottság</p>
                             <p className = "mt-6 font-bold">+36303508715</p>
-                            <p>Főző Zsolt, kollégiumi igazgató</p>
+                            <p>Kaderják Anita, kollégiumi igazgató</p>
                         </div>
                     </div>
 
                     {/* Social media icons */}
                     <div className = "flex justify-end mt-16 mr-24 gap-8">
-                        <Link href = "#" className = "hover:opacity-80 transition-opacity">
+                        <Link target="_blank" href = "https://www.facebook.com/rajkofficial/" className = "hover:opacity-80 transition-opacity">
                             <Facebook size = {28}/>
                         </Link>
-                        <Link href = "#" className = "hover:opacity-80 transition-opacity">
+                        <Link target="_blank" href = "https://www.instagram.com/rajkofficial/" className = "hover:opacity-80 transition-opacity">
                             <Instagram size = {28}/>
                         </Link>
-                        <Link href = "#" className = "hover:opacity-80 transition-opacity">
+                        <Link target="_blank" href = "https://www.youtube.com/@rajkcollegeforadvancedstud1420" className = "hover:opacity-80 transition-opacity">
                             <Youtube size = {28}/>
+                        </Link>
+                        <Link target="_blank" href = "https://www.linkedin.com/school/rajk" className = "hover:opacity-80 transition-opacity">
+                            <Linkedin size = {28}/>
                         </Link>
                         {showScrollTop && (
                             <button

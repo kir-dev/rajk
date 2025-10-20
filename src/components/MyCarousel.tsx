@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {BiSolidLeftArrow, BiSolidRightArrow} from "react-icons/bi";
 import Image from "next/image";
-import {Event} from "@/payload-types";
+import {CommunityPicture, Event} from "@/payload-types";
 import {isMedia} from "@/utils/isMedia";
 
 const NextArrow = (props: { onClick?: () => void }) => {
@@ -35,7 +35,12 @@ const PrevArrow = (props: { onClick?: () => void }) => {
     );
 };
 
-export function MyCarousel({data}: { data: Event[] } ) {
+interface MyCarouselProps {
+    data: Event[] | CommunityPicture[];
+    clickable: boolean;
+}
+
+export function MyCarousel(props: MyCarouselProps) {
     const settings = {
         className: "overflow-hidden",
         variableWidth: true,
@@ -50,21 +55,42 @@ export function MyCarousel({data}: { data: Event[] } ) {
         prevArrow: <PrevArrow/>,
     };
 
-    // Workaround for JSX typing issue
     const TypedSlider = Slider as unknown as React.ComponentType<any>; //eslint-disable-line
-
-    console.log(data)
 
     return (
         <div className="slider-container" id="carousel">
             <TypedSlider {...settings}>
-                {data.map((doc) => (
-                    <div key={doc.id} className="transition-all duration-300 ease-in-out hover:scale-105 p-2 flex h-64 w-auto outline-none">
-                        <a href={`/esemenyek/${doc.id}`} className="block h-full w-full">
-                            {isMedia(doc.picture) ? (
-                                <Image src={doc.picture.url ?? "/rajk_strucc_black.png"} alt={doc.picture.alt ?? "/rajk_strucc_black.png"} width={20} height={20} className="object-cover h-full w-auto"/>
-                            ) : null}
-                        </a>
+                {props.data.map((doc) => (
+                    <div key={doc.id} className="h-64 w-auto outline-none px-2">
+                        <div className="transition-all duration-300 ease-in-out hover:scale-105 h-full w-auto">
+                            {props.clickable ? (
+                                <a href={`/esemenyek/${doc.id}`} className="block relative h-full aspect-video">
+                                    {isMedia(doc.picture) ? (
+                                        <Image
+                                            src={doc.picture.url ?? "/rajk_strucc_black.png"}
+                                            alt={doc.picture.alt ?? "/rajk_strucc_black.png"}
+                                            fill
+                                            sizes="400px"
+                                            className="object-cover"
+                                            priority={false}
+                                        />
+                                    ) : null}
+                                </a>
+                            ) : (
+                                <div className="relative h-full aspect-video">
+                                    {isMedia(doc.picture) ? (
+                                        <Image
+                                            src={doc.picture.url ?? "/rajk_strucc_black.png"}
+                                            alt={doc.picture.alt ?? "/rajk_strucc_black.png"}
+                                            fill
+                                            sizes="400px"
+                                            className="object-cover"
+                                            priority={false}
+                                        />
+                                    ) : null}
+                                </div>
+                            )}
+                        </div>
                     </div>
                 ))}
             </TypedSlider>

@@ -82,6 +82,7 @@ export interface Config {
     'about-timeline-event': AboutTimelineEvent;
     'stripe-transactions': StripeTransaction;
     events: Event;
+    'community-pictures': CommunityPicture;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -103,6 +104,7 @@ export interface Config {
     'about-timeline-event': AboutTimelineEventSelect<false> | AboutTimelineEventSelect<true>;
     'stripe-transactions': StripeTransactionsSelect<false> | StripeTransactionsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
+    'community-pictures': CommunityPicturesSelect<false> | CommunityPicturesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -480,6 +482,19 @@ export interface Event {
   createdAt: string;
 }
 /**
+ * Közösségi események képei
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "community-pictures".
+ */
+export interface CommunityPicture {
+  id: number;
+  name: string;
+  picture: number | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
@@ -545,6 +560,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'events';
         value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'community-pictures';
+        value: number | CommunityPicture;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -789,6 +808,16 @@ export interface EventsSelect<T extends boolean = true> {
   date?: T;
   location?: T;
   speakers?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "community-pictures_select".
+ */
+export interface CommunityPicturesSelect<T extends boolean = true> {
+  name?: T;
+  picture?: T;
   updatedAt?: T;
   createdAt?: T;
 }

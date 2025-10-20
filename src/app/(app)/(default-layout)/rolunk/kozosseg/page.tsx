@@ -1,19 +1,14 @@
-import {House, LibraryBig} from "lucide-react";
-import IconTitle from "@/components/IconTitle";
-import Timeline from "@/components/Intezmeny/Timeline";
-import Mukodes from "@/components/Intezmeny/Mukodes";
-import PageTitle from "@/components/PageTitle/PageTitle";
 import React from "react";
+import {Community} from "@/components/Kozosseg/Community";
+import getCommunityPictures from "@/payload-find/getCommunityPictures";
 
 export default async function RolunkPage() {
+    const events = await getCommunityPictures()
+
     return (
-        <div>
-            <PageTitle text = {"Közösség"}/>
-            <div className="min-h-screen flex flex-col pb-40 bg-bezs text-black">
-                <IconTitle className="mt-20" title={"Bentlakás"} Icon={House}/>
-                <Mukodes/>
-                <IconTitle title={"Felvételi folyamat"} Icon={LibraryBig} />
-                <Timeline timeline={"apply-timeline-event"} />
+        <div className="min-h-screen w-full bg-bezs py-32">
+            <div className="relative z-10 w-full">
+                <Community pictures={events} />
             </div>
         </div>
     );
