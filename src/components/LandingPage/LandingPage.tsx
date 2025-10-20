@@ -83,7 +83,7 @@ export default function LandingPage(props: LandingPageProps) {
                 </div>
                 <MyCarousel data={props.data} clickable={true}/>
                 <div className="w-full flex justify-center">
-                    <Link href={"/esemenyek"} className="mt-8 inline-block bg-rajk-green/90 hover:bg-rajk-green text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg">
+                    <Link href={"/esemenyek"} className="mt-8 bg-rajk-green/90 hover:bg-rajk-green text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg">
                         Tovább az eseményekhez
                     </Link>
                 </div>

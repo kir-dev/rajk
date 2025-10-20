@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { MyCarousel } from "@/components/MyCarousel";
 import {CommunityPicture} from "@/payload-types";
@@ -114,7 +114,7 @@ export default function CommunityParallaxAccordion({
 
                 {/* Accordion */}
                 <div className="rounded-2xl border border-white/25 bg-black/30 backdrop-blur">
-                    {sections.map((s, i) => {
+                    {sections.map((s) => {
                         const isOpen = openId === s.id;
                         return (
                             <div key={s.id} className="border-b border-white/20 last:border-b-0">
