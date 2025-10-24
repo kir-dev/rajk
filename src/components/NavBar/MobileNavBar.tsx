@@ -26,7 +26,7 @@ export default function MobileNavBar() {
                         onClick={() => setMenuOpen(false)}
                     />
 
-                    <div className="absolute left-0 top-full w-full bg-rajk-green shadow-2xl animate-slide-down z-50 rounded-b-lg overflow-hidden">
+                    <div className="absolute left-0 top-full w-full bg-zold shadow-2xl animate-slide-down z-50 rounded-b-lg overflow-hidden">
                         <div className="flex flex-col gap-1 px-6 py-6">
                             {navItems.map((item, index) => (
                                 <div
