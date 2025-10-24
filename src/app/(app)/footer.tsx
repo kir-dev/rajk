@@ -38,7 +38,7 @@ export default function Footer() {
     return (
         <footer className = "relative bg-zold text-white w-full">
             {/* Wavy border */}
-            <WawyBorder direction={"top"} color={"green"} szin={"zold"}/>
+            <WawyBorder direction={"top"} color={"green"} szin={"zold"} backgroundColor={"bg-bezs"}/>
 
             <div className = "px-6 pt-4 pb-8 w-full">
                 {/* Logo and left column */}
@@ -65,7 +65,7 @@ export default function Footer() {
                         <div>
                             <p className = "font-bold">diakbizottsag@rajk.eu</p>
                             <p>Diákbizottság</p>
-                            <p className = "mt-6 font-bold">+36303508715</p>
+                            <p className = "mt-6 font-bold">+36306452537</p>
                             <p>Kaderják Anita, kollégiumi igazgató</p>
                         </div>
                     </div>

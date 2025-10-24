@@ -6,7 +6,7 @@ import {Event} from "@/payload-types";
 import { Calendar, MapPin, User } from "lucide-react";
 import {isMedia} from "@/utils/isMedia";
 
-function formatDateParts(iso: string) {
+export function formatDateParts(iso: string) {
     const d = new Date(iso);
     const month = d.toLocaleString(undefined, { month: "short" }).toUpperCase();
     const day = d.getDate().toString().padStart(2, "0");

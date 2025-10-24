@@ -93,11 +93,11 @@ export function CalendarDateCard({
     }
 
     return (
-        <div className="w-full overflow-hidden rounded-xl border h-fit shadow-sm relative">
+        <div className="min-w-fit overflow-hidden rounded-xl border h-fit shadow-sm relative">
             <div className="flex items-center gap-2 bg-neutral-200 px-4 py-3 text-neutral-900">
                 <svg aria-hidden className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2v2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7m12 8H5v8h14v-8Z"/></svg>
                 <button
-                    className="font-semibold tracking-wide"
+                    className="font-semibold tracking-wide w-full"
                     onClick={() => setDownloadClicked(!downloadClicked)}
                 >
                     ADD TO CALENDAR
