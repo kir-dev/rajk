@@ -18,8 +18,8 @@ export default function ApplyPage() {
     }
     
     return (
-        <>
-            <div className={`flex flex-col justify-center bg-white pb-20 ${emailReg ? 'brightness-50' : ''}`}>
+        <div className="bg-bezs">
+            <div className={`flex flex-col justify-center pb-20 ${emailReg ? 'brightness-50' : ''}`}>
                 <div className="relative">
                     <Image src={"/koli.png"} alt={"Koli"} width={500} height={500}
                            className="w-full h-screen object-cover object-top brightness-50 z-10"/>
@@ -47,7 +47,7 @@ export default function ApplyPage() {
                                alt={"Felvételi"}></Image>
                     </div>
                 </div>
-                <div className="flex flex-col items-center justify-center bg-white self-center p-4 py-20">
+                <div className="flex flex-col items-center justify-center self-center p-4 py-20">
                     <div className="flex flex-col md:flex-row lg:w-3/4 xl:w-1/2">
                         <Image src={"/slider_4.png"} alt={"Rajk"} width={459} height={381}
                                className="mr-20 max-md:p-16"/>
@@ -86,7 +86,7 @@ export default function ApplyPage() {
                 {emailReg ? (
                     <div className="absolute z-20 text-black">
                         <div className="fixed inset-0 flex items-center justify-center z-30">
-                            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+                            <div className="p-8 rounded-lg shadow-lg w-full max-w-md">
                                 <h2 className="text-2xl font-bold mb-4">Email cím megadása</h2>
                                 <p className="mb-4">Kérjük add meg az email címedet a letöltéshez, hogy a jövőben
                                     fel tudjuk venni veled a kapcsolatot!</p>
@@ -112,7 +112,7 @@ export default function ApplyPage() {
                     </div>
                 ) : ('')}
             </div>
-        </>
+        </div>
     )
 }
 
