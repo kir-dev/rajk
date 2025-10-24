@@ -3,6 +3,7 @@ import {RichText} from "@payloadcms/richtext-lexical/react";
 import {CalendarDateCard} from "@/components/Esemenyek/CalendarDateCard";
 import {isMedia} from "@/utils/isMedia";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function EventDetails({
                                                params,
@@ -19,12 +20,12 @@ export default async function EventDetails({
     return (
         <div className="min-h-screen py-10 px-4 bg-bezs w-full text-black">
             <div className="mx-auto mt-20 mb-20 max-w-4xl">
-                <a
+                <Link
                     href="/esemenyek"
                     className="inline-block bg-zold text-white rounded-md px-4 py-2 mb-6 hover:opacity-90 transition"
                 >
                     Vissza az eseményekhez
-                </a>
+                </Link>
 
                 <div className="flex flex-col lg:flex-row gap-6">
                     <div className="flex-1">
