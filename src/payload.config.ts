@@ -25,6 +25,9 @@ import {Events} from "@/collections/Events";
 import {stripePlugin} from "@payloadcms/plugin-stripe";
 import {StripeTransactions} from "@/collections/Stripe-Transactions";
 import {CommunityPictures} from "@/collections/CommunityPictures";
+import {CourseCategories} from "@/collections/CourseCategories";
+import {Courses} from "@/collections/Courses";
+import {Odyssey} from "@/collections/Odyssey";
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -53,6 +56,9 @@ export default buildConfig({
     StripeTransactions,
     Events,
     CommunityPictures,
+    CourseCategories,
+    Courses,
+    Odyssey,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

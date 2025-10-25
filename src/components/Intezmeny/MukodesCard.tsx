@@ -6,12 +6,9 @@ interface MukodesCardProps {
 
 export default function MukodesCard(props: MukodesCardProps) {
     return (
-        <div className="flex flex-col space-x-2">
-            <div className="rounded-full self-center p-2 bg-rajk-green">
-                <props.Icon className="w-25 h-25 p-4 text-white"/>
-            </div>
-            <div className="text-lg font-bold self-center">{props.title}</div>
-            <div className="text-justify">{props.text}</div>
+        <div className="flex flex-col w-full pt-6 p-4 sm:p-8">
+            {props.title && <div className="text-lg font-bold self-center mb-2">{props.title}</div>}
+            <div className="text-base sm:text-lg text-justify leading-relaxed">{props.text}</div>
         </div>
     )
 }

@@ -1,20 +1,23 @@
 import MukodesCard from "@/components/Intezmeny/MukodesCard";
-import {BookText, Feather, Send, Sofa} from "lucide-react";
-import Image from "next/image";
+import {Sofa} from "lucide-react";
 import InteractiveBuilding from "@/components/Intezmeny/InteractiveBuilding";
+import type { Lang } from "@/components/LanguageProvider";
+import { t } from "@/lib/utils";
 
-export default function Mukodes() {
+export default function Mukodes({ lang }: { lang: Lang }) {
+    const text = t(
+        lang,
+        "A Rajk Szakkollégium mint intézmény egy demokratikusan működő, hallgatók által irányított közösség, amely az önszerveződés elvére épülve biztosítja tagjai számára a magas színvonalú szakmai fejlődés és a közösségi felelősségvállalás egyedülálló kombinációját. A legfőbb döntéshozó testület a minden tag szavazati jogával működő Kollégiumi Gyűlés, a mindennapi működést pedig az évente választott Diákbizottság koordinálja. A szakmai életet a Szakmai Munka Tanácsa irányítja, amely évente 40–50, kis létszámú, interaktív kurzust szervez a hallgatók igényeire építve. A rendszerszintű hallgatói autonómia mellett a korábbi szakkollégisták – igazgatók, nevelőtanárok és szakmai mentorok – támogató szerepe biztosítja a hagyományok folytonosságát, így a Rajk a kiemelkedő teljesítményre épülő, dinamikusan megújuló intézményként működik, és ezen belül további bizottságokra is szegmentálódik különböző funkciók mentén, mint például a kommunikáció, az épület vagy a pénzügyek.",
+        "Rajk College is a democratically run, student-led institution built on the principle of self-organization, offering a unique combination of high-level academic development and social responsibility. The main decision-making body is the College Assembly, where every member has voting rights, while day-to-day operations are coordinated by the annually elected Student Committee. Academic life is guided by the Council for Academic Work, which organizes 40–50 small, interactive courses each year tailored to students’ needs. Alongside strong student autonomy, former members—directors, resident tutors, and academic mentors—play a supportive role, ensuring continuity of traditions. As a result, Rajk functions as a high-performance, continuously renewing institution, with additional committees overseeing areas such as communications, facilities, and finance."
+    )
+
     return (
         <div className="container mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-10 mt-3 px-4">
-                <div className="relative">
+            <div className="flex flex-col md:flex-row gap-6 md:gap-10 mt-10 px-2 sm:px-4 mb-10">
+                <div className="relative w-full mb-6 md:mb-0">
                     <InteractiveBuilding/>
                 </div>
-                <MukodesCard title={"Minidemokrácia"} text={"A Rajk egy demokratikus alapokra épülő intézmény, ahol mindenről magunk dönthetünk. Éppen ezért a kollégium legfontosabb döntéshozó szerve a Kollégiumi Gyűlés, ahol a kollégium minden tagja részt vesz, majd vitákat követően döntéseket hoz. Ezen a fórumon választjuk meg a kollégium vezető bizottságait is, mint a Diákbizottságot, a Szakmai Munka Tanácsát, vagy a Felvételi Bizottságot."} Icon={Feather} />
-                <MukodesCard title={"Aktivitás"} Icon={Send} text={"A Rajk célja, hogy társadalmi problémák iránt érzékeny értelmiségieket neveljen. Vitázunk közéletről, Magyarország társadalmi problémáiról, nemzetközi konfliktusokról, az aktualitásoktól függően. De törekszünk arra is, hogy ne álljunk meg a vitáknál, hanem tegyünk aktívan a változásért: ennek érdekében jött létre számtalan társadalmi projektünk."} />
-                <MukodesCard title={"Tanulósarok"} Icon={BookText} text={"A kollégium egy szakmai műhely. Tagjaink a társadalomtudományok széles spektrumáról érkeznek, ezzel bővítve egymás tudástárát is. A legjobb magyar oktatóktól tanulunk, a díjainkkal pedig megcélozzuk a külföldi színvonalat. A jelenlegi és volt szakkollégisták szakmai sikerei magukért beszélnek."} />
-                <MukodesCard title={"Élettér"} text={"A rajkosok számára a kollégium otthonként is szolgál. 3-5 fős szobákban élünk együtt és díszítjük fel kedvünk szerint. A szobáink mellett azonban nagyon fontosak számunkra a közös tereink is: szintvacsorákat tartunk a konyhában, medencébe lógatjuk a lábunk az udvaron, tanulunk a könyvtárban és bulizunk a pincében."} Icon={Sofa} />
-                <Image src={"/rajk_szoptato.svg"} alt={"rajk szék"} width={400} height={400} />
+                <MukodesCard title={""} text={text} Icon={Sofa} />
             </div>
         </div>
     )

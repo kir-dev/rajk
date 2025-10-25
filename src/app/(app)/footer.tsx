@@ -5,19 +5,22 @@ import {ArrowUp, Facebook, Instagram, Youtube, Linkedin} from "lucide-react"
 import {useEffect, useState} from "react"
 import Image from "next/image"
 import WawyBorder from "@/components/WawyBorder";
+import { useLanguage } from "@/components/LanguageProvider";
+import { t } from "@/lib/utils";
 
 /*
 Alternative SVG path for the wavy border
 <path
-d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
-fill="#5EB25E"
-opacity="1"
+ d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+ fill="#5EB25E"
+ opacity="1"
 ></path>
  */
 
 export default function Footer() {
     const [showScrollTop, setShowScrollTop] = useState(false)
-    
+    const { lang } = useLanguage();
+
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 300) {
@@ -55,18 +58,18 @@ export default function Footer() {
                         <div>
                             <p>Rajk Szakkollégium Alapítvány</p>
                             <p>1085, Budapest, Horánszky u. 6.</p>
-                            <p>Adószám: 19624806-2-42</p>
-                            <p>Bankszámlaszám: 10700347-69549474-51100005 (CIB)</p>
+                            <p>{t(lang, "Adószám", "Tax number")}: 19624806-2-42</p>
+                            <p>{t(lang, "Bankszámlaszám", "Bank account")}: 10700347-69549474-51100005 (CIB)</p>
                         </div>
                     </div>
 
                     <div>
-                        <h3 className = "text-xl font-semibold mb-4">Elérhetőségünk</h3>
+                        <h3 className = "text-xl font-semibold mb-4">{t(lang, "Elérhetőségünk", "Contact")}</h3>
                         <div>
                             <p className = "font-bold">diakbizottsag@rajk.eu</p>
-                            <p>Diákbizottság</p>
+                            <p>{t(lang, "Diákbizottság", "Student Committee")}</p>
                             <p className = "mt-6 font-bold">+36306452537</p>
-                            <p>Kaderják Anita, kollégiumi igazgató</p>
+                            <p>{t(lang, "Kaderják Anita, kollégiumi igazgató", "Kaderják Anita, Director of the College")}</p>
                         </div>
                     </div>
 
@@ -88,7 +91,7 @@ export default function Footer() {
                             <button
                                 onClick = {scrollToTop}
                                 className = "fixed bottom-8 right-8 bg-white text-rajk-green p-3 rounded-md shadow-md hover:bg-gray-100 transition-all z-50"
-                                aria-label = "Scroll to top"
+                                aria-label = {t(lang, "Vissza a tetejére", "Scroll to top")}
                             >
                                 <ArrowUp size = {24}/>
                             </button>

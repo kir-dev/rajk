@@ -2,12 +2,15 @@
 
 import {Menu, X} from "lucide-react";
 import {useState} from "react";
-import {navItems} from "@/utils/navbar-structure";
+import { getNavItems } from "@/utils/navbar-structure";
 import NavBarItem from "./NavBarItem";
 import LanguageSelector from "@/components/NavBar/LanguageSelector";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function MobileNavBar() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const { lang } = useLanguage();
+    const navItems = getNavItems(lang);
 
     return (
         <div className='h-full'>

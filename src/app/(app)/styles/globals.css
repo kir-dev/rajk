@@ -10,6 +10,9 @@
     --rajk-cream: #FBFBEF;
     --rajk-blue: #97D7FB;
     --rajk-purple: #CDB3EE;
+    --leaf-primary: 140, 100%, 70%;
+    --leaf-secondary: 160, 100%, 40%;
+    --leaf-accent: 120, 100%, 30%;
 }
 
 /* Define specific background classes instead of CSS variables */
