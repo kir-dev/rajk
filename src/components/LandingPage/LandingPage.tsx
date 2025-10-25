@@ -39,7 +39,7 @@ export default function LandingPage(props: LandingPageProps) {
                 </Section>
             </div>
             <div className="flex flex-col lg:flex-row h-fit w-full relative">
-                <div className="absolute left-0 top-0 h-full z-30 hidden md:block">
+                <div className="absolute left-0 top-0 h-full z-30 md:block">
                     <VertNavbar />
                 </div>
                 <div className="bg-foreground h-full w-full flex flex-col">
@@ -125,7 +125,7 @@ export default function LandingPage(props: LandingPageProps) {
                 <div className="w-full flex flex-col items-center justify-center">
                     <IconTitle className="mt-10 text-black text-center" title={t(lang, "Események", "Events")} Icon={Calendar}/>
                     <div className="w-full max-w-full overflow-x-auto">
-                        <MyCarousel data={props.data}/>
+                        <MyCarousel data={props.data} clickable={true}/>
                     </div>
                 </div>
                 <MyCarousel data={props.data} clickable={true}/>

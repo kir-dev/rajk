@@ -80,14 +80,14 @@ export default function ChooseAmount(props: ChooseAmountProps) {
                 </div>
 
                 <div className="mt-6">
-                    <p className="text-sm text-gray-600 mb-2">Egyéni összeg (minimum 5000 Ft):</p>
+                    <p className="text-sm text-gray-600 mb-2">Egyéni összeg (minimum 500 Ft):</p>
                     <div className="flex items-center">
                         <input
                             type="number"
-                            min="5000"
+                            min="500"
                             step="100"
                             value={props.amount / 100}
-                            onChange={(e) => props.setAmount(Math.max(5000, Number(e.target.value)) * 100)}
+                            onChange={(e) => props.setAmount(Math.max(500, Number(e.target.value)) * 100)}
                             className="w-full p-2 border-2 border-black rounded-2xl mr-2"
                         />
                         <span className="text-gray-700 font-medium">Ft</span>

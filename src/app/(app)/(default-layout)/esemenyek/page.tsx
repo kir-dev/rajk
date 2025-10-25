@@ -26,7 +26,10 @@ export default async function EventsPage() {
                     <Image src={"/rajk_strucc_black.png"} alt={"Strucc"} width={60} height={60} className="ml-auto"/>
                 </div>
                 <h2 className="text-2xl font-semibold mb-4">Következő esemény</h2>
-                <NextEvent event={nextEvent} />
+                {nextEvent && (
+                    <NextEvent event={nextEvent}/>
+                    )
+                }
                 <EventList events={otherEvents} baseHref="/esemenyek" emptyLabel="Nincsenek elérhető események." />
             </div>
         </div>

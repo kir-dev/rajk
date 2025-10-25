@@ -2,101 +2,73 @@
 
 import { useEffect, useState } from "react"
 import cn from "@/utils/concatenate"
-import {GraduationCap, UsersRound, Handshake, Calendar, MapPin} from "lucide-react"
+import {GraduationCap, UsersRound, Handshake, Calendar, MapPin, ChevronRight, ChevronLeft} from "lucide-react"
 import useIntersectionObserver from "@/hooks/useIntersectionObserver"
-import { useLanguage } from "@/components/LanguageProvider"
-import { t } from "@/lib/utils"
+import Image from "next/image";
 
-// Define sections outside the component to prevent re-creation on each render
 const sections = [
-    //{ id: "video", title: "", Icon: "/rajk_strucc_black.png" },
-    { id: "rolunk", Icon: UsersRound },
-    { id: "szakma", Icon: GraduationCap },
-    { id: "tarsadalmi", Icon: Handshake },
-    { id: "events", Icon: Calendar },
-    { id: "location", Icon: MapPin },
-] as const
+    { id: "video", title: "Videó", Icon: "/rajk_strucc_black.png" },
+    { id: "rolunk", title: "Közösség", Icon: UsersRound },
+    { id: "szakma", title: "Szakma", Icon: GraduationCap },
+    { id: "tarsadalmi", title: "Társadalmi felelősség", Icon: Handshake },
+    { id: "events", title: "Események", Icon: Calendar },
+    { id: "location", title: "Helyszín", Icon: MapPin },
+]
 
-type SectionItem = typeof sections[number]
+const VertNavbar = () => {
+    const [activeSection, setActiveSection] = useState("")
+    const [activePillStyle, setActivePillStyle] = useState({ transform: 'translateY(0px)', opacity: 0 })
+    const [isOpen, setIsOpen] = useState(false)
 
-function assertUnreachable(x: never): never {
-    void x
-    throw new Error("Unexpected section id")
-}
+    useIntersectionObserver(setActiveSection)
 
-        const VertNavbar = () => {
-            const [activeSection, setActiveSection] = useState("")
-            const [activePillStyle, setActivePillStyle] = useState({ transform: 'translateY(0px)', opacity: 0 })
-            const [isOpen, setIsOpen] = useState(false)
-            const { lang } = useLanguage()
+    useEffect(() => {
+        const activeIndex = sections.findIndex(s => s.id === activeSection)
+        if (activeIndex !== -1) {
+            const newY = activeIndex * 48
+            setActivePillStyle({ transform: `translateY(${newY}px)`, opacity: 1 })
+        } else {
+            setActivePillStyle({ transform: 'translateY(0px)', opacity: 0 })
+        }
+    }, [activeSection])
 
-            useIntersectionObserver(setActiveSection)
+    const scrollToSection = (id: string) => {
+        const element = document.getElementById(id)
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" })
+        }
+    }
 
-            useEffect(() => {
-                const activeIndex = sections.findIndex(s => s.id === activeSection)
-                if (activeIndex !== -1) {
-                    const newY = activeIndex * 48
-                    setActivePillStyle({ transform: `translateY(${newY}px)`, opacity: 1 })
-                } else {
-                    setActivePillStyle({ transform: 'translateY(0px)', opacity: 0 })
-                }
-            }, [activeSection])
+    return (
+        <>
+            {/* Mobile Toggle Button */}
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className={cn(
+                    "md:hidden fixed top-1/2 -translate-y-1/2 z-30 bg-white/60 backdrop-blur-lg shadow-lg border border-white/30 p-2 transition-all duration-300 text-black rounded-r-full",
+                    isOpen ? "left-[4.8rem]" : "left-0"
+                )}
+                aria-label="Toggle navigation"
+            >
+                {isOpen ? <ChevronLeft size={24} /> : <ChevronRight size={24} />}
+            </button>
 
-            const scrollToSection = (id: string) => {
-                const element = document.getElementById(id)
-                if (element) {
-                    element.scrollIntoView({ behavior: "smooth" })
-                }
-            }
-            const getLabel = (s: SectionItem): string => {
-                switch (s.id) {
-                    case "rolunk":
-                        return t(lang, "Közösség", "Community")
-                    case "szakma":
-                        return t(lang, "Szakma", "Academics")
-                    case "tarsadalmi":
-                        return t(lang, "Társadalmi felelősségvállalás", "Social Responsibility")
-                    case "events":
-                        return t(lang, "Események", "Events")
-                    case "location":
-                        return t(lang, "Helyszín", "Location")
-                    default:
-                        return assertUnreachable(s as never)
-                }
-            }
+            {/* Navbar */}
+            <div className={cn(
+                "fixed top-1/2 -translate-y-1/2 z-30 transition-all duration-300 ease-in-out",
+                "md:left-5",
+                isOpen ? "left-5" : "-left-full"
+            )}>
+                <div className="relative p-2 rounded-full bg-white/60 backdrop-blur-lg shadow-lg border border-white/30">
+                    <div
+                        className="absolute top-2 left-2 w-10 h-10 bg-rajk-green/10 rounded-full transition-transform duration-500 ease-in-out"
+                        style={{ transform: activePillStyle.transform, opacity: activePillStyle.opacity }}
+                    />
 
-            return (
-                <>
-                    {/* Mobile Toggle Button */}
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className={cn(
-                            "md:hidden fixed top-1/2 -translate-y-1/2 z-30 bg-white/60 backdrop-blur-lg shadow-lg border border-white/30 p-2 transition-all duration-300 text-black rounded-r-full",
-                            isOpen ? "left-[4.8rem]" : "left-0"
-                        )}
-                        aria-label="Toggle navigation"
-                    >
-                        {isOpen ? <ChevronLeft size={24} /> : <ChevronRight size={24} />}
-                    </button>
-
-                    {/* Navbar */}
-                    <div className={cn(
-                        "fixed top-1/2 -translate-y-1/2 z-30 transition-all duration-300 ease-in-out",
-                        "md:left-5",
-                        isOpen ? "left-5" : "-left-full"
-                    )}>
-                        <div className="relative p-2 rounded-full bg-white/60 backdrop-blur-lg shadow-lg border border-white/30">
-                            <div
-                                className="absolute top-2 left-2 w-10 h-10 bg-rajk-green/10 rounded-full transition-transform duration-500 ease-in-out"
-                                style={{ transform: activePillStyle.transform, opacity: activePillStyle.opacity }}
-                            />
-
-                            <div className="relative z-10 flex flex-col space-y-2">
-                                {sections.map((section) => (
-                                    const label = getLabel(section)
-                                    return (
-                                    <button
-                                    key={section.id}
+                    <div className="relative z-10 flex flex-col space-y-2">
+                        {sections.map((section) => (
+                            <button
+                                key={section.id}
                                 onClick={() => scrollToSection(section.id)}
                                 className="group relative flex items-center justify-center h-10 w-10 rounded-full"
                                 aria-label={`Navigate to ${section.title}`}
@@ -136,13 +108,12 @@ function assertUnreachable(x: never): never {
                                     <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rotate-45" />
                                 </div>
                             </button>
-                                    )
-                                ))}
-                            </div>
-                        </div>
+                        ))}
                     </div>
-                </>
-            )
-        }
+                </div>
+            </div>
+        </>
+    )
+}
 
-        export default VertNavbar
+export default VertNavbar
