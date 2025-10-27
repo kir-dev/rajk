@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
         const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
         if (!endpointSecret) {
-            console.error('Missing STRIPE_WEBHOOK_SECRET environment variable');
+            //console.error('Missing STRIPE_WEBHOOK_SECRET environment variable');
             return NextResponse.json(
                 { error: 'Configuration error' },
                 {
@@ -43,8 +43,8 @@ export async function POST(request: NextRequest) {
         let event: Stripe.Event;
         try {
             event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
-        } catch (err) {
-            console.error('Webhook signature verification failed:', err);
+        } catch {
+            //console.error('Webhook signature verification failed:', err);
             return NextResponse.json(
                 { error: 'Invalid signature' },
                 {
@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
 
         // Implement idempotency to prevent duplicate processing
         if (processedEvents.has(event.id)) {
-            console.log(`Event ${event.id} already processed, skipping`);
+            //console.log(`Event ${event.id} already processed, skipping`);
             return NextResponse.json(
                 { received: true, status: 'already_processed' },
                 {
@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
         switch (event.type) {
             case 'payment_intent.succeeded':
                 const pi = event.data.object as Stripe.PaymentIntent;
-                console.log('✅ Payment succeeded:', pi.id);
+                //console.log('✅ Payment succeeded:', pi.id);
 
                 // Keep amount in the smallest currency unit for consistency
                 // Comment explains the unit conversion for clarity
@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
 
             case 'payment_intent.payment_failed':
                 const failed = event.data.object as Stripe.PaymentIntent;
-                console.warn('❌ Payment failed:', failed.id, failed.last_payment_error?.message);
+                //console.warn('❌ Payment failed:', failed.id, failed.last_payment_error?.message);
 
                 await writeToPayload({
                     stripePaymentIntentId: failed.id,
@@ -108,7 +108,7 @@ export async function POST(request: NextRequest) {
                 break;
 
             default:
-                console.log(`Received unhandled event: ${event.type}`);
+                //console.log(`Received unhandled event: ${event.type}`);
         }
 
         return NextResponse.json(
@@ -118,8 +118,8 @@ export async function POST(request: NextRequest) {
                 headers: securityHeaders
             }
         );
-    } catch (error) {
-        console.error('Unexpected error in webhook handler:', error);
+    } catch {
+        //console.error('Unexpected error in webhook handler:', error);
         return NextResponse.json(
             { error: 'Internal server error' },
             {
