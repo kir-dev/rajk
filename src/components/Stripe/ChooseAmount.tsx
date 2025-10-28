@@ -75,10 +75,10 @@ export default function ChooseAmount(props: ChooseAmountProps) {
         }
     };
 
-    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    /*const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const sanitized = sanitizeInput(e.target.value, 100);
         props.setName(sanitized);
-    };
+    };*/
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const sanitized = sanitizeInput(e.target.value, 254);
@@ -141,7 +141,7 @@ export default function ChooseAmount(props: ChooseAmountProps) {
                         id="name"
                         type="text"
                         value={props.name}
-                        onChange={handleNameChange}
+                        onChange={(e) => props.setName(e.target.value)}
                         className="w-full p-2 border-2 border-black rounded-2xl"
                         placeholder="Teljes név"
                         required
