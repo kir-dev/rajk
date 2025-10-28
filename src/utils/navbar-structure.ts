@@ -37,7 +37,6 @@ export function getNavItems(lang: Lang): NavItem[] {
         { label: HU ? "Kaliforniától Budapestig" : "From California to Budapest", href: "/awards/california" },
       ],
     },
-    { label: HU ? "Nemzetközi kapcsolatok" : "International Relations", href: "/international-relations" },
     { label: HU ? "Felvételi" : "Admission", href: "/felveteli", bordered: true },
     { label: HU ? "Támogatás" : "Support", href: "/tamogass", bordered: true },
   ];

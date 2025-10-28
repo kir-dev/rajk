@@ -3,22 +3,21 @@
 import VertNavbar from "@/components/vertNavbar";
 import Section from "@/components/Section";
 import {PillarCard} from "@/components/LandingPage/PillarCard";
-import {Calendar, ExternalLink, GraduationCap, Handshake, MapPin, UsersRound} from "lucide-react";
+import {ExternalLink, GraduationCap, Handshake, MapPin, UsersRound} from "lucide-react";
 import Statistics from "@/components/LandingPage/Statistics";
 import WawyBorder from "@/components/WawyBorder";
-import MyCarousel from "@/components/MyCarousel";
 import IconTitle from "@/components/IconTitle";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import {Event} from "@/payload-types";
+//import {Event} from "@/payload-types";
 import { useLanguage } from "@/components/LanguageProvider";
 import { t } from "@/lib/utils";
 
-interface LandingPageProps {
+/*interface LandingPageProps {
     data: Event[]
-}
+}*/
 
-export default function LandingPage(props: LandingPageProps) {
+export default function LandingPage(/*props: LandingPageProps*/) {
     const Map = dynamic(() => import('@/components/LandingPage/Map'), { ssr: false });
     const rajkMapLink = "https://www.google.com/maps/place/Rajk+Szakkoll%C3%A9gium/@47.566434,19.0794354,323527m/data=!3m1!1e3!4m6!3m5!1s0x4741dc5c16189aab:0xa4ca0fbc0eb330af!8m2!3d47.4924152!4d19.06774!16zL20vMDkyenc3?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D";
     const thisYear = new Date().getFullYear();
@@ -121,20 +120,22 @@ export default function LandingPage(props: LandingPageProps) {
                 </div>
                 <WawyBorder direction={"bottom"} color={"green"} szin={"zold"} />
             </div>
-            <Section id={"events"} title={t(lang, "Események", "Events")}>
+            {/*<Section id={"events"} title={t(lang, "Események", "Events")}>
                 <div className="w-full flex flex-col items-center justify-center">
-                    <IconTitle className="mt-10 text-black text-center" title={t(lang, "Események", "Events")} Icon={Calendar}/>
+                    <IconTitle className="mt-10 text-black text-center" title={t(lang, "Események", "Events")}
+                               Icon={Calendar}/>
                     <div className="w-full max-w-full overflow-x-auto">
                         <MyCarousel data={props.data} clickable={true}/>
                     </div>
                 </div>
                 <MyCarousel data={props.data} clickable={true}/>
                 <div className="w-full flex justify-center">
-                    <Link href={"/esemenyek"} className="mt-8 bg-rajk-green/90 hover:bg-rajk-green text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg">
+                    <Link href={"/esemenyek"}
+                          className="mt-8 bg-rajk-green/90 hover:bg-rajk-green text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg">
                         Tovább az eseményekhez
                     </Link>
                 </div>
-            </Section>
+            </Section>*/}
             <Section id="location" title={t(lang, "Helyszín", "Location")}>
                 <div className="relative bg-bezs text-black py-8 px-2 sm:px-6 lg:px-8 rounded-3xl mt-10 mb-20 overflow-hidden">
                     <div className="relative max-w-7xl mx-auto">

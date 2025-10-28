@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import cn from "@/utils/concatenate"
-import {GraduationCap, UsersRound, Handshake, Calendar, MapPin, ChevronRight, ChevronLeft} from "lucide-react"
+import {GraduationCap, UsersRound, Handshake, MapPin, ChevronRight, ChevronLeft} from "lucide-react"
 import useIntersectionObserver from "@/hooks/useIntersectionObserver"
 import Image from "next/image";
 
@@ -11,7 +11,7 @@ const sections = [
     { id: "rolunk", title: "Közösség", Icon: UsersRound },
     { id: "szakma", title: "Szakma", Icon: GraduationCap },
     { id: "tarsadalmi", title: "Társadalmi felelősség", Icon: Handshake },
-    { id: "events", title: "Események", Icon: Calendar },
+    //{ id: "events", title: "Események", Icon: Calendar },
     { id: "location", title: "Helyszín", Icon: MapPin },
 ]
 
