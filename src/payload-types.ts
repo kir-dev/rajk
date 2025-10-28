@@ -82,6 +82,7 @@ export interface Config {
     'about-timeline-event': AboutTimelineEvent;
     'stripe-transactions': StripeTransaction;
     events: Event;
+    'community-pictures': CommunityPicture;
     'course-categories': CourseCategory;
     courses: Course;
     odyssey: Odyssey;
@@ -106,6 +107,7 @@ export interface Config {
     'about-timeline-event': AboutTimelineEventSelect<false> | AboutTimelineEventSelect<true>;
     'stripe-transactions': StripeTransactionsSelect<false> | StripeTransactionsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
+    'community-pictures': CommunityPicturesSelect<false> | CommunityPicturesSelect<true>;
     'course-categories': CourseCategoriesSelect<false> | CourseCategoriesSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
     odyssey: OdysseySelect<false> | OdysseySelect<true>;
@@ -464,7 +466,37 @@ export interface Event {
   id: number;
   name: string;
   picture: number | Media;
-  description: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  date: string;
+  location: string;
+  speakers?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Közösségi események képei
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "community-pictures".
+ */
+export interface CommunityPicture {
+  id: number;
+  name: string;
+  picture: number | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -643,6 +675,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'events';
         value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'community-pictures';
+        value: number | CommunityPicture;
       } | null)
     | ({
         relationTo: 'course-categories';
@@ -896,6 +932,19 @@ export interface EventsSelect<T extends boolean = true> {
   name?: T;
   picture?: T;
   description?: T;
+  date?: T;
+  location?: T;
+  speakers?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "community-pictures_select".
+ */
+export interface CommunityPicturesSelect<T extends boolean = true> {
+  name?: T;
+  picture?: T;
   updatedAt?: T;
   createdAt?: T;
 }

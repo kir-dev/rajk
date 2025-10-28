@@ -24,6 +24,7 @@ import {Applicants} from "@/collections/Applicants";
 import {Events} from "@/collections/Events";
 import {stripePlugin} from "@payloadcms/plugin-stripe";
 import {StripeTransactions} from "@/collections/Stripe-Transactions";
+import {CommunityPictures} from "@/collections/CommunityPictures";
 import {CourseCategories} from "@/collections/CourseCategories";
 import {Courses} from "@/collections/Courses";
 import {Odyssey} from "@/collections/Odyssey";
@@ -54,6 +55,7 @@ export default buildConfig({
     About_Timeline_Event,
     StripeTransactions,
     Events,
+    CommunityPictures,
     CourseCategories,
     Courses,
     Odyssey,

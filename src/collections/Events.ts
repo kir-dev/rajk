@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import {FixedToolbarFeature, lexicalEditor} from "@payloadcms/richtext-lexical";
 
 export const Events: CollectionConfig = {
     slug: 'events',
@@ -21,10 +22,41 @@ export const Events: CollectionConfig = {
             required: true,
         },
         {
-            name: 'description',
-            label: 'Leírás',
+            name: "description",
+            type: "richText",
+            required: true,
+            label: "Rövid leírás",
+            editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                    ...defaultFeatures,
+                    FixedToolbarFeature(),
+                ]
+            })
+        },
+        {
+            name: 'date',
+            label: 'Dátum és időpont',
+            type: 'date',
+            required: true,
+            admin: {
+                date: {
+                    pickerAppearance: 'dayAndTime',
+                    displayFormat: 'yyyy. MM. dd. HH:mm',
+                    timeFormat: 'HH:mm',
+                },
+            },
+        },
+        {
+            name: 'location',
+            label: 'Helyszín',
             type: 'text',
             required: true,
+        },
+        {
+            name: 'speakers',
+            label: 'Előadók',
+            type: 'text',
+            required: false,
         },
     ],
 }

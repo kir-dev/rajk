@@ -7,13 +7,14 @@ import ChooseAmount from "@/components/Stripe/ChooseAmount";
 import {GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
 
 export default function CheckoutPage() {
-    const [amount, setAmount] = useState<number>(500000); // Default 500,000 fillér (5000 HUF)
+    const [amount, setAmount] = useState<number>(500000);
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [clientSecret, setClientSecret] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [step, setStep] = useState<'choose-amount' | 'payment'>('choose-amount');
+    const [paymentIntentUsed, setPaymentIntentUsed] = useState<boolean>(false);
 
     async function handleContinue(captchaToken: string) {
         if (!name || !email) {
@@ -28,16 +29,24 @@ export default function CheckoutPage() {
             const response = await createPaymentIntent(amount, name, email, captchaToken);
             if (response.clientSecret) {
                 setClientSecret(response.clientSecret);
+                setPaymentIntentUsed(false); // Mark as unused
                 setStep('payment');
             } else {
                 setError('Nem sikerült létrehozni a fizetési szándékot.');
             }
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'An unexpected error occurred');
+            setError(err instanceof Error ? err.message : 'Váratlan hiba történt');
         } finally {
             setIsLoading(false);
         }
     }
+
+    const handleBackToChooseAmount = () => {
+        // Invalidate client secret when going back
+        setClientSecret(null);
+        setPaymentIntentUsed(true);
+        setStep('choose-amount');
+    };
 
     return (
         <div className="min-h-screen bg-bezs py-20 px-4">
@@ -68,13 +77,13 @@ export default function CheckoutPage() {
                         </div>
                     ) : (
                         <div className="max-w-md mx-auto">
-                            {clientSecret ? (
+                            {clientSecret && !paymentIntentUsed ? (
                                 <Checkout
                                     clientSecret={clientSecret}
                                     amount={amount}
                                     error={error}
                                     isLoading={isLoading}
-                                    setStep={setStep}
+                                    setStep={handleBackToChooseAmount}
                                 />
                             ) : null}
                         </div>

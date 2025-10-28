@@ -2,6 +2,8 @@ import {RichText} from "@payloadcms/richtext-lexical/react";
 import Image from "next/image";
 import getAboutTimelineEvents from "@/payload-find/getAboutTimelineEvents";
 import {AboutTimelineEvent, ApplyTimelineEvent} from "@/payload-types";
+import { cookies } from "next/headers";
+import { getLocale } from "@/lib/utils";
 
 interface TimelineProps {
     timeline: ("about-timeline-event" | "apply-timeline-event")
@@ -89,6 +91,11 @@ export default async function Timeline(props: TimelineProps) {
     const eventsData = await getAboutTimelineEvents(props.timeline);
     const events = eventsData.docs || [];
 
+    // Determine locale from 'lang' cookie; default to HU
+    const cookieStore = await cookies();
+    const cookieLang = cookieStore.get("lang")?.value;
+    const locale = getLocale(cookieLang === "EN" ? "EN" : "HU");
+
     return (
         <div className="container mx-auto relative py-12 px-4">
             {/* Vertical timeline line - desktop */}
@@ -115,7 +122,7 @@ export default async function Timeline(props: TimelineProps) {
                     // Extract date information
                     const date = new Date(event.date);
                     const year = date.getFullYear();
-                    const monthName = date.toLocaleString('hu-HU', { month: 'long' });
+                    const monthName = date.toLocaleString(locale, { month: 'long' });
                     const displayedExtraText = props.timeline === "apply-timeline-event"
                         ? monthName
                         : year.toString();

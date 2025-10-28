@@ -2,6 +2,12 @@ import type { CollectionConfig } from 'payload'
 
 export const StripeTransactions: CollectionConfig = {
     slug: 'stripe-transactions',
+    access: {
+        create: () => false,
+        read:   () => true,
+        update: () => false,
+        delete: () => false,
+    },
     admin: {
         useAsTitle: 'donorName',
         description: 'Szponzorok, akik támogatják a szakkollégiumot.',

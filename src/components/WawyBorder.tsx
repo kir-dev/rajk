@@ -2,6 +2,7 @@ interface WawyBorderProps {
     direction: "top" | "bottom";
     color?: "green" | "blue" | "purple" | "cream";
     szin?: "zold" | "kek" | "lila" | "bezs";
+    backgroundColor?: string;
 }
 
 export default function WawyBorder(props: WawyBorderProps) {
@@ -18,7 +19,7 @@ export default function WawyBorder(props: WawyBorderProps) {
     const bgImage = getBgImage();
 
     return (
-        <div className={`absolute left-0 w-full overflow-hidden leading-none transform ${(props.direction === "top") ? "translate-y-[-98%] top-0" : "translate-y-[98%] rotate-180 bottom-0"} z-10 bg-transparent`}>
+        <div className={`absolute left-0 w-full overflow-hidden leading-none transform ${(props.direction === "top") ? "translate-y-[-100%] top-0" : "translate-y-[100%] rotate-180 bottom-0"} z-10 bg-transparent ${props.backgroundColor || "bg-transparent"}`}>
             <svg
                 className="relative block w-full h-[70px]"
                 data-name="Layer 1"
