@@ -4,7 +4,7 @@ import { writeToPayload } from "@/payload-find/logTransaction";
 import {securityHeaders} from "@/utils/securityHeaders";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: '2025-07-30.basil' as unknown as Stripe.StripeConfig['apiVersion'],
+    apiVersion: '2022-08-01' as unknown as Stripe.StripeConfig['apiVersion'],
 });
 
 // Prevents Next.js from parsing the request body
