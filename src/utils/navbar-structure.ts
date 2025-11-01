@@ -15,7 +15,7 @@ export const navItems = [
       { label: 'Nemzetközi kapcsolataink', href: '/szakma/nemzetkozi-kapcsolatok' },
     ],
   },
-  { label: 'Társasadalmi felelősségvállalás', href: '/social-responsibility' },
+  { label: 'Társasadalmi felelősségvállalás', href: 'https://szabokalmanprogram.hu/' },
   {
     label: 'Díjak',
     href: '/awards',
