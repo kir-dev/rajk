@@ -83,6 +83,7 @@ export default function SzakmaPage() {
                 <TeachersSection
                     people={peopleWithRoles}
                     lead={"A rajkos kurzusvezetők munkájának elismerésére évente a \„Rajk Szakkollégium Állandó Tanára\" címet adományozzuk. A címet olyan jelenlegi és volt kurzusvezetők kapják, akik nagy hatást gyakoroltak a kollégisták szakmai fejlődésére. Ezúton is köszönjük sokéves munkájukat!"}
+                    showMax={peopleWithRoles.length}
                         />
                 {/*<TDK/>
                     <OdysseyProgram/>
