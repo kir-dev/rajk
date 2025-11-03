@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState, useMemo } from "react"
 import cn from "@/utils/concatenate"
 import useIntersectionObserver from "@/hooks/useIntersectionObserver"

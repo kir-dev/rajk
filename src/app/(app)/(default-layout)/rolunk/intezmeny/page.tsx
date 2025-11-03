@@ -39,7 +39,7 @@ export default async function RolunkPage() {
                     </Section>
                     <Section id={"onkormanyzatisag"} title={"Önkormányzatiság"} lucideIconName={"House"} className="w-full flex flex-col mt-20 items-center">
                         <IconTitle className="mt-20" title={"Önkormányzatiság"} Icon={House} />
-                        <Mukodes />
+                        <Mukodes lang={lang} />
                     </Section>
                     <Section id={"dokumentumok"} title={"Dokumentumok"} lucideIconName={"ScrollText"} className="w-full flex flex-col mt-20 items-center">
                         <IconTitle title={"Dokumentumok"} Icon={ScrollText} />
