@@ -1,6 +1,20 @@
 import { HeartHandshake, AlertCircle, Loader2 } from "lucide-react";
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
+const sanitizeInput = (input: string, maxLength: number): string => {
+    return input.trim().substring(0, maxLength);
+};
+
+const isValidName = (name: string): boolean => {
+    const trimmed = name.trim();
+    return trimmed.length >= 2 && trimmed.length <= 100 && /^[\p{L}\s'-]+$/u.test(trimmed);
+};
+
+const isValidEmail = (email: string): boolean => {
+    const trimmed = email.trim();
+    return trimmed.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+};
+
 interface ChooseAmountProps {
     amounts: number[];
     amount: number;
@@ -16,34 +30,59 @@ interface ChooseAmountProps {
 }
 
 export default function ChooseAmount(props: ChooseAmountProps) {
-    const isFormComplete = props.name.trim() !== '' && props.email.trim() !== '';
+    const isFormComplete =
+        props.name.trim() !== '' &&
+        props.email.trim() !== '' &&
+        isValidName(props.name) &&
+        isValidEmail(props.email);
+
     const { executeRecaptcha } = useGoogleReCaptcha();
 
     // Update the onContinue handler
     const handleContinueWithRecaptcha = async () => {
         // First check if recaptcha is available
         if (!executeRecaptcha) {
-            console.error("reCAPTCHA not loaded yet");
+            //console.error("reCAPTCHA not loaded yet");
             props.setError('A biztonsági ellenőrzés nem töltött be. Kérjük frissítsd az oldalt.');
             return;
         }
 
+        if (!isValidName(props.name)) {
+            props.setError('A név csak betűket, szóközöket, kötőjelet és aposztrófot tartalmazhat (2-100 karakter).');
+            return;
+        }
+
+        if (!isValidEmail(props.email)) {
+            props.setError('Kérjük, adj meg egy érvényes email címet.');
+            return;
+        }
+
         try {
-            console.log("Executing reCAPTCHA...");
+            //console.log("Executing reCAPTCHA...");
             const token = await executeRecaptcha('checkout');
 
             if (!token) {
-                console.error("reCAPTCHA returned empty token");
+                //console.error("reCAPTCHA returned empty token");
                 props.setError('A biztonsági ellenőrzés sikertelen. Próbáld újra.');
                 return;
             }
 
-            console.log("reCAPTCHA token received, proceeding with payment");
+            //console.log("reCAPTCHA token received, proceeding with payment");
             props.onContinue(token);
-        } catch (error) {
-            console.error("reCAPTCHA execution failed:", error);
+        } catch {
+            //console.error("reCAPTCHA execution failed:", error);
             props.setError('A biztonsági ellenőrzés során hiba történt. Kérjük próbáld újra később.');
         }
+    };
+
+    /*const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const sanitized = sanitizeInput(e.target.value, 100);
+        props.setName(sanitized);
+    };*/
+
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const sanitized = sanitizeInput(e.target.value, 254);
+        props.setEmail(sanitized);
     };
 
     return (
@@ -80,14 +119,14 @@ export default function ChooseAmount(props: ChooseAmountProps) {
                 </div>
 
                 <div className="mt-6">
-                    <p className="text-sm text-gray-600 mb-2">Egyéni összeg (minimum 5000 Ft):</p>
+                    <p className="text-sm text-gray-600 mb-2">Egyéni összeg (minimum 500 Ft):</p>
                     <div className="flex items-center">
                         <input
                             type="number"
-                            min="5000"
+                            min="500"
                             step="100"
                             value={props.amount / 100}
-                            onChange={(e) => props.setAmount(Math.max(5000, Number(e.target.value)) * 100)}
+                            onChange={(e) => props.setAmount(Math.max(500, Number(e.target.value)) * 100)}
                             className="w-full p-2 border-2 border-black rounded-2xl mr-2"
                         />
                         <span className="text-gray-700 font-medium">Ft</span>
@@ -115,7 +154,7 @@ export default function ChooseAmount(props: ChooseAmountProps) {
                         id="email"
                         type="email"
                         value={props.email}
-                        onChange={(e) => props.setEmail(e.target.value)}
+                        onChange={handleEmailChange}
                         className="w-full p-2 border-2 border-black rounded-2xl"
                         placeholder="email@pelda.hu"
                         required

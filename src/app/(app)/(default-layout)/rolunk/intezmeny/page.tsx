@@ -8,8 +8,14 @@ import Documents from "@/components/Intezmeny/Documents";
 import getReportsGrouped from "@/payload-find/getReports";
 import Section from "@/components/Section";
 import VertNavBarLayout from "@/components/VertNavBarLayout";
+import { cookies } from "next/headers";
+import { t } from "@/lib/utils";
+import type { Lang } from "@/components/LanguageProvider";
 
 export default async function RolunkPage() {
+    const cookieStore = await cookies();
+    const cookieLang = cookieStore.get("lang")?.value;
+    const lang: Lang = cookieLang === "EN" ? "EN" : "HU";
     // fetch server-side grouped reports
     const groups = await getReportsGrouped();
 
@@ -28,7 +34,7 @@ export default async function RolunkPage() {
             <div className="min-h-screen flex flex-col pb-40 bg-bezs text-black">
                 <VertNavBarLayout>
                     <Section id={"tortenetunk"} title={"Történetünk"} lucideIconName={"LibraryBig"} className="w-full flex flex-col mt-20 items-center">
-                        <IconTitle title={"Történetünk"} Icon={LibraryBig} />
+                        <IconTitle title={t(lang, "Történetünk", "Our history")} Icon={LibraryBig} />
                         <Timeline timeline={"about-timeline-event"} />
                     </Section>
                     <Section id={"onkormanyzatisag"} title={"Önkormányzatiság"} lucideIconName={"House"} className="w-full flex flex-col mt-20 items-center">
