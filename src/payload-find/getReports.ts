@@ -1,4 +1,3 @@
-// File: src/payload-find/getReports.ts
 import { getPayload } from "payload";
 import config from "@payload-config";
 
@@ -17,7 +16,14 @@ export type ReportsGroup = {
 export default async function getReportsGrouped(): Promise<ReportsGroup[]> {
   const payload = await getPayload({ config });
   const res = await payload.find({ collection: "reports", limit: 1000 });
-  const docs = (res.docs || []) as ReportDoc[];
+
+  const rawDocs = (res.docs || []);
+  const docs: ReportDoc[] = rawDocs.map((d) => ({
+    id: String(d.id ?? ""),
+    title: String(d.title ?? ""),
+    topic: d.topic ?? null,
+    link: String(d.link ?? ""),
+  }));
 
   const map = new Map<string, ReportDoc[]>();
   for (const d of docs) {
@@ -26,7 +32,6 @@ export default async function getReportsGrouped(): Promise<ReportsGroup[]> {
     map.get(topic)!.push(d);
   }
 
-  // Optional: sort groups by topic name
   const groups = Array.from(map.entries())
     .sort(([a], [b]) => a.localeCompare(b, undefined, { sensitivity: "base" }))
     .map(([topic, items]) => ({ topic, items }));
