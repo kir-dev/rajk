@@ -13,11 +13,11 @@ export function getNavItems(lang: Lang): NavItem[] {
   return [
     {
       label: HU ? "Rólunk" : "About",
-      href: "/rolunk",
+      href: "/rolunk/kozosseg",
       subItems: [
         { label: HU ? "Intézmény" : "Institution", href: "/rolunk/intezmeny" },
         { label: HU ? "Közösség" : "Community", href: "/rolunk/kozosseg" },
-        { label: HU ? "Galéria" : "Gallery", href: "/galeria" },
+        { label: HU ? "Galéria" : "Gallery", href: "/rolunk/galeria" },
       ],
     },
     {
@@ -27,14 +27,13 @@ export function getNavItems(lang: Lang): NavItem[] {
         { label: HU ? 'Nemzetközi kapcsolataink' : 'Our international relations', href: '/szakma/nemzetkozi-kapcsolatok' },
       ],*/
     },
-    { label: HU ? "Társasadalmi felelősségvállalás" : "Social Responsibility", href: "/social-responsibility" },
+    { label: HU ? "Társasadalmi felelősségvállalás" : "Social Responsibility", href: "https://szabokalmanprogram.hu/" },
     {
       label: HU ? "Díjak" : "Awards",
       href: "/awards",
       subItems: [
         { label: "John von Neumann Award", href: "/awards/neumann" },
         { label: "Herbert Simon Award", href: "/awards/herbert" },
-        { label: HU ? "Kaliforniától Budapestig" : "From California to Budapest", href: "/awards/california" },
       ],
     },
     { label: HU ? "Felvételi" : "Admission", href: "/felveteli", bordered: true },

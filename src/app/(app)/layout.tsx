@@ -1,5 +1,5 @@
 import type {Metadata} from "next";
-import "./(app)/styles/globals.css";
+import "./styles/globals.css";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/app/(app)/footer";
 import { cookies } from "next/headers";
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({
-                                       children,
-                                   }: Readonly<{
+                                             children,
+                                         }: Readonly<{
     children: React.ReactNode;
 }>) {
     const cookieStore = await cookies();
@@ -34,18 +34,18 @@ export default async function RootLayout({
 
     return (
         <html lang = {initialLang === "EN" ? "en" : "hu"}>
-            <head title={"Rajk Szakkollégium"}>
-                <script defer data-domain = "rajk.kir-dev.hu" src = {"https://visit.kir-dev.hu/js/script.js"}></script>
-            </head>
-            <body
-                className = {`antialiased flex flex-col justify-between min-h-screen bg-bezs`}
-            >
-                <LanguageProvider initialLang={initialLang}>
-                    <NavBar/>
-                    {children}
-                    <Footer />
-                </LanguageProvider>
-            </body>
+        <head title={"Rajk Szakkollégium"}>
+            <script defer data-domain = "rajk.kir-dev.hu" src = {"https://visit.kir-dev.hu/js/script.js"}></script>
+        </head>
+        <body
+            className = {`antialiased flex flex-col justify-between min-h-screen bg-bezs`}
+        >
+        <LanguageProvider initialLang={initialLang}>
+            <NavBar/>
+            {children}
+            <Footer />
+        </LanguageProvider>
+        </body>
         </html>
     );
 }

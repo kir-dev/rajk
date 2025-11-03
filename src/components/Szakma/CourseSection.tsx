@@ -56,7 +56,7 @@ export const CourseSection = (props: {categories: CourseCategory[], courses: Cou
                         animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.7 }}
                     >
-                        Kurzusok
+                        Kurzustérkép
                     </motion.h1>
 
                     <motion.div
@@ -72,10 +72,7 @@ export const CourseSection = (props: {categories: CourseCategory[], courses: Cou
                         animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
                         transition={{ delay: 0.2, duration: 0.7 }}
                     >
-                        A kollégiumi szakmaiság gerincét az évente több, mint 45 megszervezett kurzus adja. A heti
-                        rendszerességgel megtartott, kis létszámú, intenzív és nem utolsó sorban interaktív, fél-egyéves
-                        kurzusokat – akárcsak a különböző előadásokat, konferenciákat és blokkszeminárium​okat – a kollégisták
-                        maguknak szervezik, azokat saját érdeklődésükhöz és igényeikhez igazítják.
+                        A kurzustérképen a szerveződő kurzusaink egy részét jelenítettük meg. (Kattints a névre a tematikáért!)
                     </motion.p>
 
                     {categories.length > 0 && (

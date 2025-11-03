@@ -372,7 +372,8 @@ export interface Faq {
 export interface Report {
   id: number;
   title: string;
-  topic?: string | null;
+  topic: string;
+  link: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -882,6 +883,7 @@ export interface FaqsSelect<T extends boolean = true> {
 export interface ReportsSelect<T extends boolean = true> {
   title?: T;
   topic?: T;
+  link?: T;
   updatedAt?: T;
   createdAt?: T;
 }
