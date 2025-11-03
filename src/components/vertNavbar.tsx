@@ -6,7 +6,6 @@ import useIntersectionObserver from "@/hooks/useIntersectionObserver"
 import Image from "next/image";
 import {SectionLabelProps} from "@/components/Section";
 import {DynamicLucideIcon} from "@/components/DynamicLucideIcon";
-import {Calendar, GraduationCap, Handshake, MapPin, UsersRound} from "lucide-react";
 
 // Define sections outside the component to prevent re-creation on each render
 

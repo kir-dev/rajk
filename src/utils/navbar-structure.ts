@@ -1,19 +1,16 @@
 export const navItems = [
   {
     label: 'Rólunk',
-    href: '/rolunk',
+    href: '/rolunk/kozosseg',
     subItems: [
       { label: 'Intézmény', href: '/rolunk/intezmeny' },
       { label: 'Közösség', href: '/rolunk/kozosseg' },
-      { label: 'Galéria', href: '/galeria' },
+      { label: 'Galéria', href: '/rolunk/galeria' },
     ],
   },
   {
     label: 'Szakma',
     href: '/szakma',
-    subItems: [
-      { label: 'Nemzetközi kapcsolataink', href: '/szakma/nemzetkozi-kapcsolatok' },
-    ],
   },
   { label: 'Társasadalmi felelősségvállalás', href: 'https://szabokalmanprogram.hu/' },
   {

@@ -18,13 +18,12 @@ export type ReportsColumn = {
 };
 
 export type ReportsGridProps = {
-    title?: string;
     columns?: ReportsColumn[];
     groups?: ReportsGroup[];
     className?: string;
 };
 
-export default function ReportsGrid({ title = "Beszámolók", columns, groups, className }: ReportsGridProps) {
+export default function ReportsGrid({ columns, groups, className }: ReportsGridProps) {
     const resolvedColumns: ReportsColumn[] = groups
         ? groups.map((g) => ({
               heading: g.topic,

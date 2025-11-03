@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import {Course, CourseCategory, Group, Person} from "@/payload-types";
 import getCourses from "@/payload-find/getCourses";
 import getCourseCategories from "@/payload-find/getCourseCategories";
-import IconTitle from "@/components/IconTitle";
 import SzakmaSection, {defaultDistribution} from "@/components/Szakma/FacultyShare";
 import TeachersSection from "@/components/Szakma/TeachersSection";
 import getGroupMembers from "@/payload-find/getGroups";
