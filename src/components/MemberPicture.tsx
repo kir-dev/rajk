@@ -2,16 +2,15 @@ import React from "react";
 import Image from 'next/image'
 import {Person} from "@/../src/payload-types";
 
-export default function MemberPicture({ member }: { member: Person }) {
-    const featuredImage = member.picture && typeof member.picture === "object"
-        ? member.picture
+interface MemberPictureProps{
+    member: Person;
+}
+
+export default function MemberPicture(props: MemberPictureProps) {
+    const featuredImage = props.member.picture && typeof props.member.picture === "object"
+        ? props.member.picture
         : null;
 
-    console.log("Dump:")
-    console.log(featuredImage);
-    console.log(typeof featuredImage);
-    console.log(member)
-    console.log(member.picture)
     return (
         <div className="relative w-32 h-32 rounded-full overflow-hidden group">
             <Image
@@ -43,7 +42,7 @@ export default function MemberPicture({ member }: { member: Person }) {
                         textAnchor="middle"
                         dominantBaseline="middle"
                     >
-                        {member.name}
+                        {props.member.name}
                     </textPath>
                 </text>
             </svg>

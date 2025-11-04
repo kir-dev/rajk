@@ -74,10 +74,10 @@ export default function TeachersSection({
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: 10 }}
                                     transition={{ duration: 0.2 }}
-                                    className="absolute z-50 bottom-full mb-2 w-64 px-4 py-3 bg-slate-900 text-white text-sm rounded-lg shadow-xl pointer-events-none"
+                                    className="absolute z-50 bottom-full mb-2 w-20 px-4 py-3 bg-zold text-white text-sm rounded-lg shadow-xl pointer-events-none"
                                 >
-                                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 rotate-45" />
-                                    <p className="leading-relaxed">{item.joined_at}</p>
+                                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-zold rotate-45" />
+                                    <p className="leading-relaxed text-center w-full">{new Date(item.joined_at).getFullYear()}</p>
                                 </motion.div>
                             )}
                         </AnimatePresence>
