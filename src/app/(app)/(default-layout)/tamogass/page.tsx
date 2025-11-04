@@ -5,6 +5,7 @@ import Checkout from "@/components/Stripe/Checkout";
 import { useState } from "react";
 import ChooseAmount from "@/components/Stripe/ChooseAmount";
 import {GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
+import Image from "next/image";
 
 export default function CheckoutPage() {
     const [amount, setAmount] = useState<number>(500000);
@@ -89,6 +90,10 @@ export default function CheckoutPage() {
                         </div>
                     )}
                 </GoogleReCaptchaProvider>
+            </div>
+            <div className="flex flex-row p-10 justify-between mt-4">
+               <Image src={"/kim_logo_color (1).png"} alt={"kim"} width={500} height={500} />
+                <Image src={"/NTP_logo_color (1).jpg"} alt={"kim"} width={700} height={500} />
             </div>
         </div>
     );

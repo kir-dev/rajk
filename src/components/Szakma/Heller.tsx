@@ -1,6 +1,7 @@
 import {Group, Person} from "@/payload-types";
 import React, {useEffect, useState} from "react";
 import Image from "next/image";
+import getGroupMembers from "@/payload-find/getGroups";
 
 export default function Heller() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -10,13 +11,12 @@ export default function Heller() {
         async function fetchAwards() {
             setLoading(true);
             try {
-                const res = await fetch(`/api/groups?name=${encodeURIComponent("Heller-díj")}`);
-                if (!res.ok) {
-                    console.error('Failed to fetch group', await res.text());
+                const res = await getGroupMembers("Heller-díj");
+                if (!res) {
+                    console.error('Failed to fetch group');
                     setAwards(null);
                 } else {
-                    const json = await res.json();
-                    setAwards(json as Group | null);
+                    setAwards(res as Group);
                 }
             } catch (error){
                 console.error("Error fetching Heller-díj awardees:", error);
@@ -25,6 +25,8 @@ export default function Heller() {
             }
         }
         fetchAwards();
+        console.log("Heller:")
+        console.log(awardees);
     }, []);
 
     const members = awardees?.members || [];
