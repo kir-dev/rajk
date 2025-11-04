@@ -6,7 +6,7 @@ import { Person } from "@/../src/payload-types";
 export type TeachersSectionProps = {
     title?: string;
     lead?: string;
-    people: Array<{ person: Person; role: string | null }>;
+    people: Array<{ person: Person; joined_at: string | null }>;
     showMax?: number;
     className?: string;
 };
@@ -68,7 +68,7 @@ export default function TeachersSection({
 
                         {/* Tooltip popup */}
                         <AnimatePresence>
-                            {hoveredId === item.person.id && item.role && (
+                            {hoveredId === item.person.id && item.joined_at && (
                                 <motion.div
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ export default function TeachersSection({
                                     className="absolute z-50 bottom-full mb-2 w-64 px-4 py-3 bg-slate-900 text-white text-sm rounded-lg shadow-xl pointer-events-none"
                                 >
                                     <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 rotate-45" />
-                                    <p className="leading-relaxed">{item.role}</p>
+                                    <p className="leading-relaxed">{item.joined_at}</p>
                                 </motion.div>
                             )}
                         </AnimatePresence>

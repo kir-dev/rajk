@@ -10,14 +10,13 @@ import SzakmaSection, {defaultDistribution} from "@/components/Szakma/FacultySha
 import TeachersSection from "@/components/Szakma/TeachersSection";
 import getGroupMembers from "@/payload-find/getGroups";
 import Heller from "@/components/Szakma/Heller";
-import {GroupDoc} from "@/payload-find/getGroups";
 
 
 export default function SzakmaPage() {
     const [isMounted, setIsMounted] = useState(false);
     const [courses, setCourses] = useState<Course[]>([]);
     const [categories, setCategories] = useState<CourseCategory[]>([]);
-    const [teachers, setTeachers] = useState<Group | GroupDoc | null>(null);
+    const [teachers, setTeachers] = useState<Group | null>(null);
 
 
     useEffect(() => {
@@ -36,15 +35,16 @@ export default function SzakmaPage() {
     }, []);
 
     const members = teachers?.members || [];
+    console.log(members);
 
     // Map to include both person and role
     // Remove unused peopleArray variable and fix type predicate
     const peopleWithRoles = members
         .map(m => {
             const person = typeof m.member === 'object' ? m.member : null;
-            return person ? { person, role: m.role || null } : null;
+            return person ? { person, joined_at: m.joined_at || null } : null;
         })
-        .filter((item): item is { person: Person; role: string | null } => item !== null);
+        .filter((item): item is { person: Person; joined_at: string | null } => item !== null);
 
 
     async function fetchData() {

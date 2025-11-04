@@ -1,11 +1,11 @@
-import {Person} from "@/payload-types";
+import {Group, Person} from "@/payload-types";
 import React, {useEffect, useState} from "react";
-import getGroupMembers, {GroupDoc} from "@/payload-find/getGroups";
+import getGroupMembers from "@/payload-find/getGroups";
 import Image from "next/image";
 
 export default function Heller() {
     const [loading, setLoading] = useState<boolean>(true);
-    const [awardees, setAwards] = useState<GroupDoc | null>(null);
+    const [awardees, setAwards] = useState<Group | null>(null);
 
     useEffect(() => {
         async function fetchAwards() {
