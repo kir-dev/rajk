@@ -65,9 +65,6 @@ export default function TeachersSection({
                         <div className="transition-transform hover:scale-105">
                             <MemberPicture member={item.person} />
                         </div>
-                        <div className="mt-3 text-center">
-                            <div className="text-base font-semibold text-slate-800">{item.person.name}</div>
-                        </div>
 
                         {/* Tooltip popup */}
                         <AnimatePresence>

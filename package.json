@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "stripe listen --forward-to localhost:3000/api/stripe-webhook & next dev --turbopack",
     "build": "next build",
+    "postbuild": "payload migrate --yes",
     "start": "next start",
     "lint": "next lint"
   },
@@ -35,6 +36,7 @@
     "lucide-react": "^0.488.0",
     "next": "15.2.4",
     "payload": "3.43.0",
+    "payload-plugin-import-export": "^3.0.20",
     "prisma": "^6.6.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

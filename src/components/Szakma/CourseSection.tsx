@@ -141,7 +141,7 @@ export const CourseSection = (props: {categories: CourseCategory[], courses: Cou
                                             `}
                                             onClick={() => setSelectedCategory(category.id)}
                                         >
-                                            <span className={`w-3 h-3 rounded-full bg-[${category.color}]`}></span>
+                                            <span className={'w-3 h-3 rounded-full'} style={{ backgroundColor: (category as CourseCategory).color ?? '#97D7FB' }}></span>
                                             {category.name}
                                         </button>
                                     ))}

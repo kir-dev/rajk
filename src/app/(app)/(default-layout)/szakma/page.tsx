@@ -9,12 +9,16 @@ import getCourseCategories from "@/payload-find/getCourseCategories";
 import SzakmaSection, {defaultDistribution} from "@/components/Szakma/FacultyShare";
 import TeachersSection from "@/components/Szakma/TeachersSection";
 import getGroupMembers from "@/payload-find/getGroups";
+import Heller from "@/components/Szakma/Heller";
+import {GroupDoc} from "@/payload-find/getGroups";
+
 
 export default function SzakmaPage() {
     const [isMounted, setIsMounted] = useState(false);
     const [courses, setCourses] = useState<Course[]>([]);
     const [categories, setCategories] = useState<CourseCategory[]>([]);
-    const [teachers, setTeachers] = useState<Group | null>(null);
+    const [teachers, setTeachers] = useState<Group | GroupDoc | null>(null);
+
 
     useEffect(() => {
         async function fetchAwards() {
@@ -85,8 +89,8 @@ export default function SzakmaPage() {
                     showMax={peopleWithRoles.length}
                         />
                 {/*<TDK/>
-                    <OdysseyProgram/>
-                    <Heller/>*/}
+                    <OdysseyProgram/>*/}
+                <Heller/>
             </div>
             {/*<div className="flex flex-col items-center">
                 <iframe
