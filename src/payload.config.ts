@@ -8,6 +8,9 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
+import importExportPlugin from 'payload-plugin-import-export'
+//import type { User } from './payload-types'
+
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import {Sponsors} from "@/collections/Sponsors";
@@ -23,7 +26,6 @@ import {About_Timeline_Event} from "@/collections/About_Timeline_Event";
 import {Applicants} from "@/collections/Applicants";
 import {Events} from "@/collections/Events";
 import {stripePlugin} from "@payloadcms/plugin-stripe";
-import {StripeTransactions} from "@/collections/Stripe-Transactions";
 import {CommunityPictures} from "@/collections/CommunityPictures";
 import {CourseCategories} from "@/collections/CourseCategories";
 import {Courses} from "@/collections/Courses";
@@ -53,7 +55,6 @@ export default buildConfig({
     Reports,
     Apply_Timeline_Event,
     About_Timeline_Event,
-    StripeTransactions,
     Events,
     CommunityPictures,
     CourseCategories,
@@ -69,6 +70,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || "",
     },
+    push: process.env.NODE_ENV !== 'production', // or hardcode: false
   }),
   sharp,
   plugins: [
@@ -94,6 +96,12 @@ export default buildConfig({
     stripePlugin({
       stripeSecretKey: process.env.STRIPE_SECRET_KEY!,
       rest: true,
+    }),
+    importExportPlugin({
+      enabled: true,
+      excludeCollections: ['users'],
+      //canImport: (user?: User | null) => !!user?.roles?.includes('admin'),
     })
   ],
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL!,
 });

@@ -97,14 +97,14 @@ export const CourseCircle = ({
             <div className="relative">
                 <motion.div
                     className={`
-                        w-12 h-12 md:w-16 md:h-16
+                        w-6 h-6 md:w-10 md:h-10
                         rounded-full 
                         border-2 border-white
                         flex items-center justify-center 
                         transition-all duration-300
                         shadow-lg hover:shadow-xl
-                        bg-[${(category as CourseCategory).color}]
                     `}
+                    style={{ backgroundColor: (category as CourseCategory).color ?? '#97D7FB' }}
                     initial={{ scale: 0, opacity: 0 }}
                     animate={isVisible ? {
                         scale: isHovered ? 1.1 : 1,

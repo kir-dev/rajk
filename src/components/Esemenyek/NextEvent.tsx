@@ -22,7 +22,7 @@ export default function NextEvent({
 
     return (
         <Link
-            href={`/events/${event.id}`}
+            href={`/esemenyek/${event.id}`}
             className="group flex cursor-pointer flex-col overflow-hidden rounded-lg shadow-md transition hover:shadow-lg mb-5"
         >
             {/* Event image */}

@@ -17,7 +17,13 @@ export const Reports: CollectionConfig = {
             name: 'topic',
             label: 'Témakör',
             type: 'text',
-            required: false,
+            required: true,
         },
+        {
+            name: 'link',
+            label: 'Link',
+            type: 'text',
+            required: true,
+        }
     ],
 }

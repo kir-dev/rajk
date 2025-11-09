@@ -7255,6 +7255,11 @@ packet-reader@1.0.0:
   resolved "https://registry.yarnpkg.com/packet-reader/-/packet-reader-1.0.0.tgz#9238e5480dedabacfe1fe3f2771063f164157d74"
   integrity "sha1-kjjlSA3tq6z+H+PydxBj8WQVfXQ= sha512-HAKu/fG3HpHFO0AA8WE8q2g+gBJaZ9MG7fcKk+IJPLTGAD6Psw4443l+9DGRbOIh3/aXr7Phy0TjilYivJo5XQ=="
 
+papaparse@^5.5.3:
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/papaparse/-/papaparse-5.5.3.tgz#07f8994dec516c6dab266e952bed68e1de59fa9a"
+  integrity sha512-5QvjGxYVjxO59MGU2lHVYpRWBBtKHnlIAcSe1uNFCkkptUh63NFRj0FJQm7nR67puEruUci/ZkjmEFrjCAyP4A==
+
 parent-module@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/parent-module/-/parent-module-1.0.1.tgz#691d2709e78c79fae3a156622452d00762caaaa2"
@@ -7348,6 +7353,13 @@ pathe@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/pathe/-/pathe-2.0.3.tgz#3ecbec55421685b70a9da872b2cff3e1cbed1716"
   integrity "sha1-PsvsVUIWhbcKnahyss/z4cvtFxY= sha512-WUjGcAqP1gQacoQe+OBJsFA7Ld4DyXuUIjZ5cc75cLHvJ7dtNsTugphxIADwspS+AraAUePCKrSVtPLFj/F88w=="
+
+payload-plugin-import-export@^3.0.20:
+  version "3.0.20"
+  resolved "https://registry.yarnpkg.com/payload-plugin-import-export/-/payload-plugin-import-export-3.0.20.tgz#5ca51c783513b03c838a54d289909c618edf4bf8"
+  integrity sha512-5R9PMhetwrA5posucr/7qHbg0fVy8rj3feNIO04ejNAfwe7I7WgsC+MK/LDKiYBdH9AYGl2zYh7kedBMAYug6g==
+  dependencies:
+    papaparse "^5.5.3"
 
 payload@3.43.0:
   version "3.43.0"
