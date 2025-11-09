@@ -50,17 +50,17 @@ export const CourseSection = (props: {categories: CourseCategory[], courses: Cou
             <div className="container mx-auto px-4">
                 {/* Header */}
                 <div className="text-center mb-8 md:mb-12">
-                    <motion.h1
-                        className="text-4xl md:text-6xl font-bold text-gray-900 mb-4"
+                    <motion.h2
+                        className="text-4xl font-extrabold tracking-tight text-slate-900"
                         initial={{ opacity: 0, y: 20 }}
                         animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.7 }}
                     >
                         Kurzustérkép
-                    </motion.h1>
+                    </motion.h2>
 
                     <motion.div
-                        className="w-24 h-1 bg-course-primary mx-auto mb-6"
+                        className="w-24 h-1 bg-rajk-green mx-auto mb-6"
                         initial={{ width: 0 }}
                         animate={isVisible ? { width: 96 } : { width: 0 }}
                         transition={{ duration: 0.5, delay: 0.1 }}
@@ -72,11 +72,11 @@ export const CourseSection = (props: {categories: CourseCategory[], courses: Cou
                         animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
                         transition={{ delay: 0.2, duration: 0.7 }}
                     >
-                        A kurzustérképen a szerveződő kurzusaink egy részét jelenítettük meg. (Kattints a névre a tematikáért!)
+                        A kollégiumi szakmaiság gerincét az évente több, mint 45 megszervezett kurzus adja. A heti rendszerességgel megtartott, kis létszámú, intenzív és nem utolsó sorban interaktív, fél-egyéves kurzusokat – akárcsak a különböző előadásokat, konferenciákat és blokkszemináriumokat – a kollégisták maguknak szervezik, azokat saját érdeklődésükhöz és igényeikhez igazítják.
                     </motion.p>
 
                     {categories.length > 0 && (
-                        <div className="flex items-center justify-center mt-6 relative">
+                        <div className="flex items-center justify-center mt-6 relative hidden md:block">
                             <motion.div
                                 className="flex flex-wrap justify-center items-center gap-2 md:gap-4"
                                 initial={{ opacity: 0, y: 10 }}
@@ -187,7 +187,7 @@ export const CourseSection = (props: {categories: CourseCategory[], courses: Cou
                 </div>
 
                 {/* Interactive Course Map */}
-                <div className="relative w-full max-w-6xl mx-auto rounded-xl overflow-hidden shadow-2xl">
+                <div className="relative w-full max-w-6xl mx-auto rounded-xl shadow-2xl hidden md:block">
                     {/* Background Image */}
                     <div className="relative w-full" style={{ paddingBottom: '60%' }}>
                         <Image
@@ -219,7 +219,7 @@ export const CourseSection = (props: {categories: CourseCategory[], courses: Cou
 
                 {/* Course count indicator */}
                 <motion.div
-                    className="mt-6 text-center text-gray-600 text-sm"
+                    className="mt-6 text-center text-gray-600 text-sm hidden md:block"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: isVisible ? 1 : 0 }}
                     transition={{ delay: 0.8 }}

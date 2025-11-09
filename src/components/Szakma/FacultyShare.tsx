@@ -52,7 +52,8 @@ const ProgressBar: React.FC<{
     label: string;
     value: number;
     index: number;
-}> = ({ label, value, index }) => {
+    color: string;
+}> = ({ label, value, index, color }) => {
     const ref = useRef<HTMLDivElement | null>(null);
     const inView = useInView(ref, { once: true, margin: "-20% 0px" });
     const pct = useCountUp(value, inView, 1100 + index * 150);
@@ -66,8 +67,7 @@ const ProgressBar: React.FC<{
                     initial={{ width: 0 }}
                     animate={{ width: inView ? `${value}%` : 0 }}
                     transition={{ duration: 1.1 + index * 0.15, ease: "easeOut" }}
-                    className="absolute left-0 top-0 h-full rounded-full"
-                    style={{ backgroundColor: green }}
+                    className={`absolute left-0 top-0 h-full rounded-full ${color}`}
                 />
                 <div className="relative z-10 flex h-full items-center justify-between px-4 text-sm font-semibold text-white">
                     <span className="opacity-90">{pct}%</span>
@@ -84,8 +84,7 @@ const Point: React.FC<{
 }> = ({ Icon, title, text }) => (
     <div className="flex flex-col items-center gap-4 text-center">
         <div
-            className="flex size-28 items-center justify-center rounded-full"
-            style={{ backgroundColor: green }}
+            className="flex size-28 items-center justify-center rounded-full bg-zold"
         >
             <Icon className="size-12 text-white" />
         </div>
@@ -116,6 +115,8 @@ export default function SzakmaSection({
         [distribution]
     );
 
+    const colors = ["bg-zold", "bg-kek", "bg-lila"]
+
     return (
         <section className="mx-auto max-w-6xl px-4 py-16">
             {/* Header */}
@@ -132,7 +133,7 @@ export default function SzakmaSection({
 
                     <div className="mt-6 space-y-6">
                         {safeDistribution.map((d, i) => (
-                            <ProgressBar key={d.id} label={d.label} value={d.value} index={i} />)
+                            <ProgressBar key={d.id} label={d.label} value={d.value} index={i} color={colors[i]} />)
                         )}
                     </div>
                 </div>

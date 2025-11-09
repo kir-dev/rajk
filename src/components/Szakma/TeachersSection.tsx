@@ -1,6 +1,7 @@
+// src/components/Szakma/TeachersSection.tsx
 import React from "react";
 import MemberPicture from "@/components/MemberPicture";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Person } from "@/../src/payload-types";
 
 export type TeachersSectionProps = {
@@ -13,12 +14,11 @@ export type TeachersSectionProps = {
 
 export default function TeachersSection({
     title = "Állandó tanáraink",
-    lead = "A rajkos kurzusvezetők munkájának elismerésére minden évben adományozzuk az \"Állandó Tanár\" címet.",
+    lead = "A rajkos kurzusvezetők munkájának elismerésére minden évben adományozzuk az \\\"Állandó Tanár\\\" címet.",
     people,
     showMax,
     className,
 }: TeachersSectionProps) {
-    const [hoveredId, setHoveredId] = React.useState<number | null>(null);
     const items = showMax ? people.slice(0, showMax) : people;
 
     const container = {
@@ -59,28 +59,12 @@ export default function TeachersSection({
                         key={item.person.id}
                         variants={itemVariant}
                         className="relative flex flex-col items-center"
-                        onMouseEnter={() => setHoveredId(item.person.id)}
-                        onMouseLeave={() => setHoveredId(null)}
                     >
-                        <div className="transition-transform hover:scale-105">
-                            <MemberPicture member={item.person} />
+                        <div className="transition-transform hover:scale-105 text-center text-slate-800">
+                            <MemberPicture member={item.person} joinedAt={item.joined_at} />
+                            <p>{item.person.name}</p>
+                            <p>{new Date(item.joined_at!).getFullYear()}</p>
                         </div>
-
-                        {/* Tooltip popup */}
-                        <AnimatePresence>
-                            {hoveredId === item.person.id && item.joined_at && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: 10 }}
-                                    transition={{ duration: 0.2 }}
-                                    className="absolute z-50 bottom-full mb-2 w-20 px-4 py-3 bg-zold text-white text-sm rounded-lg shadow-xl pointer-events-none"
-                                >
-                                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-zold rotate-45" />
-                                    <p className="leading-relaxed text-center w-full">{new Date(item.joined_at).getFullYear()}</p>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
                     </motion.li>
                 ))}
             </motion.ul>

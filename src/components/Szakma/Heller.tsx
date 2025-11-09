@@ -46,10 +46,11 @@ export default function Heller() {
                 <h2 className="text-4xl font-extrabold tracking-tight text-slate-900">Heller-díj</h2>
                 <div className="mx-auto mt-2 h-1 w-24 rounded-full bg-emerald-600" />
             </div>
+            <p className="px-6 md:px-30 text-center">A kollégiumban végzett kreatív munka elismerésének és elismertségének érdekében a Szakkollégium Heller Farkas-díjat alapított. A díj odaítélésének kritériuma, hogy a díjazott nyújtson a Szakkollégiumban érvényes mércék szerint kiemelkedő szakmai teljesítményt. A díj odaítéléséről az Szakmai Munka Tanácsa (SZMT) jelölése alapján a Kollégiumi Gyűlés határoz.</p>
             <div className="relative p-16">
 
                 {/* Image with text overlay */}
-                <div className="relative">
+                <div className="relative hidden lg:block">
                     <Image
                         src={"/hellerdij.jpg"}
                         alt={"Heller-díj background image"}
@@ -94,6 +95,30 @@ export default function Heller() {
                             )}
                         </div>
                     </div>
+                </div>
+                <div className="relative lg:hidden">
+                    {columns.map((column, columnIndex) => (
+                        <div key={columnIndex} className="mb-8 ">
+                            {column.map((awardee, personIndex) => {
+                                const memberName = typeof awardee.member === 'object' && awardee.member !== null
+                                    ? (awardee.member as Person).name
+                                    : 'Unknown';
+
+                                const yearDisplay = awardee.joined_at
+                                    ? new Date(awardee.joined_at).getFullYear()
+                                    : 'N/A';
+
+                                return (
+                                    <div key={personIndex} className="text-black text-sm mb-2 flex flex-row">
+                                        <span className="font-medium">{memberName}</span>
+                                        <span className="text-gray-600 ml-1">
+                                            ({yearDisplay})
+                                        </span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
