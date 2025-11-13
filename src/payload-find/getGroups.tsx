@@ -1,47 +1,60 @@
+// typescript
 'use server';
 
-import { getPayload } from "payload";
-import config from "@payload-config";
+import { getPayload } from 'payload';
+import config from '@payload-config';
+import {Group, Person, Media} from '@/../src/payload-types';
 
-export default async function getGroupMembers(groupName: string) {
-    const payload = await getPayload({ config });
 
-    // First find the Diákbizottság group to get member IDs
-    const group = await payload.find({
-        collection: "groups",
-        where: {
-            name: {
-                equals: groupName
-            }
-        },
-        depth: 2,
-    });
+export default async function getGroupMembers(groupName: string): Promise<Group | null> {
+  const payload = await getPayload({ config });
 
-    if (!group.docs || group.docs.length === 0) {
-        return null;
+  const groupRaw = await payload.find({
+      collection: 'groups',
+      where: { name: { equals: groupName } },
+      // fetch minimal depth here and explicitly populate nested relations below
+      depth: 1,
+  });
+
+  const group = groupRaw.docs[0] as Group | undefined;
+  if (!group) return null;
+
+  const members = group.members ?? [];
+
+  // Populate each member.member (Person) and that person's picture (Media) when they are numeric IDs
+  const populatedMembers = await Promise.all(members.map(async (m) => {
+    let person: Person | null = null;
+
+    // If the member reference is a numeric ID, fetch the full person
+    if (typeof m.member === 'number') {
+      try {
+        const p = await payload.findByID({ collection: 'people', id: String(m.member), depth: 1 });
+        person = p as unknown as Person;
+      } catch {
+        person = null;
+      }
+    } else if (typeof m.member === 'object' && m.member !== null) {
+      person = m.member as Person;
     }
 
-    // Extract member IDs
-    const memberEntries = group.docs[0].members || [];
-    const memberIds = memberEntries
-        .filter(entry => entry && entry.member)
-        .map(entry => typeof entry.member === 'object' ? entry.member.id : entry.member);
-
-    if (memberIds.length === 0) {
-        return null;
+    // If person exists and picture is a numeric id, fetch the media object
+    if (person && person.picture && typeof person.picture === 'number') {
+      try {
+        const media = await payload.findByID({ collection: 'media', id: String(person.picture), depth: 0 });
+        person.picture = media as unknown as Media;
+      } catch {
+        // leave picture as-is (id) if fetching failed
+      }
     }
 
-    // Directly query the people collection with their pictures
-    const peopleResult = await payload.find({
-        collection: "people",
-        where: {
-            id: {
-                in: memberIds
-            }
-        },
-        depth: 1, // Ensure pictures are populated
-    });
+    return {
+      ...m,
+      member: person,
+    };
+  }));
 
-    if ( !group.docs[0] ) return null;
-    return group.docs[0];
+  return {
+    ...group,
+    members: populatedMembers as unknown as typeof members,
+  } as Group;
 }

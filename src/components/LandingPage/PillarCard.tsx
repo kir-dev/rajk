@@ -1,46 +1,43 @@
 'use client'
 
+import {ArrowRightIcon, LucideIcon} from "lucide-react"
 import ActionButton from "@/components/ActionButton";
 import Image from "next/image";
-import {DynamicLucideIcon} from "@/components/DynamicLucideIcon";
-import {Media} from "@/payload-types";
-import {isMedia} from "@/utils/isMedia";
 
 interface PillarCardProps {
     title: string
     description: string
-    lucideIconName: string
+    icon: LucideIcon
     buttonText: string
     href?: string
-    onAction?: () => void,
-    image?: number | Media
+    onAction?: () => void
+    imageSrc: string
 }
 
-
-export function PillarCard({ title, description, lucideIconName, buttonText, href, image }: PillarCardProps) {
+export function PillarCard({ title, description, icon: Icon, buttonText, href, imageSrc }: PillarCardProps) {
     return (
-        <div className="container mx-auto px-4">
-            <div className="group flex flex-col gap-4 h-full w-full max-w-6xl mx-auto p-6 transition-all duration-300 text-black rounded-2xl mb-20 hover:shadow-lg hover:-translate-y-1 mt-10">
-                <div className="flex flex-col md:flex-row items-center gap-6">
-                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-rajk-green to-green-600 text-white p-4 group-hover:scale-110 transition-transform duration-300">
-                        <DynamicLucideIcon iconName={lucideIconName} className="w-8 h-8" />
+        <div className="container mx-auto px-2 sm:px-4">
+            <div className="group flex flex-col gap-4 md:ml-20 h-full w-full max-w-6xl mx-auto p-4 sm:p-6 transition-all duration-300 text-black rounded-2xl mb-10 sm:mb-20 mt-6 sm:mt-10">
+                <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-6">
+                    <div className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-rajk-green to-green-600 text-white p-3 sm:p-4 group-hover:scale-110 transition-transform duration-300">
+                        <Icon className="w-7 h-7 sm:w-8 sm:h-8" />
                     </div>
-                    <h3 className="text-2xl md:text-3xl font-bold">{title}</h3>
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold">{title}</h3>
                 </div>
-                <div className="flex flex-col md:flex-row gap-6 mt-4">
+                <div className="flex flex-col md:flex-row gap-4 sm:gap-6 mt-2 sm:mt-4">
                     <div className="flex flex-col flex-1">
-                        <p className="text-lg leading-relaxed mb-6">{description}</p>
-                        <ActionButton href={href} className="mt-auto self-start group-hover:bg-green-800 transition-colors">
+                        <p className="text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">{description}</p>
+                        <ActionButton href={href} className="mt-auto self-start transition-colors">
                             {buttonText}
-                            <DynamicLucideIcon iconName={"ArrowRightIcon"} className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                            <ArrowRightIcon className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
                         </ActionButton>
                     </div>
-                    <div className="flex-shrink-0 overflow-hidden rounded-2xl h-[200px] w-[200px] relative md:mr-4">
+                    <div className="flex-shrink-0 overflow-hidden rounded-2xl h-48 w-full sm:h-[500px] sm:w-[500px] relative md:mr-4">
                         <Image
-                            src={(image && isMedia(image)) ? ((image as Media).url || "") : "/koli.jpg"}
-                            alt="Image"
+                            src={imageSrc}
+                            alt="Koli"
                             fill
-                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                            className="object-cover transition-transform duration-500"
                         />
                     </div>
                 </div>

@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import PageTitle from "@/components/PageTitle/PageTitle";
 
 export default function GalleryPage() {
     const images = [

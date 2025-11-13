@@ -135,11 +135,11 @@ export default function TDK() {
     }, []);
 
     // Helper function to convert any author format to Person[]
-    const convertToPersonArray = (author: any): Person[] => {
+    const convertToPersonArray = (author: (number | Person)[] | null | undefined): Person[] => {
         if (!author) return [];
         if (Array.isArray(author)) {
             return author
-                .filter(a => typeof a === 'object' && a !== null)
+                .filter((a): a is Person => typeof a === 'object' && a !== null)
                 .map(a => ({
                     id: a.id || 0,
                     name: a.name || 'Unknown',
@@ -147,12 +147,12 @@ export default function TDK() {
                     createdAt: a.createdAt || ''
                 }));
         }
-        if (typeof author === 'object' && author !== null) {
+        if (typeof author === 'object') {
             return [{
-                id: author.id || 0,
-                name: author.name || 'Unknown',
-                updatedAt: author.updatedAt || '',
-                createdAt: author.createdAt || ''
+                id: (author as Person).id || 0,
+                name: (author as Person).name || 'Unknown',
+                updatedAt: (author as Person).updatedAt || '',
+                createdAt: (author as Person).createdAt || ''
             }];
         }
         return [];
@@ -163,7 +163,7 @@ export default function TDK() {
         return tdks
             .filter(tdk => tdk.placement === placement)
             .map(tdk => ({
-                id: typeof tdk.id === 'number' ? tdk.id : 0,
+                id: tdk.id,
                 author: convertToPersonArray(tdk.author),
                 title: tdk.title || "Untitled TDK",
                 sectionName: tdk.section_name || "Unknown Section",

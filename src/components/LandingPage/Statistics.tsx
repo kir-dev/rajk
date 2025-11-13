@@ -72,6 +72,10 @@ export default function Statistics(props: StatisticsProps) {
 
                         if (frame >= totalFrames) {
                             clearInterval(interval);
+                            // Ensure final values are set exactly
+                            setCourseCount(props.data[0][1]);
+                            setTdkSubmittedCount(props.data[1][1]);
+                            setTdkWinnersCount(props.data[2][1]);
                         }
                     }, 1000 / fps);
 
@@ -86,7 +90,7 @@ export default function Statistics(props: StatisticsProps) {
         return () => {
             observer.unobserve(currentRef);
         };
-    }, [props.data[0][1], props.data[1][1], props.data[2][1]]);
+    }, [props.data]);
 
     return(
         <div className="relative w-full">

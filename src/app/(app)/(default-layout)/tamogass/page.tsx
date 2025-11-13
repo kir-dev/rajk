@@ -2,18 +2,46 @@
 
 import { createPaymentIntent } from "@/app/(app)/(default-layout)/tamogass/actions";
 import Checkout from "@/components/Stripe/Checkout";
-import { useState } from "react";
+import React, {useEffect, useState} from "react";
 import ChooseAmount from "@/components/Stripe/ChooseAmount";
 import {GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
+import Image from "next/image";
+import getSponsorImages from "@/payload-find/getSponsorImages";
+import {Sponsor} from "@/payload-types";
+import { motion } from "framer-motion";
 
 export default function CheckoutPage() {
-    const [amount, setAmount] = useState<number>(500000); // Default 500,000 fillér (5000 HUF)
+    const [amount, setAmount] = useState<number>(500000);
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [clientSecret, setClientSecret] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [step, setStep] = useState<'choose-amount' | 'payment'>('choose-amount');
+    const [paymentIntentUsed, setPaymentIntentUsed] = useState<boolean>(false);
+
+    // Sponsors state and loader
+    const [sponsors, setSponsors] = useState<Sponsor[]>([]);
+    const [sponsorsLoading, setSponsorsLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        let mounted = true;
+        async function fetchSponsors() {
+            setSponsorsLoading(true);
+            try {
+                const res = await getSponsorImages();
+                if (mounted && Array.isArray(res)) {
+                    setSponsors(res);
+                }
+            } catch (err) {
+                console.error("Failed to load sponsors", err);
+            } finally {
+                if (mounted) setSponsorsLoading(false);
+            }
+        }
+        fetchSponsors();
+        return () => { mounted = false; };
+    }, []);
 
     async function handleContinue(captchaToken: string) {
         if (!name || !email) {
@@ -28,16 +56,46 @@ export default function CheckoutPage() {
             const response = await createPaymentIntent(amount, name, email, captchaToken);
             if (response.clientSecret) {
                 setClientSecret(response.clientSecret);
+                setPaymentIntentUsed(false); // Mark as unused
                 setStep('payment');
             } else {
                 setError('Nem sikerült létrehozni a fizetési szándékot.');
             }
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'An unexpected error occurred');
+            setError(err instanceof Error ? err.message : 'Váratlan hiba történt');
         } finally {
             setIsLoading(false);
         }
     }
+
+    const handleBackToChooseAmount = () => {
+        // Invalidate client secret when going back
+        setClientSecret(null);
+        setPaymentIntentUsed(true);
+        setStep('choose-amount');
+    };
+
+    // Safely extract media URL (handles number | Media union shapes)
+    const getMediaUrl = (media: unknown): string | undefined => {
+        if (!media) return undefined;
+        if (typeof media === 'object' && media !== null && 'url' in media) {
+            return (media).url as string | undefined;
+        }
+        return undefined;
+    };
+
+    const gridContainer = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: { staggerChildren: 0.05, delayChildren: 0.1 },
+        },
+    };
+
+    const gridItem = {
+        hidden: { opacity: 0, y: 8 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.25 } },
+    };
 
     return (
         <div className="min-h-screen bg-bezs py-20 px-4">
@@ -68,18 +126,66 @@ export default function CheckoutPage() {
                         </div>
                     ) : (
                         <div className="max-w-md mx-auto">
-                            {clientSecret ? (
+                            {clientSecret && !paymentIntentUsed ? (
                                 <Checkout
                                     clientSecret={clientSecret}
                                     amount={amount}
                                     error={error}
                                     isLoading={isLoading}
-                                    setStep={setStep}
+                                    setStep={handleBackToChooseAmount}
                                 />
                             ) : null}
                         </div>
                     )}
                 </GoogleReCaptchaProvider>
+            </div>
+            <div className="mt-8 max-w-6xl mx-auto px-4">
+                <div className="mb-8 text-center">
+                    <h2 className="text-4xl font-extrabold tracking-tight text-slate-900">Támogatóink</h2>
+                    <div className="mx-auto mt-2 h-1 w-24 rounded-full bg-emerald-600" />
+                </div>
+
+                {sponsorsLoading ? (
+                    <div className="flex items-center justify-center py-8">
+                        <div className="animate-pulse space-x-4 flex">
+                            <div className="h-12 w-24 bg-gray-200 rounded" />
+                            <div className="h-12 w-24 bg-gray-200 rounded" />
+                            <div className="h-12 w-24 bg-gray-200 rounded" />
+                        </div>
+                    </div>
+                ) : (
+                    <motion.ul
+                        variants={gridContainer}
+                        initial="hidden"
+                        animate="show"
+                        className="grid md:grid-cols-2 gap-4 items-center"
+                    >
+                        {sponsors.map((sponsor) => {
+                            const logoUrl = getMediaUrl(sponsor.logo);
+                            return (
+                                <motion.li
+                                    key={sponsor.id}
+                                    variants={gridItem}
+                                    className="flex items-center justify-center"
+                                >
+                                    {logoUrl ? (
+                                        <Image
+                                            src={logoUrl}
+                                            alt={sponsor.name || "sponsor"}
+                                            width={1000}
+                                            height={500}
+                                            className="object-contain"
+                                        />
+                                    ) : (
+                                        <div className="h-12 w-full bg-gray-50 flex items-center justify-center text-xs text-gray-500">
+                                            {sponsor.name || "Sponsor"}
+                                        </div>
+                                    )}
+                                </motion.li>
+                            );
+                        })}
+                    </motion.ul>
+                )}
             </div>
         </div>
     );

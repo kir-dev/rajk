@@ -1,8 +1,7 @@
 import {Group, Person} from "@/payload-types";
-import {useEffect, useState} from "react";
-import getGroupMembers from "@/payload-find/getGroups";
-import {LeafDecoration} from "@/components/Szakma/LeafDecoration";
+import React, {useEffect, useState} from "react";
 import Image from "next/image";
+import getGroupMembers from "@/payload-find/getGroups";
 
 export default function Heller() {
     const [loading, setLoading] = useState<boolean>(true);
@@ -12,11 +11,13 @@ export default function Heller() {
         async function fetchAwards() {
             setLoading(true);
             try {
-                const response = await getGroupMembers("Heller-díj");
-                if (!response) {
+                const res = await getGroupMembers("Heller-díj");
+                if (!res) {
+                    console.error('Failed to fetch group');
                     setAwards(null);
+                } else {
+                    setAwards(res as Group);
                 }
-                setAwards(response);
             } catch (error){
                 console.error("Error fetching Heller-díj awardees:", error);
             } finally {
@@ -24,6 +25,8 @@ export default function Heller() {
             }
         }
         fetchAwards();
+        console.log("Heller:")
+        console.log(awardees);
     }, []);
 
     const members = awardees?.members || [];
@@ -37,43 +40,35 @@ export default function Heller() {
         members.slice(columnSize * 2)
     ];
 
-    // CSS variables for leaf colors
-    const leafStyles = {
-        "--leaf-primary": "140, 100%, 70%",
-        "--leaf-secondary": "160, 100%, 40%",
-        "--leaf-accent": "120, 100%, 30%"
-    } as React.CSSProperties;
-
     return (
-        <div className="flex items-center justify-center min-h-screen p-8 mb-20" style={leafStyles}>
+        <div className="flex flex-col items-center justify-center min-h-screen p-8 mb-20">
+            <div className="mb-8 text-center">
+                <h2 className="text-4xl font-extrabold tracking-tight text-slate-900">Heller-díj</h2>
+                <div className="mx-auto mt-2 h-1 w-24 rounded-full bg-emerald-600" />
+            </div>
+            <p className="px-6 md:px-30 text-center">A kollégiumban végzett kreatív munka elismerésének és elismertségének érdekében a Szakkollégium Heller Farkas-díjat alapított. A díj odaítélésének kritériuma, hogy a díjazott nyújtson a Szakkollégiumban érvényes mércék szerint kiemelkedő szakmai teljesítményt. A díj odaítéléséről az Szakmai Munka Tanácsa (SZMT) jelölése alapján a Kollégiumi Gyűlés határoz.</p>
             <div className="relative p-16">
-                {/* Decorative leaves */}
-                <LeafDecoration className="z-50" position="top-left" />
-                <LeafDecoration className="z-50" position="top-right" />
-                <LeafDecoration className="z-50" position="bottom-left" />
-                <LeafDecoration className="z-50" position="bottom-right" />
 
                 {/* Image with text overlay */}
-                <div className="relative">
+                <div className="relative hidden lg:block">
                     <Image
                         src={"/hellerdij.jpg"}
                         alt={"Heller-díj background image"}
-                        width={500}
-                        height={500}
+                        width={1000}
+                        height={1000}
                         className="rounded-lg"
                     />
 
                     {/* Text overlay positioned on the white box area */}
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="bg-white/80 p-6 rounded-md max-w-[80%] max-h-[80%] overflow-auto">
-                            <h3 className="text-xl font-semibold text-center mb-4">Heller-díjasok</h3>
+                        <div className="bg-white/80 rounded-md max-w-[100%] max-h-[40%]">
 
                             {loading ? (
                                 <div className="flex justify-center py-4">
                                     <p className="text-muted-foreground">Loading...</p>
                                 </div>
                             ) : (
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
                                     {columns.map((column, columnIndex) => (
                                         <div key={columnIndex} className="space-y-2">
                                             {column.map((awardee, personIndex) => {
@@ -100,6 +95,30 @@ export default function Heller() {
                             )}
                         </div>
                     </div>
+                </div>
+                <div className="relative lg:hidden">
+                    {columns.map((column, columnIndex) => (
+                        <div key={columnIndex} className="mb-8 ">
+                            {column.map((awardee, personIndex) => {
+                                const memberName = typeof awardee.member === 'object' && awardee.member !== null
+                                    ? (awardee.member as Person).name
+                                    : 'Unknown';
+
+                                const yearDisplay = awardee.joined_at
+                                    ? new Date(awardee.joined_at).getFullYear()
+                                    : 'N/A';
+
+                                return (
+                                    <div key={personIndex} className="text-black text-sm mb-2 flex flex-row">
+                                        <span className="font-medium">{memberName}</span>
+                                        <span className="text-gray-600 ml-1">
+                                            ({yearDisplay})
+                                        </span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
