@@ -13,9 +13,9 @@ export default function VertNavBarLayout({children}: { children: React.ReactNode
             return null
         })
         .filter(Boolean) as SectionLabelProps[]
-    
+
     ;
-    
+
     return (
         <div className = "flex flex-row h-fit w-full relative">
             <div className = "absolute left-0 top-0 h-full z-30 md:block max-md:hidden">

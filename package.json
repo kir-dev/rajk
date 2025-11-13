@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "stripe listen --forward-to localhost:3000/api/stripe-webhook & next dev --turbopack",
+    "dev": "NODE_OPTIONS='--inspect' stripe listen --forward-to localhost:3000/api/stripe-webhook & next dev --turbopack",
     "ci": "payload migrate --yes && next build",
     "build": "next build",
     "start": "next start",

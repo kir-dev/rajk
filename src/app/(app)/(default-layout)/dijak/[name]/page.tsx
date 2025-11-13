@@ -1,19 +1,22 @@
 import AwardLandingSection from "@/components/Dijak/AwardLandingSection";
 import TitleNextToContent from "@/components/TitleNextToContent";
 import SubTitle from "@/components/PageTitle/SubTitle";
-import {fetchAward} from "@/fetch/fetchAwards";
+import {fetchAwardBySlug} from "@/fetch/fetchAwards";
 import React from "react";
 import Section from "@/components/Section";
-import VertNavBarLayout from "@/components/vertNavBarLayout";
+import VertNavBarLayout from "@/components/VertNavBarLayout";
 import {Awardee, Media} from "@/payload-types";
 import Image from "next/image";
 import {isMedia} from "@/utils/isMedia";
 import {RichText} from "@payloadcms/richtext-lexical/react";
 import AwardeeGrid from "@/components/AwardeeGrid";
 
-export default async function Page({params}: { params: { id?: string } }) {
-    
-    const award = await fetchAward(params.id || "1");
+export default async function Page({ params }: {
+    params: Promise<{ name: string }>
+}) {
+
+    const { name: awardName } = await params;
+    const award = await fetchAwardBySlug(awardName);
     const awardee = award.awardees && (award.awardees as Awardee) || null;
     
     if (!award) {

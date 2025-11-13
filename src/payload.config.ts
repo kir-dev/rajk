@@ -1,5 +1,4 @@
 // storage-adapter-import-placeholder
-import { s3Storage } from '@payloadcms/storage-s3'
 import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
@@ -75,9 +74,9 @@ export default buildConfig({
   sharp,
   plugins: [
     payloadCloudPlugin(),
-    s3Storage({
+    /*s3Storage({
       collections: {
-        media: true
+        //media: true
       },
       bucket: process.env.S3_BUCKET!,
       config: {
@@ -91,7 +90,7 @@ export default buildConfig({
         // ... Other S3 configuration
       },
       clientUploads: true,
-    }),
+    }),*/
     // storage-adapter-placeholder
     stripePlugin({
       stripeSecretKey: process.env.STRIPE_SECRET_KEY!,
