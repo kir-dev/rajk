@@ -30,6 +30,7 @@ export const Awards: CollectionConfig = {
             label: 'Díjazottak',
             type: 'relationship',
             relationTo: 'awardees',
+            hasMany: true,
             required: false,
         },
         {
