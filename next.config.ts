@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
                 pathname: '/**', // Allow all paths under this domain
             },
         ]
-    }
+    },
 };
 
 export default withPayload(nextConfig);
