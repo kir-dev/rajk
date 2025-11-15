@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
             },
         ]
     },
+    productionBrowserSourceMaps: false
 };
 
 export default withPayload(nextConfig);

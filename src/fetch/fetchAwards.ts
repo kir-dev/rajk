@@ -29,7 +29,7 @@ const awardUrlToAwardName = new Map<string, string>([
     ["herbert-simon", "Herbert Simon-díj"],
 ]);
 
-export async function fetchAwardBySlug(slug: string) {
+export async function fetchAwardBySlug(slug: string): Promise<Award | null> {
     const awardName = awardUrlToAwardName.get(slug);
     if (!awardName) {
         throw new Error("Invalid award slug");
@@ -37,7 +37,7 @@ export async function fetchAwardBySlug(slug: string) {
     return fetchAwardByName(awardName);
 }
 
-async function fetchAwardByName(name: string) {
+async function fetchAwardByName(name: string): Promise<Award | null> {
     const payload = await getPayload({config})
     const awards = await payload.find({
         collection: "awards",
@@ -52,6 +52,7 @@ async function fetchAwardByName(name: string) {
 
     if (awards.docs.length === 0) {
         throw new Error("Award not found");
+        return null;
     }
 
     return awards.docs[0] as Award;

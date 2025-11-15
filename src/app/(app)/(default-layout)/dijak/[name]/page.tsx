@@ -17,6 +17,11 @@ export default async function Page({ params }: {
 
     const { name: awardName } = await params;
     const award = await fetchAwardBySlug(awardName);
+
+    if (!award) {
+        return <div className = "">Award not found</div>;
+    }
+
     let awardees = award.awardees && (award.awardees as Awardee[]) || [];
 
     // Sort awardees by year descending
@@ -25,11 +30,6 @@ export default async function Page({ params }: {
         return (b.year || 0) - (a.year || 0);
     });
     const currentAwardee = awardees[0];
-
-
-    if (!award) {
-        return <div className = "text-white">Award not found</div>;
-    }
     
     return (
         <div className = "flex flex-row h-fit w-full relative bg-black">
