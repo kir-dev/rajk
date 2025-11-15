@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
             },
         ]
     },
+    reactCompiler: true,
     productionBrowserSourceMaps: false
 };
 

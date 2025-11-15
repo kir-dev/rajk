@@ -1,6 +1,6 @@
 import {getPayload} from "payload";
 import config from "@/payload.config";
-import {Award} from "@/payload-types";
+import {Award, Awardee} from "@/payload-types";
 
 export async function fetchAwards() {
     const payload = await getPayload({config})
@@ -10,9 +10,10 @@ export async function fetchAwards() {
         depth: 1,
         sort: "-createdAt",
     });
-    
+
     return awards.docs as Award[];
 }
+
 export async function fetchAward(id: string) {
     const payload = await getPayload({config})
     const award = await payload.findByID({
@@ -20,7 +21,7 @@ export async function fetchAward(id: string) {
         id: id,
         depth: 2,
     });
-    
+
     return award as Award;
 }
 
@@ -37,6 +38,11 @@ export async function fetchAwardBySlug(slug: string): Promise<Award | null> {
     return fetchAwardByName(awardName);
 }
 
+/**
+ * Fetches the award by its name and sorts awardees by year descending.
+ * @param name - The name of the award to fetch.
+ * @returns The award object with sorted awardees or null if not found.
+ */
 async function fetchAwardByName(name: string): Promise<Award | null> {
     const payload = await getPayload({config})
     const awards = await payload.find({
@@ -51,11 +57,16 @@ async function fetchAwardByName(name: string): Promise<Award | null> {
     });
 
     if (awards.docs.length === 0) {
-        throw new Error("Award not found");
         return null;
     }
 
-    return awards.docs[0] as Award;
+    const award = awards.docs[0] as Award;
+
+    if (award.awardees) {
+        award.awardees = (award.awardees as Awardee[]).sort((a, b) => {
+            return (b.year || 0) - (a.year || 0);
+        });
+    }
+
+    return award;
 }
-
-

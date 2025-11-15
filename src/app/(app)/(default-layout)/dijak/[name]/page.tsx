@@ -10,6 +10,8 @@ import Image from "next/image";
 import {isMedia} from "@/utils/isMedia";
 import {RichText} from "@payloadcms/richtext-lexical/react";
 import AwardeeGrid from "@/components/AwardeeGrid";
+import {t} from "@/lib/utils";
+import AwardTitleSection from "@/components/Dijak/AwardTitleSection";
 
 export default async function Page({ params }: {
     params: Promise<{ name: string }>
@@ -22,13 +24,7 @@ export default async function Page({ params }: {
         return <div className = "">Award not found</div>;
     }
 
-    let awardees = award.awardees && (award.awardees as Awardee[]) || [];
-
-    // Sort awardees by year descending
-    // TODO: Please for the love of god do not do it this way
-    awardees = awardees.sort((a, b) => {
-        return (b.year || 0) - (a.year || 0);
-    });
+    const awardees = award.awardees && (award.awardees as Awardee[]) || [];
     const currentAwardee = awardees[0];
     
     return (
@@ -37,14 +33,7 @@ export default async function Page({ params }: {
                 <VertNavbar/>
             </div>*/}
             <VertNavBarLayout>
-                <Section id = "Top" title = "Top" lucideIconName = "Award" className={"-mx-4"}>
-                    <AwardLandingSection logo = {award.logo} title = {award.name}
-                                         background = {award.covers ? award.covers[0].cover : 0}/>
-                </Section>
-                <Section id = {"About"} title = "About" lucideIconName = "Info">
-                    <TitleNextToContent title = "About the John von Neumann Award"
-                                        content = "The John von Neumann Award, named after John von Neumann is given annually by the Rajk College for Advanced Studies (Budapest, Hungary), to an outstanding scholar in the exact social sciences, whose works have had substantial influence over a long period of time on the studies and intellectual activity of the students of the college. The award was established in 1994 and is given annually. In 2013, separately from the annual prize, Kenneth J. Arrow was given the Honorary John von Neumann Award."/>
-                </Section>
+                <AwardTitleSection award={award} />
                 <Section id = {"Statistics"} title = {"Statistics"} lucideIconName = "ChartColumnBig">
                     {/*<Statistics isLast = {false} color = {"blue"} szin = {"kek"} title = {"Until this year"}
                                 data = {
@@ -56,7 +45,7 @@ export default async function Page({ params }: {
                                 }
                     />*/}
                     <TitleNextToContent title = "Statistics"
-                                        content = "Az elmúlt években retek sokan nyerték meg ezt a díjat."/>
+                                        content = "Az elmúlt években retek sokan nyerték meg ezt a díjat." />
                 
                 </Section>
                 {currentAwardee &&
@@ -80,8 +69,8 @@ export default async function Page({ params }: {
                     </Section>
                 }
                 {awardees &&
-                    <Section id = {"Prev awardees"} title = {"Previous awardes"} className = "mb-40" lucideIconName = "Users">
-                        <SubTitle text = {"Previous awardes"}></SubTitle>
+                    <Section id = {"Prev awardees"} title = {"Previous awardees"} className = "mb-40" lucideIconName = "Users">
+                        <SubTitle text = {"Previous awardees"}></SubTitle>
                         <AwardeeGrid awardees={awardees}/>
                     </Section>
                 }
