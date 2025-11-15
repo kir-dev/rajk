@@ -1,9 +1,16 @@
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-vercel-postgres'
 
-export async function up({ db }: MigrateUpArgs): Promise<void> {
+export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
-   CREATE TYPE "public"."enum_stripe_transactions_status" AS ENUM('succeeded', 'failed');
-  CREATE TYPE "public"."enum_courses_icon" AS ENUM('BookOpen', 'Calculator', 'Globe', 'Palette', 'Code', 'Users', 'TrendingUp', 'Lightbulb', 'Target', 'Database', 'Settings', 'Puzzle', 'Monitor', 'FileText', 'Search', 'BarChart', 'Download', 'MessageCircle', 'PenTool', 'Layers');
+   CREATE TYPE "public"."enum_courses_icon" AS ENUM('BookOpen', 'Calculator', 'Globe', 'Palette', 'Code', 'Users', 'TrendingUp', 'Lightbulb', 'Target', 'Database', 'Settings', 'Puzzle', 'Monitor', 'FileText', 'Search', 'BarChart', 'Download', 'MessageCircle', 'PenTool', 'Layers');
+  CREATE TABLE "users_sessions" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"created_at" timestamp(3) with time zone,
+  	"expires_at" timestamp(3) with time zone NOT NULL
+  );
+  
   CREATE TABLE "users" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
@@ -85,7 +92,6 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   	"name" varchar NOT NULL,
   	"logo_id" integer NOT NULL,
   	"about" jsonb NOT NULL,
-  	"awardees_id" integer,
   	"facebook_link" varchar,
   	"event_facebook_link" varchar,
   	"connected_publicatios" numeric,
@@ -94,6 +100,14 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   	"video_id" integer,
   	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
+  CREATE TABLE "awards_rels" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"order" integer,
+  	"parent_id" integer NOT NULL,
+  	"path" varchar NOT NULL,
+  	"awardees_id" integer
   );
   
   CREATE TABLE "awardees" (
@@ -137,7 +151,8 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   CREATE TABLE "reports" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"title" varchar NOT NULL,
-  	"topic" varchar,
+  	"topic" varchar NOT NULL,
+  	"link" varchar NOT NULL,
   	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
@@ -157,20 +172,6 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   	"date" timestamp(3) with time zone NOT NULL,
   	"description" jsonb NOT NULL,
   	"logo_id" integer NOT NULL,
-  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
-  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
-  );
-  
-  CREATE TABLE "stripe_transactions" (
-  	"id" serial PRIMARY KEY NOT NULL,
-  	"donor_name" varchar,
-  	"formatted_amount" varchar,
-  	"currency" varchar,
-  	"donor_email" varchar,
-  	"stripe_payment_intent_id" varchar NOT NULL,
-  	"amount" numeric,
-  	"metadata" jsonb,
-  	"status" "enum_stripe_transactions_status" NOT NULL,
   	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
@@ -233,6 +234,12 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
   
+  CREATE TABLE "payload_kv" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"key" varchar NOT NULL,
+  	"data" jsonb NOT NULL
+  );
+  
   CREATE TABLE "payload_locked_documents" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"global_slug" varchar,
@@ -258,7 +265,6 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   	"reports_id" integer,
   	"apply_timeline_event_id" integer,
   	"about_timeline_event_id" integer,
-  	"stripe_transactions_id" integer,
   	"events_id" integer,
   	"community_pictures_id" integer,
   	"course_categories_id" varchar,
@@ -290,6 +296,7 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
   
+  ALTER TABLE "users_sessions" ADD CONSTRAINT "users_sessions_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "sponsors" ADD CONSTRAINT "sponsors_logo_id_media_id_fk" FOREIGN KEY ("logo_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "groups_members" ADD CONSTRAINT "groups_members_member_id_people_id_fk" FOREIGN KEY ("member_id") REFERENCES "public"."people"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "groups_members" ADD CONSTRAINT "groups_members_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."groups"("id") ON DELETE cascade ON UPDATE no action;
@@ -297,8 +304,9 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "awards_covers" ADD CONSTRAINT "awards_covers_cover_id_media_id_fk" FOREIGN KEY ("cover_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "awards_covers" ADD CONSTRAINT "awards_covers_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."awards"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "awards" ADD CONSTRAINT "awards_logo_id_media_id_fk" FOREIGN KEY ("logo_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
-  ALTER TABLE "awards" ADD CONSTRAINT "awards_awardees_id_awardees_id_fk" FOREIGN KEY ("awardees_id") REFERENCES "public"."awardees"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "awards" ADD CONSTRAINT "awards_video_id_media_id_fk" FOREIGN KEY ("video_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "awards_rels" ADD CONSTRAINT "awards_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."awards"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "awards_rels" ADD CONSTRAINT "awards_rels_awardees_fk" FOREIGN KEY ("awardees_id") REFERENCES "public"."awardees"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "awardees" ADD CONSTRAINT "awardees_picture_id_media_id_fk" FOREIGN KEY ("picture_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "tdks_rels" ADD CONSTRAINT "tdks_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."tdks"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "tdks_rels" ADD CONSTRAINT "tdks_rels_people_fk" FOREIGN KEY ("people_id") REFERENCES "public"."people"("id") ON DELETE cascade ON UPDATE no action;
@@ -322,7 +330,6 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_reports_fk" FOREIGN KEY ("reports_id") REFERENCES "public"."reports"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_apply_timeline_event_fk" FOREIGN KEY ("apply_timeline_event_id") REFERENCES "public"."apply_timeline_event"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_about_timeline_event_fk" FOREIGN KEY ("about_timeline_event_id") REFERENCES "public"."about_timeline_event"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_stripe_transactions_fk" FOREIGN KEY ("stripe_transactions_id") REFERENCES "public"."stripe_transactions"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_events_fk" FOREIGN KEY ("events_id") REFERENCES "public"."events"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_community_pictures_fk" FOREIGN KEY ("community_pictures_id") REFERENCES "public"."community_pictures"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_course_categories_fk" FOREIGN KEY ("course_categories_id") REFERENCES "public"."course_categories"("id") ON DELETE cascade ON UPDATE no action;
@@ -330,6 +337,8 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_odyssey_fk" FOREIGN KEY ("odyssey_id") REFERENCES "public"."odyssey"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_preferences_rels" ADD CONSTRAINT "payload_preferences_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."payload_preferences"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_preferences_rels" ADD CONSTRAINT "payload_preferences_rels_users_fk" FOREIGN KEY ("users_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
+  CREATE INDEX "users_sessions_order_idx" ON "users_sessions" USING btree ("_order");
+  CREATE INDEX "users_sessions_parent_id_idx" ON "users_sessions" USING btree ("_parent_id");
   CREATE INDEX "users_updated_at_idx" ON "users" USING btree ("updated_at");
   CREATE INDEX "users_created_at_idx" ON "users" USING btree ("created_at");
   CREATE UNIQUE INDEX "users_email_idx" ON "users" USING btree ("email");
@@ -353,10 +362,13 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "awards_covers_parent_id_idx" ON "awards_covers" USING btree ("_parent_id");
   CREATE INDEX "awards_covers_cover_idx" ON "awards_covers" USING btree ("cover_id");
   CREATE INDEX "awards_logo_idx" ON "awards" USING btree ("logo_id");
-  CREATE INDEX "awards_awardees_idx" ON "awards" USING btree ("awardees_id");
   CREATE INDEX "awards_video_idx" ON "awards" USING btree ("video_id");
   CREATE INDEX "awards_updated_at_idx" ON "awards" USING btree ("updated_at");
   CREATE INDEX "awards_created_at_idx" ON "awards" USING btree ("created_at");
+  CREATE INDEX "awards_rels_order_idx" ON "awards_rels" USING btree ("order");
+  CREATE INDEX "awards_rels_parent_idx" ON "awards_rels" USING btree ("parent_id");
+  CREATE INDEX "awards_rels_path_idx" ON "awards_rels" USING btree ("path");
+  CREATE INDEX "awards_rels_awardees_id_idx" ON "awards_rels" USING btree ("awardees_id");
   CREATE INDEX "awardees_picture_idx" ON "awardees" USING btree ("picture_id");
   CREATE INDEX "awardees_updated_at_idx" ON "awardees" USING btree ("updated_at");
   CREATE INDEX "awardees_created_at_idx" ON "awardees" USING btree ("created_at");
@@ -375,8 +387,6 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "about_timeline_event_logo_idx" ON "about_timeline_event" USING btree ("logo_id");
   CREATE INDEX "about_timeline_event_updated_at_idx" ON "about_timeline_event" USING btree ("updated_at");
   CREATE INDEX "about_timeline_event_created_at_idx" ON "about_timeline_event" USING btree ("created_at");
-  CREATE INDEX "stripe_transactions_updated_at_idx" ON "stripe_transactions" USING btree ("updated_at");
-  CREATE INDEX "stripe_transactions_created_at_idx" ON "stripe_transactions" USING btree ("created_at");
   CREATE INDEX "events_picture_idx" ON "events" USING btree ("picture_id");
   CREATE INDEX "events_updated_at_idx" ON "events" USING btree ("updated_at");
   CREATE INDEX "events_created_at_idx" ON "events" USING btree ("created_at");
@@ -393,6 +403,7 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "odyssey_participants_participant_idx" ON "odyssey_participants" USING btree ("participant_id");
   CREATE INDEX "odyssey_updated_at_idx" ON "odyssey" USING btree ("updated_at");
   CREATE INDEX "odyssey_created_at_idx" ON "odyssey" USING btree ("created_at");
+  CREATE UNIQUE INDEX "payload_kv_key_idx" ON "payload_kv" USING btree ("key");
   CREATE INDEX "payload_locked_documents_global_slug_idx" ON "payload_locked_documents" USING btree ("global_slug");
   CREATE INDEX "payload_locked_documents_updated_at_idx" ON "payload_locked_documents" USING btree ("updated_at");
   CREATE INDEX "payload_locked_documents_created_at_idx" ON "payload_locked_documents" USING btree ("created_at");
@@ -412,7 +423,6 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "payload_locked_documents_rels_reports_id_idx" ON "payload_locked_documents_rels" USING btree ("reports_id");
   CREATE INDEX "payload_locked_documents_rels_apply_timeline_event_id_idx" ON "payload_locked_documents_rels" USING btree ("apply_timeline_event_id");
   CREATE INDEX "payload_locked_documents_rels_about_timeline_event_id_idx" ON "payload_locked_documents_rels" USING btree ("about_timeline_event_id");
-  CREATE INDEX "payload_locked_documents_rels_stripe_transactions_id_idx" ON "payload_locked_documents_rels" USING btree ("stripe_transactions_id");
   CREATE INDEX "payload_locked_documents_rels_events_id_idx" ON "payload_locked_documents_rels" USING btree ("events_id");
   CREATE INDEX "payload_locked_documents_rels_community_pictures_id_idx" ON "payload_locked_documents_rels" USING btree ("community_pictures_id");
   CREATE INDEX "payload_locked_documents_rels_course_categories_id_idx" ON "payload_locked_documents_rels" USING btree ("course_categories_id");
@@ -429,9 +439,10 @@ export async function up({ db }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "payload_migrations_created_at_idx" ON "payload_migrations" USING btree ("created_at");`)
 }
 
-export async function down({ db }: MigrateDownArgs): Promise<void> {
+export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
-   DROP TABLE "users" CASCADE;
+   DROP TABLE "users_sessions" CASCADE;
+  DROP TABLE "users" CASCADE;
   DROP TABLE "media" CASCADE;
   DROP TABLE "sponsors" CASCADE;
   DROP TABLE "groups_members" CASCADE;
@@ -440,6 +451,7 @@ export async function down({ db }: MigrateDownArgs): Promise<void> {
   DROP TABLE "applicants" CASCADE;
   DROP TABLE "awards_covers" CASCADE;
   DROP TABLE "awards" CASCADE;
+  DROP TABLE "awards_rels" CASCADE;
   DROP TABLE "awardees" CASCADE;
   DROP TABLE "tdks" CASCADE;
   DROP TABLE "tdks_rels" CASCADE;
@@ -447,18 +459,17 @@ export async function down({ db }: MigrateDownArgs): Promise<void> {
   DROP TABLE "reports" CASCADE;
   DROP TABLE "apply_timeline_event" CASCADE;
   DROP TABLE "about_timeline_event" CASCADE;
-  DROP TABLE "stripe_transactions" CASCADE;
   DROP TABLE "events" CASCADE;
   DROP TABLE "community_pictures" CASCADE;
   DROP TABLE "course_categories" CASCADE;
   DROP TABLE "courses" CASCADE;
   DROP TABLE "odyssey_participants" CASCADE;
   DROP TABLE "odyssey" CASCADE;
+  DROP TABLE "payload_kv" CASCADE;
   DROP TABLE "payload_locked_documents" CASCADE;
   DROP TABLE "payload_locked_documents_rels" CASCADE;
   DROP TABLE "payload_preferences" CASCADE;
   DROP TABLE "payload_preferences_rels" CASCADE;
   DROP TABLE "payload_migrations" CASCADE;
-  DROP TYPE "public"."enum_stripe_transactions_status";
   DROP TYPE "public"."enum_courses_icon";`)
 }

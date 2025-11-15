@@ -1,11 +1,12 @@
 // storage-adapter-import-placeholder
-import { s3Storage } from '@payloadcms/storage-s3'
 import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import path from 'path'
+import { s3Storage } from "@payloadcms/storage-s3";
+import { stripePlugin } from "@payloadcms/plugin-stripe";
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
+import path from 'path'
 import sharp from 'sharp'
 
 import importExportPlugin from 'payload-plugin-import-export'
@@ -25,7 +26,6 @@ import {Apply_Timeline_Event} from "@/collections/Apply_Timeline_Event";
 import {About_Timeline_Event} from "@/collections/About_Timeline_Event";
 import {Applicants} from "@/collections/Applicants";
 import {Events} from "@/collections/Events";
-import {stripePlugin} from "@payloadcms/plugin-stripe";
 import {CommunityPictures} from "@/collections/CommunityPictures";
 import {CourseCategories} from "@/collections/CourseCategories";
 import {Courses} from "@/collections/Courses";
