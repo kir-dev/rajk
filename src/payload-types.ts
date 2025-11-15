@@ -273,7 +273,7 @@ export interface Award {
     };
     [k: string]: unknown;
   };
-  awardees?: (number | null) | Awardee;
+  awardees?: (number | Awardee)[] | null;
   covers?:
     | {
         cover: number | Media;
