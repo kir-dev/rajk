@@ -2,6 +2,7 @@
 import * as React from "react";
 import Link from "next/link";
 import type { ReportsGroup } from "@/payload-find/getReports";
+import type {Route} from "next";
 
 export type ReportsItem = {
     title: string;
@@ -73,7 +74,7 @@ export default function ReportsGrid({ columns, groups, className }: ReportsGridP
                                             <li key={i}>
                                                 {it.href ? (
                                                     <Link
-                                                        href={it.href}
+                                                        href={it.href as Route}
                                                         target={it.targetBlank ? "_blank" : undefined}
                                                         rel={it.targetBlank ? "noreferrer noopener" : undefined}
                                                         className="group block rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600/60 focus-visible:ring-offset-2"

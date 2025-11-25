@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import {Event} from "@/payload-types";
 import { Calendar, MapPin, User } from "lucide-react";
 import {isMedia} from "@/utils/isMedia";
+import type {Route} from "next";
 
 export function formatDateParts(iso: string) {
     const d = new Date(iso);
@@ -49,7 +50,7 @@ export function EventCard({ event, href }: { event: Event; href: string }) {
 
     return (
         <Link
-            href={href}
+            href={href as Route}
             className="group relative grid grid-cols-1 gap-6 overflow-hidden rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm transition-all duration-300 hover:border-rajk-green/30 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-rajk-green/20 sm:grid-cols-[100px,240px,1fr] sm:gap-6 max-w-3xl"
         >
             {/* Accent gradient on hover */}
