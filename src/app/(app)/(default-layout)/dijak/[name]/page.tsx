@@ -13,6 +13,7 @@ import AwardeeGrid from "@/components/AwardeeGrid";
 import {t} from "@/lib/utils";
 import AwardTitleSection from "@/components/Dijak/AwardTitleSection";
 import {notFound} from "next/navigation";
+import AwardHeroSection from "@/components/Dijak/AwardHeroSection";
 
 export default async function Page({ params }: {
     params: Promise<{ name: string }>
@@ -30,12 +31,10 @@ export default async function Page({ params }: {
     
     return (
         <div className = "flex flex-row h-fit w-full relative bg-black">
-            {/*<div className = "absolute left-0 top-0 h-full z-30 md:block">
-                <VertNavbar/>
-            </div>*/}
             <VertNavBarLayout>
-                <AwardTitleSection award={award} />
-                <Section id = {"Statistics"} title = {"Statistics"} lucideIconName = "ChartColumnBig">
+                <AwardHeroSection award={award} />
+                <AwardTitleSection award={award}/>
+                <Section id={"Statistics"} title={"Statistics"} lucideIconName="ChartColumnBig">
                     {/*<Statistics isLast = {false} color = {"blue"} szin = {"kek"} title = {"Until this year"}
                                 data = {
                                     [
