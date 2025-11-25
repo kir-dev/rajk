@@ -4,7 +4,7 @@ import SubTitle from "@/components/PageTitle/SubTitle";
 import {fetchAwardBySlug} from "@/fetch/fetchAwards";
 import React from "react";
 import Section from "@/components/Section";
-import VertNavBarLayout from "@/components/vertNavBarLayout";
+import VertNavBarLayout from "@/components/VertNavBarLayout";
 import {Awardee, Media} from "@/payload-types";
 import Image from "next/image";
 import {isMedia} from "@/utils/isMedia";

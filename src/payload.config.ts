@@ -70,7 +70,8 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || "",
     },
-    push: process.env.NODE_ENV !== 'production', // or hardcode: false
+      // This was set to process.env.NODE_ENV !== 'production', but it resulted in a lot of inconsistencies
+    push: false,
   }),
   sharp,
   plugins: [
