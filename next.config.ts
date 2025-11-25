@@ -18,7 +18,11 @@ const nextConfig: NextConfig = {
         ]
     },
     reactCompiler: true,
-    productionBrowserSourceMaps: false
+    productionBrowserSourceMaps: false,
+    typedRoutes: true,
+    experimental: {
+        typedEnv: true
+    }
 };
 
 export default withPayload(nextConfig);

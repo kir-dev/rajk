@@ -12,6 +12,7 @@ import {RichText} from "@payloadcms/richtext-lexical/react";
 import AwardeeGrid from "@/components/AwardeeGrid";
 import {t} from "@/lib/utils";
 import AwardTitleSection from "@/components/Dijak/AwardTitleSection";
+import {notFound} from "next/navigation";
 
 export default async function Page({ params }: {
     params: Promise<{ name: string }>
@@ -21,7 +22,7 @@ export default async function Page({ params }: {
     const award = await fetchAwardBySlug(awardName);
 
     if (!award) {
-        return <div className = "">Award not found</div>;
+        notFound()
     }
 
     const awardees = award.awardees && (award.awardees as Awardee[]) || [];

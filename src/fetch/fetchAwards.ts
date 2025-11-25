@@ -48,6 +48,7 @@ async function fetchAwardByName(name: string): Promise<Award | null> {
     const awards = await payload.find({
         collection: "awards",
         limit: 1,
+        pagination: false,
         depth: 2,
         where: {
             name: {

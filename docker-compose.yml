@@ -1,7 +1,7 @@
 services:
   postgres:
     container_name: rajk-postgres
-    image: postgres:18-alpine
+    image: postgres:17-alpine
     ports:
       - "${POSTGRES_PORT}:5432"
     volumes:
