@@ -91,7 +91,7 @@ export const CourseCircle = ({
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            onClick={handleClick}
+            onClick={() => {}}
         >
             {/* Main Circle */}
             <div className="relative">

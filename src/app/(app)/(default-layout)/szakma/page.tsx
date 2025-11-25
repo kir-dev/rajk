@@ -58,7 +58,7 @@ export default function SzakmaPage() {
     }, []);
 
     return (
-        <main className="min-h-screen flex flex-col py-20 bg-bezs text-black">
+        <main className="min-h-screen flex flex-col py-20 bg-bezs text-black mx-20">
             <SzakmaSection
                 title="Kurzusrendszer"
                 distribution={defaultDistribution}
@@ -66,7 +66,7 @@ export default function SzakmaPage() {
             {/* Page wrapper with nice padding and full height */}
             {isMounted ? (
                 <motion.div
-                    className="py-12 md:py-20 px-4 max-w-[1440px] mx-auto"
+                    className="px-4 max-w-[1440px] mx-auto"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
