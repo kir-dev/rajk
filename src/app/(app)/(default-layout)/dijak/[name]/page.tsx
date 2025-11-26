@@ -23,7 +23,7 @@ export default async function Page({ params }: PageProps<'/dijak/[name]'>) {
     return (
         <div className="flex flex-row h-fit w-full relative bg-black">
             <VertNavBarLayout>
-                <AwardHeroSection award={award}/>ú
+                <AwardHeroSection award={award}/>
                 <AwardTitleSection award={award}/>
                 <AwardAboutSection award={award} />
                 <AwardAwardeesSection awardees={awardees} currentAwardee={currentAwardee} />
