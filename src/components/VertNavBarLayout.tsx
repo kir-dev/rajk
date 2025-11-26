@@ -1,6 +1,6 @@
 import React from "react";
 import Section, {SectionLabelProps, SectionProps} from "@/components/Section";
-import VertNavbar from "@/components/vertNavbar";
+import VertNavbar from "@/components/VertNavbar";
 
 
 export default function VertNavBarLayout({children}: { children: React.ReactNode }) {
