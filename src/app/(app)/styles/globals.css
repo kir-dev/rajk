@@ -31,12 +31,27 @@
 
 .bg-zold {
     background-image: url('/lap_zold.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 .bg-kek {
     background-image: url('/lap_kek.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 .bg-lila {
     background-image: url('/lap_lila.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 .bg-bezs {
     background-image: url('/lap_bezs.png');

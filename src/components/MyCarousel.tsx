@@ -54,13 +54,17 @@ export function MyCarousel(props: MyCarouselProps) {
             {
                 breakpoint: 768,
                 settings: {
-                    centerMode: false,
+                    centerMode: true,
+                    centerPadding: '20px',
                     variableWidth: false,
+                    slidesToShow: 1,
                 }
             },
             {
                 breakpoint: 9999,
                 settings: {
+                    centerMode: true,
+                    centerPadding: '0px',
                     variableWidth: true,
                 }
             }
@@ -73,10 +77,10 @@ export function MyCarousel(props: MyCarouselProps) {
         <div className="slider-container px-4 md:px-8" id="carousel">
             <TypedSlider {...settings}>
                 {props.data.map((doc) => (
-                    <div key={doc.id} className="h-64 outline-none px-3 md:px-4">
-                        <div className="transition-all duration-300 ease-in-out hover:scale-105 h-full w-full md:w-auto">
+                    <div key={doc.id} className="h-64 outline-none px-2 md:px-4">
+                        <div className="transition-all duration-300 ease-in-out hover:scale-105 h-full w-full">
                             {props.clickable ? (
-                                <a href={`/esemenyek/${doc.id}`} className="block relative h-full aspect-video">
+                                <a href={`/esemenyek/${doc.id}`} className="block relative h-full w-full">
                                     {isMedia(doc.picture) ? (
                                         <Image
                                             src={doc.picture.url ?? "/rajk_strucc_black.png"}
@@ -89,7 +93,7 @@ export function MyCarousel(props: MyCarouselProps) {
                                     ) : null}
                                 </a>
                             ) : (
-                                <div className="relative h-full aspect-video">
+                                <div className="relative h-full w-full">
                                     {isMedia(doc.picture) ? (
                                         <Image
                                             src={doc.picture.url ?? "/rajk_strucc_black.png"}
