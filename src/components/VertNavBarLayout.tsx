@@ -10,6 +10,7 @@ export default function VertNavBarLayout({children}: { children: React.ReactNode
                 const props = child.props as SectionProps
                 return {id: props.id, title: props.title, lucideIconName: props.lucideIconName} as SectionLabelProps
             }
+
             return null
         })
         .filter(Boolean) as SectionLabelProps[]
