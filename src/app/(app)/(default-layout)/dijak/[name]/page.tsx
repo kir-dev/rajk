@@ -10,7 +10,7 @@ import AwardAwardeesSection from "@/components/Dijak/AwardAwardeesSection";
 import AwardHeroSectionTemplate from "@/components/Dijak/AwardHeroSectionTemplate";
 import AwardAboutSectionTemplate from "@/components/Dijak/AwardAboutSectionTemplate";
 import AwardAwardeesSectionTemplate from "@/components/Dijak/AwardAwardeesSectionTemplate";
-
+import Section from "@/components/Section";
 export default async function Page({ params }: PageProps<'/dijak/[name]'>) {
 
     const {name: awardName} = await params;
@@ -27,9 +27,15 @@ export default async function Page({ params }: PageProps<'/dijak/[name]'>) {
     return (
         <div className="flex flex-row h-fit w-full relative bg-foreground">
             <VertNavBarLayout>
-                <AwardHeroSectionTemplate />
-                <AwardAboutSectionTemplate />
-                <AwardAwardeesSectionTemplate />
+                <Section id="hero" title="" lucideIconName="/rajk_strucc_black.png">
+                    <AwardHeroSectionTemplate />
+                </Section>
+                <Section id="about" title="" lucideIconName="ScrollText">
+                    <AwardAboutSectionTemplate />
+                </Section>
+                <Section id="awardees" title="" lucideIconName="Award">
+                    <AwardAwardeesSectionTemplate />
+                </Section>
                 {/*<AwardHeroSection award={award} />
                 <AwardTitleSection award={award}/>
                 <AwardAboutSection award={award} />

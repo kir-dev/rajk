@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "stripe listen --forward-to localhost:3000/api/stripe-webhook & next dev --inspect",
+    "dev": "stripe listen --forward-to localhost:3000/api/stripe-webhook & next dev",
     "ci": "payload migrate --yes && next build --webpack",
     "build": "next build --webpack",
     "start": "next start",
