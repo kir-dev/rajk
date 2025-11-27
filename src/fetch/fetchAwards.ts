@@ -32,10 +32,12 @@ const awardUrlToAwardName = new Map<string, string>([
 
 export async function fetchAwardBySlug(slug: string): Promise<Award | null> {
     const awardName = awardUrlToAwardName.get(slug);
-    if (!awardName) {
+    // TODO: Work on error handling here
+    /*if (!awardName) {
         throw new Error("Invalid award slug");
     }
-    return fetchAwardByName(awardName);
+    return fetchAwardByName(awardName);*/
+    return awardName ? fetchAwardByName(awardName) : null;
 }
 
 /**
@@ -44,30 +46,36 @@ export async function fetchAwardBySlug(slug: string): Promise<Award | null> {
  * @returns The award object with sorted awardees or null if not found.
  */
 async function fetchAwardByName(name: string): Promise<Award | null> {
-    const payload = await getPayload({config})
-    const awards = await payload.find({
-        collection: "awards",
-        limit: 1,
-        pagination: false,
-        depth: 2,
-        where: {
-            name: {
-                equals: name,
-            },
-        },
-    });
+    try {
 
-    if (awards.docs.length === 0) {
+        const payload = await getPayload({config})
+        const awards = await payload.find({
+            collection: "awards",
+            limit: 1,
+            pagination: false,
+            depth: 2,
+            where: {
+                name: {
+                    equals: name,
+                },
+            },
+        });
+
+        if (awards.docs.length === 0) {
+            return null;
+        }
+
+        const award = awards.docs[0] as Award;
+
+        if (award.awardees) {
+            award.awardees = (award.awardees as Awardee[]).sort((a, b) => {
+                return (b.year || 0) - (a.year || 0);
+            });
+        }
+
+        return award;
+    } catch (error) {
+        console.error("Error fetching award by name:", error);
         return null;
     }
-
-    const award = awards.docs[0] as Award;
-
-    if (award.awardees) {
-        award.awardees = (award.awardees as Awardee[]).sort((a, b) => {
-            return (b.year || 0) - (a.year || 0);
-        });
-    }
-
-    return award;
 }

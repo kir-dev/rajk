@@ -14,7 +14,7 @@ import AwardAwardeesSectionTemplate from "@/components/Dijak/AwardAwardeesSectio
 export default async function Page({ params }: PageProps<'/dijak/[name]'>) {
 
     const {name: awardName} = await params;
-    const award = await fetchAwardBySlug(awardName) as Award;
+    const award = await fetchAwardBySlug(awardName);
 
     // TODO: Only commented out for the demo, re-enable later
     /*if (!award) {
@@ -27,9 +27,9 @@ export default async function Page({ params }: PageProps<'/dijak/[name]'>) {
     return (
         <div className="flex flex-row h-fit w-full relative bg-foreground">
             <VertNavBarLayout>
-                <AwardHeroSectionTemplate award={award} />
-                <AwardAboutSectionTemplate award={award} />
-                <AwardAwardeesSectionTemplate awardees={[]} />
+                <AwardHeroSectionTemplate />
+                <AwardAboutSectionTemplate />
+                <AwardAwardeesSectionTemplate />
                 {/*<AwardHeroSection award={award} />
                 <AwardTitleSection award={award}/>
                 <AwardAboutSection award={award} />

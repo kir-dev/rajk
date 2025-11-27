@@ -2,11 +2,11 @@ import { Award as AwardIcon, Users, Trophy, Sparkles } from "lucide-react"
 import {Award} from "@/payload-types";
 import Section from "@/components/Section";
 
-interface AwardAboutSectionProps {
+/*interface AwardAboutSectionProps {
     award: Award
-}
+}*/
 
-export default function AwardAboutSectionTemplate({ award }: AwardAboutSectionProps) {
+export default function AwardAboutSectionTemplate() {
     const stats = [
         {
             icon: AwardIcon,

@@ -6,11 +6,11 @@ import Section from "@/components/Section";
 import {Award} from "@/payload-types";
 import React from "react";
 
-interface AwardHeroSectionProps {
+/*interface AwardHeroSectionProps {
     award: Award;
-}
+}*/
 
-export default function AwardHeroSectionTemplate({ award } : AwardHeroSectionProps) {
+export default function AwardHeroSectionTemplate() {
     const scrollToLatest = () => {
         document.getElementById("awardees")?.scrollIntoView({ behavior: "smooth" })
     }

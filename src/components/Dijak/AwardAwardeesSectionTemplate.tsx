@@ -128,11 +128,11 @@ const years = [...new Set(awardees.map((l) => l.year))].sort((a, b) => b - a)
 const fields = [...new Set(awardees.map((l) => l.field))]
 const institutions = [...new Set(awardees.map((l) => l.institution))]
 
-interface AwardAwardeesSectionProps {
+/*interface AwardAwardeesSectionProps {
     awardees: Awardee[];
-}
+}*/
 
-export default function AwardAwardeesSectionTemplate(props : AwardAwardeesSectionProps) {
+export default function AwardAwardeesSectionTemplate() {
     const { lang } = useLanguage()
 
     const [filters, setFilters] = useState({
