@@ -155,7 +155,7 @@ export default function AwardAwardeesSectionTemplate(props : AwardAwardeesSectio
     return (
         <Section id={"awardees"} title={"Awardees"} className="py-24 px-4 border-t border-border">
             <div className="max-w-7xl mx-auto">
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{t(lang, "Díjazottak", "Awardees")}</h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-background mb-4">{t(lang, "Díjazottak", "Awardees")}</h2>
                 <p className="text-muted-foreground mb-12 max-w-2xl">
                     A Neumann János-díj eddigi kitüntetettjei, akik kiemelkedő hozzájárulást tettek az egzakt társadalomtudományok
                     fejlődéséhez.

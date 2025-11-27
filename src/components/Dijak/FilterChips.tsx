@@ -46,7 +46,7 @@ export function FilterChips({ years, fields, institutions, filters, setFilters }
                 <select
                     value={filters.year || ""}
                     onChange={(e) => setFilters((f) => ({ ...f, year: e.target.value ? Number(e.target.value) : null }))}
-                    className="bg-secondary text-secondary-foreground px-3 py-1.5 rounded-full text-sm border-0 focus:ring-2 focus:ring-primary cursor-pointer"
+                    className="bg-secondary text-background px-3 py-1.5 rounded-full text-sm border-0 focus:ring-2 focus:ring-primary cursor-pointer"
                 >
                     <option value="">Minden év</option>
                     {years.map((year) => (
@@ -67,8 +67,8 @@ export function FilterChips({ years, fields, institutions, filters, setFilters }
                     className={cn(
                         "px-3 py-1.5 rounded-full text-sm transition-colors",
                         filters.hasNobel === true
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+                            ? "bg-primary text-primary-background"
+                            : "bg-secondary text-background hover:bg-secondary/80",
                     )}
                 >
                     Nobel-díjas
@@ -78,7 +78,7 @@ export function FilterChips({ years, fields, institutions, filters, setFilters }
                 <select
                     value={filters.field || ""}
                     onChange={(e) => setFilters((f) => ({ ...f, field: e.target.value || null }))}
-                    className="bg-secondary text-secondary-foreground px-3 py-1.5 rounded-full text-sm border-0 focus:ring-2 focus:ring-primary cursor-pointer"
+                    className="bg-secondary text-background px-3 py-1.5 rounded-full text-sm border-0 focus:ring-2 focus:ring-primary cursor-pointer"
                 >
                     <option value="">Minden terület</option>
                     {fields.map((field) => (
@@ -92,7 +92,7 @@ export function FilterChips({ years, fields, institutions, filters, setFilters }
                 <select
                     value={filters.institution || ""}
                     onChange={(e) => setFilters((f) => ({ ...f, institution: e.target.value || null }))}
-                    className="bg-secondary text-secondary-foreground px-3 py-1.5 rounded-full text-sm border-0 focus:ring-2 focus:ring-primary cursor-pointer"
+                    className="bg-secondary text-background px-3 py-1.5 rounded-full text-sm border-0 focus:ring-2 focus:ring-primary cursor-pointer"
                 >
                     <option value="">Minden intézmény</option>
                     {institutions.map((inst) => (
