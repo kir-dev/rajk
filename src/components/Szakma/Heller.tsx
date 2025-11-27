@@ -1,5 +1,5 @@
-import {Group, Person} from "@/payload-types";
-import React, {useEffect, useState} from "react";
+import { Group, Person } from "@/payload-types";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import getGroupMembers from "@/payload-find/getGroups";
 
@@ -18,7 +18,7 @@ export default function Heller() {
                 } else {
                     setAwards(res as Group);
                 }
-            } catch (error){
+            } catch (error) {
                 console.error("Error fetching Heller-díj awardees:", error);
             } finally {
                 setLoading(false);
@@ -27,7 +27,7 @@ export default function Heller() {
         fetchAwards();
         console.log("Heller:")
         console.log(awardees);
-    }, []);
+    }, [awardees]);
 
     const members = awardees?.members || [];
     members.sort((a, b) => new Date(a.joined_at || 0).getFullYear() - new Date(b.joined_at || 0).getFullYear())

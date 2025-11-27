@@ -11,9 +11,10 @@ import {isMedia} from "@/utils/isMedia";
 import {RichText} from "@payloadcms/richtext-lexical/react";
 import AwardeeGrid from "@/components/AwardeeGrid";
 
-export default async function Page({params}: { params: { id?: string } }) {
+export default async function Page({params}: { params: Promise<{ name: string }> }) {
+    const { name } = await params;
     
-    const award = await fetchAward(params.id || "1");
+    const award = await fetchAward(name || "1");
     const awardee = award.awardees && (award.awardees as Awardee) || null;
     
     if (!award) {
