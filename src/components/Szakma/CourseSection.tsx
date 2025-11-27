@@ -72,7 +72,7 @@ export const CourseSection = (props: {categories: CourseCategory[], courses: Cou
                         animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
                         transition={{ delay: 0.2, duration: 0.7 }}
                     >
-                        A kollégiumi szakmaiság gerincét az évente több, mint 45 megszervezett kurzus adja. A heti rendszerességgel megtartott, kis létszámú, intenzív és nem utolsó sorban interaktív, fél-egyéves kurzusokat – akárcsak a különböző előadásokat, konferenciákat és blokkszemináriumokat – a kollégisták maguknak szervezik, azokat saját érdeklődésükhöz és igényeikhez igazítják.
+                        A kollégiumi szakmaiság gerincét az évente több, mint 45 megszervezett kurzus adja. A heti rendszerességgel megtartott, kis létszámú, intenzív és nem utolsó sorban interaktív, fél-egyéves kurzusokat – akárcsak a különböző előadásokat, konferenciákat és blokkszemináriumokat – a kollégisták maguknak szervezik, azokat saját érdeklődésükhöz és igényeikhez igazítják. A kurzustérképen a szerveződő kurzusaink egy részét jelenítettük meg.
                     </motion.p>
 
                     {categories.length > 0 && (

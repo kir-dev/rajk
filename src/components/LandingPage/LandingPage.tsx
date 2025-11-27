@@ -1,6 +1,6 @@
 'use client'
 
-import VertNavbar from "@/components/vertNavbar";
+import VertNavbar from "@/components/VertNavbar";
 import Section from "@/components/Section";
 import {PillarCard} from "@/components/LandingPage/PillarCard";
 import {Calendar, ExternalLink, GraduationCap, Handshake, MapPin, UsersRound} from "lucide-react";

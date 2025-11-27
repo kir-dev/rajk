@@ -27,6 +27,8 @@ interface ChooseAmountProps {
     isLoading: boolean;
     error: string | null;
     setError: (error: string | null) => void;
+    note: string;
+    setNote: (note: string) => void;
 }
 
 export default function ChooseAmount(props: ChooseAmountProps) {
@@ -158,6 +160,18 @@ export default function ChooseAmount(props: ChooseAmountProps) {
                         className="w-full p-2 border-2 border-black rounded-2xl"
                         placeholder="email@pelda.hu"
                         required
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <label htmlFor="name" className="block text-sm text-gray-600 mb-1">Megjegyzés:</label>
+                    <input
+                        id="note"
+                        type="text"
+                        value={props.note}
+                        onChange={(e) => props.setNote(e.target.value)}
+                        className="w-full p-2 border-2 border-black rounded-2xl"
+                        placeholder="Egyéb megjegyzés"
                     />
                 </div>
             </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { createPaymentIntent } from "@/app/(app)/(default-layout)/tamogass/actions";
+import { createPaymentIntent } from "@/app/(app)/(default-layout)/tamogatas/actions";
 import Checkout from "@/components/Stripe/Checkout";
 import React, {useEffect, useState} from "react";
 import ChooseAmount from "@/components/Stripe/ChooseAmount";
@@ -9,11 +9,14 @@ import Image from "next/image";
 import getSponsorImages from "@/payload-find/getSponsorImages";
 import {Sponsor} from "@/payload-types";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { ArrowUpRight } from 'lucide-react';
 
 export default function CheckoutPage() {
     const [amount, setAmount] = useState<number>(500000);
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
+    const [note, setNote] = useState<string>('');
     const [clientSecret, setClientSecret] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -98,10 +101,11 @@ export default function CheckoutPage() {
     };
 
     return (
-        <div className="min-h-screen bg-bezs py-20 px-4">
+        <div className="min-h-screen bg-bezs py-20 px-4 text-slate-900">
             <div className="max-w-4xl mx-auto">
-                <div className="mb-8 text-center">
-                    <h1 className="text-3xl font-bold mb-3">Támogasd a Rajk Szakkollégiumot</h1>
+                <div className="my-8 text-center items-center flex flex-col">
+                    <h1 className="text-4xl font-extrabold tracking-tight text-slate-900">Támogasd a Rajk Szakkollégiumot</h1>
+                    <div className="mx-auto my-2 h-1 w-96 rounded-full bg-emerald-600" />
                     <p className="text-gray-700 max-w-2xl mx-auto">
                         Adományoddal hozzájárulsz a Rajk Szakkollégium működéséhez és programjaihoz.
                         Segíts, hogy továbbra is biztosíthassuk a minőségi képzést a jövő generációinak.
@@ -122,6 +126,8 @@ export default function CheckoutPage() {
                                 isLoading={isLoading}
                                 error={error}
                                 setError={setError}
+                                note={note}
+                                setNote={setNote}
                             />
                         </div>
                     ) : (
@@ -139,6 +145,20 @@ export default function CheckoutPage() {
                     )}
                 </GoogleReCaptchaProvider>
             </div>
+
+            <div className="mt-8 max-w-6xl mx-auto px-4">
+                <div className="mb-8 text-center">
+                    <Link
+                        href="https://tamogatas.rajk.uni-corvinus.hu/"
+                        className="inline-flex items-center gap-1 text-2xl tracking-tight hover:text-emerald-600 text-slate-900 transition-colors duration-200 group"
+                    >
+                        <span>Konkrét projektjeinket ide kattintva találod</span>
+                        <ArrowUpRight className="transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    </Link>
+                    <div className="mx-auto mt-2 h-1 w-24 rounded-full bg-emerald-600" />
+                </div>
+            </div>
+
             <div className="mt-8 max-w-6xl mx-auto px-4">
                 <div className="mb-8 text-center">
                     <h2 className="text-4xl font-extrabold tracking-tight text-slate-900">Támogatóink</h2>

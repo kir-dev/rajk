@@ -21,6 +21,10 @@ export function getNavItems(lang: Lang): NavItem[] {
       ],
     },
     {
+      label: HU ? "Események" : "Events",
+      href: "/esemenyek",
+    },
+    {
       label: HU ? "Szakma" : "Academics",
       href: "/szakma",
       /*subItems: [
@@ -37,7 +41,7 @@ export function getNavItems(lang: Lang): NavItem[] {
       ],
     },
     { label: HU ? "Felvételi" : "Admission", href: "/felveteli", bordered: true },
-    { label: HU ? "Támogatás" : "Support", href: "/tamogass", bordered: true },
+    { label: HU ? "Támogatás" : "Support", href: "/tamogatas", bordered: true },
   ];
 }
 
