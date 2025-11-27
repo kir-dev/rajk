@@ -15,17 +15,36 @@ export default async function EventsPage() {
         idxOfNextEvent++
     }
 
-    const nextEvent = payloadEvents[idxOfNextEvent]
-    const otherEvents = payloadEvents.slice(idxOfNextEvent + 1)
+    // Check if there are any upcoming events
+    const hasUpcomingEvents = idxOfNextEvent < payloadEvents.length
+
+    let nextEvent = null as typeof payloadEvents[0] | null
+    let otherEvents = [] as typeof payloadEvents
+    let sectionTitle = "Következő esemény"
+
+    if (hasUpcomingEvents) {
+        // Show upcoming events
+        nextEvent = payloadEvents[idxOfNextEvent]
+        otherEvents = payloadEvents.slice(idxOfNextEvent + 1)
+    } else {
+        // No upcoming events, show latest past events
+        sectionTitle = "Legutóbbi esemény"
+        if (payloadEvents.length > 0) {
+            // Show events in reverse order (most recent first)
+            const reversedEvents = [...payloadEvents].reverse()
+            nextEvent = reversedEvents[0]
+            otherEvents = reversedEvents.slice(1)
+        }
+    }
 
     return (
         <div className="min-h-screen py-20 px-4 bg-bezs w-full text-black">
             <div className="container mx-auto">
-                <div className="text-3xl font-bold mb-6 mt-15 p-4 w-full bg-rajk-green rounded-lg flex">
+                <div className="text-3xl text-white font-bold mb-6 mt-15 p-4 w-full bg-rajk-green rounded-lg flex">
                     <p className="self-center">Események</p>
-                    <Image src={"/rajk_strucc_black.png"} alt={"Strucc"} width={60} height={60} className="ml-auto"/>
+                    <Image src={"/rajk_strucc_white.png"} alt={"Strucc"} width={60} height={60} className="ml-auto"/>
                 </div>
-                <h2 className="text-2xl font-semibold mb-4">Következő esemény</h2>
+                <h2 className="text-2xl font-semibold mb-4">{sectionTitle}</h2>
                 {nextEvent && (
                     <NextEvent event={nextEvent}/>
                     )

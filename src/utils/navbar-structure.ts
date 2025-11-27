@@ -21,6 +21,10 @@ export function getNavItems(lang: Lang): NavItem[] {
       ],
     },
     {
+      label: HU ? "Események" : "Events",
+      href: "/esemenyek",
+    },
+    {
       label: HU ? "Szakma" : "Academics",
       href: "/szakma",
       /*subItems: [
