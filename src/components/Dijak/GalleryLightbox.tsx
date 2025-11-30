@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { GalleryImage } from "@/components/Dijak/AwardAwardeesSection"
+import Image from "next/image";
 
 interface GalleryLightboxProps {
     images: GalleryImage[]
@@ -63,9 +64,11 @@ export function GalleryLightbox({ images, initialIndex = 0, onClose }: GalleryLi
 
             {/* Image */}
             <div className="max-w-5xl max-h-[80vh] px-16">
-                <img
+                <Image
                     src={currentImage.src || "/placeholder.svg"}
                     alt={currentImage.alt}
+                    width={700}
+                    height={700}
                     className="max-w-full max-h-[70vh] object-contain mx-auto"
                 />
                 {currentImage.caption && <p className="text-center text-white/80 mt-4 text-sm">{currentImage.caption}</p>}
