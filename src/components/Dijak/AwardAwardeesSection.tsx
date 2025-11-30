@@ -32,7 +32,7 @@ export interface AwardeeLinks {
     institutional?: string
     googleScholar?: string
     nobel?: string
-    rajk?: string
+    personalWebpage?: string
 }
 
 export interface AwardeeDownloads {
@@ -122,7 +122,6 @@ const awardees: Awardee[] = [
             institutional: "https://www.princeton.edu",
             googleScholar: "https://scholar.google.com",
             nobel: "https://www.nobelprize.org/prizes/economic-sciences/2002/kahneman",
-            rajk: "https://rajk.hu/kahneman",
         },
         downloads: {
             laudationPdf: "/downloads/kahneman-laudacio.pdf",
@@ -148,8 +147,8 @@ const awardees: Awardee[] = [
         ceremonyVideoUrl: "https://www.youtube.com/embed/placeholder-acemoglu-ceremony",
         lectureVideoUrl: "https://www.youtube.com/embed/placeholder-acemoglu-lecture",
         gallery: [
-            { src: "/acemoglu-students-university.jpg", alt: "Acemoglu hallgatókkal", caption: "Találkozás a Rajk hallgatóival" },
-            { src: "/acemoglu-lecture-hall.jpg", alt: "Előadás", caption: "Nobel-előadás" },
+            { src: "/images/placeholders/acemoglu-students-university.png", alt: "Acemoglu hallgatókkal", caption: "Találkozás a Rajk hallgatóival" },
+            { src: "/images/placeholders/acemoglu-lecture-hall.png", alt: "Előadás", caption: "Nobel-előadás" },
         ],
         relatedContent: [
             { type: "interview", title: "Why Nations Fail - Interjú Acemogluval", url: "#" },
@@ -159,7 +158,6 @@ const awardees: Awardee[] = [
         links: {
             institutional: "https://economics.mit.edu/people/faculty/daron-acemoglu",
             googleScholar: "https://scholar.google.com",
-            rajk: "https://rajk.hu/acemoglu",
         },
         downloads: {
             laudationPdf: "/downloads/acemoglu-laudacio.pdf",
@@ -237,9 +235,7 @@ const awardees: Awardee[] = [
         shortJustification: "A hiánygazdaság elméletének kidolgozásáért és a rendszerváltás közgazdaságtanáért.",
         fullBio:
             "Kornai János magyar közgazdász, a Harvard Egyetem és a Budapesti Corvinus Egyetem emeritus professzora. A hiánygazdaság és a puha költségvetési korlát fogalmainak megalkotója, munkássága alapvető az átmeneti gazdaságok megértéséhez.",
-        links: {
-            rajk: "https://rajk.hu/kornai",
-        },
+        links: {},
     },
     {
         id: 7,

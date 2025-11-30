@@ -280,15 +280,15 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                                 Nobel-oldal
                                             </a>
                                         )}
-                                        {awardee.links.rajk && (
+                                        {awardee.links.personalWebpage && (
                                             <a
-                                                href={awardee.links.rajk}
+                                                href={awardee.links.personalWebpage}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
                                             >
                                                 <ExternalLink className="w-4 h-4"/>
-                                                Rajk oldal
+                                                Személyes weboldal
                                             </a>
                                         )}
                                     </div>
@@ -438,6 +438,17 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                             Intézményi oldal
                                         </a>
                                     )}
+                                    {awardee.links.googleScholar && (
+                                        <a
+                                            href={awardee.links.googleScholar}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+                                        >
+                                            <BookOpen className="w-4 h-4"/>
+                                            Google Scholar
+                                        </a>
+                                    )}
                                     {awardee.links.nobel && (
                                         <a
                                             href={awardee.links.nobel}
@@ -447,6 +458,17 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                         >
                                             <Award className="w-4 h-4"/>
                                             Nobel-oldal
+                                        </a>
+                                    )}
+                                    {awardee.links.personalWebpage && (
+                                        <a
+                                            href={awardee.links.personalWebpage}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+                                        >
+                                            <ExternalLink className="w-4 h-4"/>
+                                            Személyes weboldal
                                         </a>
                                     )}
                                 </div>
