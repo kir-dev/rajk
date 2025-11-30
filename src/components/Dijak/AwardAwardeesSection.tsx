@@ -86,30 +86,30 @@ const awardees: Awardee[] = [
         lectureVideoUrl: "https://www.youtube.com/embed/placeholder-lecture",
         gallery: [
             {
-                src: "/kahneman-students-ceremony.jpg",
+                src: "/images/placeholders/kahneman-students-ceremony.png",
                 alt: "Kahneman a díjátadón hallgatókkal",
                 caption: "A díjátadó ünnepség a Rajk Szakkollégiumban",
             },
-            { src: "/kahneman-lecture-audience.jpg", alt: "Kahneman előadása", caption: "Nobel-előadás a közönség előtt" },
+            { src: "/images/placeholders/kahneman-lecture-audience.png", alt: "Kahneman előadása", caption: "Nobel-előadás a közönség előtt" },
             {
-                src: "/kahneman-discussion-students.jpg",
+                src: "/images/placeholders/kahneman-discussion-students.png",
                 alt: "Beszélgetés hallgatókkal",
                 caption: "Informális beszélgetés a szakkollégistákkal",
             },
-            { src: "/kahneman-award-handshake.jpg", alt: "Díjátadás pillanata", caption: "A díj átvétele" },
+            { src: "/images/placeholders/kahneman-award-handshake.png", alt: "Díjátadás pillanata", caption: "A díj átvétele" },
         ],
         relatedContent: [
             {
                 type: "interview",
                 title: "Interjú Daniel Kahnemannel a döntéshozatalról",
                 url: "#",
-                thumbnail: "/placeholder-l149l.png",
+                thumbnail: "/images/image-placeholder.png",
             },
             {
                 type: "video",
                 title: "Thinking Fast and Slow - Összefoglaló",
                 url: "#",
-                thumbnail: "/thinking-fast-slow-book.jpg",
+                thumbnail: "/images/placeholders/thinking-fast-slow-book.jpg",
             },
             { type: "podcast", title: "Rajk Podcast: Viselkedési közgazdaságtan", url: "#" },
         ],

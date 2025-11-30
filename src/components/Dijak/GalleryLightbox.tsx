@@ -17,9 +17,14 @@ export function GalleryLightbox({ images, initialIndex = 0, onClose }: GalleryLi
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
+            console.log(e.key)
             if (e.key === "Escape") onClose()
-            if (e.key === "ArrowLeft") setCurrentIndex((i) => (i > 0 ? i - 1 : images.length - 1))
-            if (e.key === "ArrowRight") setCurrentIndex((i) => (i < images.length - 1 ? i + 1 : 0))
+            if (e.key === "ArrowLeft" || e.key === "a")  {
+                setCurrentIndex((i) => (i > 0 ? i - 1 : images.length - 1))
+            }
+            if (e.key === "ArrowRight" || e.key === "d")  {
+                setCurrentIndex((i) => (i < images.length - 1 ? i + 1 : 0))
+            }
         }
         window.addEventListener("keydown", handleKeyDown)
         document.body.style.overflow = "hidden"

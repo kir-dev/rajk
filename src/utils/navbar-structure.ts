@@ -30,7 +30,7 @@ export function getNavItems(lang: Lang): NavItem[] {
     { label: HU ? "Társasadalmi felelősségvállalás" : "Social Responsibility", href: "https://szabokalmanprogram.hu/" },
     {
       label: HU ? "Díjak" : "Awards",
-      href: "/",
+      href: "#",
       subItems: [
         { label: HU ? "Neumann János-díj" : "John von Neumann Award", href: "/dijak/neumann-janos" /*href: "https://hu.wikipedia.org/wiki/Rajk_Szakkoll%C3%A9gium#Neumann_J%C3%A1nos-d%C3%ADj" */ },
         { label: HU ? "Herbert Simon-díj" : "Herbert Simon Award", href: "/dijak/herbert-simon" /*href: "https://hu.wikipedia.org/wiki/Rajk_Szakkoll%C3%A9gium#Herbert_Simon-d%C3%ADj" */ },

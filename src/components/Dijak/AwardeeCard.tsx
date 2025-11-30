@@ -143,7 +143,7 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                             className="aspect-video rounded-lg overflow-hidden hover:ring-2 ring-primary transition-all"
                                         >
                                             <Image
-                                                src={image.src || "/placeholder.svg"}
+                                                src={image.src || "/images/image-placeholder.png"}
                                                 alt={image.alt}
                                                 width={600}
                                                 height={600}
@@ -348,7 +348,7 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                     {/* Portrait */}
                     <div className="w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden flex-shrink-0">
                         <Image
-                            src={awardee.image || "/placeholder.svg"}
+                            src={awardee.image || "/images/image-placeholder.png"}
                             alt={awardee.name}
                             width={600}
                             height={600}
@@ -412,7 +412,7 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                                 className="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden hover:ring-2 ring-primary transition-all"
                                             >
                                                 <Image 
-                                                    src={image.src || "/placeholder.svg"} 
+                                                    src={image.src || "/images/image-placeholder.png"}
                                                     alt={image.alt} 
                                                     width={600}
                                                     height={600}
