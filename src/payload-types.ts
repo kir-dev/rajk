@@ -306,7 +306,62 @@ export interface Award {
 export interface Awardee {
   id: number;
   name: string;
+  institution: string;
+  origin_country: string;
+  fields_of_science: {
+    field: string;
+    id?: string | null;
+  }[];
+  fields_of_science_en: {
+    field: string;
+    id?: string | null;
+  }[];
   about: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  about_en: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  short_justification: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  short_justification_en: {
     root: {
       type: string;
       children: {
@@ -323,7 +378,12 @@ export interface Awardee {
   };
   year: number;
   picture: number | Media;
-  testimony: string;
+  has_nobel?: boolean | null;
+  nobel_year?: number | null;
+  google_scholar_link?: string | null;
+  personal_website_link?: string | null;
+  institution_website_link?: string | null;
+  nobel_website_link?: string | null;
   facebook_link?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -846,10 +906,32 @@ export interface AwardsSelect<T extends boolean = true> {
  */
 export interface AwardeesSelect<T extends boolean = true> {
   name?: T;
+  institution?: T;
+  origin_country?: T;
+  fields_of_science?:
+    | T
+    | {
+        field?: T;
+        id?: T;
+      };
+  fields_of_science_en?:
+    | T
+    | {
+        field?: T;
+        id?: T;
+      };
   about?: T;
+  about_en?: T;
+  short_justification?: T;
+  short_justification_en?: T;
   year?: T;
   picture?: T;
-  testimony?: T;
+  has_nobel?: T;
+  nobel_year?: T;
+  google_scholar_link?: T;
+  personal_website_link?: T;
+  institution_website_link?: T;
+  nobel_website_link?: T;
   facebook_link?: T;
   updatedAt?: T;
   createdAt?: T;
