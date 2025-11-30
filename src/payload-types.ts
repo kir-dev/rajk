@@ -380,6 +380,29 @@ export interface Awardee {
   picture: number | Media;
   has_nobel?: boolean | null;
   nobel_year?: number | null;
+  image_gallery: {
+    image: number | Media;
+    caption: string;
+    caption_en: string;
+    id?: string | null;
+  }[];
+  related_content: {
+    title: string;
+    title_en: string;
+    url: string;
+    thumbnail?: (number | null) | Media;
+    type: 'article' | 'interview' | 'video' | 'other';
+    id?: string | null;
+  }[];
+  downloads: AwardeeDownloads;
+  publications: {
+    title: string;
+    title_en: string;
+    author: string;
+    date: string;
+    link?: string | null;
+    id?: string | null;
+  }[];
   google_scholar_link?: string | null;
   personal_website_link?: string | null;
   institution_website_link?: string | null;
@@ -387,6 +410,14 @@ export interface Awardee {
   facebook_link?: string | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AwardeeDownloads".
+ */
+export interface AwardeeDownloads {
+  laudation_pdf?: (number | null) | Media;
+  press_photo_pack?: (number | null) | Media;
 }
 /**
  * TDK dolgozatok
@@ -928,6 +959,35 @@ export interface AwardeesSelect<T extends boolean = true> {
   picture?: T;
   has_nobel?: T;
   nobel_year?: T;
+  image_gallery?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        caption_en?: T;
+        id?: T;
+      };
+  related_content?:
+    | T
+    | {
+        title?: T;
+        title_en?: T;
+        url?: T;
+        thumbnail?: T;
+        type?: T;
+        id?: T;
+      };
+  downloads?: T | AwardeeDownloadsSelect<T>;
+  publications?:
+    | T
+    | {
+        title?: T;
+        title_en?: T;
+        author?: T;
+        date?: T;
+        link?: T;
+        id?: T;
+      };
   google_scholar_link?: T;
   personal_website_link?: T;
   institution_website_link?: T;
@@ -935,6 +995,14 @@ export interface AwardeesSelect<T extends boolean = true> {
   facebook_link?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AwardeeDownloads_select".
+ */
+export interface AwardeeDownloadsSelect<T extends boolean = true> {
+  laudation_pdf?: T;
+  press_photo_pack?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

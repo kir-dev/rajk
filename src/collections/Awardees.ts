@@ -105,6 +105,141 @@ export const Awardees: CollectionConfig = {
             required: false,
         },
         {
+            name: 'image_gallery',
+            label: 'Galéria',
+            type: 'array',
+            fields: [
+                {
+                    name: 'image',
+                    type: 'upload',
+                    relationTo: 'media',
+                    required: true,
+                },
+                {
+                    name: 'caption',
+                    label: 'Képfelirat',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'caption_en',
+                    label: 'Image caption',
+                    type: 'text',
+                    required: true,
+                }
+            ],
+            minRows: 0,
+            required: true,
+        },
+        {
+            name: 'related_content',
+            label: 'Kapcsolódó tartalmak',
+            type: 'array',
+            fields: [
+                {
+                    name: 'title',
+                    label: 'Cím',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'title_en',
+                    label: 'Title',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'url',
+                    label: 'URL',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'thumbnail',
+                    label: 'Kép',
+                    type: 'upload',
+                    relationTo: 'media',
+                    required: false,
+                },
+                {
+                    name: 'type',
+                    label: 'Típus',
+                    type: 'select',
+                    options: [
+                        {label: 'Cikk', value: 'article'},
+                        {label: 'Interjú', value: 'interview'},
+                        {label: 'Videó', value: 'video'},
+                        {label: 'Egyéb', value: 'other'},
+                    ],
+                    required: true,
+                }
+            ],
+            minRows: 0,
+            required: true,
+        },
+        {
+            name: "downloads",
+            label: "Letöltések",
+            type: "group",
+            interfaceName: "AwardeeDownloads",
+            fields: [
+                {
+                    name: 'laudation_pdf',
+                    label: 'Laudáció PDF',
+                    type: 'upload',
+                    relationTo: 'media',
+                    required: false,
+                },
+                {
+                    name: 'press_photo_pack',
+                    label: 'Sajtófotó csomag',
+                    type: 'upload',
+                    relationTo: 'media',
+                    required: false,
+                },
+                ],
+            required: true,
+        },
+        {
+            name: 'publications',
+            label: 'Publikációk',
+            type: 'array',
+            fields: [
+                {
+                    name: 'title',
+                    label: 'Cím',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'title_en',
+                    label: 'Title',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'author',
+                    label: 'Szerző(k)',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'date',
+                    label: 'Megjelenés dátuma',
+                    type: 'date',
+                    required: true,
+                },
+                {
+                    name: 'link',
+                    label: 'Link',
+                    type: 'text',
+                    required: false,
+                }
+            ],
+            minRows: 0,
+            required: true
+        },
+        {
             name: 'google_scholar_link',
             label: 'Google Scholar link',
             type: 'text',

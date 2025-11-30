@@ -424,6 +424,49 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                 </div>
                             )}
 
+                            {/* Publications section */}
+                            {awardee.publications && awardee.publications.length > 0 && (
+                                <div>
+                                    <h4 className="text-lg font-semibold text-background mb-4 flex items-center gap-2">
+                                        <FileText className="w-5 h-5 text-primary"/>
+                                        Kiadványok és cikkek
+                                    </h4>
+                                    <div className="space-y-3">
+                                        {awardee.publications.map((pub, index) => (
+                                            <div key={index}
+                                                 className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
+                                                <div>
+                                                    <p className="font-medium text-background">{pub.title}</p>
+                                                    <p className="text-sm text-muted-foreground">
+                                                        {pub.author} · {pub.date}
+                                                    </p>
+                                                </div>
+                                                <div className="flex gap-2">
+                                                    {pub.url && (
+                                                        <a
+                                                            href={pub.url}
+                                                            className="p-2 text-muted-foreground hover:text-primary transition-colors"
+                                                            aria-label="Link megnyitása"
+                                                        >
+                                                            <ExternalLink className="w-4 h-4"/>
+                                                        </a>
+                                                    )}
+                                                    {pub.pdfUrl && (
+                                                        <a
+                                                            href={pub.pdfUrl}
+                                                            className="p-2 text-muted-foreground hover:text-primary transition-colors"
+                                                            aria-label="PDF letöltése"
+                                                        >
+                                                            <Download className="w-4 h-4"/>
+                                                        </a>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
                             {/* Links footer */}
                             {awardee.links && (
                                 <div className="flex flex-wrap gap-4 pt-4 border-t border-border">
