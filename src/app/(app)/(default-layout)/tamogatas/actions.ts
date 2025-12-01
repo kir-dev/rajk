@@ -44,7 +44,7 @@ async function verifyRecaptcha(token: string) {
     return data.success && data.score >= 0.7;
 }
 
-export async function createPaymentIntent(amount: number, name: string, email: string, recaptchaToken: string) {
+export async function createPaymentIntent(amount: number, name: string, email: string, note: string, recaptchaToken: string) {
     // Get IP for rate limiting
     const headersList = await headers();
     const ip = headersList.get('x-forwarded-for')?.split(',')[0] ||
@@ -87,6 +87,7 @@ export async function createPaymentIntent(amount: number, name: string, email: s
                 source: 'donation_page',
                 donorName: name.substring(0,100),
                 donorEmail: email.substring(0,254),
+                note: note.substring(0,254),
             },
         })
 

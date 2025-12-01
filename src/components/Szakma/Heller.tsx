@@ -61,7 +61,7 @@ export default function Heller() {
 
                     {/* Text overlay positioned on the white box area */}
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="bg-white/50 p-2 rounded-md max-w-[100%] max-h-[40%]">
+                        <div className="p-4 rounded-md max-w-[100%] max-h-[40%]">
 
                             {loading ? (
                                 <div className="flex justify-center py-4">

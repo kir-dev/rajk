@@ -56,7 +56,7 @@ export default function CheckoutPage() {
         setError(null);
 
         try {
-            const response = await createPaymentIntent(amount, name, email, captchaToken);
+            const response = await createPaymentIntent(amount, name, email, note, captchaToken);
             if (response.clientSecret) {
                 setClientSecret(response.clientSecret);
                 setPaymentIntentUsed(false); // Mark as unused
