@@ -1,6 +1,8 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { getLanguageFromPath, getLocalizedPath } from "@/utils/language-routes";
 
 export type Lang = "HU" | "EN";
 
@@ -16,11 +18,22 @@ export function LanguageProvider({
   children: React.ReactNode;
 }) {
   const [lang, setLangState] = useState<Lang>(initialLang);
+  const pathname = usePathname();
+  const router = useRouter();
 
   const setLang = (l: Lang) => {
     setLangState(l);
     // persist for 1 year
     document.cookie = `lang=${l}; path=/; max-age=31536000; samesite=lax`;
+
+    // Try to find a localized path
+    if (pathname) {
+      const newPath = getLocalizedPath(pathname, l);
+      if (newPath) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        router.push(newPath as any);
+      }
+    }
   };
 
   // hydrate from cookie on the client if present
@@ -31,6 +44,16 @@ export function LanguageProvider({
       if (v === "HU" || v === "EN") setLangState(v);
     }
   }, []);
+
+  // Sync language with URL
+  useEffect(() => {
+    if (pathname) {
+      const detectedLang = getLanguageFromPath(pathname);
+      if (detectedLang && detectedLang !== lang) {
+        setLangState(detectedLang);
+      }
+    }
+  }, [pathname, lang]);
 
   // keep <html lang> in sync on the client
   useEffect(() => {

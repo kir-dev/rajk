@@ -12,7 +12,7 @@ const defSections: SectionLabelProps[] = [
   { id: "video", title: "", lucideIconName: "/rajk_strucc_black.png" },
   { id: "rolunk", title: "Közösség", lucideIconName: "UsersRound" },
   { id: "szakma", title: "Szakma", lucideIconName: "GraduationCap" },
-  { id: "tarsadalmi", title: "Társadalmi érzékenység", lucideIconName: "Handshake" },
+  { id: "tarsadalmi", title: "Társadalmi felelősségvállalás", lucideIconName: "Handshake" },
   { id: "events", title: "Események", lucideIconName: "Calendar" },
   { id: "location", title: "Elérhetőség", lucideIconName: "MapPin" },
 ]
