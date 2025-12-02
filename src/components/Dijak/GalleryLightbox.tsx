@@ -2,9 +2,13 @@
 
 import { useState, useEffect } from "react"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
-import { cn } from "@/lib/utils"
-import type { GalleryImage } from "@/components/Dijak/AwardAwardeesSection"
+import {cn, t} from "@/lib/utils"
 import Image from "next/image";
+import {Awardee} from "@/payload-types";
+import {useLanguage} from "@/components/LanguageProvider";
+import {getMediaUrl} from "@/utils/isMedia";
+
+type GalleryImage = Awardee["image_gallery"][number];
 
 interface GalleryLightboxProps {
     images: GalleryImage[]
@@ -35,6 +39,8 @@ export function GalleryLightbox({ images, initialIndex = 0, onClose }: GalleryLi
     }, [images.length, onClose])
 
     const currentImage = images[currentIndex]
+
+    const { lang } = useLanguage()
 
     return (
         <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center">
@@ -70,8 +76,8 @@ export function GalleryLightbox({ images, initialIndex = 0, onClose }: GalleryLi
             {/* Image */}
             <div className="max-w-5xl max-h-[80vh] px-16">
                 <Image
-                    src={currentImage.src || "/placeholder.svg"}
-                    alt={currentImage.alt}
+                    src={getMediaUrl(currentImage.image)}
+                    alt={t(lang, currentImage.caption, currentImage.caption_en)}
                     width={700}
                     height={700}
                     className="max-w-full max-h-[70vh] object-contain mx-auto"

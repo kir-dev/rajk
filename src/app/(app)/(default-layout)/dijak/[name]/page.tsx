@@ -12,8 +12,10 @@ export default async function Page({params}: PageProps<'/dijak/[name]'>) {
     const {name: awardName} = await params;
     const award = await fetchAwardBySlug(awardName);
 
+    console.log('Fetched award:', award);
+
     if (!award) {
-        notFound()
+        throw notFound()
     }
 
     return (

@@ -4,6 +4,11 @@ import * as migration_20251113_183716 from './20251113_183716';
 import * as migration_20251125_120736 from './20251125_120736';
 import * as migration_20251130_203245_add_additional_awardee_fields from './20251130_203245_add_additional_awardee_fields';
 import * as migration_20251130_220014_extend_awardees_with_publications_and_related_content from './20251130_220014_extend_awardees_with_publications_and_related_content';
+import * as migration_20251202_213127_add_ceremony_video_to_awardee from './20251202_213127_add_ceremony_video_to_awardee';
+import * as migration_20251202_213803_add_lecture_video_to_awardees from './20251202_213803_add_lecture_video_to_awardees';
+import * as migration_20251202_215042_add_extended_justification_for_awardees from './20251202_215042_add_extended_justification_for_awardees';
+import * as migration_20251202_215433_extended_justification_is_nullable from './20251202_215433_extended_justification_is_nullable';
+import * as migration_20251202_220232_group_websites_of_awardees from './20251202_220232_group_websites_of_awardees';
 
 export const migrations = [
   {
@@ -34,6 +39,31 @@ export const migrations = [
   {
     up: migration_20251130_220014_extend_awardees_with_publications_and_related_content.up,
     down: migration_20251130_220014_extend_awardees_with_publications_and_related_content.down,
-    name: '20251130_220014_extend_awardees_with_publications_and_related_content'
+    name: '20251130_220014_extend_awardees_with_publications_and_related_content',
+  },
+  {
+    up: migration_20251202_213127_add_ceremony_video_to_awardee.up,
+    down: migration_20251202_213127_add_ceremony_video_to_awardee.down,
+    name: '20251202_213127_add_ceremony_video_to_awardee',
+  },
+  {
+    up: migration_20251202_213803_add_lecture_video_to_awardees.up,
+    down: migration_20251202_213803_add_lecture_video_to_awardees.down,
+    name: '20251202_213803_add_lecture_video_to_awardees',
+  },
+  {
+    up: migration_20251202_215042_add_extended_justification_for_awardees.up,
+    down: migration_20251202_215042_add_extended_justification_for_awardees.down,
+    name: '20251202_215042_add_extended_justification_for_awardees',
+  },
+  {
+    up: migration_20251202_215433_extended_justification_is_nullable.up,
+    down: migration_20251202_215433_extended_justification_is_nullable.down,
+    name: '20251202_215433_extended_justification_is_nullable',
+  },
+  {
+    up: migration_20251202_220232_group_websites_of_awardees.up,
+    down: migration_20251202_220232_group_websites_of_awardees.down,
+    name: '20251202_220232_group_websites_of_awardees'
   },
 ];

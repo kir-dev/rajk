@@ -16,8 +16,12 @@ import {
 } from "lucide-react"
 import {cn} from "@/lib/utils"
 import {GalleryLightbox} from "@/components/Dijak/GalleryLightbox"
-import type {Awardee} from "@/components/Dijak/AwardAwardeesSection"
 import Image from "next/image"
+import {Awardee} from "@/payload-types";
+import {getMediaUrl} from "@/utils/isMedia";
+import {useLanguage} from "@/components/LanguageProvider";
+import {t} from "@/lib/utils";
+import {RichText} from "@payloadcms/richtext-lexical/react";
 
 interface AwardeeCardProps {
     awardee: Awardee
@@ -34,6 +38,20 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
         setLightboxOpen(true)
     }
 
+    const {lang} = useLanguage();
+
+    const getFieldsOfScienceStr = (awardee: Awardee) => {
+        return lang === "HU" ? awardee.fields_of_science.join(', ') : awardee.fields_of_science_en.join(', ');
+    }
+
+    const getShortJustificationStr = (awardee: Awardee) => {
+        return lang === "HU" ? awardee.short_justification : awardee.short_justification_en;
+    }
+
+    const getExtendedJustificationStr = (awardee: Awardee) => {
+        return lang === "HU" ? awardee.extended_justification : awardee.extended_justification_en;
+    }
+
     if (featured) {
         return (
             <>
@@ -43,17 +61,17 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                         {/* Portrait */}
                         <div className="relative aspect-square md:aspect-auto">
                             <Image
-                                src={awardee.image}
+                                src={getMediaUrl(awardee.picture)}
                                 alt={awardee.name}
                                 width={600}
                                 height={600}
                                 className="w-full h-full object-cover rounded-lg"
                             />
-                            {awardee.hasNobel && (
+                            {awardee.has_nobel && (
                                 <div
                                     className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1">
                                     <Award className="w-4 h-4"/>
-                                    Nobel {awardee.nobelYear}
+                                    Nobel {awardee.nobel_year}
                                 </div>
                             )}
                         </div>
@@ -66,7 +84,7 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                             <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-6">
                 <span className="flex items-center gap-1">
                   <MapPin className="w-4 h-4"/>
-                    {awardee.country}
+                    {awardee.origin_country}
                 </span>
                                 <span className="flex items-center gap-1">
                   <Building className="w-4 h-4"/>
@@ -74,57 +92,60 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                 </span>
                                 <span className="flex items-center gap-1">
                   <BookOpen className="w-4 h-4"/>
-                                    {awardee.field}
+                                    {getFieldsOfScienceStr(awardee)}
                 </span>
                             </div>
 
                             {/* Short justification */}
-                            {awardee.shortJustification && (
-                                <p className="text-lg text-background italic border-l-2 border-primary pl-4 mb-6">
-                                    &#34;{awardee.shortJustification}&#34;
-                                </p>
-                            )}
+                            <p className="text-lg text-background italic border-l-2 border-primary pl-4 mb-6">
+                                &#34;{getShortJustificationStr(awardee)}&#34;
+                            </p>
 
-                            <p className="text-muted-foreground leading-relaxed">{awardee.fullBio}</p>
+                            {/* Description and full bio */}
+                            <RichText data={lang === "HU" ? awardee.about : awardee.about_en} className="text-background leading-relaxed mb-6"/>
                         </div>
                     </div>
 
                     {/* Extended content section */}
                     <div className="border-t border-border p-6 md:p-8 space-y-10">
                         {/* Videos section */}
-                        {(awardee.ceremonyVideoUrl || awardee.lectureVideoUrl) && (
+                        {(awardee.lecture_video_link || awardee.ceremony_video_link) && (
                             <div>
                                 <h4 className="text-lg font-semibold text-background mb-4 flex items-center gap-2">
                                     <Play className="w-5 h-5 text-primary"/>
                                     Videók
                                 </h4>
                                 <div className="grid md:grid-cols-2 gap-6">
-                                    {awardee.ceremonyVideoUrl && (
+                                    {awardee.ceremony_video_link && (
                                         <div>
                                             <div className="aspect-video bg-muted rounded-lg overflow-hidden mb-2">
                                                 <iframe
-                                                    src={awardee.ceremonyVideoUrl}
+                                                    src={awardee.ceremony_video_link}
                                                     className="w-full h-full"
                                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                     allowFullScreen
                                                     title="Díjátadó videó"
                                                 />
                                             </div>
-                                            <p className="text-sm text-muted-foreground">Díjátadó ünnepség</p>
+                                            <p className="text-sm text-muted-foreground">
+                                                {t(lang, "Díjátadó ünnepség", "Award Ceremony")}
+                                            </p>
                                         </div>
                                     )}
-                                    {awardee.lectureVideoUrl && (
+                                    {awardee.lecture_video_link && (
                                         <div>
                                             <div className="aspect-video bg-muted rounded-lg overflow-hidden mb-2">
                                                 <iframe
-                                                    src={awardee.lectureVideoUrl}
+                                                    src={awardee.lecture_video_link}
                                                     className="w-full h-full"
                                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                     allowFullScreen
                                                     title="Előadás videó"
                                                 />
                                             </div>
-                                            <p className="text-sm text-muted-foreground">Nobel-előadás</p>
+                                            <p className="text-sm text-muted-foreground">
+                                                {t(lang, "Díjazott előadása", "Awardee Lecture")}
+                                            </p>
                                         </div>
                                     )}
                                 </div>
@@ -132,19 +153,19 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                         )}
 
                         {/* Gallery section */}
-                        {awardee.gallery && awardee.gallery.length > 0 && (
+                        {awardee.image_gallery && awardee.image_gallery.length > 0 && (
                             <div>
                                 <h4 className="text-lg font-semibold text-background mb-4">Galéria</h4>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                    {awardee.gallery.map((image, index) => (
+                                    {awardee.image_gallery.map((image, index) => (
                                         <button
                                             key={index}
                                             onClick={() => openLightbox(index)}
                                             className="aspect-video rounded-lg overflow-hidden hover:ring-2 ring-primary transition-all"
                                         >
                                             <Image
-                                                src={image.src || "/images/image-placeholder.png"}
-                                                alt={image.alt}
+                                                src={getMediaUrl(image.image, "/images/image-placeholder.png")}
+                                                alt={t(lang, image.caption, image.caption_en)}
                                                 width={600}
                                                 height={600}
                                                 className="w-full h-full object-cover"
@@ -156,11 +177,13 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                         )}
 
                         {/* Related content section */}
-                        {awardee.relatedContent && awardee.relatedContent.length > 0 && (
+                        {awardee.related_content && awardee.related_content.length > 0 && (
                             <div>
-                                <h4 className="text-lg font-semibold text-background mb-4">Kapcsolódó tartalmak</h4>
+                                <h4 className="text-lg font-semibold text-background mb-4">
+                                    {t(lang, "Kapcsolódó tartalmak", "Related Content")}
+                                </h4>
                                 <div className="grid md:grid-cols-3 gap-4">
-                                    {awardee.relatedContent.map((content, index) => (
+                                    {awardee.related_content.map((content, index) => (
                                         <a
                                             key={index}
                                             href={content.url}
@@ -170,16 +193,18 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                                 className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                                                 {content.type === "interview" && <Mic className="w-5 h-5"/>}
                                                 {content.type === "video" && <Video className="w-5 h-5"/>}
-                                                {content.type === "podcast" && <Mic className="w-5 h-5"/>}
+                                                {content.type === "interview" && <Mic className="w-5 h-5"/>}
+                                                {content.type === "other" && <FileText className="w-5 h-5"/>}
                                             </div>
                                             <div>
                                                 <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
-                                                    {content.type === "interview" && "Interjú"}
-                                                    {content.type === "video" && "Videó"}
-                                                    {content.type === "podcast" && "Podcast"}
+                                                    {content.type === "interview" && t(lang, "Interjú", "Interview")}
+                                                    {content.type === "video" && t(lang, "Videó", "Video")}
+                                                    {content.type === "interview" && "Podcast"}
+                                                    {content.type === "other" && t(lang, "Egyéb", "Other")}
                                                 </p>
                                                 <p className="text-sm font-medium text-background group-hover:text-primary transition-colors">
-                                                    {content.title}
+                                                    {t(lang, content.title, content.title_en)}
                                                 </p>
                                             </div>
                                         </a>
@@ -193,7 +218,7 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                             <div>
                                 <h4 className="text-lg font-semibold text-background mb-4 flex items-center gap-2">
                                     <FileText className="w-5 h-5 text-primary"/>
-                                    Kiadványok és cikkek
+                                    {t(lang, "Kiadványok és cikkek", "Publications and Articles")}
                                 </h4>
                                 <div className="space-y-3">
                                     {awardee.publications.map((pub, index) => (
@@ -206,16 +231,16 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                                 </p>
                                             </div>
                                             <div className="flex gap-2">
-                                                {pub.url && (
+                                                {pub.link && (
                                                     <a
-                                                        href={pub.url}
+                                                        href={pub.link}
                                                         className="p-2 text-muted-foreground hover:text-primary transition-colors"
                                                         aria-label="Link megnyitása"
                                                     >
                                                         <ExternalLink className="w-4 h-4"/>
                                                     </a>
                                                 )}
-                                                {pub.pdfUrl && (
+                                                {/*pub.pdfUrl && (
                                                     <a
                                                         href={pub.pdfUrl}
                                                         className="p-2 text-muted-foreground hover:text-primary transition-colors"
@@ -223,7 +248,7 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                                     >
                                                         <Download className="w-4 h-4"/>
                                                     </a>
-                                                )}
+                                                )*/}
                                             </div>
                                         </div>
                                     ))}
@@ -232,35 +257,35 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                         )}
 
                         {/* Extended justification */}
-                        {awardee.extendedJustification && (
+                        {getExtendedJustificationStr(awardee) && (
                             <div>
-                                <h4 className="text-lg font-semibold text-background mb-4">Indoklás</h4>
-                                <p className="text-muted-foreground leading-relaxed">{awardee.extendedJustification}</p>
+                                <h4 className="text-lg font-semibold text-background mb-4">{t(lang, "Indoklás", "Justification")}</h4>
+                                <p className="text-muted-foreground leading-relaxed">{getExtendedJustificationStr(awardee)}</p>
                             </div>
                         )}
                     </div>
 
                     {/* Footer with links and downloads */}
-                    {(awardee.links || awardee.downloads) && (
+                    {(awardee.websites || awardee.downloads) && (
                         <div className="border-t border-border p-6 md:p-8 bg-muted/30">
                             <div className="flex flex-wrap items-center justify-between gap-6">
                                 {/* Links */}
-                                {awardee.links && (
+                                {awardee.websites && (
                                     <div className="flex flex-wrap gap-4">
-                                        {awardee.links.institutional && (
+                                        {awardee.websites.institution_website_link && (
                                             <a
-                                                href={awardee.links.institutional}
+                                                href={awardee.websites.institution_website_link}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
                                             >
                                                 <Building className="w-4 h-4"/>
-                                                Intézményi oldal
+                                                {t(lang, "Intézményi oldal", "Institutional Page")}
                                             </a>
                                         )}
-                                        {awardee.links.googleScholar && (
+                                        {awardee.websites.google_scholar_link && (
                                             <a
-                                                href={awardee.links.googleScholar}
+                                                href={awardee.websites.google_scholar_link}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
@@ -269,26 +294,26 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                                 Google Scholar
                                             </a>
                                         )}
-                                        {awardee.links.nobel && (
+                                        {awardee.websites.nobel_website_link && (
                                             <a
-                                                href={awardee.links.nobel}
+                                                href={awardee.websites.nobel_website_link}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
                                             >
                                                 <Award className="w-4 h-4"/>
-                                                Nobel-oldal
+                                                {t(lang, "Nobel-oldal", "Nobel Page")}
                                             </a>
                                         )}
-                                        {awardee.links.personalWebpage && (
+                                        {awardee.websites.personal_website_link && (
                                             <a
-                                                href={awardee.links.personalWebpage}
+                                                href={awardee.websites.personal_website_link}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
                                             >
                                                 <ExternalLink className="w-4 h-4"/>
-                                                Személyes weboldal
+                                                {t(lang, "Személyes weboldal", "Personal website")}
                                             </a>
                                         )}
                                     </div>
@@ -297,22 +322,22 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                 {/* Downloads */}
                                 {awardee.downloads && (
                                     <div className="flex flex-wrap gap-4">
-                                        {awardee.downloads.laudationPdf && (
+                                        {awardee.downloads.laudation_pdf && (
                                             <a
-                                                href={awardee.downloads.laudationPdf}
+                                                href={getMediaUrl(awardee.downloads.laudation_pdf)}
                                                 className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors text-sm font-medium"
                                             >
                                                 <Download className="w-4 h-4"/>
-                                                Laudáció PDF
+                                                {t(lang, "Laudáció PDF", "Laudation PDF")}
                                             </a>
                                         )}
-                                        {awardee.downloads.pressPhotoPack && (
+                                        {awardee.downloads.press_photo_pack && (
                                             <a
-                                                href={awardee.downloads.pressPhotoPack}
+                                                href={getMediaUrl(awardee.downloads.press_photo_pack)}
                                                 className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors text-sm font-medium"
                                             >
                                                 <Download className="w-4 h-4"/>
-                                                Sajtófotók
+                                                {t(lang, "Sajtófotók", "Press Photo Pack")}
                                             </a>
                                         )}
                                     </div>
@@ -323,9 +348,9 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                 </div>
 
                 {/* Lightbox */}
-                {lightboxOpen && awardee.gallery && (
+                {lightboxOpen && awardee.image_gallery && (
                     <GalleryLightbox
-                        images={awardee.gallery}
+                        images={awardee.image_gallery}
                         initialIndex={lightboxIndex}
                         onClose={() => setLightboxOpen(false)}
                     />
@@ -348,7 +373,7 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                     {/* Portrait */}
                     <div className="w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden flex-shrink-0">
                         <Image
-                            src={awardee.image || "/images/image-placeholder.png"}
+                            src={getMediaUrl(awardee.picture, "/images/image-placeholder.png")}
                             alt={awardee.name}
                             width={600}
                             height={600}
@@ -360,15 +385,15 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                     <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
                             <h3 className="text-lg md:text-xl font-semibold text-background truncate">{awardee.name}</h3>
-                            {awardee.hasNobel && (
+                            {awardee.has_nobel && (
                                 <span
                                     className="bg-primary/20 text-primary px-2 py-0.5 rounded text-xs font-medium flex-shrink-0">
-                  Nobel {awardee.nobelYear}
+                  Nobel {awardee.nobel_year}
                 </span>
                             )}
                         </div>
                         <div className="text-sm text-muted-foreground truncate">
-                            {awardee.institution} · {awardee.country}
+                            {awardee.institution} · {awardee.origin_country}
                         </div>
                     </div>
 
@@ -388,32 +413,31 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                             <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-4">
                 <span className="flex items-center gap-1">
                   <BookOpen className="w-4 h-4"/>
-                    {awardee.field}
+                    {getFieldsOfScienceStr(awardee)}
                 </span>
                             </div>
 
-                            {awardee.shortJustification && (
-                                <p className="text-background italic border-l-2 border-primary pl-4 mb-4">
-                                    &#34;{awardee.shortJustification}&#34;
-                                </p>
+                            <p className="text-background italic border-l-2 border-primary pl-4 mb-4">
+                                    &#34;{getShortJustificationStr(awardee)}&#34;
+                            </p>
+
+                            {getExtendedJustificationStr(awardee) && (
+                                <RichText data={lang === "HU" ? awardee.about : awardee.about_en} className="text-background leading-relaxed mb-6"/>
                             )}
 
-                            <p className="text-background leading-relaxed mb-4">{awardee.description}</p>
-                            <p className="text-muted-foreground leading-relaxed mb-6">{awardee.fullBio}</p>
-
                             {/* Compact gallery preview */}
-                            {awardee.gallery && awardee.gallery.length > 0 && (
+                            {awardee.image_gallery && awardee.image_gallery.length > 0 && (
                                 <div className="mb-6">
                                     <div className="flex gap-2 overflow-x-auto pb-2">
-                                        {awardee.gallery.slice(0, 4).map((image, index) => (
+                                        {awardee.image_gallery.slice(0, 4).map((image, index) => (
                                             <button
                                                 key={index}
                                                 onClick={() => openLightbox(index)}
                                                 className="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden hover:ring-2 ring-primary transition-all"
                                             >
-                                                <Image 
-                                                    src={image.src || "/images/image-placeholder.png"}
-                                                    alt={image.alt} 
+                                                <Image
+                                                    src={getMediaUrl(image.image, "/images/image-placeholder.png")}
+                                                    alt={t(lang, image.caption, image.caption_en)}
                                                     width={600}
                                                     height={600}
                                                     className="w-full h-full object-cover"
@@ -442,16 +466,16 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                                     </p>
                                                 </div>
                                                 <div className="flex gap-2">
-                                                    {pub.url && (
+                                                    {pub.link && (
                                                         <a
-                                                            href={pub.url}
+                                                            href={pub.link}
                                                             className="p-2 text-muted-foreground hover:text-primary transition-colors"
                                                             aria-label="Link megnyitása"
                                                         >
                                                             <ExternalLink className="w-4 h-4"/>
                                                         </a>
                                                     )}
-                                                    {pub.pdfUrl && (
+                                                    {/*pub.pdfUrl && (
                                                         <a
                                                             href={pub.pdfUrl}
                                                             className="p-2 text-muted-foreground hover:text-primary transition-colors"
@@ -459,7 +483,7 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                                         >
                                                             <Download className="w-4 h-4"/>
                                                         </a>
-                                                    )}
+                                                    )*/}
                                                 </div>
                                             </div>
                                         ))}
@@ -468,22 +492,22 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                             )}
 
                             {/* Links footer */}
-                            {awardee.links && (
+                            {awardee.websites && (
                                 <div className="flex flex-wrap gap-4 pt-4 border-t border-border">
-                                    {awardee.links.institutional && (
+                                    {awardee.websites.institution_website_link && (
                                         <a
-                                            href={awardee.links.institutional}
+                                            href={awardee.websites.institution_website_link}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
                                         >
                                             <Building className="w-4 h-4"/>
-                                            Intézményi oldal
+                                            {t(lang, "Intézményi oldal", "Institutional Page")}
                                         </a>
                                     )}
-                                    {awardee.links.googleScholar && (
+                                    {awardee.websites.google_scholar_link && (
                                         <a
-                                            href={awardee.links.googleScholar}
+                                            href={awardee.websites.google_scholar_link}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
@@ -492,20 +516,20 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                             Google Scholar
                                         </a>
                                     )}
-                                    {awardee.links.nobel && (
+                                    {awardee.websites.nobel_website_link && (
                                         <a
-                                            href={awardee.links.nobel}
+                                            href={awardee.websites.nobel_website_link}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
                                         >
                                             <Award className="w-4 h-4"/>
-                                            Nobel-oldal
+                                            {t(lang, "Nobel-oldal", "Nobel Page")}
                                         </a>
                                     )}
-                                    {awardee.links.personalWebpage && (
+                                    {awardee.websites.personal_website_link && (
                                         <a
-                                            href={awardee.links.personalWebpage}
+                                            href={awardee.websites.personal_website_link}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
@@ -522,9 +546,9 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
             </div>
 
             {/* Lightbox for non-featured cards */}
-            {lightboxOpen && awardee.gallery && (
+            {lightboxOpen && awardee.image_gallery && (
                 <GalleryLightbox
-                    images={awardee.gallery}
+                    images={awardee.image_gallery}
                     initialIndex={lightboxIndex}
                     onClose={() => setLightboxOpen(false)}
                 />

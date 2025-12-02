@@ -346,40 +346,16 @@ export interface Awardee {
     };
     [k: string]: unknown;
   };
-  short_justification: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  short_justification_en: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  short_justification: string;
+  short_justification_en: string;
+  extended_justification?: string | null;
+  extended_justification_en?: string | null;
   year: number;
   picture: number | Media;
   has_nobel?: boolean | null;
   nobel_year?: number | null;
+  ceremony_video_link?: string | null;
+  lecture_video_link?: string | null;
   image_gallery: {
     image: number | Media;
     caption: string;
@@ -403,11 +379,7 @@ export interface Awardee {
     link?: string | null;
     id?: string | null;
   }[];
-  google_scholar_link?: string | null;
-  personal_website_link?: string | null;
-  institution_website_link?: string | null;
-  nobel_website_link?: string | null;
-  facebook_link?: string | null;
+  websites: AwardeeWebsites;
   updatedAt: string;
   createdAt: string;
 }
@@ -418,6 +390,16 @@ export interface Awardee {
 export interface AwardeeDownloads {
   laudation_pdf?: (number | null) | Media;
   press_photo_pack?: (number | null) | Media;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AwardeeWebsites".
+ */
+export interface AwardeeWebsites {
+  google_scholar_link?: string | null;
+  personal_website_link?: string | null;
+  institution_website_link?: string | null;
+  nobel_website_link?: string | null;
 }
 /**
  * TDK dolgozatok
@@ -955,10 +937,14 @@ export interface AwardeesSelect<T extends boolean = true> {
   about_en?: T;
   short_justification?: T;
   short_justification_en?: T;
+  extended_justification?: T;
+  extended_justification_en?: T;
   year?: T;
   picture?: T;
   has_nobel?: T;
   nobel_year?: T;
+  ceremony_video_link?: T;
+  lecture_video_link?: T;
   image_gallery?:
     | T
     | {
@@ -988,11 +974,7 @@ export interface AwardeesSelect<T extends boolean = true> {
         link?: T;
         id?: T;
       };
-  google_scholar_link?: T;
-  personal_website_link?: T;
-  institution_website_link?: T;
-  nobel_website_link?: T;
-  facebook_link?: T;
+  websites?: T | AwardeeWebsitesSelect<T>;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1003,6 +985,16 @@ export interface AwardeesSelect<T extends boolean = true> {
 export interface AwardeeDownloadsSelect<T extends boolean = true> {
   laudation_pdf?: T;
   press_photo_pack?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AwardeeWebsites_select".
+ */
+export interface AwardeeWebsitesSelect<T extends boolean = true> {
+  google_scholar_link?: T;
+  personal_website_link?: T;
+  institution_website_link?: T;
+  nobel_website_link?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -69,14 +69,26 @@ export const Awardees: CollectionConfig = {
         {
             name: 'short_justification',
             label: 'Rövid indoklás a díjazásra',
-            type: 'richText',
+            type: 'text',
             required: true,
         },
         {
             name: 'short_justification_en',
             label: 'Short justification for the award',
-            type: 'richText',
+            type: 'text',
             required: true,
+        },
+        {
+            name: 'extended_justification',
+            label: 'Bővebb indoklás a díjazásra',
+            type: 'text',
+            required: false,
+        },
+        {
+            name: 'extended_justification_en',
+            label: 'Extended justification for the award',
+            type: 'text',
+            required: false,
         },
         {
             name: 'year',
@@ -102,6 +114,18 @@ export const Awardees: CollectionConfig = {
             name: 'nobel_year',
             label: 'Nobel év',
             type: 'number',
+            required: false,
+        },
+        {
+            name: 'ceremony_video_link',
+            label: 'Díjátadó videó link',
+            type: 'text',
+            required: false,
+        },
+        {
+            name: 'lecture_video_link',
+            label: 'Előadás videó link',
+            type: 'text',
             required: false,
         },
         {
@@ -240,34 +264,37 @@ export const Awardees: CollectionConfig = {
             required: true
         },
         {
-            name: 'google_scholar_link',
-            label: 'Google Scholar link',
-            type: 'text',
-            required: false,
-        },
-        {
-            name: 'personal_website_link',
-            label: 'Személyes weboldal',
-            type: 'text',
-            required: false,
-        },
-        {
-            name: 'institution_website_link',
-            label: 'Intézményi honlap',
-            type: 'text',
-            required: false,
-        },
-        {
-            name: 'nobel_website_link',
-            label: 'Nobel oldal',
-            type: 'text',
-            required: false,
-        },
-        {
-            name: 'facebook_link',
-            label: 'Facebook link',
-            type: 'text',
-            required: false,
+            name: "websites",
+            label: "Weboldalak",
+            type: "group",
+            interfaceName: "AwardeeWebsites",
+            fields: [
+                {
+                    name: 'google_scholar_link',
+                    label: 'Google Scholar link',
+                    type: 'text',
+                    required: false,
+                },
+                {
+                    name: 'personal_website_link',
+                    label: 'Személyes weboldal',
+                    type: 'text',
+                    required: false,
+                },
+                {
+                    name: 'institution_website_link',
+                    label: 'Intézményi honlap',
+                    type: 'text',
+                    required: false,
+                },
+                {
+                    name: 'nobel_website_link',
+                    label: 'Nobel oldal',
+                    type: 'text',
+                    required: false,
+                },
+            ],
+            required: true,
         }
     ]
 }

@@ -6,7 +6,7 @@ import {AwardeeCard} from "@/components/Dijak/AwardeeCard";
 import {FilterChips} from "@/components/Dijak/FilterChips";
 import {useLanguage} from "@/components/LanguageProvider";
 import {t} from "@/lib/utils"
-import {Award} from "@/payload-types";
+import {Award, Awardee} from "@/payload-types";
 
 export interface Publication {
     title: string
@@ -41,7 +41,7 @@ export interface AwardeeDownloads {
     pressPhotoPack?: string
 }
 
-export interface Awardee {
+export interface DemoAwardee {
     id: number
     name: string
     year: number
@@ -65,7 +65,7 @@ export interface Awardee {
     downloads?: AwardeeDownloads
 }
 
-const awardees: Awardee[] = [
+const awardees: DemoAwardee[] = [
     {
         id: 1,
         name: "Kahneman, Daniel",
@@ -280,10 +280,13 @@ export default function AwardAwardeesSection({ award }: AwardAwardeesSectionProp
 
     const filteredAwardees = awardees.filter((l) => {
         if (filters.year && l.year !== filters.year) return false
-        if (filters.hasNobel !== null && l.hasNobel !== filters.hasNobel) return false
-        if (filters.field && l.field !== filters.field) return false
-        if (filters.institution && l.institution !== filters.institution) return false
-        return true
+        if (filters.hasNobel !== null && l.has_nobel !== filters.hasNobel) return false
+        if (filters.field) {
+            const fieldsOfScience = (l.fields_of_science || []).map(f => f.field);
+            if (!fieldsOfScience.includes(filters.field)) return false
+        }
+        return !(filters.institution && l.institution !== filters.institution);
+
     })
 
     const latestAwardee = awardees[0]
@@ -301,7 +304,7 @@ export default function AwardAwardeesSection({ award }: AwardAwardeesSectionProp
                 <div className="mb-16">
                     <div className="text-sm text-primary font-medium mb-4 flex items-center gap-2">
                         <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                        Legfrissebb díjazott
+                        {t(lang, "Legfrissebb díjazott", "Latest Award Winner")}
                     </div>
                     <AwardeeCard awardee={latestAwardee} featured />
                 </div>
@@ -323,7 +326,9 @@ export default function AwardAwardeesSection({ award }: AwardAwardeesSectionProp
                 </div>
 
                 {filteredAwardees.length === 0 && (
-                    <div className="text-center py-12 text-muted-foreground">Nincs találat a megadott szűrőkkel.</div>
+                    <div className="text-center py-12 text-muted-foreground">
+                        {t(lang, "Nincs találat a megadott szűrőkkel", "No matches with the current filters")}.
+                    </div>
                 )}
             </div>
         </Section>
