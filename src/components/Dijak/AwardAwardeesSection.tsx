@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import {useState} from "react"
 import Section from "@/components/Section";
 import {AwardeeCard} from "@/components/Dijak/AwardeeCard";
 import {FilterChips} from "@/components/Dijak/FilterChips";
@@ -91,13 +91,21 @@ const awardees: DemoAwardee[] = [
                 alt: "Kahneman a díjátadón hallgatókkal",
                 caption: "A díjátadó ünnepség a Rajk Szakkollégiumban",
             },
-            { src: "/images/placeholders/kahneman-lecture-audience.png", alt: "Kahneman előadása", caption: "Nobel-előadás a közönség előtt" },
+            {
+                src: "/images/placeholders/kahneman-lecture-audience.png",
+                alt: "Kahneman előadása",
+                caption: "Nobel-előadás a közönség előtt"
+            },
             {
                 src: "/images/placeholders/kahneman-discussion-students.png",
                 alt: "Beszélgetés hallgatókkal",
                 caption: "Informális beszélgetés a szakkollégistákkal",
             },
-            { src: "/images/placeholders/kahneman-award-handshake.png", alt: "Díjátadás pillanata", caption: "A díj átvétele" },
+            {
+                src: "/images/placeholders/kahneman-award-handshake.png",
+                alt: "Díjátadás pillanata",
+                caption: "A díj átvétele"
+            },
         ],
         relatedContent: [
             {
@@ -112,12 +120,12 @@ const awardees: DemoAwardee[] = [
                 url: "#",
                 thumbnail: "/images/placeholders/thinking-fast-slow-book.jpg",
             },
-            { type: "podcast", title: "Rajk Podcast: Viselkedési közgazdaságtan", url: "#" },
+            {type: "podcast", title: "Rajk Podcast: Viselkedési közgazdaságtan", url: "#"},
         ],
         publications: [
-            { title: "Kahneman és a magyar közgazdaságtan", author: "Kovács Péter", date: "2024. március 15.", url: "#" },
-            { title: "A viselkedési közgazdaságtan hatása", author: "Nagy Anna", date: "2024. március 20.", pdfUrl: "#" },
-            { title: "Interjú a díjátadó után", author: "Rajk Hírek", date: "2024. április 1.", url: "#" },
+            {title: "Kahneman és a magyar közgazdaságtan", author: "Kovács Péter", date: "2024. március 15.", url: "#"},
+            {title: "A viselkedési közgazdaságtan hatása", author: "Nagy Anna", date: "2024. március 20.", pdfUrl: "#"},
+            {title: "Interjú a díjátadó után", author: "Rajk Hírek", date: "2024. április 1.", url: "#"},
         ],
         links: {
             institutional: "https://www.princeton.edu",
@@ -148,14 +156,18 @@ const awardees: DemoAwardee[] = [
         ceremonyVideoUrl: "https://www.youtube.com/embed/placeholder-acemoglu-ceremony",
         lectureVideoUrl: "https://www.youtube.com/embed/placeholder-acemoglu-lecture",
         gallery: [
-            { src: "/images/placeholders/acemoglu-students-university.png", alt: "Acemoglu hallgatókkal", caption: "Találkozás a Rajk hallgatóival" },
-            { src: "/images/placeholders/acemoglu-lecture-hall.png", alt: "Előadás", caption: "Nobel-előadás" },
+            {
+                src: "/images/placeholders/acemoglu-students-university.png",
+                alt: "Acemoglu hallgatókkal",
+                caption: "Találkozás a Rajk hallgatóival"
+            },
+            {src: "/images/placeholders/acemoglu-lecture-hall.png", alt: "Előadás", caption: "Nobel-előadás"},
         ],
         relatedContent: [
-            { type: "interview", title: "Why Nations Fail - Interjú Acemogluval", url: "#" },
-            { type: "podcast", title: "Intézmények és fejlődés", url: "#" },
+            {type: "interview", title: "Why Nations Fail - Interjú Acemogluval", url: "#"},
+            {type: "podcast", title: "Intézmények és fejlődés", url: "#"},
         ],
-        publications: [{ title: "Acemoglu Budapesten", author: "Szabó Márton", date: "2023. november 10.", url: "#" }],
+        publications: [{title: "Acemoglu Budapesten", author: "Szabó Márton", date: "2023. november 10.", url: "#"}],
         links: {
             institutional: "https://economics.mit.edu/people/faculty/daron-acemoglu",
             googleScholar: "https://scholar.google.com",
@@ -266,10 +278,16 @@ interface AwardAwardeesSectionProps {
     award: Award
 }
 
-export default function AwardAwardeesSection({ award }: AwardAwardeesSectionProps) {
+export default function AwardAwardeesSection({award}: AwardAwardeesSectionProps) {
 
-    const awardees = (award.awardees || []) as unknown as Awardee[];
-    const { lang } = useLanguage();
+    const awardees = award.awardees as Awardee[] || [];
+
+    const {lang} = useLanguage();
+
+    const years = [...new Set(awardees.map((l) => l.year))].sort((a, b) => b - a)
+    const institutions = [...new Set(awardees.map((l) => l.institution))]
+    const fields = [...new Set(awardees.flatMap((l) => l.fields_of_science.map(f => f.field)))]
+
 
     const [filters, setFilters] = useState({
         year: null as number | null,
@@ -289,24 +307,29 @@ export default function AwardAwardeesSection({ award }: AwardAwardeesSectionProp
 
     })
 
-    const latestAwardee = awardees[0]
+    const latestAwardee = awardees.length > 0 ? awardees[0] : null;
 
     return (
         <Section id={"awardees"} title={"Awardees"} className="py-24 px-4 border-t border-border">
             <div className="max-w-7xl mx-auto">
                 <h2 className="text-3xl md:text-4xl font-bold text-background mb-4">{t(lang, "Díjazottak", "Awardees")}</h2>
                 <p className="text-muted-foreground mb-12 max-w-2xl">
-                    A Neumann János-díj eddigi kitüntetettjei, akik kiemelkedő hozzájárulást tettek az egzakt társadalomtudományok
+                    A Neumann János-díj eddigi kitüntetettjei, akik kiemelkedő hozzájárulást tettek az egzakt
+                    társadalomtudományok
                     fejlődéséhez.
                 </p>
 
                 {/* Latest Laureate Feature */}
                 <div className="mb-16">
-                    <div className="text-sm text-primary font-medium mb-4 flex items-center gap-2">
-                        <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                        {t(lang, "Legfrissebb díjazott", "Latest Award Winner")}
-                    </div>
-                    <AwardeeCard awardee={latestAwardee} featured />
+                    {latestAwardee && (
+                        <>
+                            <div className="text-sm text-primary font-medium mb-4 flex items-center gap-2">
+                                <span className="w-2 h-2 bg-primary rounded-full animate-pulse"/>
+                                {t(lang, "Legfrissebb díjazott", "Latest Award Winner")}
+                            </div>
+                            <AwardeeCard awardee={latestAwardee} featured/>
+                        </>
+                    )}
                 </div>
 
                 {/* Filters */}
@@ -321,7 +344,7 @@ export default function AwardAwardeesSection({ award }: AwardAwardeesSectionProp
                 {/* Timeline */}
                 <div className="space-y-4">
                     {filteredAwardees.slice(1).map((awardee) => (
-                        <AwardeeCard key={awardee.id} awardee={awardee} />
+                        <AwardeeCard key={awardee.id} awardee={awardee}/>
                     ))}
                 </div>
 
