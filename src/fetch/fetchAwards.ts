@@ -47,7 +47,6 @@ export async function fetchAwardBySlug(slug: string): Promise<Award | null> {
  */
 async function fetchAwardByName(name: string): Promise<Award | null> {
     try {
-
         const payload = await getPayload({config})
         const awards = await payload.find({
             collection: "awards",

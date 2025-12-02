@@ -6,6 +6,7 @@ import {AwardeeCard} from "@/components/Dijak/AwardeeCard";
 import {FilterChips} from "@/components/Dijak/FilterChips";
 import {useLanguage} from "@/components/LanguageProvider";
 import {t} from "@/lib/utils"
+import {Award} from "@/payload-types";
 
 export interface Publication {
     title: string
@@ -261,12 +262,14 @@ const years = [...new Set(awardees.map((l) => l.year))].sort((a, b) => b - a)
 const fields = [...new Set(awardees.map((l) => l.field))]
 const institutions = [...new Set(awardees.map((l) => l.institution))]
 
-/*interface AwardAwardeesSectionProps {
-    awardees: Awardee[];
-}*/
+interface AwardAwardeesSectionProps {
+    award: Award
+}
 
-export default function AwardAwardeesSection() {
-    const { lang } = useLanguage()
+export default function AwardAwardeesSection({ award }: AwardAwardeesSectionProps) {
+
+    const awardees = (award.awardees || []) as unknown as Awardee[];
+    const { lang } = useLanguage();
 
     const [filters, setFilters] = useState({
         year: null as number | null,

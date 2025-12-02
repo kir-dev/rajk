@@ -1,13 +1,21 @@
+"use client";
+
 import { Award as AwardIcon, Users, Trophy, Sparkles } from "lucide-react"
-import {Award} from "@/payload-types";
+import {Award, Awardee} from "@/payload-types";
 import Section from "@/components/Section";
+import {useLanguage} from "@/components/LanguageProvider";
+import { t } from "@/lib/utils";
 
-/*interface AwardAboutSectionProps {
+interface AwardAboutSectionProps {
     award: Award
-}*/
+}
 
-export default function AwardAboutSection() {
-    const stats = [
+export default function AwardAboutSection({ award } : AwardAboutSectionProps) {
+
+    const awardees = award.awardees && (award.awardees as Awardee[]) || [];
+    const numberOfNobelLaureates = awardees.filter(awardee => awardee.has_nobel).length;
+
+    const statsHun = [
         {
             icon: AwardIcon,
             value: "1995",
@@ -22,11 +30,22 @@ export default function AwardAboutSection() {
         },
         {
             icon: Trophy,
-            value: "5",
+            value: numberOfNobelLaureates.toString(),
             label: "Nobel-díjas",
             description: "a díjazottak közül",
         },
     ]
+
+    const statsEn = statsHun;
+    statsEn[0].label = "Founded in";
+    statsEn[0].description = "Hungary";
+    statsEn[1].label = "Awarded";
+    statsEn[1].description = "scientists so far";
+    statsEn[2].label = "Nobel laureates";
+    statsEn[2].description = "among awardees";
+
+    const { lang } = useLanguage();
+    const stats = lang === "HU" ? statsHun : statsEn;
 
     return (
         <Section id={"about"} title={"About"} className="py-24 px-4 border-t border-border">
@@ -50,25 +69,37 @@ export default function AwardAboutSection() {
                             <Sparkles className="w-6 h-6 text-primary" />
                         </div>
                         <div>
-                            <h2 className="text-2xl md:text-3xl font-bold text-background mb-2">Miben egyedi?</h2>
-                            <p className="text-md text-muted-foreground">A díjazási folyamat, ami megkülönbözteti a Neumann-díjat</p>
+                            <h2 className="text-2xl md:text-3xl font-bold text-background mb-2">{t(lang, "Miben egyedi?", "Why is it unique?")}</h2>
+                            <p className="text-md text-muted-foreground">
+                                {t(lang, `A díjazási folyamat, ami megkülönbözteti a ${award.name}at`, `The awarding process that sets the ${award.name} apart`)}
+                            </p>
                         </div>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-8">
                         <div className="space-y-4">
-                            <h3 className="text-lg font-semibold text-background">Hallgatói jelölés</h3>
+                            <h3 className="text-lg font-semibold text-background">
+                                {t(lang, "Hallgatói jelölés", "Student Nomination")}
+                            </h3>
                             <p className="text-muted-foreground leading-relaxed">
-                                A Rajk Szakkollégium hallgatói maguk jelölhetik azokat a tudósokat, akiknek munkája meghatározó hatást
-                                gyakorolt az egzakt társadalomtudományok fejlődésére. Ez a bottom-up megközelítés egyedülálló a
-                                tudományos díjak között.
+                                {t(
+                                    lang,
+                                    "A Rajk Szakkollégium hallgatói maguk jelölhetik azokat a tudósokat, akiknek munkája meghatározó hatást gyakorolt az egzakt társadalomtudományok fejlődésére. Ez a megközelítés egyedülálló a tudományos díjak között.",
+                                    "Students of the Rajk College can nominate scientists whose work has had a significant impact on the development of exact social sciences. This approach is unique among scientific awards."
+                                )}
                             </p>
                         </div>
                         <div className="space-y-4">
-                            <h3 className="text-lg font-semibold text-background">Demokratikus szavazás</h3>
+                            <h3 className="text-lg font-semibold text-background">
+                                {t(lang, "Demokratikus szavazás", "Democratic Voting")};
+                            </h3>
                             <p className="text-muted-foreground leading-relaxed">
-                                A jelöltek közül demokratikus szavazással választják ki a díjazottat. Ez a folyamat biztosítja, hogy a
-                                díj valóban azokat a tudósokat ismerje el, akik inspirálják a következő generációt.
+                                {t(
+                                    lang,
+                                    "A jelöltek közül demokratikus szavazással választják ki a díjazottat. Ez a folyamat biztosítja, hogy a díj valóban azokat a tudósokat ismerje el, akik inspirálják a következő generációt.",
+                                    "The awardee is selected through a democratic voting process among the nominees. This ensures that the award truly recognizes scientists who inspire the next generation."
+                                )}
+
                             </p>
                         </div>
                     </div>

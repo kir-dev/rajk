@@ -6,14 +6,16 @@ import Section from "@/components/Section";
 import {Award} from "@/payload-types";
 import React from "react";
 
-/*interface AwardHeroSectionProps {
+interface AwardHeroSectionProps {
     award: Award;
-}*/
+}
 
-export default function AwardHeroSection() {
+export default function AwardHeroSection({ award }: AwardHeroSectionProps) {
     const scrollToLatest = () => {
         document.getElementById("awardees")?.scrollIntoView({ behavior: "smooth" })
     }
+
+    const awardName = award.name;
 
     return (
         <Section id={"hero"} title={"Hero"} className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -50,7 +52,7 @@ export default function AwardHeroSection() {
                 </div>
 
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-foreground mb-6 tracking-tight text-balance">
-                    Neumann János-díj
+                    {awardName}
                 </h1>
 
                 <p className="text-lg md:text-xl text-foreground max-w-3xl mx-auto mb-12 leading-relaxed text-pretty">
