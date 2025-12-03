@@ -6,16 +6,18 @@ import AwardHeroSection from "@/components/Dijak/AwardHeroSection";
 import AwardAboutSection from "@/components/Dijak/AwardAboutSection";
 import AwardAwardeesSection from "@/components/Dijak/AwardAwardeesSection";
 import Section from "@/components/Section";
+import {getAwardMockData} from "@/lib/award-utils";
 
 export default async function Page({params}: PageProps<'/dijak/[name]'>) {
 
     const {name: awardName} = await params;
-    const award = await fetchAwardBySlug(awardName);
-
-    console.log('Fetched award:', award);
+    let award = await fetchAwardBySlug(awardName);
 
     if (!award) {
-        throw notFound()
+        // TODO: This will be the desired behaviour once the production db is set up
+        //throw notFound()
+
+        award = getAwardMockData("Neumann János-díj");
     }
 
     return (
