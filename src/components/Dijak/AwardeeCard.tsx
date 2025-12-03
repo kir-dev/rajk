@@ -193,14 +193,14 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                                 className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                                                 {content.type === "interview" && <Mic className="w-5 h-5"/>}
                                                 {content.type === "video" && <Video className="w-5 h-5"/>}
-                                                {content.type === "interview" && <Mic className="w-5 h-5"/>}
+                                                {content.type === "article" && <FileText className="w-5 h-5"/>}
                                                 {content.type === "other" && <FileText className="w-5 h-5"/>}
                                             </div>
                                             <div>
                                                 <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
                                                     {content.type === "interview" && t(lang, "Interjú", "Interview")}
                                                     {content.type === "video" && t(lang, "Videó", "Video")}
-                                                    {content.type === "interview" && "Podcast"}
+                                                    {content.type === "article" && t(lang, "Cikk", "Article")}
                                                     {content.type === "other" && t(lang, "Egyéb", "Other")}
                                                 </p>
                                                 <p className="text-sm font-medium text-background group-hover:text-primary transition-colors">
@@ -225,7 +225,7 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                         <div key={index}
                                              className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
                                             <div>
-                                                <p className="font-medium text-background">{pub.title}</p>
+                                                <p className="font-medium text-background">{t(lang, pub.title, pub.title_en)}</p>
                                                 <p className="text-sm text-muted-foreground">
                                                     {pub.author} · {pub.date}
                                                 </p>

@@ -8,65 +8,6 @@ import {useLanguage} from "@/components/LanguageProvider";
 import {t} from "@/lib/utils"
 import {Award, Awardee} from "@/payload-types";
 
-export interface Publication {
-    title: string
-    author: string
-    date: string
-    url?: string
-    pdfUrl?: string
-}
-
-export interface RelatedContent {
-    type: "interview" | "video" | "podcast"
-    title: string
-    url: string
-    thumbnail?: string
-}
-
-export interface GalleryImage {
-    src: string
-    alt: string
-    caption?: string
-}
-
-export interface AwardeeLinks {
-    institutional?: string
-    googleScholar?: string
-    nobel?: string
-    personalWebpage?: string
-}
-
-export interface AwardeeDownloads {
-    laudationPdf?: string
-    pressPhotoPack?: string
-}
-
-export interface DemoAwardee {
-    id: number
-    name: string
-    year: number
-    country: string
-    institution: string
-    field: string
-    hasNobel: boolean
-    nobelYear?: number
-    image: string
-    description: string
-    fullBio: string
-    // New fields
-    shortJustification?: string
-    extendedJustification?: string
-    ceremonyVideoUrl?: string
-    lectureVideoUrl?: string
-    gallery?: GalleryImage[]
-    relatedContent?: RelatedContent[]
-    publications?: Publication[]
-    links?: AwardeeLinks
-    downloads?: AwardeeDownloads
-}
-
-
-
 interface AwardAwardeesSectionProps {
     award: Award
 }
