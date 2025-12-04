@@ -104,7 +104,8 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                             </p>
 
                             {/* Description and full bio */}
-                            <RichText data={lang === "HU" ? awardee.about : awardee.about_en} className="text-background leading-relaxed mb-6"/>
+                            <RichText data={lang === "HU" ? awardee.about : awardee.about_en}
+                                      className="text-background leading-relaxed mb-6"/>
                         </div>
                     </div>
 
@@ -413,18 +414,19 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                     <div className="px-4 md:px-6 pb-6 pt-0">
                         <div className="border-t border-border pt-6 ml-0 md:ml-[calc(5rem+1.5rem)]">
                             <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-4">
-                <span className="flex items-center gap-1">
-                  <BookOpen className="w-4 h-4"/>
-                    {getFieldsOfScienceStr(awardee)}
-                </span>
+                                <span className="flex items-center gap-1">
+                                    <BookOpen className="w-4 h-4"/>
+                                    {getFieldsOfScienceStr(awardee)}
+                                </span>
                             </div>
 
                             <p className="text-background italic border-l-2 border-primary pl-4 mb-4">
-                                    &#34;{getShortJustificationStr(awardee)}&#34;
+                                &#34;{getShortJustificationStr(awardee)}&#34;
                             </p>
 
                             {getExtendedJustificationStr(awardee) && (
-                                <RichText data={lang === "HU" ? awardee.about : awardee.about_en} className="text-background leading-relaxed mb-6"/>
+                                <RichText data={lang === "HU" ? awardee.about : awardee.about_en}
+                                          className="text-background leading-relaxed mb-6"/>
                             )}
 
                             {/* Compact gallery preview */}

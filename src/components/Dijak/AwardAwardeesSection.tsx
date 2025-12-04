@@ -48,9 +48,10 @@ export default function AwardAwardeesSection({award}: AwardAwardeesSectionProps)
             <div className="max-w-7xl mx-auto">
                 <h2 className="text-3xl md:text-4xl font-bold text-background mb-4">{t(lang, "Díjazottak", "Awardees")}</h2>
                 <p className="text-muted-foreground mb-12 max-w-2xl">
-                    A Neumann János-díj eddigi kitüntetettjei, akik kiemelkedő hozzájárulást tettek az egzakt
-                    társadalomtudományok
-                    fejlődéséhez.
+                    {t(lang,
+                        `A ${award.name} eddigi kitüntetettjei, akik kiemelkedő hozzájárulást tettek az egzakt társadalomtudományok fejlődéséhez.`,
+                        `The past recipients of the ${award.name}, who have made outstanding contributions to the development of exact social sciences.`
+                    )}
                 </p>
 
                 {/* Latest Laureate Feature */}
