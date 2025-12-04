@@ -1,6 +1,6 @@
 "use client"
 
-import {useState} from "react"
+import {ReactNode, useState} from "react"
 import {
     ChevronDown,
     MapPin,
@@ -28,6 +28,40 @@ interface AwardeeCardProps {
     featured?: boolean
 }
 
+interface ExpandableSectionProps {
+    title: string
+    icon?: ReactNode
+    children: ReactNode
+    className?: string
+}
+
+function ExpandableSection({title, icon, children, className}: ExpandableSectionProps) {
+    const [isOpen, setIsOpen] = useState(true)
+
+    return (
+        <div className={className}>
+            <button
+                type="button"
+                className="flex w-full items-center justify-between gap-4 py-2 text-left"
+                onClick={() => setIsOpen(prev => !prev)}
+                aria-expanded={isOpen}
+            >
+                <span className="flex items-center gap-2 text-lg font-semibold text-background">
+                    {icon}
+                    {title}
+                </span>
+                <ChevronDown
+                    className={cn(
+                        "w-5 h-5 text-muted-foreground transition-transform",
+                        isOpen && "rotate-180",
+                    )}
+                />
+            </button>
+            {isOpen && <div className="mt-4">{children}</div>}
+        </div>
+    )
+}
+
 export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
     const [isExpanded, setIsExpanded] = useState(featured)
     const [lightboxOpen, setLightboxOpen] = useState(false)
@@ -52,6 +86,192 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
 
     const getExtendedJustificationStr = (awardee: Awardee) => {
         return lang === "HU" ? awardee.extended_justification : awardee.extended_justification_en;
+    }
+
+    const extendedJustification = getExtendedJustificationStr(awardee)
+    const hasVideos = Boolean(awardee.lecture_video_link || awardee.ceremony_video_link)
+    const hasGallery = Boolean(awardee.image_gallery && awardee.image_gallery.length > 0)
+    const hasRelated = Boolean(awardee.related_content && awardee.related_content.length > 0)
+    const hasPublications = Boolean(awardee.publications && awardee.publications.length > 0)
+    const hasJustification = Boolean(extendedJustification)
+
+    const renderVideosSection = () => {
+        if (!hasVideos) return null
+
+        return (
+            <ExpandableSection
+                title={t(lang, "Videók", "Videos")}
+                icon={<Play className="w-5 h-5 text-primary"/>}
+            >
+                <div className="grid md:grid-cols-2 gap-6">
+                    {awardee.ceremony_video_link && (
+                        <div>
+                            <div className="aspect-video bg-muted rounded-lg overflow-hidden mb-2">
+                                <iframe
+                                    src={awardee.ceremony_video_link}
+                                    className="w-full h-full"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                    title="Díjátadó videó"
+                                />
+                            </div>
+                            <p className="text-sm text-muted-foreground">
+                                {t(lang, "Díjátadó ünnepség", "Award Ceremony")}
+                            </p>
+                        </div>
+                    )}
+                    {awardee.lecture_video_link && (
+                        <div>
+                            <div className="aspect-video bg-muted rounded-lg overflow-hidden mb-2">
+                                <iframe
+                                    src={awardee.lecture_video_link}
+                                    className="w-full h-full"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                    title="Előadás videó"
+                                />
+                            </div>
+                            <p className="text-sm text-muted-foreground">
+                                {t(lang, "Díjazott előadása", "Awardee Lecture")}
+                            </p>
+                        </div>
+                    )}
+                </div>
+            </ExpandableSection>
+        )
+    }
+
+    const renderGallerySection = (variant: "featured" | "compact") => {
+        if (!hasGallery) return null
+
+        if (variant === "compact") {
+            return (
+                <ExpandableSection title={t(lang, "Galéria", "Gallery")}>
+                    <div className="flex gap-2 overflow-x-auto pb-2">
+                        {awardee.image_gallery!.slice(0, 4).map((image, index) => (
+                            <button
+                                key={index}
+                                onClick={() => openLightbox(index)}
+                                className="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden hover:ring-2 ring-primary transition-all"
+                            >
+                                <Image
+                                    src={getMediaUrl(image.image, "/images/image-placeholder.png")}
+                                    alt={t(lang, image.caption, image.caption_en)}
+                                    width={600}
+                                    height={600}
+                                    className="w-full h-full object-cover"
+                                />
+                            </button>
+                        ))}
+                    </div>
+                </ExpandableSection>
+            )
+        }
+
+        return (
+            <ExpandableSection title={t(lang, "Galéria", "Gallery")}>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {awardee.image_gallery!.map((image, index) => (
+                        <button
+                            key={index}
+                            onClick={() => openLightbox(index)}
+                            className="aspect-video rounded-lg overflow-hidden hover:ring-2 ring-primary transition-all"
+                        >
+                            <Image
+                                src={getMediaUrl(image.image, "/images/image-placeholder.png")}
+                                alt={t(lang, image.caption, image.caption_en)}
+                                width={600}
+                                height={600}
+                                className="w-full h-full object-cover"
+                            />
+                        </button>
+                    ))}
+                </div>
+            </ExpandableSection>
+        )
+    }
+
+    const renderRelatedSection = () => {
+        if (!hasRelated) return null
+
+        return (
+            <ExpandableSection title={t(lang, "Kapcsolódó tartalmak", "Related Content")}>
+                <div className="grid md:grid-cols-3 gap-4">
+                    {awardee.related_content!.map((content, index) => (
+                        <a
+                            key={index}
+                            href={content.url}
+                            className="group flex items-start gap-3 p-4 bg-muted/50 rounded-lg hover:bg-muted transition-colors"
+                        >
+                            <div
+                                className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                {content.type === "interview" && <Mic className="w-5 h-5"/>}
+                                {content.type === "video" && <Video className="w-5 h-5"/>}
+                                {content.type === "article" && <FileText className="w-5 h-5"/>}
+                                {content.type === "other" && <FileText className="w-5 h-5"/>}
+                            </div>
+                            <div>
+                                <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
+                                    {content.type === "interview" && t(lang, "Interjú", "Interview")}
+                                    {content.type === "video" && t(lang, "Videó", "Video")}
+                                    {content.type === "article" && t(lang, "Cikk", "Article")}
+                                    {content.type === "other" && t(lang, "Egyéb", "Other")}
+                                </p>
+                                <p className="text-sm font-medium text-background group-hover:text-primary transition-colors">
+                                    {t(lang, content.title, content.title_en)}
+                                </p>
+                            </div>
+                        </a>
+                    ))}
+                </div>
+            </ExpandableSection>
+        )
+    }
+
+    const renderPublicationsSection = () => {
+        if (!hasPublications) return null
+
+        return (
+            <ExpandableSection
+                title={t(lang, "Kiadványok és cikkek", "Publications and Articles")}
+                icon={<FileText className="w-5 h-5 text-primary"/>}
+            >
+                <div className="space-y-3">
+                    {awardee.publications!.map((pub, index) => (
+                        <div key={index}
+                             className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
+                            <div>
+                                <p className="font-medium text-background">{t(lang, pub.title, pub.title_en)}</p>
+                                <p className="text-sm text-muted-foreground">
+                                    {pub.author} · {pub.date}
+                                </p>
+                            </div>
+                            <div className="flex gap-2">
+                                {pub.link && (
+                                    <a
+                                        href={pub.link}
+                                        className="p-2 text-muted-foreground hover:text-primary transition-colors"
+                                        aria-label="Link megnyitása"
+                                    >
+                                        <ExternalLink className="w-4 h-4"/>
+                                    </a>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </ExpandableSection>
+        )
+    }
+
+    const renderJustificationSection = () => {
+        if (!hasJustification) return null
+
+        return (
+            <ExpandableSection title={t(lang, "Indoklás", "Justification")}>
+                <p className="text-muted-foreground leading-relaxed">{extendedJustification}</p>
+            </ExpandableSection>
+        )
     }
 
     if (featured) {
@@ -110,163 +330,15 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                     </div>
 
                     {/* Extended content section */}
-                    <div className="border-t border-border p-6 md:p-8 space-y-10">
-                        {/* Videos section */}
-                        {(awardee.lecture_video_link || awardee.ceremony_video_link) && (
-                            <div>
-                                <h4 className="text-lg font-semibold text-background mb-4 flex items-center gap-2">
-                                    <Play className="w-5 h-5 text-primary"/>
-                                    Videók
-                                </h4>
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    {awardee.ceremony_video_link && (
-                                        <div>
-                                            <div className="aspect-video bg-muted rounded-lg overflow-hidden mb-2">
-                                                <iframe
-                                                    src={awardee.ceremony_video_link}
-                                                    className="w-full h-full"
-                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                    allowFullScreen
-                                                    title="Díjátadó videó"
-                                                />
-                                            </div>
-                                            <p className="text-sm text-muted-foreground">
-                                                {t(lang, "Díjátadó ünnepség", "Award Ceremony")}
-                                            </p>
-                                        </div>
-                                    )}
-                                    {awardee.lecture_video_link && (
-                                        <div>
-                                            <div className="aspect-video bg-muted rounded-lg overflow-hidden mb-2">
-                                                <iframe
-                                                    src={awardee.lecture_video_link}
-                                                    className="w-full h-full"
-                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                    allowFullScreen
-                                                    title="Előadás videó"
-                                                />
-                                            </div>
-                                            <p className="text-sm text-muted-foreground">
-                                                {t(lang, "Díjazott előadása", "Awardee Lecture")}
-                                            </p>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Gallery section */}
-                        {awardee.image_gallery && awardee.image_gallery.length > 0 && (
-                            <div>
-                                <h4 className="text-lg font-semibold text-background mb-4">Galéria</h4>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                    {awardee.image_gallery.map((image, index) => (
-                                        <button
-                                            key={index}
-                                            onClick={() => openLightbox(index)}
-                                            className="aspect-video rounded-lg overflow-hidden hover:ring-2 ring-primary transition-all"
-                                        >
-                                            <Image
-                                                src={getMediaUrl(image.image, "/images/image-placeholder.png")}
-                                                alt={t(lang, image.caption, image.caption_en)}
-                                                width={600}
-                                                height={600}
-                                                className="w-full h-full object-cover"
-                                            />
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Related content section */}
-                        {awardee.related_content && awardee.related_content.length > 0 && (
-                            <div>
-                                <h4 className="text-lg font-semibold text-background mb-4">
-                                    {t(lang, "Kapcsolódó tartalmak", "Related Content")}
-                                </h4>
-                                <div className="grid md:grid-cols-3 gap-4">
-                                    {awardee.related_content.map((content, index) => (
-                                        <a
-                                            key={index}
-                                            href={content.url}
-                                            className="group flex items-start gap-3 p-4 bg-muted/50 rounded-lg hover:bg-muted transition-colors"
-                                        >
-                                            <div
-                                                className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                                                {content.type === "interview" && <Mic className="w-5 h-5"/>}
-                                                {content.type === "video" && <Video className="w-5 h-5"/>}
-                                                {content.type === "article" && <FileText className="w-5 h-5"/>}
-                                                {content.type === "other" && <FileText className="w-5 h-5"/>}
-                                            </div>
-                                            <div>
-                                                <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
-                                                    {content.type === "interview" && t(lang, "Interjú", "Interview")}
-                                                    {content.type === "video" && t(lang, "Videó", "Video")}
-                                                    {content.type === "article" && t(lang, "Cikk", "Article")}
-                                                    {content.type === "other" && t(lang, "Egyéb", "Other")}
-                                                </p>
-                                                <p className="text-sm font-medium text-background group-hover:text-primary transition-colors">
-                                                    {t(lang, content.title, content.title_en)}
-                                                </p>
-                                            </div>
-                                        </a>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Publications section */}
-                        {awardee.publications && awardee.publications.length > 0 && (
-                            <div>
-                                <h4 className="text-lg font-semibold text-background mb-4 flex items-center gap-2">
-                                    <FileText className="w-5 h-5 text-primary"/>
-                                    {t(lang, "Kiadványok és cikkek", "Publications and Articles")}
-                                </h4>
-                                <div className="space-y-3">
-                                    {awardee.publications.map((pub, index) => (
-                                        <div key={index}
-                                             className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
-                                            <div>
-                                                <p className="font-medium text-background">{t(lang, pub.title, pub.title_en)}</p>
-                                                <p className="text-sm text-muted-foreground">
-                                                    {pub.author} · {pub.date}
-                                                </p>
-                                            </div>
-                                            <div className="flex gap-2">
-                                                {pub.link && (
-                                                    <a
-                                                        href={pub.link}
-                                                        className="p-2 text-muted-foreground hover:text-primary transition-colors"
-                                                        aria-label="Link megnyitása"
-                                                    >
-                                                        <ExternalLink className="w-4 h-4"/>
-                                                    </a>
-                                                )}
-                                                {/*pub.pdfUrl && (
-                                                    <a
-                                                        href={pub.pdfUrl}
-                                                        className="p-2 text-muted-foreground hover:text-primary transition-colors"
-                                                        aria-label="PDF letöltése"
-                                                    >
-                                                        <Download className="w-4 h-4"/>
-                                                    </a>
-                                                )*/}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Extended justification */}
-                        {getExtendedJustificationStr(awardee) && (
-                            <div>
-                                <h4 className="text-lg font-semibold text-background mb-4">{t(lang, "Indoklás", "Justification")}</h4>
-                                <p className="text-muted-foreground leading-relaxed">{getExtendedJustificationStr(awardee)}</p>
-                            </div>
-                        )}
-                    </div>
+                    {hasVideos || hasGallery || hasRelated || hasPublications || hasJustification ? (
+                        <div className="border-t border-border p-6 md:p-8 space-y-8">
+                            {renderVideosSection()}
+                            {renderGallerySection("featured")}
+                            {renderRelatedSection()}
+                            {renderPublicationsSection()}
+                            {renderJustificationSection()}
+                        </div>
+                    ) : null}
 
                     {/* Footer with links and downloads */}
                     {(awardee.websites || awardee.downloads) && (
@@ -424,76 +496,18 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                                 &#34;{getShortJustificationStr(awardee)}&#34;
                             </p>
 
-                            {getExtendedJustificationStr(awardee) && (
+                            {extendedJustification && (
                                 <RichText data={lang === "HU" ? awardee.about : awardee.about_en}
                                           className="text-background leading-relaxed mb-6"/>
                             )}
 
-                            {/* Compact gallery preview */}
-                            {awardee.image_gallery && awardee.image_gallery.length > 0 && (
-                                <div className="mb-6">
-                                    <div className="flex gap-2 overflow-x-auto pb-2">
-                                        {awardee.image_gallery.slice(0, 4).map((image, index) => (
-                                            <button
-                                                key={index}
-                                                onClick={() => openLightbox(index)}
-                                                className="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden hover:ring-2 ring-primary transition-all"
-                                            >
-                                                <Image
-                                                    src={getMediaUrl(image.image, "/images/image-placeholder.png")}
-                                                    alt={t(lang, image.caption, image.caption_en)}
-                                                    width={600}
-                                                    height={600}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Publications section */}
-                            {awardee.publications && awardee.publications.length > 0 && (
-                                <div>
-                                    <h4 className="text-lg font-semibold text-background mb-4 flex items-center gap-2">
-                                        <FileText className="w-5 h-5 text-primary"/>
-                                        Kiadványok és cikkek
-                                    </h4>
-                                    <div className="space-y-3">
-                                        {awardee.publications.map((pub, index) => (
-                                            <div key={index}
-                                                 className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
-                                                <div>
-                                                    <p className="font-medium text-background">{pub.title}</p>
-                                                    <p className="text-sm text-muted-foreground">
-                                                        {pub.author} · {pub.date}
-                                                    </p>
-                                                </div>
-                                                <div className="flex gap-2">
-                                                    {pub.link && (
-                                                        <a
-                                                            href={pub.link}
-                                                            className="p-2 text-muted-foreground hover:text-primary transition-colors"
-                                                            aria-label="Link megnyitása"
-                                                        >
-                                                            <ExternalLink className="w-4 h-4"/>
-                                                        </a>
-                                                    )}
-                                                    {/*pub.pdfUrl && (
-                                                        <a
-                                                            href={pub.pdfUrl}
-                                                            className="p-2 text-muted-foreground hover:text-primary transition-colors"
-                                                            aria-label="PDF letöltése"
-                                                        >
-                                                            <Download className="w-4 h-4"/>
-                                                        </a>
-                                                    )*/}
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
+                            <div className="space-y-6">
+                                {renderVideosSection()}
+                                {renderGallerySection("compact")}
+                                {renderRelatedSection()}
+                                {renderPublicationsSection()}
+                                {renderJustificationSection()}
+                            </div>
 
                             {/* Links footer */}
                             {awardee.websites && (
