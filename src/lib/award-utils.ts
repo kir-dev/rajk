@@ -599,6 +599,7 @@ export function getAwardLocalizedName(award: Award, lang: Lang): string {
 
 export function getAwardMockData(awardName: string): Award {
     return {
+        about_en: {root: {children: [], direction: "rtl", format: "left", indent: 0, type: "", version: 0}},
         about: {root: {children: [], direction: "rtl", format: "left", indent: 0, type: "", version: 0}},
         logo: {
             url: "/neumannlogo_2020_white-2.png",

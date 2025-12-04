@@ -55,13 +55,13 @@ export default function AwardAboutSection({ award } : AwardAboutSectionProps) {
         <Section id={"about"} title={"About"} className="py-24 px-4 border-t border-border">
             <div className="max-w-7xl mx-auto">
                 {/* Award Description */}
-                <div className="mb-16">
+                <div className="bg-card border border-border rounded-lg p-8 md:p-12 mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold text-background mb-4">{t(lang, "A díjról", "About the Award")}</h2>
                     <RichText data={lang == "HU" ? award.about : award.about_en} className="text-md text-background leading-relaxed" />
                 </div>
 
                 {/* About the Program */}
-                <div className="mb-16">
+                <div className="bg-card border border-border rounded-lg p-8 md:p-12 mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold text-background mb-4">{t(lang, "A programról", "About the Program")}</h2>
                     <p className="text-md text-background leading-relaxed">
                         {aboutTheProgramStr}
