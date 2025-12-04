@@ -2,7 +2,7 @@
 
 import { CourseSection } from "@/components/Szakma/CourseSection";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import {useEffect, useEffectEvent, useState} from "react";
 import {Course, CourseCategory, Group, Person} from "@/payload-types";
 import getCourses from "@/payload-find/getCourses";
 import getCourseCategories from "@/payload-find/getCourseCategories";
@@ -31,7 +31,7 @@ export default function SzakmaPage() {
                 console.error("Error fetching Heller-díj awardees:", error);
             }
         }
-        fetchAwards();
+        void fetchAwards();
     }, []);
 
     const members = teachers?.members || [];
@@ -52,9 +52,13 @@ export default function SzakmaPage() {
         setCategories(await getCourseCategories());
     }
 
-    useEffect(() => {
+    const onMounted = useEffectEvent(() => {
         setIsMounted(true);
-        fetchData();
+        void fetchData();
+    })
+
+    useEffect(() => {
+        onMounted();
     }, []);
 
     return (

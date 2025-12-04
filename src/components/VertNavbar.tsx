@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useMemo } from "react"
+import {useEffect, useState, useMemo, useEffectEvent} from "react"
 import cn from "@/utils/concatenate"
 import useIntersectionObserver from "@/hooks/useIntersectionObserver"
 import Image from "next/image";
@@ -25,7 +25,14 @@ export function VertNavbar({ sections }: { sections?: SectionLabelProps[] }) {
   const [activePillStyle, setActivePillStyle] = useState({ transform: "translateY(0px)", opacity: 0 })
   const [isOpen, setIsOpen] = useState(false)
 
-  useIntersectionObserver(setActiveSection)
+  useIntersectionObserver(setActiveSection);
+
+  const onSectionChanged = useEffectEvent((newOpacity: number, newTransform: string) => {
+      setActivePillStyle(prev => {
+          if (prev.transform === newTransform && prev.opacity === newOpacity) return prev
+          return { transform: newTransform, opacity: newOpacity }
+      })
+  })
 
   useEffect(() => {
     const activeIndex = localSections.findIndex(s => s.id === activeSection)
@@ -34,10 +41,7 @@ export function VertNavbar({ sections }: { sections?: SectionLabelProps[] }) {
     const newTransform = `translateY(${newY}px)`
 
     // only update state when values actually change to avoid infinite loops
-    setActivePillStyle(prev => {
-      if (prev.transform === newTransform && prev.opacity === newOpacity) return prev
-      return { transform: newTransform, opacity: newOpacity }
-    })
+    onSectionChanged(newOpacity, newTransform);
   }, [activeSection, localSections])
 
   const scrollToSection = (id: string) => {

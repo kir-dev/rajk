@@ -2,8 +2,7 @@ import Link from "next/link";
 import type {Route} from "next";
 
 export default function NavBarItem(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    {text, href, selected = false, bordered = false, onClick}: {
+    {text, href, bordered = false, onClick}: {
         text: string;
         href: string;
         selected?: boolean;

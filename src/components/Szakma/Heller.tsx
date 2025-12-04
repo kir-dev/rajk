@@ -1,11 +1,16 @@
 import {Group, Person} from "@/payload-types";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useEffectEvent, useState} from "react";
 import Image from "next/image";
 import getGroupMembers from "@/payload-find/getGroups";
 
 export default function Heller() {
     const [loading, setLoading] = useState<boolean>(true);
     const [awardees, setAwards] = useState<Group | null>(null);
+
+    const logAwardees = useEffectEvent(() => {
+        console.log("Heller:")
+        console.log(awardees);
+    })
 
     useEffect(() => {
         async function fetchAwards() {
@@ -24,9 +29,9 @@ export default function Heller() {
                 setLoading(false);
             }
         }
-        fetchAwards();
-        console.log("Heller:")
-        console.log(awardees);
+        void fetchAwards();
+
+        logAwardees()
     }, []);
 
     const members = awardees?.members || [];
