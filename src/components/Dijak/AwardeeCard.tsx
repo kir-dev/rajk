@@ -41,7 +41,9 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
     const {lang} = useLanguage();
 
     const getFieldsOfScienceStr = (awardee: Awardee) => {
-        return lang === "HU" ? awardee.fields_of_science.join(', ') : awardee.fields_of_science_en.join(', ');
+        return lang === "HU"
+            ? awardee.fields_of_science.map(f => f.field).join(', ')
+            : awardee.fields_of_science_en.map(f => f.field).join(', ');
     }
 
     const getShortJustificationStr = (awardee: Awardee) => {
