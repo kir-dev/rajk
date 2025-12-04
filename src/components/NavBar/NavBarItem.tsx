@@ -11,6 +11,12 @@ export default function NavBarItem(
         onClick?: () => void;
     }
 ) {
+    if (href === "#" || href === "") {
+        return (<span
+            className={`font-bold px-2 inline-block max-lg:w-auto max-xl:w-min lg:text-center cursor-default ${bordered ? 'border-2 border-white rounded mx-2 px-4 py-1 hover:border-gray-300' : 'hover:underline underline-offset-4'} duration-100`}
+            onClick={onClick}>{text}</span>)
+    }
+
     return (<>
         <Link
             className={`font-bold px-2 inline-block max-lg:w-auto max-xl:w-min lg:text-center ${bordered ? 'border-2 border-white rounded mx-2 px-4 py-1 hover:border-gray-300' : 'hover:underline underline-offset-4 '} duration-100`}
