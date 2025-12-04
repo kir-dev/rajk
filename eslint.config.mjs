@@ -7,7 +7,7 @@ const eslintConfig = [
     ...nextTypescript,
     reactHooks.configs.flat['recommended-latest'],
     {
-        ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts"]
+        ignores: ["node_modules/**", ".next/**", "src/migrations/**", "out/**", "build/**", "next-env.d.ts"]
     }
 ];
 
