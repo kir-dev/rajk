@@ -12,7 +12,7 @@ import {
     Play,
     Mic,
     Video,
-    FileText,
+    FileText, ImageIcon,
 } from "lucide-react"
 import {cn} from "@/lib/utils"
 import {GalleryLightbox} from "@/components/Dijak/GalleryLightbox"
@@ -22,44 +22,11 @@ import {getMediaUrl} from "@/utils/isMedia";
 import {useLanguage} from "@/components/LanguageProvider";
 import {t} from "@/lib/utils";
 import {RichText} from "@payloadcms/richtext-lexical/react";
+import {ExpandableSection} from "@/components/ExpendableSection";
 
 interface AwardeeCardProps {
     awardee: Awardee
     featured?: boolean
-}
-
-interface ExpandableSectionProps {
-    title: string
-    icon?: ReactNode
-    children: ReactNode
-    className?: string
-}
-
-function ExpandableSection({title, icon, children, className}: ExpandableSectionProps) {
-    const [isOpen, setIsOpen] = useState(true)
-
-    return (
-        <div className={className}>
-            <button
-                type="button"
-                className="flex w-full items-center justify-between gap-4 py-2 text-left"
-                onClick={() => setIsOpen(prev => !prev)}
-                aria-expanded={isOpen}
-            >
-                <span className="flex items-center gap-2 text-lg font-semibold text-background">
-                    {icon}
-                    {title}
-                </span>
-                <ChevronDown
-                    className={cn(
-                        "w-5 h-5 text-muted-foreground transition-transform",
-                        isOpen && "rotate-180",
-                    )}
-                />
-            </button>
-            {isOpen && <div className="mt-4">{children}</div>}
-        </div>
-    )
 }
 
 export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
@@ -89,9 +56,10 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
     }
 
     const extendedJustification = getExtendedJustificationStr(awardee)
+
     const hasVideos = Boolean(awardee.lecture_video_link || awardee.ceremony_video_link)
     const hasGallery = Boolean(awardee.image_gallery && awardee.image_gallery.length > 0)
-    const hasRelated = Boolean(awardee.related_content && awardee.related_content.length > 0)
+    const hasRelatedContent = Boolean(awardee.related_content && awardee.related_content.length > 0)
     const hasPublications = Boolean(awardee.publications && awardee.publications.length > 0)
     const hasJustification = Boolean(extendedJustification)
 
@@ -146,7 +114,10 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
 
         if (variant === "compact") {
             return (
-                <ExpandableSection title={t(lang, "Galéria", "Gallery")}>
+                <ExpandableSection
+                    title={t(lang, "Galéria", "Image Gallery")}
+                    icon={<ImageIcon className="w-5 h-5 text-primary" />}
+                >
                     <div className="flex gap-2 overflow-x-auto pb-2">
                         {awardee.image_gallery!.slice(0, 4).map((image, index) => (
                             <button
@@ -169,7 +140,10 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
         }
 
         return (
-            <ExpandableSection title={t(lang, "Galéria", "Gallery")}>
+            <ExpandableSection
+                title={t(lang, "Galéria", "Image Gallery")}
+                icon={<ImageIcon className="w-5 h-5 text-primary" />}
+            >
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {awardee.image_gallery!.map((image, index) => (
                         <button
@@ -192,7 +166,7 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
     }
 
     const renderRelatedSection = () => {
-        if (!hasRelated) return null
+        if (!hasRelatedContent) return null
 
         return (
             <ExpandableSection title={t(lang, "Kapcsolódó tartalmak", "Related Content")}>
@@ -268,7 +242,10 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
         if (!hasJustification) return null
 
         return (
-            <ExpandableSection title={t(lang, "Indoklás", "Justification")}>
+            <ExpandableSection
+                title={t(lang, "Indoklás", "Justification")}
+                icon={<Award className="w-5 h-5 text-primary"/>}
+            >
                 <p className="text-muted-foreground leading-relaxed">{extendedJustification}</p>
             </ExpandableSection>
         )
@@ -330,7 +307,7 @@ export function AwardeeCard({awardee, featured = false}: AwardeeCardProps) {
                     </div>
 
                     {/* Extended content section */}
-                    {hasVideos || hasGallery || hasRelated || hasPublications || hasJustification ? (
+                    {hasVideos || hasGallery || hasRelatedContent || hasPublications || hasJustification ? (
                         <div className="border-t border-border p-6 md:p-8 space-y-8">
                             {renderVideosSection()}
                             {renderGallerySection("featured")}
