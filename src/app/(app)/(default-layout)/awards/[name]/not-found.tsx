@@ -8,8 +8,8 @@ export default function AwardNotFound() {
             <p>Check out our existing awards</p>
             <div>
                 <ul className="list-disc list-inside">
-                    <li><Link href="/dijak/neumann-janos">Neumann János-díj</Link></li>
-                    <li><Link href="/dijak/herbert-simon">Herbert Simon-díj</Link></li>
+                    <li><Link href="/awards/neumann-janos">Neumann János-díj</Link></li>
+                    <li><Link href="/awards/herbert-simon">Herbert Simon-díj</Link></li>
                 </ul>
             </div>
             <p>or</p>

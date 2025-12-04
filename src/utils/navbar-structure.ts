@@ -32,8 +32,8 @@ export function getNavItems(lang: Lang): NavItem[] {
       label: HU ? "Díjak" : "Awards",
       href: "#",
       subItems: [
-        { label: HU ? "Neumann János-díj" : "John von Neumann Award", href: "/dijak/neumann-janos" /*href: "https://hu.wikipedia.org/wiki/Rajk_Szakkoll%C3%A9gium#Neumann_J%C3%A1nos-d%C3%ADj" */ },
-        { label: HU ? "Herbert Simon-díj" : "Herbert Simon Award", href: "/dijak/herbert-simon" /*href: "https://hu.wikipedia.org/wiki/Rajk_Szakkoll%C3%A9gium#Herbert_Simon-d%C3%ADj" */ },
+        { label: HU ? "Neumann János-díj" : "John von Neumann Award", href: "/awards/neumann-janos" /*href: "https://hu.wikipedia.org/wiki/Rajk_Szakkoll%C3%A9gium#Neumann_J%C3%A1nos-d%C3%ADj" */ },
+        { label: HU ? "Herbert Simon-díj" : "Herbert Simon Award", href: "/awards/herbert-simon" /*href: "https://hu.wikipedia.org/wiki/Rajk_Szakkoll%C3%A9gium#Herbert_Simon-d%C3%ADj" */ },
       ],
     },
     { label: HU ? "Felvételi" : "Admission", href: "/felveteli", bordered: true },
