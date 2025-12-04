@@ -5,6 +5,8 @@ import {Award, Awardee} from "@/payload-types";
 import Section from "@/components/Section";
 import {useLanguage} from "@/components/LanguageProvider";
 import { t } from "@/lib/utils";
+import {getProgramDescription} from "@/lib/award-utils";
+import {RichText} from "@payloadcms/richtext-lexical/react";
 
 interface AwardAboutSectionProps {
     award: Award
@@ -47,9 +49,25 @@ export default function AwardAboutSection({ award } : AwardAboutSectionProps) {
     const { lang } = useLanguage();
     const stats = lang === "HU" ? statsHun : statsEn;
 
+    const aboutTheProgramStr = getProgramDescription(lang)
+
     return (
         <Section id={"about"} title={"About"} className="py-24 px-4 border-t border-border">
             <div className="max-w-7xl mx-auto">
+                {/* Award Description */}
+                <div className="mb-16">
+                    <h2 className="text-3xl md:text-4xl font-bold text-background mb-4">{t(lang, "A díjról", "About the Award")}</h2>
+                    <RichText data={lang == "HU" ? award.about : award.about_en} className="text-md text-background leading-relaxed" />
+                </div>
+
+                {/* About the Program */}
+                <div className="mb-16">
+                    <h2 className="text-3xl md:text-4xl font-bold text-background mb-4">{t(lang, "A programról", "About the Program")}</h2>
+                    <p className="text-md text-background leading-relaxed">
+                        {aboutTheProgramStr}
+                    </p>
+                </div>
+
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border rounded-lg mb-16">
                     {stats.map((stat, index) => (

@@ -24,6 +24,16 @@ export function getAwardDescription(award: Award, lang: Lang): string {
     throw new Error("Unknown award name: " + award.name);
 }
 
+export function getProgramDescription(lang: Lang): string {
+    if (lang === "HU") {
+        return "A díjátadás minden esetben egy többnapos budapesti látogatás keretében valósul meg, amelyet a logisztikától a szakmai tartalomig teljes egészében a szakkollégisták szerveznek. A programsorozat két fő szakmai pillérre épül: a széles közönség számára meghirdetett előadásra, valamint a díjazott és a diákok közötti közvetlen párbeszédre épülő zártkörű mesterkurzusra. Ezen a szemináriumon kizárólag azok a rajkosok vehetnek részt, akik hónapokon át tartó kutatómunka során mélyedtek el a vendégprofesszor munkásságában.\n" +
+            "A feszes szakmai napirendet kötetlen események egészítik ki. A szakmai ebédek és a díszvacsora lehetőséget teremtenek a hazai szakmai elit, a díjak anyagi támogatóinak és a kollégium vezetésének bevonására, míg a hallgatók által szervezett szabadidős programok során a vendég személyes kapcsolatba kerül a közösséggel, megismerve Budapestet és a magyar viszonyokat, illetve kultúrát.";
+    } else {
+        return "In every instance, the award presentation takes place within the framework of a multi-day visit to Budapest, organized entirely by the students of the College, from logistics to professional content. The program series is built upon two main professional pillars: a public lecture announced to a wide audience, and a closed-door masterclass built on direct dialogue between the awardee and the students. Participation in this seminar is reserved exclusively for those Rajk students who have immersed themselves in the guest professor’s work during months of preparatory research.\n" +
+            "The tight professional agenda is complemented by informal events. Professional lunches and the Gala Dinner provide an opportunity to involve the Hungarian professional elite, the financial sponsors of the awards, and the College leadership, while leisure programs organized by the students allow the guest to establish a personal connection with the community, getting to know Budapest, the Hungarian context, and culture.";
+    }
+}
+
 const demoAwardees: Awardee[] = [
     {
         id: 1,

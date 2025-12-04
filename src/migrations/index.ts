@@ -9,6 +9,7 @@ import * as migration_20251202_213803_add_lecture_video_to_awardees from './2025
 import * as migration_20251202_215042_add_extended_justification_for_awardees from './20251202_215042_add_extended_justification_for_awardees';
 import * as migration_20251202_215433_extended_justification_is_nullable from './20251202_215433_extended_justification_is_nullable';
 import * as migration_20251202_220232_group_websites_of_awardees from './20251202_220232_group_websites_of_awardees';
+import * as migration_20251204_144742_add_about_en_to_award from './20251204_144742_add_about_en_to_award';
 
 export const migrations = [
   {
@@ -64,6 +65,11 @@ export const migrations = [
   {
     up: migration_20251202_220232_group_websites_of_awardees.up,
     down: migration_20251202_220232_group_websites_of_awardees.down,
-    name: '20251202_220232_group_websites_of_awardees'
+    name: '20251202_220232_group_websites_of_awardees',
+  },
+  {
+    up: migration_20251204_144742_add_about_en_to_award.up,
+    down: migration_20251204_144742_add_about_en_to_award.down,
+    name: '20251204_144742_add_about_en_to_award'
   },
 ];

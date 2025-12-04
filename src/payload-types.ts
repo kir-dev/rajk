@@ -283,6 +283,21 @@ export interface Award {
     };
     [k: string]: unknown;
   };
+  about_en: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   awardees?: (number | Awardee)[] | null;
   covers?:
     | {
@@ -897,6 +912,7 @@ export interface AwardsSelect<T extends boolean = true> {
   name?: T;
   logo?: T;
   about?: T;
+  about_en?: T;
   awardees?: T;
   covers?:
     | T
