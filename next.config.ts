@@ -22,7 +22,43 @@ const nextConfig: NextConfig = {
     typedRoutes: true,
     experimental: {
         typedEnv: true
-    }
+    },
+    async rewrites() {
+        return [
+            {
+                source: '/about/institution',
+                destination: '/rolunk/intezmeny',
+            },
+            {
+                source: '/about/community',
+                destination: '/rolunk/kozosseg',
+            },
+            {
+                source: '/about/gallery',
+                destination: '/rolunk/galeria',
+            },
+            {
+                source: '/events',
+                destination: '/esemenyek',
+            },
+            {
+                source: '/academics',
+                destination: '/szakma',
+            },
+            {
+                source: '/admission',
+                destination: '/felveteli',
+            },
+            {
+                source: '/support',
+                destination: '/tamogatas',
+            },
+            {
+                source: '/awards',
+                destination: '/dijak',
+            },
+        ];
+    },
 };
 
 export default withPayload(nextConfig);

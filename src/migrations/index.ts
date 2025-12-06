@@ -10,6 +10,7 @@ import * as migration_20251202_215042_add_extended_justification_for_awardees fr
 import * as migration_20251202_215433_extended_justification_is_nullable from './20251202_215433_extended_justification_is_nullable';
 import * as migration_20251202_220232_group_websites_of_awardees from './20251202_220232_group_websites_of_awardees';
 import * as migration_20251204_144742_add_about_en_to_award from './20251204_144742_add_about_en_to_award';
+import * as migration_20251206_214500_fix_missing_awards_rels from './20251206_214500_fix_missing_awards_rels';
 
 export const migrations = [
   {
@@ -70,6 +71,11 @@ export const migrations = [
   {
     up: migration_20251204_144742_add_about_en_to_award.up,
     down: migration_20251204_144742_add_about_en_to_award.down,
-    name: '20251204_144742_add_about_en_to_award'
+    name: '20251204_144742_add_about_en_to_award',
+  },
+  {
+    up: migration_20251206_214500_fix_missing_awards_rels.up,
+    down: migration_20251206_214500_fix_missing_awards_rels.down,
+    name: '20251206_214500_fix_missing_awards_rels',
   },
 ];

@@ -1,16 +1,11 @@
-import {Group, Person} from "@/payload-types";
-import React, {useEffect, useEffectEvent, useState} from "react";
+import { Group, Person } from "@/payload-types";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import getGroupMembers from "@/payload-find/getGroups";
 
 export default function Heller() {
     const [loading, setLoading] = useState<boolean>(true);
     const [awardees, setAwards] = useState<Group | null>(null);
-
-    const logAwardees = useEffectEvent(() => {
-        console.log("Heller:")
-        console.log(awardees);
-    })
 
     useEffect(() => {
         async function fetchAwards() {
@@ -23,15 +18,13 @@ export default function Heller() {
                 } else {
                     setAwards(res as Group);
                 }
-            } catch (error){
+            } catch (error) {
                 console.error("Error fetching Heller-díj awardees:", error);
             } finally {
                 setLoading(false);
             }
         }
         void fetchAwards();
-
-        logAwardees()
     }, []);
 
     const members = awardees?.members || [];
@@ -57,7 +50,7 @@ export default function Heller() {
                 {/* Image with text overlay */}
                 <div className="relative hidden lg:block">
                     <Image
-                        src={"/hellerdij.jpg"}
+                        src={"/heller.png"}
                         alt={"Heller-díj background image"}
                         width={1000}
                         height={1000}
@@ -66,7 +59,7 @@ export default function Heller() {
 
                     {/* Text overlay positioned on the white box area */}
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="bg-white/80 rounded-md max-w-[100%] max-h-[40%]">
+                        <div className="p-4 rounded-md max-w-[100%] max-h-[40%]">
 
                             {loading ? (
                                 <div className="flex justify-center py-4">

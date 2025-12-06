@@ -54,7 +54,7 @@ export default function LandingPage(props: LandingPageProps) {
                                 )}
                                 icon={UsersRound}
                                 buttonText={t(lang, "Tovább", "Learn more")}
-                                href={"/rolunk/kozosseg"}
+                                href={lang === "HU" ? "/rolunk/kozosseg" : "/about/community"}
                                 imageSrc={"/Mainpage_kozosseg.jpg"}
                             />
                             <Statistics isLast={false} color={"purple"} szin={"lila"} title={t(lang, "Közösség", "Community")}
@@ -79,7 +79,7 @@ export default function LandingPage(props: LandingPageProps) {
                                 )}
                                 icon={GraduationCap}
                                 buttonText={t(lang, "Tovább", "Learn more")}
-                                href={"/szakma"}
+                                href={lang === "HU" ? "/szakma" : "/academics"}
                                 imageSrc={"/Mainpage_szakma.jpg"}
                             />
                             <Statistics isLast={false} color={"blue"} szin={"kek"} title={t(lang, "Szakma", "Academics")}
@@ -96,7 +96,7 @@ export default function LandingPage(props: LandingPageProps) {
                     <Section id={"tarsadalmi"} title={t(lang, "Társadalmi felelősségvállalás", "Social Responsibility")}>
                         <div className="flex flex-col h-full rounded-2xl">
                             <PillarCard
-                                title={t(lang, "Társadalmi felelősség", "Social Responsibility")}
+                                title={t(lang, "Társadalmi felelősségvállalás", "Social Responsibility")}
                                 description={t(
                                     lang,
                                     "A Rajk mindig is érzékenyen reagált a közéleti folyamatokra – a rendszerváltás előtti fórumoktól egészen a napjainkban felmerülő társadalmi kérdésekig. A kollégiumban rendszeresen tartunk előadásokat, vitákat és saját kezdeményezésű projekteket, amelyek arra ösztönöznek, hogy túllépjünk a szűken vett szakmai nézőponton, és felelősen gondolkodjunk a közélet és a társadalom egészéről. A cél nem pusztán az ismeretszerzés, hanem az, hogy a tagok készek legyenek aktívan alakítani a környezetüket – és ez a szemlélet a végzés után is meghatározza a rajkosok gondolkodását.",
@@ -104,7 +104,7 @@ export default function LandingPage(props: LandingPageProps) {
                                 )}
                                 icon={Handshake}
                                 buttonText={t(lang, "Tovább", "Learn more")}
-                                href={"/social-responsibility"}
+                                href={"https://szabokalmanprogram.hu/"}
                                 imageSrc={"/Mainpage_Tarsifel.jpg"}
                             />
                             <Statistics isLast={true} color={"green"} szin={"zold"} title={t(lang, "Társadalmi felelősségvállalás", "Social Responsibility")}

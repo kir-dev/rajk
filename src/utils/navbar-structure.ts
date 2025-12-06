@@ -13,16 +13,20 @@ export function getNavItems(lang: Lang): NavItem[] {
   return [
     {
       label: HU ? "Rólunk" : "About",
-      href: "/rolunk/kozosseg",
+      href: HU ? "/rolunk/intezmeny" : "/about/institution",
       subItems: [
-        { label: HU ? "Intézmény" : "Institution", href: "/rolunk/intezmeny" },
-        { label: HU ? "Közösség" : "Community", href: "/rolunk/kozosseg" },
-        { label: HU ? "Galéria" : "Gallery", href: "/rolunk/galeria" },
+        { label: HU ? "Intézmény" : "Institution", href: HU ? "/rolunk/intezmeny" : "/about/institution" },
+        { label: HU ? "Közösség" : "Community", href: HU ? "/rolunk/kozosseg" : "/about/community" },
+        { label: HU ? "Galéria" : "Gallery", href: HU ? "/rolunk/galeria" : "/about/gallery" },
       ],
     },
     {
+      label: HU ? "Események" : "Events",
+      href: HU ? "/esemenyek" : "/events",
+    },
+    {
       label: HU ? "Szakma" : "Academics",
-      href: "/szakma",
+      href: HU ? "/szakma" : "/academics",
       /*subItems: [
         { label: HU ? 'Nemzetközi kapcsolataink' : 'Our international relations', href: '/szakma/nemzetkozi-kapcsolatok' },
       ],*/
@@ -36,8 +40,8 @@ export function getNavItems(lang: Lang): NavItem[] {
         { label: HU ? "Herbert Simon-díj" : "Herbert Simon Award", href: "/awards/herbert-simon" /*href: "https://hu.wikipedia.org/wiki/Rajk_Szakkoll%C3%A9gium#Herbert_Simon-d%C3%ADj" */ },
       ],
     },
-    { label: HU ? "Felvételi" : "Admission", href: "/felveteli", bordered: true },
-    { label: HU ? "Támogatás" : "Support", href: "/tamogass", bordered: true },
+    { label: HU ? "Felvételi" : "Admission", href: HU ? "/felveteli" : "/admission", bordered: true },
+    { label: HU ? "Támogatás" : "Support", href: HU ? "/tamogatas" : "/support", bordered: true },
   ];
 }
 
