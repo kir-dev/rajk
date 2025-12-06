@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "stripe listen --forward-to localhost:3000/api/stripe-webhook & next dev --turbopack",
-    "ci": "payload migrate --yes && next build",
-    "build": "next build",
+    "ci": "payload migrate --yes && next build --webpack",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "next lint"
   },
