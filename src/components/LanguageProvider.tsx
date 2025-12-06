@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {createContext, useContext, useEffect, useEffectEvent, useState} from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { getLanguageFromPath, getLocalizedPath } from "@/utils/language-routes";
 
@@ -25,8 +25,6 @@ export function LanguageProvider({
     setLangState(l);
     // persist for 1 year
     document.cookie = `lang=${l}; path=/; max-age=31536000; samesite=lax`;
-
-    // Try to find a localized path
     if (pathname) {
       const newPath = getLocalizedPath(pathname, l);
       if (newPath) {
@@ -36,12 +34,16 @@ export function LanguageProvider({
     }
   };
 
+  const onLoaded = useEffectEvent((cookie: string) => {
+      const v = cookie.split("=")[1];
+      if (v === "HU" || v === "EN") setLangState(v);
+  })
+
   // hydrate from cookie on the client if present
   useEffect(() => {
     const cookie = document.cookie.split("; ").find((c) => c.startsWith("lang="));
     if (cookie) {
-      const v = cookie.split("=")[1];
-      if (v === "HU" || v === "EN") setLangState(v);
+      onLoaded(cookie);
     }
   }, []);
 

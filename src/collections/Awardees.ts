@@ -13,10 +13,82 @@ export const Awardees: CollectionConfig = {
             required: true,
         },
         {
+            name: 'institution',
+            label: 'Intézmény',
+            type: 'text',
+            required: true,
+        },
+        {
+            name: 'origin_country',
+            label: 'Származási ország',
+            type: 'text',
+            required: true,
+        },
+        {
+            name: 'fields_of_science',
+            label: 'Tudományterületek',
+            type: "array",
+            required: true,
+            minRows: 1,
+            fields: [
+                {
+                    name: 'field',
+                    label: 'Tudományterület',
+                    type: 'text',
+                    required: true,
+                }
+            ]
+        },
+        {
+            name: 'fields_of_science_en',
+            label: 'Fields of Science',
+            type: "array",
+            required: true,
+            minRows: 1,
+            fields: [
+                {
+                    name: 'field',
+                    label: 'Field of Science',
+                    type: 'text',
+                    required: true,
+                }
+            ]
+        },
+        {
             name: 'about',
             label: 'Leírás',
             type: 'richText',
             required: true,
+        },
+        {
+            name: 'about_en',
+            label: 'Description',
+            type: 'richText',
+            required: true,
+        },
+        {
+            name: 'short_justification',
+            label: 'Rövid indoklás a díjazásra',
+            type: 'text',
+            required: true,
+        },
+        {
+            name: 'short_justification_en',
+            label: 'Short justification for the award',
+            type: 'text',
+            required: true,
+        },
+        {
+            name: 'extended_justification',
+            label: 'Bővebb indoklás a díjazásra',
+            type: 'text',
+            required: false,
+        },
+        {
+            name: 'extended_justification_en',
+            label: 'Extended justification for the award',
+            type: 'text',
+            required: false,
         },
         {
             name: 'year',
@@ -32,16 +104,197 @@ export const Awardees: CollectionConfig = {
             required: true,
         },
         {
-            name: 'testimony',
-            label: 'Tanúsítvány',
+            name: 'has_nobel',
+            label: 'Nobel-kapcsolat',
+            type: 'checkbox',
+            required: false,
+            defaultValue: false,
+        },
+        {
+            name: 'nobel_year',
+            label: 'Nobel év',
+            type: 'number',
+            required: false,
+        },
+        {
+            name: 'ceremony_video_link',
+            label: 'Díjátadó videó link',
             type: 'text',
+            required: false,
+        },
+        {
+            name: 'lecture_video_link',
+            label: 'Előadás videó link',
+            type: 'text',
+            required: false,
+        },
+        {
+            name: 'image_gallery',
+            label: 'Galéria',
+            type: 'array',
+            fields: [
+                {
+                    name: 'image',
+                    type: 'upload',
+                    relationTo: 'media',
+                    required: true,
+                },
+                {
+                    name: 'caption',
+                    label: 'Képfelirat',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'caption_en',
+                    label: 'Image caption',
+                    type: 'text',
+                    required: true,
+                }
+            ],
+            minRows: 0,
             required: true,
         },
         {
-            name: 'facebook_link',
-            label: 'Facebook link',
-            type: 'text',
-            required: false,
+            name: 'related_content',
+            label: 'Kapcsolódó tartalmak',
+            type: 'array',
+            fields: [
+                {
+                    name: 'title',
+                    label: 'Cím',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'title_en',
+                    label: 'Title',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'url',
+                    label: 'URL',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'thumbnail',
+                    label: 'Kép',
+                    type: 'upload',
+                    relationTo: 'media',
+                    required: false,
+                },
+                {
+                    name: 'type',
+                    label: 'Típus',
+                    type: 'select',
+                    options: [
+                        {label: 'Cikk', value: 'article'},
+                        {label: 'Interjú', value: 'interview'},
+                        {label: 'Videó', value: 'video'},
+                        {label: 'Egyéb', value: 'other'},
+                    ],
+                    required: true,
+                }
+            ],
+            minRows: 0,
+            required: true,
+        },
+        {
+            name: "downloads",
+            label: "Letöltések",
+            type: "group",
+            interfaceName: "AwardeeDownloads",
+            fields: [
+                {
+                    name: 'laudation_pdf',
+                    label: 'Laudáció PDF',
+                    type: 'upload',
+                    relationTo: 'media',
+                    required: false,
+                },
+                {
+                    name: 'press_photo_pack',
+                    label: 'Sajtófotó csomag',
+                    type: 'upload',
+                    relationTo: 'media',
+                    required: false,
+                },
+                ],
+            required: true,
+        },
+        {
+            name: 'publications',
+            label: 'Publikációk',
+            type: 'array',
+            fields: [
+                {
+                    name: 'title',
+                    label: 'Cím',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'title_en',
+                    label: 'Title',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'author',
+                    label: 'Szerző(k)',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'date',
+                    label: 'Megjelenés dátuma',
+                    type: 'date',
+                    required: true,
+                },
+                {
+                    name: 'link',
+                    label: 'Link',
+                    type: 'text',
+                    required: false,
+                }
+            ],
+            minRows: 0,
+            required: true
+        },
+        {
+            name: "websites",
+            label: "Weboldalak",
+            type: "group",
+            interfaceName: "AwardeeWebsites",
+            fields: [
+                {
+                    name: 'google_scholar_link',
+                    label: 'Google Scholar link',
+                    type: 'text',
+                    required: false,
+                },
+                {
+                    name: 'personal_website_link',
+                    label: 'Személyes weboldal',
+                    type: 'text',
+                    required: false,
+                },
+                {
+                    name: 'institution_website_link',
+                    label: 'Intézményi honlap',
+                    type: 'text',
+                    required: false,
+                },
+                {
+                    name: 'nobel_website_link',
+                    label: 'Nobel oldal',
+                    type: 'text',
+                    required: false,
+                },
+            ],
+            required: true,
         }
     ]
 }

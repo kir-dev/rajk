@@ -24,9 +24,7 @@ export default function Heller() {
                 setLoading(false);
             }
         }
-        fetchAwards();
-        console.log("Heller:")
-        console.log(awardees);
+        void fetchAwards();
     }, []);
 
     const members = awardees?.members || [];

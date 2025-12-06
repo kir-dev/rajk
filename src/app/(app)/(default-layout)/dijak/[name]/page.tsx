@@ -15,7 +15,7 @@ export default async function Page({params}: { params: Promise<{ name: string }>
     const { name } = await params;
     
     const award = await fetchAward(name || "1");
-    const awardee = award.awardees && (award.awardees as Awardee) || null;
+    const awardee = award.awardees && (award.awardees[0] as Awardee) || null;
     
     if (!award) {
         return <div className = "text-white">Award not found</div>;
@@ -72,7 +72,7 @@ export default async function Page({params}: { params: Promise<{ name: string }>
                 {award.awardees && typeof award.awardees !== "number" &&
                     <Section id = {"Prev awardees"} title = {"Previous awardes"} className = "mb-40" lucideIconName = "Users">
                         <SubTitle text = {"Previous awardes"}></SubTitle>
-                        <AwardeeGrid awardees={[award.awardees, award.awardees, award.awardees, award.awardees, award.awardees]}/>
+                        <AwardeeGrid awardees={award.awardees as Awardee[]}/>
                     </Section>
                 }
             </VertNavBarLayout>

@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import {Event} from "@/payload-types";
 import { Calendar, MapPin, User } from "lucide-react";
 import {isMedia} from "@/utils/isMedia";
+import type {Route} from "next";
 
 export function formatDateParts(iso: string) {
     const d = new Date(iso);

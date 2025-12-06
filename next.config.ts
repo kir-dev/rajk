@@ -2,6 +2,7 @@ import {withPayload} from "@payloadcms/next/withPayload";
 import type {NextConfig} from "next";
 
 const nextConfig: NextConfig = {
+    turbopack: {},
     images: {
         remotePatterns: [
             {
@@ -15,6 +16,12 @@ const nextConfig: NextConfig = {
                 pathname: '/**', // Allow all paths under this domain
             },
         ]
+    },
+    reactCompiler: true,
+    productionBrowserSourceMaps: false,
+    typedRoutes: true,
+    experimental: {
+        typedEnv: true
     },
     async rewrites() {
         return [

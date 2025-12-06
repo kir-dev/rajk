@@ -26,10 +26,17 @@ export const Awards: CollectionConfig = {
             required: true,
         },
         {
+            name: 'about_en',
+            label: 'About',
+            type: 'richText',
+            required: true,
+        },
+        {
             name: 'awardees',
             label: 'Díjazottak',
             type: 'relationship',
             relationTo: 'awardees',
+            hasMany: true,
             required: false,
         },
         {

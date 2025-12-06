@@ -1,8 +1,9 @@
 services:
   postgres:
-    image: postgres:13-alpine
+    container_name: rajk-postgres
+    image: postgres:17-alpine
     ports:
-      - '5432:5432'
+      - "${POSTGRES_PORT}:5432"
     volumes:
       - postgres:/var/lib/postgresql/data
     env_file:
@@ -10,3 +11,4 @@ services:
 
 volumes:
   postgres:
+    name: rajk-postgres-data
