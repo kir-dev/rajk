@@ -34,9 +34,9 @@ export default function EventList({
     }
 
     return (
-        <ul className="space-y-6">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {events.map((ev) => (
-                <li key={ev.id}>
+                <li key={ev.id} className="h-full">
                     <EventCard event={ev} href={`${baseHref}/${ev.id}`} />
                 </li>
             ))}
@@ -49,30 +49,19 @@ export function EventCard({ event, href }: { event: Event; href: string }) {
 
     return (
         <Link
-            href={href}
-            className="group relative grid grid-cols-1 gap-6 overflow-hidden rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm transition-all duration-300 hover:border-rajk-green/30 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-rajk-green/20 sm:grid-cols-[100px,240px,1fr] sm:gap-6 max-w-3xl"
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            href={href as any}
+            className="group relative flex flex-col h-full overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:border-rajk-green/30 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-rajk-green/20"
         >
-            {/* Accent gradient on hover */}
-            <div className="absolute inset-0 bg-gradient-to-r from-rajk-green/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-            {/* Date rail */}
-            <div className="relative z-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-rajk-green to-rajk-green/80 p-4 text-white shadow-md sm:flex-col sm:justify-start">
-                <div className="flex flex-row items-baseline gap-2 sm:flex-col sm:items-center sm:gap-0">
-                    <div className="text-xs font-bold uppercase tracking-widest opacity-90">{date.month}</div>
-                    <div className="text-4xl font-black leading-none">{date.day}</div>
-                    <div className="text-xs font-semibold opacity-90">{date.year}</div>
-                </div>
-            </div>
-
             {/* Thumbnail */}
-            <div className="relative z-10 h-48 w-full overflow-hidden rounded-xl shadow-md sm:h-44 sm:w-[240px]">
+            <div className="relative h-48 w-full overflow-hidden">
                 {isMedia(event.picture) ? (
                     <Image
                         src={event.picture?.url ?? "/rajk_strucc_black.png"}
                         alt={event.name}
                         fill
-                        sizes="(max-width: 640px) 100vw, 240px"
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                         priority={false}
                     />
                 ) : (
@@ -80,43 +69,47 @@ export function EventCard({ event, href }: { event: Event; href: string }) {
                         <Calendar className="h-12 w-12" />
                     </div>
                 )}
-                {/* Overlay gradient on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                {/* Date badge overlay */}
+                <div className="absolute top-3 left-3 flex flex-col items-center justify-center rounded-lg bg-white/90 backdrop-blur-sm p-2 text-neutral-800 shadow-sm min-w-[60px]">
+                    <div className="text-xs font-bold uppercase tracking-widest text-rajk-green">{date.month}</div>
+                    <div className="text-2xl font-black leading-none">{date.day}</div>
+                    <div className="text-xs font-semibold opacity-80">{date.year}</div>
+                </div>
             </div>
 
             {/* Content */}
-            <div className="relative z-10 flex flex-col justify-center gap-3 pr-2">
-                <h3 className="text-xl font-bold leading-tight tracking-tight text-neutral-900 transition-colors duration-300 group-hover:text-rajk-green">
-                    {event.name}
-                </h3>
+            <div className="flex flex-col flex-grow justify-between p-6">
+                <div className="flex flex-col gap-3">
+                    <h3 className="text-xl font-bold leading-tight tracking-tight text-neutral-900 transition-colors duration-300 group-hover:text-rajk-green line-clamp-2">
+                        {event.name}
+                    </h3>
 
-                {/* Meta information with icons */}
-                <div className="flex flex-col gap-2">
-                    {event.speakers && (
-                        <div className="flex items-start gap-2 text-sm text-neutral-600">
-                            <User className="mt-0.5 h-4 w-4 flex-shrink-0 text-rajk-green/70" />
-                            <span className="font-medium">{event.speakers}</span>
-                        </div>
-                    )}
-
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-neutral-500">
-                        <div className="flex items-center gap-1.5">
-                            <Calendar className="h-4 w-4 text-rajk-green/70" />
-                            <span>{date.month} {date.day}, {date.year} • {date.time}</span>
+                    {/* Meta information */}
+                    <div className="flex flex-col gap-2 text-sm text-neutral-600">
+                        <div className="flex items-center gap-2">
+                            <Calendar className="h-4 w-4 text-rajk-green flex-shrink-0" />
+                            <span>{date.year}, {date.month}, {date.day}, {date.time}</span>
                         </div>
 
                         {event.location && (
-                            <div className="flex items-center gap-1.5">
-                                <MapPin className="h-4 w-4 text-rajk-green/70" />
-                                <span>{event.location}</span>
+                            <div className="flex items-center gap-2">
+                                <MapPin className="h-4 w-4 text-rajk-green flex-shrink-0" />
+                                <span className="line-clamp-1">{event.location}</span>
+                            </div>
+                        )}
+                        
+                        {event.speakers && (
+                            <div className="flex items-start gap-2 mt-1">
+                                <User className="mt-0.5 h-4 w-4 flex-shrink-0 text-rajk-green" />
+                                <span className="font-medium line-clamp-1">{event.speakers}</span>
                             </div>
                         )}
                     </div>
                 </div>
 
                 {/* Read more indicator */}
-                <div className="mt-1 flex items-center gap-2 text-sm font-semibold text-rajk-green opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1">
-                    <span>View details</span>
+                <div className="mt-6 flex items-center gap-2 text-sm font-bold text-rajk-green opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1">
+                    <span>Részletek</span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
                         <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
                     </svg>

@@ -56,7 +56,7 @@ export default function CheckoutPage() {
         setError(null);
 
         try {
-            const response = await createPaymentIntent(amount, name, email, captchaToken);
+            const response = await createPaymentIntent(amount, name, email, note, captchaToken);
             if (response.clientSecret) {
                 setClientSecret(response.clientSecret);
                 setPaymentIntentUsed(false); // Mark as unused
@@ -155,7 +155,8 @@ export default function CheckoutPage() {
                         <span>Konkrét projektjeinket ide kattintva találod</span>
                         <ArrowUpRight className="transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </Link>
-                    <div className="mx-auto mt-2 h-1 w-24 rounded-full bg-emerald-600" />
+                    {/*<div className="mx-auto mt-2 h-1 w-24 rounded-full bg-emerald-600" />*/}
+                    <p className="text-gray-700 max-w-2xl mx-auto">Az új felületen mindig láthatod mennyi támogatásra van szükség és milyen célból. <br></br>Mostantól 3 egyszerű lépésben támogathatod régi vagy új szívügyeidet a kollégiumban!</p>
                 </div>
             </div>
 

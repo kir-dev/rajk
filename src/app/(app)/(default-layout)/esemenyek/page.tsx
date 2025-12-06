@@ -1,55 +1,112 @@
 import EventList from "@/components/Esemenyek/EventsList";
-import getEvents from "@/payload-find/getEvents";
 import NextEvent from "@/components/Esemenyek/NextEvent";
 import Image from "next/image";
+import EventArchive from "@/components/Esemenyek/EventArchive";
+import { getPayload } from "payload";
+import config from "@payload-config";
 
 export default async function EventsPage() {
-    const payloadEvents = await getEvents()
-    let idxOfNextEvent = 0
-    const today = new Date()
-    for (const event of payloadEvents) {
-        const eventDate = new Date(event.date)
-        if (eventDate >= today) {
-            break
-        }
-        idxOfNextEvent++
-    }
+    const payload = await getPayload({ config });
+    const today = new Date();
+    const thirtyDaysAgo = new Date(today);
+    thirtyDaysAgo.setDate(today.getDate() - 30);
 
-    // Check if there are any upcoming events
-    const hasUpcomingEvents = idxOfNextEvent < payloadEvents.length
+    // Fetch upcoming events (future)
+    const upcomingResult = await payload.find({
+        collection: "events",
+        where: {
+            date: {
+                greater_than_equal: today.toISOString(),
+            },
+        },
+        sort: "date",
+    });
+    const upcomingEvents = upcomingResult.docs;
 
-    let nextEvent = null as typeof payloadEvents[0] | null
-    let otherEvents = [] as typeof payloadEvents
-    let sectionTitle = "Következő esemény"
+    // Fetch recent past events (last 30 days)
+    const recentPastResult = await payload.find({
+        collection: "events",
+        where: {
+            and: [
+                {
+                    date: {
+                        less_than: today.toISOString(),
+                    },
+                },
+                {
+                    date: {
+                        greater_than_equal: thirtyDaysAgo.toISOString(),
+                    },
+                },
+            ],
+        },
+        sort: "-date", // Most recent first
+    });
+    const recentPastEvents = recentPastResult.docs;
 
-    if (hasUpcomingEvents) {
-        // Show upcoming events
-        nextEvent = payloadEvents[idxOfNextEvent]
-        otherEvents = payloadEvents.slice(idxOfNextEvent + 1)
-    } else {
-        // No upcoming events, show latest past events
-        sectionTitle = "Legutóbbi esemény"
-        if (payloadEvents.length > 0) {
-            // Show events in reverse order (most recent first)
-            const reversedEvents = [...payloadEvents].reverse()
-            nextEvent = reversedEvents[0]
-            otherEvents = reversedEvents.slice(1)
-        }
+    // Fetch initial archive events (older than 30 days, limit 5)
+    const archiveResult = await payload.find({
+        collection: "events",
+        where: {
+            date: {
+                less_than: thirtyDaysAgo.toISOString(),
+            },
+        },
+        sort: "-date",
+        limit: 5,
+    });
+    const archiveEvents = archiveResult.docs;
+
+    // Upcoming events logic
+    let nextEvent = null;
+    let otherUpcomingEvents: typeof upcomingEvents = [];
+    
+    if (upcomingEvents.length > 0) {
+        nextEvent = upcomingEvents[0];
+        otherUpcomingEvents = upcomingEvents.slice(1);
     }
 
     return (
         <div className="min-h-screen py-20 px-4 bg-bezs w-full text-black">
             <div className="container mx-auto">
-                <div className="text-3xl text-white font-bold mb-6 mt-15 p-4 w-full bg-rajk-green rounded-lg flex">
+                <div className="text-3xl text-white font-bold mb-6 mt-15 p-4 w-full bg-zold rounded-lg flex">
                     <p className="self-center">Események</p>
                     <Image src={"/rajk_strucc_white.png"} alt={"Strucc"} width={60} height={60} className="ml-auto"/>
                 </div>
-                <h2 className="text-2xl font-semibold mb-4">{sectionTitle}</h2>
+                
+                {/* Next Event Section */}
                 {nextEvent && (
-                    <NextEvent event={nextEvent}/>
-                    )
-                }
-                <EventList events={otherEvents} baseHref="/esemenyek" emptyLabel="Nincsenek elérhető események." />
+                    <div className="mb-12">
+                        <h2 className="text-2xl font-semibold mb-4">Következő eseményünk</h2>
+                        <NextEvent event={nextEvent}/>
+                    </div>
+                )}
+
+                {/* Other Upcoming Events Section */}
+                {otherUpcomingEvents.length > 0 && (
+                    <div className="mb-12">
+                        <h2 className="text-2xl font-semibold mb-4">Közelgő eseményeink</h2>
+                        <EventList events={otherUpcomingEvents} baseHref="/esemenyek" />
+                    </div>
+                )}
+
+                {/* Recent Past Events Section */}
+                {recentPastEvents.length > 0 && (
+                    <div className="mb-12">
+                        <h2 className="text-2xl font-semibold mb-4">Legutóbbi eseményeink</h2>
+                        <EventList events={recentPastEvents} baseHref="/esemenyek" />
+                    </div>
+                )}
+
+                {/* Archive Section */}
+                <EventArchive initialEvents={archiveEvents} />
+                
+                {/* Fallback if no events at all */}
+                {upcomingEvents.length === 0 && recentPastEvents.length === 0 && archiveEvents.length === 0 && (
+                    <div className="text-center py-12 text-gray-500">
+                        Jelenleg nincsenek megjeleníthető események.
+                    </div>
+                )}
             </div>
         </div>
     )
