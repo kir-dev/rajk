@@ -8,7 +8,7 @@ import {Awardee} from "@/payload-types";
 import {useLanguage} from "@/components/LanguageProvider";
 import {getMediaUrl} from "@/utils/isMedia";
 
-type GalleryImage = Awardee["image_gallery"][number];
+type GalleryImage = NonNullable<Awardee["image_gallery"]>[number];
 
 interface GalleryLightboxProps {
     images: GalleryImage[]

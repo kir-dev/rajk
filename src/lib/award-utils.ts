@@ -128,44 +128,17 @@ const demoAwardees: Awardee[] = [
                 caption_en: "Receiving the award"
             },
         ],
-        related_content: [
+        publications: [
             {
-                type: "interview",
-                title: "Interjú Daniel Kahnemannel a döntéshozatalról",
-                title_en: "Interview with Daniel Kahneman on Decision Making",
-                url: "#",
-                thumbnail: {
+                title: "Kahneman és a magyar közgazdaságtan",
+                title_en: "Kahneman and Hungarian Economics",
+                cover_image: {
                     url: "/images/image-placeholder.png",
                     id: 1,
                     alt: "",
                     createdAt: new Date().toDateString(),
                     updatedAt: new Date().toDateString()
                 },
-            },
-            {
-                type: "video",
-                title: "Thinking Fast and Slow - Összefoglaló",
-                title_en: "Thinking Fast and Slow - Summary",
-                url: "#",
-                thumbnail: {
-                    url: "/images/placeholders/thinking-fast-slow-book.jpg",
-                    id: 1,
-                    alt: "Thinking Fast and Slow könyvborító",
-                    createdAt: new Date().toDateString(),
-                    updatedAt: new Date().toDateString()
-                },
-            },
-            {
-                type: "other",
-                title: "Rajk Podcast: Viselkedési közgazdaságtan",
-                title_en: "Rajk Podcast: Behavioral Economics",
-                url: "#"
-            },
-        ],
-        publications: [
-            {
-                title: "Kahneman és a magyar közgazdaságtan",
-                title_en: "Kahneman and Hungarian Economics",
                 author: "Kovács Péter",
                 date: "2024. március 15.",
                 link: "#",
@@ -173,6 +146,13 @@ const demoAwardees: Awardee[] = [
             {
                 title: "A viselkedési közgazdaságtan hatása",
                 title_en: "Effects of Behavioral Economics",
+                cover_image: {
+                    url: "/images/image-placeholder.png",
+                    id: 1,
+                    alt: "",
+                    createdAt: new Date().toDateString(),
+                    updatedAt: new Date().toDateString()
+                },
                 author: "Nagy Anna",
                 date: "2024. március 20.",
                 link: "#"
@@ -180,6 +160,13 @@ const demoAwardees: Awardee[] = [
             {
                 title: "Interjú a díjátadó után",
                 title_en: "Interview after the Award Ceremony",
+                cover_image: {
+                    url: "/images/image-placeholder.png",
+                    id: 1,
+                    alt: "",
+                    createdAt: new Date().toDateString(),
+                    updatedAt: new Date().toDateString()
+                },
                 author: "Rajk Hírek",
                 date: "2024. április 1.",
                 link: "#"
@@ -204,26 +191,6 @@ const demoAwardees: Awardee[] = [
                 url: "/downloads/kahneman-sajto-fotok.zip",
                 updatedAt: new Date().toDateString(),
                 createdAt: new Date().toDateString(),
-            }
-        },
-        about: {
-            root: {
-                type: "",
-                children: [],
-                direction: null,
-                format: "",
-                indent: 0,
-                version: 0
-            }
-        },
-        about_en: {
-            root: {
-                type: "",
-                children: [],
-                direction: null,
-                format: "",
-                indent: 0,
-                version: 0
             }
         },
         short_justification_en: "",
@@ -295,24 +262,17 @@ const demoAwardees: Awardee[] = [
                 caption_en: "Nobel Lecture"
             },
         ],
-        related_content: [
-            {
-                type: "interview",
-                title: "Why Nations Fail - Interjú Acemogluval",
-                title_en: "Why Nations Fail - Interview with Acemoglu",
-                url: "#",
-            },
-            {
-                type: "other",
-                title: "Intézmények és fejlődés",
-                title_en: "Institutions and Development",
-                url: "#"
-            },
-        ],
         publications: [
             {
                 title: "Acemoglu Budapesten",
                 title_en: "Acemoglu in Budapest",
+                cover_image: {
+                    url: "/images/image-placeholder.png",
+                    id: 1,
+                    alt: "",
+                    createdAt: new Date().toDateString(),
+                    updatedAt: new Date().toDateString()
+                },
                 author: "Szabó Márton",
                 date: "2023. november 10.",
                 link: "#"
@@ -330,26 +290,6 @@ const demoAwardees: Awardee[] = [
                 createdAt: new Date().toDateString(),
                 updatedAt: new Date().toDateString()
             },
-        },
-        about: {
-            root: {
-                type: "",
-                children: [],
-                direction: null,
-                format: "",
-                indent: 0,
-                version: 0
-            }
-        },
-        about_en: {
-            root: {
-                type: "",
-                children: [],
-                direction: null,
-                format: "",
-                indent: 0,
-                version: 0
-            }
         },
         short_justification_en: "",
         updatedAt: "",
@@ -380,29 +320,8 @@ const demoAwardees: Awardee[] = [
             google_scholar_link: "https://scholar.google.com",
             nobel_website_link: "https://www.nobelprize.org/prizes/economic-sciences/2017/thaler",
         },
-        about: {
-            root: {
-                type: "",
-                children: [],
-                direction: null,
-                format: "",
-                indent: 0,
-                version: 0
-            }
-        },
-        about_en: {
-            root: {
-                type: "",
-                children: [],
-                direction: null,
-                format: "",
-                indent: 0,
-                version: 0
-            }
-        },
         short_justification_en: "",
         image_gallery: [],
-        related_content: [],
         downloads: {
             laudation_pdf: null,
             press_photo_pack: null
@@ -437,28 +356,7 @@ const demoAwardees: Awardee[] = [
             google_scholar_link: "https://scholar.google.com",
             nobel_website_link: "https://www.nobelprize.org/prizes/economic-sciences/1998/sen",
         },
-        about: {
-            root: {
-                type: "",
-                children: [],
-                direction: null,
-                format: "",
-                indent: 0,
-                version: 0
-            }
-        },
-        about_en: {
-            root: {
-                type: "",
-                children: [],
-                direction: null,
-                format: "",
-                indent: 0,
-                version: 0
-            }
-        },
         image_gallery: [],
-        related_content: [],
         downloads: {
             laudation_pdf: null,
             press_photo_pack: null
@@ -490,29 +388,8 @@ const demoAwardees: Awardee[] = [
         websites: {
             nobel_website_link: "https://www.nobelprize.org/prizes/economic-sciences/2009/ostrom",
         },
-        about: {
-            root: {
-                type: "",
-                children: [],
-                direction: null,
-                format: "",
-                indent: 0,
-                version: 0
-            }
-        },
-        about_en: {
-            root: {
-                type: "",
-                children: [],
-                direction: null,
-                format: "",
-                indent: 0,
-                version: 0
-            }
-        },
         short_justification_en: "",
         image_gallery: [],
-        related_content: [],
         downloads: {},
         publications: [],
         updatedAt: "",
@@ -534,33 +411,12 @@ const demoAwardees: Awardee[] = [
             createdAt: new Date().toDateString(),
             updatedAt: new Date().toDateString()
         },
-        about: {
-            root: {
-                type: "",
-                children: [],
-                direction: null,
-                format: "",
-                indent: 0,
-                version: 0
-            }
-        },
-        about_en: {
-            root: {
-                type: "",
-                children: [],
-                direction: null,
-                format: "",
-                indent: 0,
-                version: 0
-            }
-        },
         short_justification: "A hiánygazdaság elméletének kidolgozásáért és a rendszerváltás közgazdaságtanáért.",
         //description: "A szocialista gazdaságok működésének és a rendszerváltás közgazdaságtanának világhírű kutatója.",
         //fullBio: "Kornai János magyar közgazdász, a Harvard Egyetem és a Budapesti Corvinus Egyetem emeritus professzora. A hiánygazdaság és a puha költségvetési korlát fogalmainak megalkotója, munkássága alapvető az átmeneti gazdaságok megértéséhez.",
         websites: {},
         short_justification_en: "",
         image_gallery: [],
-        related_content: [],
         downloads: {
             laudation_pdf: null,
             press_photo_pack: null
@@ -589,29 +445,8 @@ const demoAwardees: Awardee[] = [
         short_justification: "Az intézményi közgazdaságtan megalapozásáért.",
         short_justification_en: "For founding institutional economics.",
         image_gallery: [],
-        related_content: [],
         websites: {
             nobel_website_link: "https://www.nobelprize.org/prizes/economic-sciences/1993/north",
-        },
-        about: {
-            root: {
-                type: "",
-                children: [],
-                direction: null,
-                format: "",
-                indent: 0,
-                version: 0
-            }
-        },
-        about_en: {
-            root: {
-                type: "",
-                children: [],
-                direction: null,
-                format: "",
-                indent: 0,
-                version: 0
-            }
         },
         downloads: {
             laudation_pdf: null,
