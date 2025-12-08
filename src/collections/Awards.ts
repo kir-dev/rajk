@@ -54,6 +54,13 @@ export const Awards: CollectionConfig = {
             required: false,
         },
         {
+            name: 'event',
+            label: 'Web esemény',
+            type: 'relationship',
+            relationTo: 'events',
+            required: false,
+        },
+        {
             name: 'facebook_link',
             label: 'Facebook link',
             type: 'text',

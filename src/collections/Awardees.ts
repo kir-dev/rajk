@@ -1,3 +1,4 @@
+import { FixedToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import type {CollectionConfig} from 'payload'
 
 export const Awardees: CollectionConfig = {
@@ -53,18 +54,6 @@ export const Awardees: CollectionConfig = {
                     required: true,
                 }
             ]
-        },
-        {
-            name: 'about',
-            label: 'Leírás',
-            type: 'richText',
-            required: true,
-        },
-        {
-            name: 'about_en',
-            label: 'Description',
-            type: 'richText',
-            required: true,
         },
         {
             name: 'short_justification',
@@ -123,10 +112,28 @@ export const Awardees: CollectionConfig = {
             required: false,
         },
         {
-            name: 'lecture_video_link',
-            label: 'Előadás videó link',
-            type: 'text',
+            name: "video_description",
+            type: "richText",
             required: false,
+            label: "Video leírás",
+            editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                    ...defaultFeatures,
+                    FixedToolbarFeature(),
+                ]
+            })
+        },
+        {
+            name: "video_description_en",
+            type: "richText",
+            required: false,
+            label: "Video description",
+            editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                    ...defaultFeatures,
+                    FixedToolbarFeature(),
+                ]
+            })
         },
         {
             name: 'image_gallery',
@@ -153,53 +160,7 @@ export const Awardees: CollectionConfig = {
                 }
             ],
             minRows: 0,
-            required: true,
-        },
-        {
-            name: 'related_content',
-            label: 'Kapcsolódó tartalmak',
-            type: 'array',
-            fields: [
-                {
-                    name: 'title',
-                    label: 'Cím',
-                    type: 'text',
-                    required: true,
-                },
-                {
-                    name: 'title_en',
-                    label: 'Title',
-                    type: 'text',
-                    required: true,
-                },
-                {
-                    name: 'url',
-                    label: 'URL',
-                    type: 'text',
-                    required: true,
-                },
-                {
-                    name: 'thumbnail',
-                    label: 'Kép',
-                    type: 'upload',
-                    relationTo: 'media',
-                    required: false,
-                },
-                {
-                    name: 'type',
-                    label: 'Típus',
-                    type: 'select',
-                    options: [
-                        {label: 'Cikk', value: 'article'},
-                        {label: 'Interjú', value: 'interview'},
-                        {label: 'Videó', value: 'video'},
-                        {label: 'Egyéb', value: 'other'},
-                    ],
-                    required: true,
-                }
-            ],
-            minRows: 0,
-            required: true,
+            required: false,
         },
         {
             name: "downloads",
@@ -222,7 +183,7 @@ export const Awardees: CollectionConfig = {
                     required: false,
                 },
                 ],
-            required: true,
+            required: false,
         },
         {
             name: 'publications',
@@ -239,6 +200,13 @@ export const Awardees: CollectionConfig = {
                     name: 'title_en',
                     label: 'Title',
                     type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'cover_image',
+                    label: 'Cover image',
+                    type: 'upload',
+                    relationTo: 'media',
                     required: true,
                 },
                 {
@@ -261,7 +229,7 @@ export const Awardees: CollectionConfig = {
                 }
             ],
             minRows: 0,
-            required: true
+            required: false,
         },
         {
             name: "websites",
@@ -294,7 +262,7 @@ export const Awardees: CollectionConfig = {
                     required: false,
                 },
             ],
-            required: true,
+            required: false,
         }
     ]
 }

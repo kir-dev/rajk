@@ -150,13 +150,13 @@ export default function CheckoutPage() {
                 <div className="mb-8 text-center">
                     <Link
                         href="https://tamogatas.rajk.uni-corvinus.hu/"
-                        className="inline-flex items-center gap-1 text-2xl tracking-tight hover:text-emerald-600 text-slate-900 transition-colors duration-200 group"
+                        className="inline-flex items-center gap-1 text-2xl tracking-tight hover:text-emerald-600 text-slate-900 transition-colors duration-200 group bg-kek rounded-xl border-2 max-w-xl mx-auto p-2"
                     >
                         <span>Konkrét projektjeinket ide kattintva találod</span>
                         <ArrowUpRight className="transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </Link>
                     {/*<div className="mx-auto mt-2 h-1 w-24 rounded-full bg-emerald-600" />*/}
-                    <p className="text-gray-700 max-w-2xl mx-auto">Az új felületen mindig láthatod mennyi támogatásra van szükség és milyen célból. <br></br>Mostantól 3 egyszerű lépésben támogathatod régi vagy új szívügyeidet a kollégiumban!</p>
+                    <p className="text-gray-700 max-w-2xl mx-auto">Ezen a felületen mindig láthatod mennyi támogatásra van szükség és milyen célból. <br></br>Mostantól 3 egyszerű lépésben támogathatod régi vagy új szívügyeidet a kollégiumban!</p>
                 </div>
             </div>
 

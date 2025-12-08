@@ -305,6 +305,7 @@ export interface Award {
         id?: string | null;
       }[]
     | null;
+  event?: (number | null) | Event;
   facebook_link?: string | null;
   event_facebook_link?: string | null;
   connected_publicatios?: number | null;
@@ -331,36 +332,6 @@ export interface Awardee {
     field: string;
     id?: string | null;
   }[];
-  about: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  about_en: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
   short_justification: string;
   short_justification_en: string;
   extended_justification?: string | null;
@@ -370,31 +341,57 @@ export interface Awardee {
   has_nobel?: boolean | null;
   nobel_year?: number | null;
   ceremony_video_link?: string | null;
-  lecture_video_link?: string | null;
-  image_gallery: {
-    image: number | Media;
-    caption: string;
-    caption_en: string;
-    id?: string | null;
-  }[];
-  related_content: {
-    title: string;
-    title_en: string;
-    url: string;
-    thumbnail?: (number | null) | Media;
-    type: 'article' | 'interview' | 'video' | 'other';
-    id?: string | null;
-  }[];
-  downloads: AwardeeDownloads;
-  publications: {
-    title: string;
-    title_en: string;
-    author: string;
-    date: string;
-    link?: string | null;
-    id?: string | null;
-  }[];
-  websites: AwardeeWebsites;
+  video_description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  video_description_en?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  image_gallery?:
+    | {
+        image: number | Media;
+        caption: string;
+        caption_en: string;
+        id?: string | null;
+      }[]
+    | null;
+  downloads?: AwardeeDownloads;
+  publications?:
+    | {
+        title: string;
+        title_en: string;
+        cover_image: number | Media;
+        author: string;
+        date: string;
+        link?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  websites?: AwardeeWebsites;
   updatedAt: string;
   createdAt: string;
 }
@@ -415,6 +412,37 @@ export interface AwardeeWebsites {
   personal_website_link?: string | null;
   institution_website_link?: string | null;
   nobel_website_link?: string | null;
+}
+/**
+ * Események és eseményekkel kapcsolatos információk
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  name: string;
+  picture: number | Media;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  date: string;
+  location: string;
+  speakers?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * TDK dolgozatok
@@ -523,37 +551,6 @@ export interface AboutTimelineEvent {
     [k: string]: unknown;
   };
   logo: number | Media;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * Események és eseményekkel kapcsolatos információk
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events".
- */
-export interface Event {
-  id: number;
-  name: string;
-  picture: number | Media;
-  description: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  date: string;
-  location: string;
-  speakers?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -920,6 +917,7 @@ export interface AwardsSelect<T extends boolean = true> {
         cover?: T;
         id?: T;
       };
+  event?: T;
   facebook_link?: T;
   event_facebook_link?: T;
   connected_publicatios?: T;
@@ -949,8 +947,6 @@ export interface AwardeesSelect<T extends boolean = true> {
         field?: T;
         id?: T;
       };
-  about?: T;
-  about_en?: T;
   short_justification?: T;
   short_justification_en?: T;
   extended_justification?: T;
@@ -960,7 +956,8 @@ export interface AwardeesSelect<T extends boolean = true> {
   has_nobel?: T;
   nobel_year?: T;
   ceremony_video_link?: T;
-  lecture_video_link?: T;
+  video_description?: T;
+  video_description_en?: T;
   image_gallery?:
     | T
     | {
@@ -969,22 +966,13 @@ export interface AwardeesSelect<T extends boolean = true> {
         caption_en?: T;
         id?: T;
       };
-  related_content?:
-    | T
-    | {
-        title?: T;
-        title_en?: T;
-        url?: T;
-        thumbnail?: T;
-        type?: T;
-        id?: T;
-      };
   downloads?: T | AwardeeDownloadsSelect<T>;
   publications?:
     | T
     | {
         title?: T;
         title_en?: T;
+        cover_image?: T;
         author?: T;
         date?: T;
         link?: T;

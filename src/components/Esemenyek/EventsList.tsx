@@ -5,7 +5,6 @@ import { useMemo } from "react";
 import {Event} from "@/payload-types";
 import { Calendar, MapPin, User } from "lucide-react";
 import {isMedia} from "@/utils/isMedia";
-import type {Route} from "next";
 
 export function formatDateParts(iso: string) {
     const d = new Date(iso);
@@ -55,7 +54,7 @@ export function EventCard({ event, href }: { event: Event; href: string }) {
             className="group relative flex flex-col h-full overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all duration-300 hover:border-rajk-green/30 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-rajk-green/20"
         >
             {/* Thumbnail */}
-            <div className="relative h-48 w-full overflow-hidden">
+            <div className="relative h-56 w-full overflow-hidden">
                 {isMedia(event.picture) ? (
                     <Image
                         src={event.picture?.url ?? "/rajk_strucc_black.png"}
@@ -70,41 +69,48 @@ export function EventCard({ event, href }: { event: Event; href: string }) {
                         <Calendar className="h-12 w-12" />
                     </div>
                 )}
-                {/* Date badge overlay */}
-                <div className="absolute top-3 left-3 flex flex-col items-center justify-center rounded-lg bg-white/90 backdrop-blur-sm p-2 text-neutral-800 shadow-sm min-w-[60px]">
-                    <div className="text-xs font-bold uppercase tracking-widest text-rajk-green">{date.month}</div>
-                    <div className="text-2xl font-black leading-none">{date.day}</div>
-                    <div className="text-xs font-semibold opacity-80">{date.year}</div>
-                </div>
+                {/* Date badge overlay - REMOVED */}
             </div>
 
             {/* Content */}
             <div className="flex flex-col flex-grow justify-between p-6">
-                <div className="flex flex-col gap-3">
-                    <h3 className="text-xl font-bold leading-tight tracking-tight text-neutral-900 transition-colors duration-300 group-hover:text-rajk-green line-clamp-2">
-                        {event.name}
-                    </h3>
+                <div className="flex gap-4 items-start">
+                     {/* Date Badge Moved Here */}
+                    <div className="flex flex-col items-center justify-center rounded-lg bg-neutral-50 border border-neutral-100 p-2 text-neutral-800 shadow-sm min-w-[60px] flex-shrink-0">
+                        <div className="text-xs font-bold uppercase tracking-widest text-rajk-green">{date.month}</div>
+                        <div className="text-2xl font-black leading-none">{date.day}</div>
+                        <div className="text-xs font-semibold opacity-80">{date.year}</div>
+                    </div>
 
-                    {/* Meta information */}
-                    <div className="flex flex-col gap-2 text-sm text-neutral-600">
-                        <div className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4 text-rajk-green flex-shrink-0" />
-                            <span>{date.year}, {date.month}, {date.day}, {date.time}</span>
-                        </div>
+                    <div className="flex flex-col gap-3">
+                        <h3 className="text-xl font-bold leading-tight tracking-tight text-neutral-900 transition-colors duration-300 group-hover:text-rajk-green line-clamp-2">
+                            {event.name}
+                        </h3>
 
-                        {event.location && (
+                        {/* Meta information */}
+                        <div className="flex flex-col gap-2 text-sm text-neutral-600">
+                            {/* Removed redundant date line since badge is here? Or keep time? 
+                                Keep full date/time for clarity if user wants.
+                            */}
                             <div className="flex items-center gap-2">
-                                <MapPin className="h-4 w-4 text-rajk-green flex-shrink-0" />
-                                <span className="line-clamp-1">{event.location}</span>
+                                <Calendar className="h-4 w-4 text-rajk-green flex-shrink-0" />
+                                <span>{date.year}, {date.month}, {date.day}, {date.time}</span>
                             </div>
-                        )}
-                        
-                        {event.speakers && (
-                            <div className="flex items-start gap-2 mt-1">
-                                <User className="mt-0.5 h-4 w-4 flex-shrink-0 text-rajk-green" />
-                                <span className="font-medium line-clamp-1">{event.speakers}</span>
-                            </div>
-                        )}
+
+                            {event.location && (
+                                <div className="flex items-center gap-2">
+                                    <MapPin className="h-4 w-4 text-rajk-green flex-shrink-0" />
+                                    <span className="line-clamp-1">{event.location}</span>
+                                </div>
+                            )}
+                            
+                            {event.speakers && (
+                                <div className="flex items-start gap-2 mt-1">
+                                    <User className="mt-0.5 h-4 w-4 flex-shrink-0 text-rajk-green" />
+                                    <span className="font-medium line-clamp-1">{event.speakers}</span>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
 

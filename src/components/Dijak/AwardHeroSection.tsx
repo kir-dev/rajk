@@ -10,7 +10,7 @@ interface AwardHeroSectionProps {
     award: Award;
 }
 
-export default function AwardHeroSection({ award }: AwardHeroSectionProps) {
+export default function íAwardHeroSection({ award }: AwardHeroSectionProps) {
     const scrollToLatest = () => {
         document.getElementById("awardees")?.scrollIntoView({ behavior: "smooth" })
     }
@@ -55,7 +55,7 @@ export default function AwardHeroSection({ award }: AwardHeroSectionProps) {
                     {awardName}
                 </h1>
 
-                <p className="text-lg md:text-xl text-foreground max-w-3xl mx-auto mb-12 leading-relaxed text-pretty">
+                <p className="text-lg md:text-xl text-foreground max-w-4xl mx-auto mb-12 leading-relaxed text-pretty">
                     A Rajk Szakkollégium hallgatóinak tudományos díja az egzakt társadalomtudományok területén
                 </p>
 

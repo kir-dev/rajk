@@ -47,25 +47,12 @@ export default function AwardAwardeesSection({award}: AwardAwardeesSectionProps)
         <Section id={"awardees"} title={"Awardees"} className="py-24 px-4 border-t border-border">
             <div className="max-w-7xl mx-auto">
                 <h2 className="text-3xl md:text-4xl font-bold text-background mb-4">{t(lang, "Díjazottak", "Awardees")}</h2>
-                <p className="text-muted-foreground mb-12 max-w-2xl">
+                {/*<p className="text-muted-foreground mb-12 max-w-2xl">
                     {t(lang,
                         `A ${award.name} eddigi kitüntetettjei, akik kiemelkedő hozzájárulást tettek az egzakt társadalomtudományok fejlődéséhez.`,
                         `The past recipients of the ${award.name}, who have made outstanding contributions to the development of exact social sciences.`
                     )}
-                </p>
-
-                {/* Latest Laureate Feature */}
-                <div className="mb-16">
-                    {latestAwardee && (
-                        <>
-                            <div className="text-sm text-primary font-medium mb-4 flex items-center gap-2">
-                                <span className="w-2 h-2 bg-primary rounded-full animate-pulse"/>
-                                {t(lang, "Legfrissebb díjazott", "Latest Award Winner")}
-                            </div>
-                            <AwardeeCard awardee={latestAwardee} featured/>
-                        </>
-                    )}
-                </div>
+                </p>*/}
 
                 {/* Filters */}
                 <FilterChips
@@ -75,6 +62,15 @@ export default function AwardAwardeesSection({award}: AwardAwardeesSectionProps)
                     filters={filters}
                     setFilters={setFilters}
                 />
+
+                {/* Latest Laureate Feature */}
+                <div className="mb-16">
+                    {latestAwardee && (
+                        <>
+                            <AwardeeCard awardee={latestAwardee} featured/>
+                        </>
+                    )}
+                </div>
 
                 {/* Timeline */}
                 <div className="space-y-4">
