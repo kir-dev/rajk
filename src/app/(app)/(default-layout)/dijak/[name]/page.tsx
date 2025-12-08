@@ -8,7 +8,6 @@ import VertNavBarLayout from "@/components/VertNavBarLayout";
 import {Awardee, Media} from "@/payload-types";
 import Image from "next/image";
 import {isMedia} from "@/utils/isMedia";
-import {RichText} from "@payloadcms/richtext-lexical/react";
 import AwardeeGrid from "@/components/AwardeeGrid";
 
 export default async function Page({params}: { params: Promise<{ name: string }> }) {
@@ -64,7 +63,6 @@ export default async function Page({params}: { params: Promise<{ name: string }>
                             </div>
                             <div>
                                 <h2 className = "text-3xl font-bold mb-4">{awardee.name}</h2>
-                                <RichText className={"w-5/6 wrap-normal"} data={awardee.about}/>
                             </div>
                         </div>
                     </Section>
