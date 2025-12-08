@@ -1,5 +1,6 @@
 import {Award, Awardee} from "@/payload-types";
 import {Lang} from "@/components/LanguageProvider";
+import {Event} from "@/payload-types";
 
 /**
  * Returns a title for the given award in the specified language.
@@ -57,7 +58,26 @@ const demoAwardees: Awardee[] = [
         //description: "A viselkedési közgazdaságtan úttörője, aki forradalmasította a döntéshozatal és kockázatészlelés megértését.",
         extended_justification: "Daniel Kahneman munkássága forradalmasította a közgazdaságtant azzal, hogy bemutatta: az emberek nem a klasszikus közgazdaságtan által feltételezett racionális döntéshozók. A kilátáselmélet, amelyet Amos Tverskyvel együtt dolgozott ki, megmutatta, hogy az emberek másképp értékelik a nyereségeket és veszteségeket, és hajlamosak a kognitív torzításokra. Ez a felismerés alapjaiban változtatta meg a közgazdaságtan, pénzügy és közpolitika területeit. A Rajk Szakkollégium közössége Kahneman professzort a viselkedési közgazdaságtan úttörőjeként, a tudományos gondolkodás megújítójaként tiszteli.",
         ceremony_video_link: "https://www.youtube.com/embed/placeholder-ceremony",
-        lecture_video_link: "https://www.youtube.com/embed/placeholder-lecture",
+        video_description: {
+            root: {
+                type: "",
+                children: [],
+                direction: null,
+                format: "",
+                indent: 0,
+                version: 0
+            }
+        },
+        video_description_en: {
+            root: {
+                type: "",
+                children: [],
+                direction: null,
+                format: "",
+                indent: 0,
+                version: 0
+            }
+        },
         image_gallery: [
             {
                 id: "1",
@@ -231,7 +251,26 @@ const demoAwardees: Awardee[] = [
         short_justification: "Az intézmények gazdasági szerepének feltárásáért és a gazdasági egyenlőtlenségek kutatásáért.",
         extended_justification: "Daron Acemoglu munkássága alapvetően megváltoztatta azt, ahogyan a közgazdászok az intézmények és a gazdasági fejlődés kapcsolatát értelmezik. James Robinsonnal közösen írt 'Why Nations Fail' című könyve világszerte vitát generált az intézmények szerepéről. Kutatásai megmutatták, hogy a befogadó versus kizsákmányoló intézmények közötti különbség magyarázza a gazdasági fejlettség országok közötti eltéréseit.",
         ceremony_video_link: "https://www.youtube.com/embed/placeholder-acemoglu-ceremony",
-        lecture_video_link: "https://www.youtube.com/embed/placeholder-acemoglu-lecture",
+        video_description: {
+            root: {
+                type: "",
+                children: [],
+                direction: null,
+                format: "",
+                indent: 0,
+                version: 0
+            }
+        },
+        video_description_en: {
+            root: {
+                type: "",
+                children: [],
+                direction: null,
+                format: "",
+                indent: 0,
+                version: 0
+            }
+        },
         image_gallery: [
             {
                 image: {
@@ -584,6 +623,33 @@ const demoAwardees: Awardee[] = [
     },
 ]
 
+const demoEvent: Event = {
+    id: 1,
+    name: "Neumann János-díj",
+    picture: {
+        url: "/images/placeholders/n30s20.jpg",
+        id: 1,
+        alt: "Esemény borító kép",
+        createdAt: new Date().toDateString(),
+        updatedAt: new Date().toDateString()
+    },
+    description: {
+            root: {
+                type: "",
+                children: [],
+                direction: null,
+                format: "",
+                indent: 0,
+                version: 0
+            }
+        },
+    location: "",
+    date: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 7).toDateString(),
+    speakers: "",
+    createdAt: "",
+    updatedAt: "",
+}
+
 export function getAwardLocalizedName(award: Award, lang: Lang): string {
     switch (award.name) {
         case "Neumann János-díj": {
@@ -612,6 +678,7 @@ export function getAwardMockData(awardName: string): Award {
         name: awardName,
         awardees: demoAwardees,
         createdAt: "",
-        updatedAt: ""
+        updatedAt: "",
+        event: demoEvent,
     }
 }

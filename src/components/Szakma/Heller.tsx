@@ -45,7 +45,7 @@ export default function Heller() {
                 <div className="mx-auto mt-2 h-1 w-24 rounded-full bg-emerald-600" />
             </div>
             <p className="px-6 md:px-30 text-center">A kollégiumban végzett kreatív munka elismerésének és elismertségének érdekében a Szakkollégium Heller Farkas-díjat alapított. A díj odaítélésének kritériuma, hogy a díjazott nyújtson a Szakkollégiumban érvényes mércék szerint kiemelkedő szakmai teljesítményt. A díj odaítéléséről az Szakmai Munka Tanácsa (SZMT) jelölése alapján a Kollégiumi Gyűlés határoz.</p>
-            <div className="relative p-16">
+            <div className="relative">
 
                 {/* Image with text overlay */}
                 <div className="relative hidden lg:block">
@@ -54,7 +54,6 @@ export default function Heller() {
                         alt={"Heller-díj background image"}
                         width={1000}
                         height={1000}
-                        className="rounded-lg"
                     />
 
                     {/* Text overlay positioned on the white box area */}

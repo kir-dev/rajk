@@ -10,7 +10,7 @@ interface ExpandableSectionProps {
 }
 
 export function ExpandableSection({title, icon, children, className}: ExpandableSectionProps) {
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
         <div className={className}>

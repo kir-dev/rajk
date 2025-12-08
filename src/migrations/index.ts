@@ -11,6 +11,10 @@ import * as migration_20251202_215433_extended_justification_is_nullable from '.
 import * as migration_20251202_220232_group_websites_of_awardees from './20251202_220232_group_websites_of_awardees';
 import * as migration_20251204_144742_add_about_en_to_award from './20251204_144742_add_about_en_to_award';
 import * as migration_20251206_214500_fix_missing_awards_rels from './20251206_214500_fix_missing_awards_rels';
+import * as migration_20251208_122221 from './20251208_122221';
+import * as migration_20251208_152357 from './20251208_152357';
+import * as migration_20251208_154756_remove_unnecessary_requirements_and_fields from './20251208_154756_remove_unnecessary_requirements_and_fields';
+import * as migration_20251208_160401_add_cover_image_to_publications from './20251208_160401_add_cover_image_to_publications';
 
 export const migrations = [
   {
@@ -77,5 +81,25 @@ export const migrations = [
     up: migration_20251206_214500_fix_missing_awards_rels.up,
     down: migration_20251206_214500_fix_missing_awards_rels.down,
     name: '20251206_214500_fix_missing_awards_rels',
+  },
+  {
+    up: migration_20251208_122221.up,
+    down: migration_20251208_122221.down,
+    name: '20251208_122221',
+  },
+  {
+    up: migration_20251208_152357.up,
+    down: migration_20251208_152357.down,
+    name: '20251208_152357',
+  },
+  {
+    up: migration_20251208_154756_remove_unnecessary_requirements_and_fields.up,
+    down: migration_20251208_154756_remove_unnecessary_requirements_and_fields.down,
+    name: '20251208_154756_remove_unnecessary_requirements_and_fields',
+  },
+  {
+    up: migration_20251208_160401_add_cover_image_to_publications.up,
+    down: migration_20251208_160401_add_cover_image_to_publications.down,
+    name: '20251208_160401_add_cover_image_to_publications'
   },
 ];

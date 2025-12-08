@@ -1,12 +1,13 @@
 import {fetchAwardBySlug} from "@/fetch/fetchAwards";
 import React from "react";
 import VertNavBarLayout from "@/components/VertNavBarLayout";
-import {notFound} from "next/navigation";
 import AwardHeroSection from "@/components/Dijak/AwardHeroSection";
 import AwardAboutSection from "@/components/Dijak/AwardAboutSection";
 import AwardAwardeesSection from "@/components/Dijak/AwardAwardeesSection";
 import Section from "@/components/Section";
 import {getAwardMockData} from "@/lib/award-utils";
+import NextEvent from "@/components/Esemenyek/NextEvent";
+import {Event} from "@/payload-types";
 
 export default async function Page({params}: PageProps<'/awards/[name]'>) {
 
@@ -26,12 +27,17 @@ export default async function Page({params}: PageProps<'/awards/[name]'>) {
                 <Section id="hero" title="" lucideIconName="/rajk_strucc_black.png">
                     <AwardHeroSection award={award} />
                 </Section>
-                <Section id="about" title="" lucideIconName="ScrollText">
+                <Section id="about" title="Díjról" lucideIconName="ScrollText">
                     <AwardAboutSection award={award} />
                 </Section>
-                <Section id="awardees" title="" lucideIconName="Award">
+                <Section id="awardees" title="Díjazottak" lucideIconName="Award">
                     <AwardAwardeesSection award={award} />
                 </Section>
+                {award.event && (
+                    <Section id="event" title="Esemény" lucideIconName="Calendar" className="mb-20">
+                        <NextEvent event={award.event as Event}/>
+                    </Section>
+                )}
             </VertNavBarLayout>
         </div>
     )
