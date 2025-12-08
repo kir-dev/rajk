@@ -16,11 +16,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"field" varchar NOT NULL
   );
   
-  ALTER TABLE "awardees" ADD COLUMN "institution" varchar NOT NULL;
-  ALTER TABLE "awardees" ADD COLUMN "origin_country" varchar NOT NULL;
-  ALTER TABLE "awardees" ADD COLUMN "about_en" jsonb NOT NULL;
-  ALTER TABLE "awardees" ADD COLUMN "short_justification" jsonb NOT NULL;
-  ALTER TABLE "awardees" ADD COLUMN "short_justification_en" jsonb NOT NULL;
+  ALTER TABLE "awardees" ADD COLUMN "institution" varchar DEFAULT '' NOT NULL;
+  ALTER TABLE "awardees" ADD COLUMN "origin_country" varchar DEFAULT '' NOT NULL;
+  ALTER TABLE "awardees" ADD COLUMN "about_en" jsonb DEFAULT '{}' NOT NULL;
+  ALTER TABLE "awardees" ADD COLUMN "short_justification" jsonb DEFAULT '{}' NOT NULL;
+  ALTER TABLE "awardees" ADD COLUMN "short_justification_en" jsonb DEFAULT '{}' NOT NULL;
   ALTER TABLE "awardees" ADD COLUMN "has_nobel" boolean DEFAULT false;
   ALTER TABLE "awardees" ADD COLUMN "nobel_year" numeric;
   ALTER TABLE "awardees" ADD COLUMN "google_scholar_link" varchar;
