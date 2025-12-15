@@ -63,7 +63,7 @@ export function AwardeeCard({awardee}: AwardeeCardProps) {
 
     const extendedJustification = getExtendedJustificationStr(awardee)
 
-    const hasVideos = Boolean(awardee.ceremony_video_link || awardee.downloads || awardee.video_description)
+    const hasVideos = Boolean(awardee.ceremony_video_link || awardee.video_description)
     const hasGallery = Boolean(awardee.image_gallery && awardee.image_gallery.length > 0)
     const hasPublications = Boolean(awardee.publications && awardee.publications.length > 0)
     const hasJustification = Boolean(extendedJustification)

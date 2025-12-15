@@ -1,3 +1,4 @@
+import { FixedToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import type {CollectionConfig} from 'payload'
 
 export const Awards: CollectionConfig = {
@@ -24,12 +25,24 @@ export const Awards: CollectionConfig = {
             label: 'Leírás',
             type: 'richText',
             required: true,
+            editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                    ...defaultFeatures,
+                    FixedToolbarFeature(),
+                ]
+            })
         },
         {
             name: 'about_en',
             label: 'About',
             type: 'richText',
             required: true,
+            editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                    ...defaultFeatures,
+                    FixedToolbarFeature(),
+                ]
+            })
         },
         {
             name: 'awardees',

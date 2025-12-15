@@ -13,6 +13,7 @@ export default async function Page({params}: PageProps<'/awards/[name]'>) {
 
     const {name: awardName} = await params;
     let award = await fetchAwardBySlug(awardName);
+    console.log(award);
 
     if (!award) {
         // TODO: This will be the desired behaviour once the production db is set up
