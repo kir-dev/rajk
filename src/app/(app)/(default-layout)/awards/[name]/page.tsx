@@ -23,7 +23,7 @@ export default async function Page({params}: PageProps<'/awards/[name]'>) {
     }
 
     return (
-        <div className="flex flex-row h-fit w-full relative bg-foreground">
+        <div className="flex flex-row h-fit w-full relative bg-bezs">
             <VertNavBarLayout>
                 <Section id="hero" title="" lucideIconName="/rajk_strucc_black.png">
                     <AwardHeroSection award={award} />

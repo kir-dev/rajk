@@ -1,6 +1,6 @@
 "use client";
 
-import { Award as AwardIcon, Users, Trophy, Sparkles } from "lucide-react"
+import { Award as AwardIcon, Users, Trophy } from "lucide-react"
 import {Award, Awardee} from "@/payload-types";
 import Section from "@/components/Section";
 import {useLanguage} from "@/components/LanguageProvider";
@@ -69,10 +69,10 @@ export default function AwardAboutSection({ award } : AwardAboutSectionProps) {
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border rounded-lg mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white rounded-lg mb-16">
                     {stats.map((stat, index) => (
-                        <div key={index} className="bg-card p-8 md:p-12 text-center md:text-left">
-                            <stat.icon className="w-6 h-6 text-primary mb-4 mx-auto md:mx-0" />
+                        <div key={index} className="bg-transparent p-8 md:p-12 text-center">
+                            <stat.icon className="w-6 h-6 text-primary mb-4 mx-auto" />
                             <div className="text-4xl md:text-5xl font-bold text-background mb-2">{stat.value}</div>
                             <div className="text-lg text-background font-medium">{stat.label}</div>
                             <div className="text-sm text-muted-foreground">{stat.description}</div>
@@ -83,9 +83,6 @@ export default function AwardAboutSection({ award } : AwardAboutSectionProps) {
                 {/* Unique Feature Box */}
                 <div className="bg-card border border-border rounded-lg p-8 md:p-12">
                     <div className="flex items-start gap-4 mb-6">
-                        <div className="p-3 bg-primary/10 rounded-lg">
-                            <Sparkles className="w-6 h-6 text-primary" />
-                        </div>
                         <div>
                             <h2 className="text-2xl md:text-3xl font-bold text-background mb-2">{t(lang, "Miben egyedi?", "Why is it unique?")}</h2>
                             <p className="text-md text-muted-foreground">

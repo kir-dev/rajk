@@ -41,7 +41,7 @@ export default function AwardAwardeesSection({award}: AwardAwardeesSectionProps)
 
     })
 
-    const latestAwardee = awardees.length > 0 ? awardees[0] : null;
+    const latestAwardee = filteredAwardees.length > 0 ? filteredAwardees[0] : null;
 
     return (
         <Section id={"awardees"} title={"Awardees"} className="py-24 px-4 border-t border-border">

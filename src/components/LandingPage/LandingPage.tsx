@@ -42,7 +42,7 @@ export default function LandingPage(props: LandingPageProps) {
                 <div className="absolute left-0 top-0 h-full z-30 md:block">
                     <VertNavbar />
                 </div>
-                <div className="bg-foreground h-full w-full flex flex-col">
+                <div className="bg-bezs h-full w-full flex flex-col">
                     <Section id={"rolunk"} title={t(lang, "Közösség", "Community")}>
                         <div className="flex flex-col w-full h-full rounded-2xl">
                             <PillarCard
