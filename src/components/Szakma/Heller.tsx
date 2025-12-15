@@ -39,7 +39,7 @@ export default function Heller() {
     ];
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen p-8 mb-20">
+        <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 mb-20">
             <div className="mb-8 text-center">
                 <h2 className="text-4xl font-extrabold tracking-tight text-slate-900">Heller-díj</h2>
                 <div className="mx-auto mt-2 h-1 w-24 rounded-full bg-emerald-600" />
@@ -93,29 +93,27 @@ export default function Heller() {
                         </div>
                     </div>
                 </div>
-                <div className="relative lg:hidden">
-                    {columns.map((column, columnIndex) => (
-                        <div key={columnIndex} className="mb-8 ">
-                            {column.map((awardee, personIndex) => {
-                                const memberName = typeof awardee.member === 'object' && awardee.member !== null
-                                    ? (awardee.member as Person).name
-                                    : 'Unknown';
+                <div className="relative lg:hidden w-full">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
+                        {members.map((awardee, personIndex) => {
+                            const memberName = typeof awardee.member === 'object' && awardee.member !== null
+                                ? (awardee.member as Person).name
+                                : 'Unknown';
 
-                                const yearDisplay = awardee.joined_at
-                                    ? new Date(awardee.joined_at).getFullYear()
-                                    : 'N/A';
+                            const yearDisplay = awardee.joined_at
+                                ? new Date(awardee.joined_at).getFullYear()
+                                : 'N/A';
 
-                                return (
-                                    <div key={personIndex} className="text-black text-sm mb-2 flex flex-row">
-                                        <span className="font-medium">{memberName}</span>
-                                        <span className="text-gray-600 ml-1">
-                                            ({yearDisplay})
-                                        </span>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    ))}
+                            return (
+                                <div key={personIndex} className="text-black text-sm flex flex-row justify-between sm:justify-start items-center border-b border-gray-100 py-2 sm:border-none sm:py-0">
+                                    <span className="font-medium">{memberName}</span>
+                                    <span className="text-gray-500 text-xs ml-2 bg-gray-100 px-2 py-0.5 rounded-full">
+                                        {yearDisplay}
+                                    </span>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </div>

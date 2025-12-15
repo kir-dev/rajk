@@ -62,7 +62,7 @@ export default function SzakmaPage() {
     }, []);
 
     return (
-        <main className="min-h-screen flex flex-col py-20 bg-bezs text-black mx-20">
+        <main className="min-h-screen flex flex-col py-20 bg-bezs text-black mx-4 md:mx-20">
             <SzakmaSection
                 title="Kurzusrendszer"
                 distribution={defaultDistribution}
@@ -91,7 +91,7 @@ export default function SzakmaPage() {
                     people={peopleWithRoles}
                     lead={"A rajkos kurzusvezetők munkájának elismerésére évente a \„Rajk Szakkollégium Állandó Tanára\" címet adományozzuk. A címet olyan jelenlegi és volt kurzusvezetők kapják, akik nagy hatást gyakoroltak a kollégisták szakmai fejlődésére. Ezúton is köszönjük sokéves munkájukat!"}
                     showMax={peopleWithRoles.length}
-                        />
+                />
                 {/*<TDK/>
                     <OdysseyProgram/>*/}
                 <Heller/>

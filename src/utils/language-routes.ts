@@ -1,4 +1,4 @@
-import { Lang } from "@/components/LanguageProvider";
+{/*import { Lang } from "@/components/LanguageProvider";
 
 type RouteMapping = {
   en: string;
@@ -31,3 +31,4 @@ export function getLocalizedPath(path: string, targetLang: Lang): string | null 
   }
   return null;
 }
+*/}

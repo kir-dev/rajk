@@ -283,7 +283,7 @@ export function AwardeeCard({awardee}: AwardeeCardProps) {
                                                 : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-emerald-600"
                                         )}
                                     >
-                                        <section.icon className="w-4 h-4"/>
+                                        {/*<section.icon className="w-4 h-4"/>*/}
                                         {section.label}
                                     </button>
                                 ))}

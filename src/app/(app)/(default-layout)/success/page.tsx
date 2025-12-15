@@ -23,11 +23,11 @@ export default function SuccessPage() {
             <div className="bg-white rounded-2xl border-2 border-black shadow-lg p-8 max-w-md w-full text-center">
                 <div className="flex justify-center mb-6">
                     <div className={`transition-all duration-700 ease-out ${animationComplete ? 'scale-100 opacity-100' : 'scale-50 opacity-0'}`}>
-                        <CheckCircle className="h-24 w-24 text-zold" strokeWidth={2} />
+                        <CheckCircle className="h-24 w-24 text-rajk-green" strokeWidth={2} />
                     </div>
                 </div>
 
-                <h1 className={`text-3xl font-bold mb-4 transition-all delay-200 duration-500 ${animationComplete ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                <h1 className={`text-3xl text-rajk-green font-bold mb-4 transition-all delay-200 duration-500 ${animationComplete ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
                     {t(lang, 'Sikeres fizetés!', 'Payment successful!')}
                 </h1>
 
