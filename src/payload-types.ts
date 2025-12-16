@@ -267,6 +267,7 @@ export interface Applicant {
 export interface Award {
   id: number;
   name: string;
+  name_en: string;
   logo: number | Media;
   about: {
     root: {
@@ -298,6 +299,44 @@ export interface Award {
     };
     [k: string]: unknown;
   };
+  program_about: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  program_about_en: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  stats: {
+    value: number;
+    label: string;
+    label_en: string;
+    description: string;
+    description_en: string;
+    id?: string | null;
+  }[];
   awardees?: (number | Awardee)[] | null;
   covers?:
     | {
@@ -371,6 +410,7 @@ export interface Awardee {
     };
     [k: string]: unknown;
   } | null;
+  interview_video_link?: string | null;
   image_gallery?:
     | {
         image: number | Media;
@@ -384,10 +424,26 @@ export interface Awardee {
     | {
         title: string;
         title_en: string;
+        abstract?: string | null;
+        abstract_en?: string | null;
         cover_image: number | Media;
         author: string;
         date: string;
         link?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  articles?:
+    | {
+        title: string;
+        title_en: string;
+        abstract?: string | null;
+        abstract_en?: string | null;
+        cover_image: number | Media;
+        author: string;
+        date: string;
+        link?: string | null;
+        download?: (number | null) | Media;
         id?: string | null;
       }[]
     | null;
@@ -907,9 +963,22 @@ export interface ApplicantsSelect<T extends boolean = true> {
  */
 export interface AwardsSelect<T extends boolean = true> {
   name?: T;
+  name_en?: T;
   logo?: T;
   about?: T;
   about_en?: T;
+  program_about?: T;
+  program_about_en?: T;
+  stats?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        label_en?: T;
+        description?: T;
+        description_en?: T;
+        id?: T;
+      };
   awardees?: T;
   covers?:
     | T
@@ -958,6 +1027,7 @@ export interface AwardeesSelect<T extends boolean = true> {
   ceremony_video_link?: T;
   video_description?: T;
   video_description_en?: T;
+  interview_video_link?: T;
   image_gallery?:
     | T
     | {
@@ -972,10 +1042,26 @@ export interface AwardeesSelect<T extends boolean = true> {
     | {
         title?: T;
         title_en?: T;
+        abstract?: T;
+        abstract_en?: T;
         cover_image?: T;
         author?: T;
         date?: T;
         link?: T;
+        id?: T;
+      };
+  articles?:
+    | T
+    | {
+        title?: T;
+        title_en?: T;
+        abstract?: T;
+        abstract_en?: T;
+        cover_image?: T;
+        author?: T;
+        date?: T;
+        link?: T;
+        download?: T;
         id?: T;
       };
   websites?: T | AwardeeWebsitesSelect<T>;

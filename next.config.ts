@@ -59,6 +59,15 @@ const nextConfig: NextConfig = {
             },
         ];
     },
+    async redirects() {
+        return [
+            {
+                source: '/tamogass',
+                destination: '/support',
+                permanent: true,
+            },
+        ];
+    },
 };
 
 export default withPayload(nextConfig);

@@ -21,6 +21,7 @@ export default function AwardAwardeesSection({award}: AwardAwardeesSectionProps)
     const years = [...new Set(awardees.map((l) => l.year))].sort((a, b) => b - a)
     const institutions = [...new Set(awardees.map((l) => l.institution))]
     const fields = [...new Set(awardees.flatMap((l) => l.fields_of_science.map(f => f.field)))]
+    const fieldsEn = [...new Set(awardees.flatMap((l) => l.fields_of_science_en.map(f => f.field)))];
 
 
     const [filters, setFilters] = useState({
@@ -34,7 +35,7 @@ export default function AwardAwardeesSection({award}: AwardAwardeesSectionProps)
         if (filters.year && l.year !== filters.year) return false
         if (filters.hasNobel !== null && l.has_nobel !== filters.hasNobel) return false
         if (filters.field) {
-            const fieldsOfScience = (l.fields_of_science || []).map(f => f.field);
+            const fieldsOfScience = (l.fields_of_science || l.fields_of_science_en || []).map(f => f.field);
             if (!fieldsOfScience.includes(filters.field)) return false
         }
         return !(filters.institution && l.institution !== filters.institution);
@@ -58,6 +59,7 @@ export default function AwardAwardeesSection({award}: AwardAwardeesSectionProps)
                 <FilterChips
                     years={years}
                     fields={fields}
+                    fieldsEn={fieldsEn}
                     institutions={institutions}
                     filters={filters}
                     setFilters={setFilters}

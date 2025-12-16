@@ -11,6 +11,7 @@ import {Sponsor} from "@/payload-types";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight } from 'lucide-react';
+import {useLanguage} from "@/components/LanguageProvider";
 
 export default function CheckoutPage() {
     const [amount, setAmount] = useState<number>(500000);
@@ -22,6 +23,7 @@ export default function CheckoutPage() {
     const [error, setError] = useState<string | null>(null);
     const [step, setStep] = useState<'choose-amount' | 'payment'>('choose-amount');
     const [paymentIntentUsed, setPaymentIntentUsed] = useState<boolean>(false);
+    const {lang} = useLanguage();
 
     // Sponsors state and loader
     const [sponsors, setSponsors] = useState<Sponsor[]>([]);
@@ -104,11 +106,20 @@ export default function CheckoutPage() {
         <div className="min-h-screen bg-bezs py-20 px-4 text-slate-900">
             <div className="max-w-4xl mx-auto">
                 <div className="my-8 text-center items-center flex flex-col">
-                    <h1 className="text-4xl font-extrabold tracking-tight text-slate-900">Támogasd a Rajk Szakkollégiumot</h1>
+                    <h1 className="text-4xl font-extrabold tracking-tight text-slate-900">{lang === 'HU' ? 'Támogasd a Rajk Szakkollégiumot' : 'Support the Rajk College for Advanced Studies'}</h1>
                     <div className="mx-auto my-2 h-1 w-96 rounded-full bg-emerald-600" />
                     <p className="text-gray-700 max-w-2xl mx-auto">
-                        Adományoddal hozzájárulsz a Rajk Szakkollégium működéséhez és programjaihoz.
-                        Segíts, hogy továbbra is biztosíthassuk a minőségi képzést a jövő generációinak.
+                        {lang === 'HU' ? (
+                            <>
+                                Adományoddal hozzájárulsz a Rajk Szakkollégium működéséhez és programjaihoz.
+                                Segíts, hogy továbbra is biztosíthassuk a minőségi képzést a jövő generációinak.
+                            </>
+                        ) : (
+                            <>
+                                Your donation helps the Rajk College for Advanced Studies to continue its operations and programs.
+                                Help us maintain the high quality of education for future generations.
+                            </>
+                        )}
                     </p>
                 </div>
                 <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}>
@@ -152,17 +163,17 @@ export default function CheckoutPage() {
                         href="https://tamogatas.rajk.uni-corvinus.hu/"
                         className="inline-flex items-center gap-1 text-2xl tracking-tight hover:text-emerald-600 text-slate-900 transition-colors duration-200 group bg-kek rounded-xl border-2 max-w-xl mx-auto p-2"
                     >
-                        <span>Konkrét projektjeinket ide kattintva találod</span>
+                        <span>{lang === 'HU' ? 'Konkrét projektjeinket ide kattintva találod' : 'Click here to see our projects'}</span>
                         <ArrowUpRight className="transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </Link>
                     {/*<div className="mx-auto mt-2 h-1 w-24 rounded-full bg-emerald-600" />*/}
-                    <p className="text-gray-700 max-w-2xl mx-auto">Ezen a felületen mindig láthatod mennyi támogatásra van szükség és milyen célból. <br></br>Mostantól 3 egyszerű lépésben támogathatod régi vagy új szívügyeidet a kollégiumban!</p>
+                    <p className="text-gray-700 max-w-2xl mx-auto">{lang === 'HU' ? 'Ezen a felületen mindig láthatod mennyi támogatásra van szükség és milyen célból. <br></br>Mostantól 3 egyszerű lépésben támogathatod régi vagy új szívügyeidet a kollégiumban!' : 'On this page you can always see how much support is needed and for what purpose. <br></br>Now you can donate to the college in just three simple steps!'} </p>
                 </div>
             </div>
 
             <div className="mt-8 max-w-6xl mx-auto px-4">
                 <div className="mb-8 text-center">
-                    <h2 className="text-4xl font-extrabold tracking-tight text-slate-900">Támogatóink</h2>
+                    <h2 className="text-4xl font-extrabold tracking-tight text-slate-900">{lang === 'HU' ? 'Támogatóink' : 'Our sponsors'}</h2>
                     <div className="mx-auto mt-2 h-1 w-24 rounded-full bg-emerald-600" />
                 </div>
 
