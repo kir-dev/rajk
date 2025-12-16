@@ -16,6 +16,7 @@ import {GalleryLightbox} from "@/components/Dijak/GalleryLightbox"
 import Image from "next/image"
 import {Awardee} from "@/payload-types";
 import {getMediaUrl} from "@/utils/isMedia";
+import {getEmbedUrl} from "@/utils/videoUtils";
 import {useLanguage} from "@/components/LanguageProvider";
 import {RichText} from "@payloadcms/richtext-lexical/react";
 import {AnimatePresence, motion} from "framer-motion";
@@ -25,7 +26,7 @@ interface AwardeeCardProps {
     featured?: boolean
 }
 
-type SectionType = 'introduction' | 'videos' | 'gallery' | 'publications'
+type SectionType = 'introduction' | 'videos' | 'gallery' | 'publications' | 'articles' | 'interview'
 
 export function AwardeeCard({awardee}: AwardeeCardProps) {
     const [activeSection, setActiveSection] = useState<SectionType | null>(null)
@@ -63,10 +64,12 @@ export function AwardeeCard({awardee}: AwardeeCardProps) {
 
     const extendedJustification = getExtendedJustificationStr(awardee)
 
-    const hasVideos = Boolean(awardee.ceremony_video_link || awardee.video_description)
+    const hasVideos = Boolean(awardee.ceremony_video_link)
     const hasGallery = Boolean(awardee.image_gallery && awardee.image_gallery.length > 0)
     const hasPublications = Boolean(awardee.publications && awardee.publications.length > 0)
+    const hasArticles = Boolean(awardee.articles && awardee.articles.length > 0)
     const hasJustification = Boolean(extendedJustification)
+    const hasInterviews = Boolean(awardee.interview_video_link)
 
     const renderVideosSection = () => {
         return (
@@ -78,7 +81,7 @@ export function AwardeeCard({awardee}: AwardeeCardProps) {
                     <div>
                         <div className="aspect-video bg-muted rounded-lg overflow-hidden mb-2">
                             <iframe
-                                src={awardee.ceremony_video_link}
+                                src={getEmbedUrl(awardee.ceremony_video_link)}
                                 className="w-full h-full"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
@@ -90,27 +93,27 @@ export function AwardeeCard({awardee}: AwardeeCardProps) {
                         </p>
                     </div>
                 )}
-                {/* Downloads */}
-                {awardee.downloads && (
-                    <div className="flex flex-wrap gap-4 justify-end">
-                        {awardee.downloads.laudation_pdf && (
-                            <a
-                                href={getMediaUrl(awardee.downloads.laudation_pdf)}
-                                className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors text-sm font-medium"
-                            >
-                                <Download className="w-4 h-4"/>
-                                {t(lang, "Laudáció PDF", "Laudation PDF")}
-                            </a>
-                        )}
-                        {awardee.downloads.press_photo_pack && (
-                            <a
-                                href={getMediaUrl(awardee.downloads.press_photo_pack)}
-                                className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors text-sm font-medium"
-                            >
-                                <Download className="w-4 h-4"/>
-                                {t(lang, "Sajtófotók", "Press Photo Pack")}
-                            </a>
-                        )}
+            </div>
+        )
+    }
+
+    const renderInterviewVideosSection = () => {
+        return (
+            <div className="max-w-5xl mx-auto">
+                {awardee.interview_video_link && (
+                    <div>
+                        <div className="aspect-video bg-muted rounded-lg overflow-hidden mb-2">
+                            <iframe
+                                src={getEmbedUrl(awardee.interview_video_link)}
+                                className="w-full h-full"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                title="Interjú videó"
+                            />
+                        </div>
+                        <p className="text-sm text-muted-foreground">
+                            {t(lang, "Díjátadó ünnepség", "Award Ceremony")}
+                        </p>
                     </div>
                 )}
             </div>
@@ -150,14 +153,14 @@ export function AwardeeCard({awardee}: AwardeeCardProps) {
                          className="flex items-start justify-between p-4 bg-muted/50 rounded-lg hover:bg-muted transition-colors group"
                          onClick={() => window.open(pub.link ? pub.link : "#", pub.link ? "_blank" : "_self")}
                          >
-                        <div className="flex gap-4">
-                            <div className="flex-shrink-0 relative w-24 shadow-md rounded-sm overflow-hidden bg-background">
+                        <div className="flex flex-col md:flex-row gap-4">
+                            <div className="flex-shrink-0 relative w-24 h-36 shadow-md rounded-sm overflow-hidden bg-background">
                                 <Image
                                     src={getMediaUrl(pub.cover_image, "/images/image-placeholder.png")}
                                     alt={t(lang, pub.title, pub.title_en)}
                                     width={200}
                                     height={300}
-                                    className="w-full h-auto object-cover aspect-[2/3]"
+                                    className="w-full h-fit object-cover aspect-[2/3]"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-l from-black/5 to-transparent pointer-events-none" />
                             </div>
@@ -165,6 +168,9 @@ export function AwardeeCard({awardee}: AwardeeCardProps) {
                                 <p className="font-medium text-background group-hover:text-primary transition-colors">{t(lang, pub.title, pub.title_en)}</p>
                                 <p className="text-sm text-muted-foreground mt-1">
                                     {pub.author} · {new Date(pub.date).toLocaleDateString(lang)}
+                                </p>
+                                <p className="text-sm text-black mt-1 hidden md:block">
+                                    {lang === "HU" ? pub.abstract : pub.abstract_en}
                                 </p>
                             </div>
                         </div>
@@ -176,6 +182,71 @@ export function AwardeeCard({awardee}: AwardeeCardProps) {
                                     aria-label="Link megnyitása"
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                >
+                                    <ExternalLink className="w-4 h-4"/>
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        )
+    }
+
+    const renderArticlesSection = () => {
+        if (!awardee.articles) return null
+        return (
+            <div className="space-y-3">
+                {awardee.articles.map((article, index) => (
+                    <div key={index}
+                         className="flex items-start justify-between p-4 bg-muted/50 rounded-lg hover:bg-muted transition-colors group cursor-pointer"
+                         onClick={() => {
+                             if (article.download) {
+                                 window.open(getMediaUrl(article.download), "_blank")
+                             } else {
+                                 window.open(article.link ? article.link : "#", article.link ? "_blank" : "_self")
+                             }
+                         }}
+                         >
+                        <div className="flex flex-col md:flex-row gap-4">
+                            <div className="flex-shrink-0 relative w-24 h-36 shadow-md rounded-sm overflow-hidden bg-background">
+                                <Image
+                                    src={getMediaUrl(article.cover_image, "/images/image-placeholder.png")}
+                                    alt={t(lang, article.title, article.title_en)}
+                                    width={200}
+                                    height={300}
+                                    className="w-full h-auto object-cover aspect-[2/3]"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-l from-black/5 to-transparent pointer-events-none" />
+                            </div>
+                            <div>
+                                <p className="font-medium text-background group-hover:text-primary transition-colors">{t(lang, article.title, article.title_en)}</p>
+                                <p className="text-sm text-muted-foreground mt-1">
+                                    {article.author} · {new Date(article.date).toLocaleDateString(lang)}
+                                </p>
+                            </div>
+                        </div>
+                        <div className="flex gap-2">
+                            {article.download ? (
+                                <a
+                                    href={getMediaUrl(article.download)}
+                                    className="p-2 text-muted-foreground hover:text-primary transition-colors"
+                                    aria-label="Letöltés"
+                                    download
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    <Download className="w-4 h-4"/>
+                                </a>
+                            ) : article.link && (
+                                <a
+                                    href={article.link}
+                                    className="p-2 text-muted-foreground hover:text-primary transition-colors"
+                                    aria-label="Link megnyitása"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
                                 >
                                     <ExternalLink className="w-4 h-4"/>
                                 </a>
@@ -200,7 +271,6 @@ export function AwardeeCard({awardee}: AwardeeCardProps) {
             icon: Award,
             available: hasJustification
         },
-
         {
             id: 'videos' as SectionType,
             label: t(lang, "Díjátadó", "Award Ceremony"),
@@ -215,10 +285,22 @@ export function AwardeeCard({awardee}: AwardeeCardProps) {
         },
         {
             id: 'publications' as SectionType,
-            label: t(lang, "Kiadványok", "Publications"),
+            label: t(lang, "Kiadvány", "Publication"),
             icon: FileText,
             available: hasPublications
         },
+        {
+            id: 'articles' as SectionType,
+            label: t(lang, "Cikkek", "Articles"),
+            icon: FileText,
+            available: hasArticles
+        },
+        {
+            id: 'interview' as SectionType,
+            label: t(lang, "Interjúk", "Interviews"),
+            icon: Play,
+            available: hasInterviews
+        }
     ].filter(s => s.available);
 
     return (
@@ -265,8 +347,8 @@ export function AwardeeCard({awardee}: AwardeeCardProps) {
                         </div>
 
                         {/* Short justification */}
-                        <p className="text-lg text-background italic border-l-2 border-primary pl-4 mb-6">
-                            &#34;{getShortJustificationStr(awardee)}&#34;
+                        <p className="text-lg text-background border-l-2 border-primary pl-4 mb-6">
+                            {getShortJustificationStr(awardee)}
                         </p>
 
                         {/* Action Buttons */}
@@ -305,8 +387,10 @@ export function AwardeeCard({awardee}: AwardeeCardProps) {
                             <div className="p-6 md:p-8 border-t border-border">
                                 {activeSection === 'introduction' && renderIntroductionSection()}
                                 {activeSection === 'publications' && renderPublicationsSection()}
+                                {activeSection === 'articles' && renderArticlesSection()}
                                 {activeSection === 'gallery' && renderGallerySection()}
                                 {activeSection === 'videos' && renderVideosSection()}
+                                {activeSection === 'interview' && renderInterviewVideosSection()}
                             </div>
                         </motion.div>
                     )}
@@ -366,6 +450,35 @@ export function AwardeeCard({awardee}: AwardeeCardProps) {
                                 </div>
                             )}
                         </div>
+                        {/* Downloads */}
+                        {awardee.downloads && (
+                            <div className="flex flex-wrap gap-4 justify-end">
+                                {awardee.downloads.laudation_pdf && (
+                                    <a
+                                        href={getMediaUrl(awardee.downloads.laudation_pdf)}
+                                        className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors text-sm font-medium"
+                                        download={getMediaUrl(awardee.downloads.laudation_pdf)}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <Download className="w-4 h-4"/>
+                                        {t(lang, "Laudáció PDF", "Laudation PDF")}
+                                    </a>
+                                )}
+                                {awardee.downloads.press_photo_pack && (
+                                    <a
+                                        href={getMediaUrl(awardee.downloads.press_photo_pack)}
+                                        className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors text-sm font-medium"
+                                        download={getMediaUrl(awardee.downloads.press_photo_pack)}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <Download className="w-4 h-4"/>
+                                        {t(lang, "Sajtófotók", "Press Photo Pack")}
+                                    </a>
+                                )}
+                            </div>
+                        )}
                     </div>
                 )}
             </div>

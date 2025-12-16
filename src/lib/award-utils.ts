@@ -502,6 +502,9 @@ export function getAwardMockData(awardName: string): Award {
     return {
         about_en: {root: {children: [], direction: "rtl", format: "left", indent: 0, type: "", version: 0}},
         about: {root: {children: [], direction: "rtl", format: "left", indent: 0, type: "", version: 0}},
+        program_about: {root: {children: [], direction: "rtl", format: "left", indent: 0, type: "", version: 0}},
+        program_about_en: {root: {children: [], direction: "rtl", format: "left", indent: 0, type: "", version: 0}},
+        stats: [],
         logo: {
             url: "/neumannlogo_2020_white-2.png",
             id: 1,
@@ -511,6 +514,7 @@ export function getAwardMockData(awardName: string): Award {
         },
         id: 1,
         name: awardName,
+        name_en: awardName,
         awardees: demoAwardees,
         createdAt: "",
         updatedAt: "",

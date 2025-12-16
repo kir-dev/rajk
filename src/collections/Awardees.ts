@@ -136,6 +136,12 @@ export const Awardees: CollectionConfig = {
             })
         },
         {
+            name: 'interview_video_link',
+            label: 'Interview videó link',
+            type: 'text',
+            required: false,
+        },
+        {
             name: 'image_gallery',
             label: 'Galéria',
             type: 'array',
@@ -187,7 +193,7 @@ export const Awardees: CollectionConfig = {
         },
         {
             name: 'publications',
-            label: 'Publikációk',
+            label: 'Kiadvány',
             type: 'array',
             fields: [
                 {
@@ -201,6 +207,18 @@ export const Awardees: CollectionConfig = {
                     label: 'Title',
                     type: 'text',
                     required: true,
+                },
+                {
+                    name: 'abstract',
+                    label: 'Absztrakt',
+                    type: 'text',
+                    required: false,
+                },
+                {
+                    name: 'abstract_en',
+                    label: 'Abstract',
+                    type: 'text',
+                    required: false,
                 },
                 {
                     name: 'cover_image',
@@ -225,6 +243,71 @@ export const Awardees: CollectionConfig = {
                     name: 'link',
                     label: 'Link',
                     type: 'text',
+                    required: false,
+                }
+            ],
+            minRows: 0,
+            required: false,
+        },
+        {
+            name: 'articles',
+            label: 'Cikkek',
+            type: 'array',
+            fields: [
+                {
+                    name: 'title',
+                    label: 'Cím',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'title_en',
+                    label: 'Title',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'abstract',
+                    label: 'Absztrakt',
+                    type: 'text',
+                    required: false,
+                },
+                {
+                    name: 'abstract_en',
+                    label: 'Abstract',
+                    type: 'text',
+                    required: false,
+                },
+                {
+                    name: 'cover_image',
+                    label: 'Cover image',
+                    type: 'upload',
+                    relationTo: 'media',
+                    required: true,
+                },
+                {
+                    name: 'author',
+                    label: 'Szerző(k)',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'date',
+                    label: 'Megjelenés dátuma',
+                    type: 'date',
+                    required: true,
+                },
+                {
+                    name: 'link',
+                    label: 'Link',
+                    type: 'text',
+                    required: false,
+                },
+                {
+                    name: 'download',
+                    label: 'Download',
+                    type: 'upload',
+                    relationTo: 'media',
                     required: false,
                 }
             ],

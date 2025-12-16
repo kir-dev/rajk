@@ -5,17 +5,20 @@ import { ChevronDown, Play } from "lucide-react"
 import Section from "@/components/Section";
 import {Award} from "@/payload-types";
 import React from "react";
+import {useLanguage} from "@/components/LanguageProvider";
+import {t} from "@/lib/utils"
 
 interface AwardHeroSectionProps {
     award: Award;
 }
 
-export default function íAwardHeroSection({ award }: AwardHeroSectionProps) {
+export default function AwardHeroSection({ award }: AwardHeroSectionProps) {
     const scrollToLatest = () => {
         document.getElementById("awardees")?.scrollIntoView({ behavior: "smooth" })
     }
 
-    const awardName = award.name;
+    const {lang} = useLanguage();
+    const awardName = t(lang, award.name, award.name_en);
 
     return (
         <Section id={"hero"} title={"Hero"} className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -56,7 +59,7 @@ export default function íAwardHeroSection({ award }: AwardHeroSectionProps) {
                 </h1>
 
                 <p className="text-lg md:text-xl text-foreground max-w-4xl mx-auto mb-12 leading-relaxed text-pretty">
-                    A Rajk Szakkollégium hallgatóinak tudományos díja az egzakt társadalomtudományok területén
+                    {lang === 'HU' ? 'A Rajk Szakkollégium hallgatóinak tudományos díja az egzakt társadalomtudományok területén' : 'The Rajk University of Technology Academic Excellence Award is the highest academic award of the Rajk University of Technology'}
                 </p>
 
                 <Button
@@ -64,7 +67,7 @@ export default function íAwardHeroSection({ award }: AwardHeroSectionProps) {
                     size="lg"
                     className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-lg font-medium rounded-full hover:cursor-pointer"
                 >
-                    Ugorj a legfrissebb díjazottra
+                    {lang === 'HU' ? 'Ugorj a legfrissebb díjazottra' : 'Scroll to the latest awardee'}
                     <ChevronDown className="ml-2 w-5 h-5" />
                 </Button>
             </div>

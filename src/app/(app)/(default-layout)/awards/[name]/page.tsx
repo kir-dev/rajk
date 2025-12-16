@@ -8,6 +8,7 @@ import Section from "@/components/Section";
 import {getAwardMockData} from "@/lib/award-utils";
 import NextEvent from "@/components/Esemenyek/NextEvent";
 import {Event} from "@/payload-types";
+import { getMediaUrl } from "@/utils/isMedia";
 
 export default async function Page({params}: PageProps<'/awards/[name]'>) {
 
@@ -25,10 +26,10 @@ export default async function Page({params}: PageProps<'/awards/[name]'>) {
     return (
         <div className="flex flex-row h-fit w-full relative bg-bezs">
             <VertNavBarLayout>
-                <Section id="hero" title="" lucideIconName="/rajk_strucc_black.png">
+                <Section id="hero" title="" lucideIconName={getMediaUrl(award.logo)}>
                     <AwardHeroSection award={award} />
                 </Section>
-                <Section id="about" title="Díjról" lucideIconName="ScrollText">
+                <Section id="about" title="Leírás" lucideIconName="ScrollText">
                     <AwardAboutSection award={award} />
                 </Section>
                 <Section id="awardees" title="Díjazottak" lucideIconName="Award">

@@ -1,11 +1,10 @@
 "use client";
 
 import { Award as AwardIcon, Users, Trophy } from "lucide-react"
-import {Award, Awardee} from "@/payload-types";
+import {Award} from "@/payload-types";
 import Section from "@/components/Section";
 import {useLanguage} from "@/components/LanguageProvider";
 import { t } from "@/lib/utils";
-import {getProgramDescription} from "@/lib/award-utils";
 import {RichText} from "@payloadcms/richtext-lexical/react";
 
 interface AwardAboutSectionProps {
@@ -13,43 +12,14 @@ interface AwardAboutSectionProps {
 }
 
 export default function AwardAboutSection({ award } : AwardAboutSectionProps) {
-
-    const awardees = award.awardees && (award.awardees as Awardee[]) || [];
-    const numberOfNobelLaureates = awardees.filter(awardee => awardee.has_nobel).length;
-
-    const statsHun = [
-        {
-            icon: AwardIcon,
-            value: "1995",
-            label: "Alapítás éve",
-            description: "Magyarország",
-        },
-        {
-            icon: Users,
-            value: "28",
-            label: "Díjazott",
-            description: "tudós eddig",
-        },
-        {
-            icon: Trophy,
-            value: numberOfNobelLaureates.toString(),
-            label: "Nobel-díjas",
-            description: "a díjazottak közül",
-        },
-    ]
-
-    const statsEn = statsHun;
-    statsEn[0].label = "Founded in";
-    statsEn[0].description = "Hungary";
-    statsEn[1].label = "Awarded";
-    statsEn[1].description = "scientists so far";
-    statsEn[2].label = "Nobel laureates";
-    statsEn[2].description = "among awardees";
-
     const { lang } = useLanguage();
-    const stats = lang === "HU" ? statsHun : statsEn;
-
-    const aboutTheProgramStr = getProgramDescription(lang)
+    const stats = award.stats
+    const aboutTheProgramStr = lang === "HU" ? award.program_about : award.program_about_en;
+    const icons = [
+        AwardIcon,
+        Users,
+        Trophy
+    ]
 
     return (
         <Section id={"about"} title={"About"} className="py-24 px-4 border-t border-border">
@@ -63,25 +33,25 @@ export default function AwardAboutSection({ award } : AwardAboutSectionProps) {
                 {/* About the Program */}
                 <div className="bg-card border border-border rounded-lg p-8 md:p-12 mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold text-background mb-4">{t(lang, "A programról", "About the Program")}</h2>
-                    <p className="text-md text-background leading-relaxed">
-                        {aboutTheProgramStr}
-                    </p>
+                    <RichText data={aboutTheProgramStr} className="text-md text-background leading-relaxed" />
                 </div>
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white rounded-lg mb-16">
-                    {stats.map((stat, index) => (
+                    {stats?.map((stat, index) => {
+                        const Icon = icons[index % icons.length]
+                        return (
                         <div key={index} className="bg-transparent p-8 md:p-12 text-center">
-                            <stat.icon className="w-6 h-6 text-primary mb-4 mx-auto" />
+                            <Icon className="w-6 h-6 text-primary mb-4 mx-auto" />
                             <div className="text-4xl md:text-5xl font-bold text-background mb-2">{stat.value}</div>
-                            <div className="text-lg text-background font-medium">{stat.label}</div>
-                            <div className="text-sm text-muted-foreground">{stat.description}</div>
+                            <div className="text-lg text-background font-medium">{lang == "HU" ? stat.label : stat.label_en}</div>
+                            <div className="text-sm text-muted-foreground">{lang == "HU" ? stat.description : stat.description_en}</div>
                         </div>
-                    ))}
+                    )})}
                 </div>
 
                 {/* Unique Feature Box */}
-                <div className="bg-card border border-border rounded-lg p-8 md:p-12">
+                {/*<div className="bg-card border border-border rounded-lg p-8 md:p-12">
                     <div className="flex items-start gap-4 mb-6">
                         <div>
                             <h2 className="text-2xl md:text-3xl font-bold text-background mb-2">{t(lang, "Miben egyedi?", "Why is it unique?")}</h2>
@@ -118,7 +88,7 @@ export default function AwardAboutSection({ award } : AwardAboutSectionProps) {
                             </p>
                         </div>
                     </div>
-                </div>
+                </div>*/}
             </div>
         </Section>
     )

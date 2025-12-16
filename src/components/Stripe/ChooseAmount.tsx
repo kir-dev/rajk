@@ -1,5 +1,6 @@
 import { HeartHandshake, AlertCircle, Loader2 } from "lucide-react";
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { useLanguage } from "@/components/LanguageProvider";
 
 const sanitizeInput = (input: string, maxLength: number): string => {
     return input.trim().substring(0, maxLength);
@@ -87,13 +88,15 @@ export default function ChooseAmount(props: ChooseAmountProps) {
         props.setEmail(sanitized);
     };
 
+    const {lang} = useLanguage();
+
     return (
         <div className="bg-white text-black rounded-2xl border-2 border-black p-6 shadow-lg">
             <div className="flex justify-center mb-6">
                 <HeartHandshake className="h-16 w-16 text-zold" />
             </div>
 
-            <h2 className="text-xl font-bold mb-4 text-center">Válassz összeget</h2>
+            <h2 className="text-xl font-bold mb-4 text-center">{lang === 'HU' ? 'Válassz összeget' : 'Choose amount'}</h2>
 
             <div className="mb-6">
                 <div className="grid grid-cols-3 gap-3 mb-4">
@@ -121,7 +124,7 @@ export default function ChooseAmount(props: ChooseAmountProps) {
                 </div>
 
                 <div className="mt-6">
-                    <p className="text-sm text-gray-600 mb-2">Egyéni összeg (minimum 500 Ft):</p>
+                    <p className="text-sm text-gray-600 mb-2">{lang === 'HU' ? 'Egyéni összeg (minimum 500 Ft):' : 'Custom amount (minimum 500 Ft):'}</p>
                     <div className="flex items-center">
                         <input
                             type="number"
@@ -138,46 +141,46 @@ export default function ChooseAmount(props: ChooseAmountProps) {
 
             <div className="mt-6 mb-6">
                 <div className="mb-4">
-                    <label htmlFor="name" className="block text-sm text-gray-600 mb-1">Név:</label>
+                    <label htmlFor="name" className="block text-sm text-gray-600 mb-1">{lang === 'HU' ? 'Név:' : 'Name:'}</label>
                     <input
                         id="name"
                         type="text"
                         value={props.name}
                         onChange={(e) => props.setName(e.target.value)}
                         className="w-full p-2 border-2 border-black rounded-2xl"
-                        placeholder="Teljes név"
+                        placeholder={lang === 'HU' ? 'Teljes név' : 'Full name'}
                         required
                     />
                 </div>
 
                 <div>
-                    <label htmlFor="email" className="block text-sm text-gray-600 mb-1">Email cím:</label>
+                    <label htmlFor="email" className="block text-sm text-gray-600 mb-1">{lang === 'HU' ? 'Email cím:' : 'Email address:'}</label>
                     <input
                         id="email"
                         type="email"
                         value={props.email}
                         onChange={handleEmailChange}
                         className="w-full p-2 border-2 border-black rounded-2xl"
-                        placeholder="email@pelda.hu"
+                        placeholder={lang === 'HU' ? 'email@pelda.hu' : 'email@example.com'}
                         required
                     />
                 </div>
 
                 <div className="mt-4">
-                    <label htmlFor="name" className="block text-sm text-gray-600 mb-1">Megjegyzés:</label>
+                    <label htmlFor="name" className="block text-sm text-gray-600 mb-1">{lang === 'HU' ? 'Megjegyzés:' : 'Note:'}</label>
                     <input
                         id="note"
                         type="text"
                         value={props.note}
                         onChange={(e) => props.setNote(e.target.value)}
                         className="w-full p-2 border-2 border-black rounded-2xl"
-                        placeholder="Egyéb megjegyzés"
+                        placeholder={lang === 'HU' ? 'Egyéb megjegyzés' : 'Other note'}
                     />
                 </div>
             </div>
 
             <div className="border-t border-gray-200 pt-4">
-                <h3 className="font-medium mb-2">Kiválasztott összeg:</h3>
+                <h3 className="font-medium mb-2">{lang === 'HU' ? 'Kiválasztott összeg:' : 'Selected amount:'}</h3>
                 <p className="text-2xl font-bold text-zold">{(props.amount / 100).toLocaleString('hu-HU')} Ft</p>
             </div>
 
@@ -197,10 +200,10 @@ export default function ChooseAmount(props: ChooseAmountProps) {
                     {props.isLoading ? (
                         <>
                             <Loader2 className="animate-spin mr-2 h-5 w-5" />
-                            <span>Betöltés...</span>
+                            <span>{lang === 'HU' ? 'Betöltés...' : 'Loading...'}</span>
                         </>
                     ) : (
-                        <span>Tovább a fizetéshez</span>
+                        <span>{lang === 'HU' ? 'Tovább a fizetéshez' : 'Continue to payment'}</span>
                     )}
                 </button>
             </div>

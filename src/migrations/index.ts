@@ -17,6 +17,8 @@ import * as migration_20251208_154756_remove_unnecessary_requirements_and_fields
 import * as migration_20251208_160401_add_cover_image_to_publications from './20251208_160401_add_cover_image_to_publications';
 import * as migration_20251208_171738_add_users_sessions_table from './20251208_171738_add_users_sessions_table';
 import * as migration_20251214_233315_fix_awards_richtext_data from './20251214_233315_fix_awards_richtext_data';
+import * as migration_20251216_140621_add_new_field_to_awards_and_awardees from './20251216_140621_add_new_field_to_awards_and_awardees';
+import * as migration_20251216_181541 from './20251216_181541';
 
 export const migrations = [
   {
@@ -112,6 +114,16 @@ export const migrations = [
   {
     up: migration_20251214_233315_fix_awards_richtext_data.up,
     down: migration_20251214_233315_fix_awards_richtext_data.down,
-    name: '20251214_233315_fix_awards_richtext_data'
+    name: '20251214_233315_fix_awards_richtext_data',
+  },
+  {
+    up: migration_20251216_140621_add_new_field_to_awards_and_awardees.up,
+    down: migration_20251216_140621_add_new_field_to_awards_and_awardees.down,
+    name: '20251216_140621_add_new_field_to_awards_and_awardees',
+  },
+  {
+    up: migration_20251216_181541.up,
+    down: migration_20251216_181541.down,
+    name: '20251216_181541'
   },
 ];

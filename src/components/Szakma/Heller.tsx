@@ -1,6 +1,5 @@
 import { Group, Person } from "@/payload-types";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import getGroupMembers from "@/payload-find/getGroups";
 
 export default function Heller() {
@@ -49,15 +48,15 @@ export default function Heller() {
 
                 {/* Image with text overlay */}
                 <div className="relative hidden lg:block">
-                    <Image
+                    {/*<Image
                         src={"/heller.png"}
                         alt={"Heller-díj background image"}
                         width={1000}
                         height={1000}
-                    />
+                    />*/}
 
                     {/* Text overlay positioned on the white box area */}
-                    <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="flex items-center justify-center border-2 rounded-lg border-black bg-kek mt-5">
                         <div className="p-4 rounded-md max-w-[100%] max-h-[40%]">
 
                             {loading ? (
