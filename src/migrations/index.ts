@@ -1,0 +1,129 @@
+import * as migration_20251027_134023_events_rework from './20251027_134023_events_rework';
+import * as migration_20251103_192138 from './20251103_192138';
+import * as migration_20251113_183716 from './20251113_183716';
+import * as migration_20251125_120736 from './20251125_120736';
+import * as migration_20251130_203245_add_additional_awardee_fields from './20251130_203245_add_additional_awardee_fields';
+import * as migration_20251130_220014_extend_awardees_with_publications_and_related_content from './20251130_220014_extend_awardees_with_publications_and_related_content';
+import * as migration_20251202_213127_add_ceremony_video_to_awardee from './20251202_213127_add_ceremony_video_to_awardee';
+import * as migration_20251202_213803_add_lecture_video_to_awardees from './20251202_213803_add_lecture_video_to_awardees';
+import * as migration_20251202_215042_add_extended_justification_for_awardees from './20251202_215042_add_extended_justification_for_awardees';
+import * as migration_20251202_215433_extended_justification_is_nullable from './20251202_215433_extended_justification_is_nullable';
+import * as migration_20251202_220232_group_websites_of_awardees from './20251202_220232_group_websites_of_awardees';
+import * as migration_20251204_144742_add_about_en_to_award from './20251204_144742_add_about_en_to_award';
+import * as migration_20251206_214500_fix_missing_awards_rels from './20251206_214500_fix_missing_awards_rels';
+import * as migration_20251208_122221 from './20251208_122221';
+import * as migration_20251208_152357 from './20251208_152357';
+import * as migration_20251208_154756_remove_unnecessary_requirements_and_fields from './20251208_154756_remove_unnecessary_requirements_and_fields';
+import * as migration_20251208_160401_add_cover_image_to_publications from './20251208_160401_add_cover_image_to_publications';
+import * as migration_20251208_171738_add_users_sessions_table from './20251208_171738_add_users_sessions_table';
+import * as migration_20251214_233315_fix_awards_richtext_data from './20251214_233315_fix_awards_richtext_data';
+import * as migration_20251216_140621_add_new_field_to_awards_and_awardees from './20251216_140621_add_new_field_to_awards_and_awardees';
+import * as migration_20251216_181541 from './20251216_181541';
+
+export const migrations = [
+  {
+    up: migration_20251027_134023_events_rework.up,
+    down: migration_20251027_134023_events_rework.down,
+    name: '20251027_134023_events_rework',
+  },
+  {
+    up: migration_20251103_192138.up,
+    down: migration_20251103_192138.down,
+    name: '20251103_192138',
+  },
+  {
+    up: migration_20251113_183716.up,
+    down: migration_20251113_183716.down,
+    name: '20251113_183716',
+  },
+  {
+    up: migration_20251125_120736.up,
+    down: migration_20251125_120736.down,
+    name: '20251125_120736',
+  },
+  {
+    up: migration_20251130_203245_add_additional_awardee_fields.up,
+    down: migration_20251130_203245_add_additional_awardee_fields.down,
+    name: '20251130_203245_add_additional_awardee_fields',
+  },
+  {
+    up: migration_20251130_220014_extend_awardees_with_publications_and_related_content.up,
+    down: migration_20251130_220014_extend_awardees_with_publications_and_related_content.down,
+    name: '20251130_220014_extend_awardees_with_publications_and_related_content',
+  },
+  {
+    up: migration_20251202_213127_add_ceremony_video_to_awardee.up,
+    down: migration_20251202_213127_add_ceremony_video_to_awardee.down,
+    name: '20251202_213127_add_ceremony_video_to_awardee',
+  },
+  {
+    up: migration_20251202_213803_add_lecture_video_to_awardees.up,
+    down: migration_20251202_213803_add_lecture_video_to_awardees.down,
+    name: '20251202_213803_add_lecture_video_to_awardees',
+  },
+  {
+    up: migration_20251202_215042_add_extended_justification_for_awardees.up,
+    down: migration_20251202_215042_add_extended_justification_for_awardees.down,
+    name: '20251202_215042_add_extended_justification_for_awardees',
+  },
+  {
+    up: migration_20251202_215433_extended_justification_is_nullable.up,
+    down: migration_20251202_215433_extended_justification_is_nullable.down,
+    name: '20251202_215433_extended_justification_is_nullable',
+  },
+  {
+    up: migration_20251202_220232_group_websites_of_awardees.up,
+    down: migration_20251202_220232_group_websites_of_awardees.down,
+    name: '20251202_220232_group_websites_of_awardees',
+  },
+  {
+    up: migration_20251204_144742_add_about_en_to_award.up,
+    down: migration_20251204_144742_add_about_en_to_award.down,
+    name: '20251204_144742_add_about_en_to_award',
+  },
+  {
+    up: migration_20251206_214500_fix_missing_awards_rels.up,
+    down: migration_20251206_214500_fix_missing_awards_rels.down,
+    name: '20251206_214500_fix_missing_awards_rels',
+  },
+  {
+    up: migration_20251208_122221.up,
+    down: migration_20251208_122221.down,
+    name: '20251208_122221',
+  },
+  {
+    up: migration_20251208_152357.up,
+    down: migration_20251208_152357.down,
+    name: '20251208_152357',
+  },
+  {
+    up: migration_20251208_154756_remove_unnecessary_requirements_and_fields.up,
+    down: migration_20251208_154756_remove_unnecessary_requirements_and_fields.down,
+    name: '20251208_154756_remove_unnecessary_requirements_and_fields',
+  },
+  {
+    up: migration_20251208_160401_add_cover_image_to_publications.up,
+    down: migration_20251208_160401_add_cover_image_to_publications.down,
+    name: '20251208_160401_add_cover_image_to_publications',
+  },
+  {
+    up: migration_20251208_171738_add_users_sessions_table.up,
+    down: migration_20251208_171738_add_users_sessions_table.down,
+    name: '20251208_171738_add_users_sessions_table',
+  },
+  {
+    up: migration_20251214_233315_fix_awards_richtext_data.up,
+    down: migration_20251214_233315_fix_awards_richtext_data.down,
+    name: '20251214_233315_fix_awards_richtext_data',
+  },
+  {
+    up: migration_20251216_140621_add_new_field_to_awards_and_awardees.up,
+    down: migration_20251216_140621_add_new_field_to_awards_and_awardees.down,
+    name: '20251216_140621_add_new_field_to_awards_and_awardees',
+  },
+  {
+    up: migration_20251216_181541.up,
+    down: migration_20251216_181541.down,
+    name: '20251216_181541'
+  },
+];

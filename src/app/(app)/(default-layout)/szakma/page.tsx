@@ -2,7 +2,7 @@
 
 import { CourseSection } from "@/components/Szakma/CourseSection";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import {useEffect, useEffectEvent, useState} from "react";
 import {Course, CourseCategory, Group, Person} from "@/payload-types";
 import getCourses from "@/payload-find/getCourses";
 import getCourseCategories from "@/payload-find/getCourseCategories";
@@ -31,7 +31,7 @@ export default function SzakmaPage() {
                 console.error("Error fetching Heller-díj awardees:", error);
             }
         }
-        fetchAwards();
+        void fetchAwards();
     }, []);
 
     const members = teachers?.members || [];
@@ -52,13 +52,17 @@ export default function SzakmaPage() {
         setCategories(await getCourseCategories());
     }
 
-    useEffect(() => {
+    const onMounted = useEffectEvent(() => {
         setIsMounted(true);
-        fetchData();
+        void fetchData();
+    })
+
+    useEffect(() => {
+        onMounted();
     }, []);
 
     return (
-        <main className="min-h-screen flex flex-col py-20 bg-bezs text-black">
+        <main className="min-h-screen flex flex-col py-20 bg-bezs text-black mx-4 md:mx-20">
             <SzakmaSection
                 title="Kurzusrendszer"
                 distribution={defaultDistribution}
@@ -66,7 +70,7 @@ export default function SzakmaPage() {
             {/* Page wrapper with nice padding and full height */}
             {isMounted ? (
                 <motion.div
-                    className="py-12 md:py-20 px-4 max-w-[1440px] mx-auto"
+                    className="px-4 max-w-[1440px] mx-auto"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
@@ -87,7 +91,7 @@ export default function SzakmaPage() {
                     people={peopleWithRoles}
                     lead={"A rajkos kurzusvezetők munkájának elismerésére évente a \„Rajk Szakkollégium Állandó Tanára\" címet adományozzuk. A címet olyan jelenlegi és volt kurzusvezetők kapják, akik nagy hatást gyakoroltak a kollégisták szakmai fejlődésére. Ezúton is köszönjük sokéves munkájukat!"}
                     showMax={peopleWithRoles.length}
-                        />
+                />
                 {/*<TDK/>
                     <OdysseyProgram/>*/}
                 <Heller/>

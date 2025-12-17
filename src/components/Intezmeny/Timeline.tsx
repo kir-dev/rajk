@@ -66,7 +66,7 @@ function DesktopTimelineItem({ event, displayedExtraText, featuredImageUrl, isEv
             <div className="col-span-1 flex justify-center relative">
                 <Image
                     src={featuredImageUrl}
-                    className="w-10 h-10 p-2 bg-rajk-green rounded-full border-4 border-rajk-blue z-50"
+                    className="w-10 h-10 p-2 bg-rajk-green rounded-full border-4 border-rajk-blue z-40"
                     alt={event.name}
                     width={24} height={24}
                 />

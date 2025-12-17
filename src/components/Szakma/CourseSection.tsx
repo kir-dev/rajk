@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CourseCircle } from "./CourseCircle";
+import { CourseCircle, IconComponent, IconName } from "./CourseCircle";
 import {
     Filter,
     ChevronDown,
@@ -16,6 +16,15 @@ export const CourseSection = (props: {categories: CourseCategory[], courses: Cou
     const [selectedCategory, setSelectedCategory] = useState<string>("all");
     const [showFilterMenu, setShowFilterMenu] = useState(false);
     const [showInfo, setShowInfo] = useState(false);
+    const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
+
+    const toggleCategory = (categoryId: string) => {
+        setExpandedCategories(prev =>
+            prev.includes(categoryId)
+                ? prev.filter(id => id !== categoryId)
+                : [...prev, categoryId]
+        );
+    };
 
     const isLoading = false;
     const categories = props.categories || [];
@@ -72,7 +81,7 @@ export const CourseSection = (props: {categories: CourseCategory[], courses: Cou
                         animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
                         transition={{ delay: 0.2, duration: 0.7 }}
                     >
-                        A kollégiumi szakmaiság gerincét az évente több, mint 45 megszervezett kurzus adja. A heti rendszerességgel megtartott, kis létszámú, intenzív és nem utolsó sorban interaktív, fél-egyéves kurzusokat – akárcsak a különböző előadásokat, konferenciákat és blokkszemináriumokat – a kollégisták maguknak szervezik, azokat saját érdeklődésükhöz és igényeikhez igazítják.
+                        A kollégiumi szakmaiság gerincét az évente több, mint 45 megszervezett kurzus adja. A heti rendszerességgel megtartott, kis létszámú, intenzív és nem utolsó sorban interaktív, fél-egyéves kurzusokat – akárcsak a különböző előadásokat, konferenciákat és blokkszemináriumokat – a kollégisták maguknak szervezik, azokat saját érdeklődésükhöz és igényeikhez igazítják. A kurzustérképen a szerveződő kurzusaink egy részét jelenítettük meg.
                     </motion.p>
 
                     {categories.length > 0 && (
@@ -83,8 +92,8 @@ export const CourseSection = (props: {categories: CourseCategory[], courses: Cou
                                 animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                                 transition={{ delay: 0.3, duration: 0.7 }}
                             >
-                                {/* Mobile filter dropdown */}
-                                <div className="relative md:hidden">
+                                {/* Mobile filter dropdown - HIDDEN for accordion view */}
+                                <div className="relative hidden">
                                     <button
                                         onClick={() => setShowFilterMenu(!showFilterMenu)}
                                         className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-md text-sm font-medium"
@@ -215,6 +224,70 @@ export const CourseSection = (props: {categories: CourseCategory[], courses: Cou
                             ))}
                         </div>
                     </div>
+                </div>
+
+                {/* Mobile visualization: Accordion List */}
+                <div className="md:hidden space-y-4">
+                    {categories.map((category) => {
+                        const categoryCourses = courses.filter(c => (c.category as CourseCategory).id === category.id);
+                        if (categoryCourses.length === 0) return null;
+
+                        const isExpanded = expandedCategories.includes(category.id);
+
+                        return (
+                            <div key={category.id} className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                                <button
+                                    onClick={() => toggleCategory(category.id)}
+                                    className="w-full flex items-center justify-between p-4 text-left"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <div
+                                            className="w-4 h-4 rounded-full"
+                                            style={{ backgroundColor: (category as CourseCategory).color ?? '#97D7FB' }}
+                                        />
+                                        <span className="font-bold text-gray-900">{category.name}</span>
+                                        <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                                            {categoryCourses.length}
+                                        </span>
+                                    </div>
+                                    <ChevronDown
+                                        size={20}
+                                        className={`text-gray-400 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                                    />
+                                </button>
+
+                                <AnimatePresence>
+                                    {isExpanded && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                                            className="overflow-hidden"
+                                        >
+                                            <div className="p-4 pt-0 space-y-3">
+                                                {categoryCourses.map((course) => (
+                                                    <div key={course.id} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                                                        <div
+                                                            className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 bg-white shadow-sm"
+                                                        >
+                                                             <IconComponent iconName={course.icon as IconName} className="text-gray-700" size={16} />
+                                                        </div>
+                                                        <div>
+                                                            <h4 className="font-semibold text-gray-900 text-sm leading-tight mb-0.5">{course.title}</h4>
+                                                            {course.description && (
+                                                                <p className="text-xs text-gray-500 line-clamp-2">{course.description}</p>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        );
+                    })}
                 </div>
 
                 {/* Course count indicator */}

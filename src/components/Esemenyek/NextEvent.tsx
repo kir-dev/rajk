@@ -23,23 +23,23 @@ export default function NextEvent({
     return (
         <Link
             href={`/esemenyek/${event.id}`}
-            className="group flex cursor-pointer flex-col overflow-hidden rounded-lg shadow-md transition hover:shadow-lg mb-5"
+            className="group flex cursor-pointer flex-col overflow-hidden transition mb-5 max-w-4xl mx-auto"
         >
             {/* Event image */}
-            <div className="relative aspect-[16/9] w-full">
+            <div className="relative aspect-[16/9] w-full rounded-lg overflow-hidden">
                 <Image
                     src={pictureUrl}
-                    alt={"Event"}
+                    alt={event.name || "Event"}
                     fill
-                    className="object-cover"
-                    // Desktop: card ≈ 33vw, tablet: 50vw, mobile: 100vw
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    quality={85}
+                    className="object-contain"
+                    sizes="(min-width: 1280px) 896px, (min-width: 1024px) 80vw, (min-width: 640px) 90vw, 100vw"
+                    quality={95}
+                    priority={true}
                 />
             </div>
 
             {/* Event info */}
-            <div className="bg-[#06252e] px-5 py-4 text-white">
+            <div className="bg-[#06252e] px-5 py-4 text-white rounded-lg">
                 <h3 className="text-lg font-medium leading-snug">{event.name}</h3>
 
                 {event.speakers && (

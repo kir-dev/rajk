@@ -1,3 +1,4 @@
+import { FixedToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import type {CollectionConfig} from 'payload'
 
 export const Awards: CollectionConfig = {
@@ -13,6 +14,12 @@ export const Awards: CollectionConfig = {
             required: true,
         },
         {
+            name: 'name_en',
+            label: 'Name (EN)',
+            type: 'text',
+            required: true,
+        },
+        {
             name: 'logo',
             label: 'Logó',
             type: 'upload',
@@ -24,12 +31,94 @@ export const Awards: CollectionConfig = {
             label: 'Leírás',
             type: 'richText',
             required: true,
+            editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                    ...defaultFeatures,
+                    FixedToolbarFeature(),
+                ]
+            })
+        },
+        {
+            name: 'about_en',
+            label: 'About',
+            type: 'richText',
+            required: true,
+            editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                    ...defaultFeatures,
+                    FixedToolbarFeature(),
+                ]
+            })
+        },
+        {
+            name: 'program_about',
+            label: 'Program Leírás',
+            type: 'richText',
+            required: true,
+            editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                    ...defaultFeatures,
+                    FixedToolbarFeature(),
+                ]
+            })
+        },
+        {
+            name: 'program_about_en',
+            label: 'Program Leírás (EN)',
+            type: 'richText',
+            required: true,
+            editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                    ...defaultFeatures,
+                    FixedToolbarFeature(),
+                ]
+            })
+        },
+        {
+            name: 'stats',
+            label: 'Statisztika',
+            type: 'array',
+            fields: [
+                {
+                    name: 'value',
+                    label: 'Érték',
+                    type: 'number',
+                    required: true,
+                },
+                {
+                    name: 'label',
+                    label: 'Cím',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'label_en',
+                    label: 'Cím (EN)',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'description',
+                    label: 'Leírás',
+                    type: 'text',
+                    required: true,
+                },
+                {
+                    name: 'description_en',
+                    label: 'Leírás (EN)',
+                    type: 'text',
+                    required: true,
+                },
+            ],
+            minRows: 3,
+            required: true,
         },
         {
             name: 'awardees',
             label: 'Díjazottak',
             type: 'relationship',
             relationTo: 'awardees',
+            hasMany: true,
             required: false,
         },
         {
@@ -44,6 +133,13 @@ export const Awards: CollectionConfig = {
                     required: true,
                 },
             ],
+            required: false,
+        },
+        {
+            name: 'event',
+            label: 'Web esemény',
+            type: 'relationship',
+            relationTo: 'events',
             required: false,
         },
         {

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {CourseCategory} from "@/payload-types";
+import { CourseCategory } from "@/payload-types";
 import {
     BookOpen,
     Calculator,
@@ -26,13 +26,13 @@ import {
     Layers
 } from 'lucide-react';
 
-type IconName = 'BookOpen' | 'Calculator' | 'Globe' | 'Palette' | 'Code' |
+export type IconName = 'BookOpen' | 'Calculator' | 'Globe' | 'Palette' | 'Code' |
     'Users' | 'TrendingUp' | 'Lightbulb' | 'Target' | 'Database' |
     'Settings' | 'Puzzle' | 'Monitor' | 'FileText' | 'Search' |
     'BarChart' | 'Download' | 'MessageCircle' | 'PenTool' | 'Layers';
 
 
-const IconComponent = ({ iconName, className = "", size = 24 }: { iconName: IconName, className?: string, size: number}) => {
+export const IconComponent = ({ iconName, className = "", size = 24 }: { iconName: IconName, className?: string, size: number }) => {
     const iconMap = {
         BookOpen, Calculator, Globe, Palette, Code, Users, TrendingUp, Lightbulb,
         Target, Database, Settings, Puzzle, Monitor, FileText, Search, BarChart,
@@ -59,7 +59,7 @@ interface CourseCircleProps {
 export const CourseCircle = ({
     icon,
     title,
-    link,
+    //link,
     position,
     delay = 0,
     category = "default",
@@ -77,10 +77,10 @@ export const CourseCircle = ({
         return () => clearTimeout(timeoutId);
     }, [delay]);
 
-    const handleClick = () => {
+    /*const handleClick = () => {
         window.open(link, '_blank');
     };
-    console.log("CourseCircle rendered with category:", (category as CourseCategory).color);
+    console.log("CourseCircle rendered with category:", (category as CourseCategory).color);*/
 
     return (
         <div
@@ -91,7 +91,7 @@ export const CourseCircle = ({
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            onClick={handleClick}
+            onClick={() => { }}
         >
             {/* Main Circle */}
             <div className="relative">

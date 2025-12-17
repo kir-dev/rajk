@@ -85,6 +85,7 @@ export interface Config {
     'course-categories': CourseCategory;
     courses: Course;
     odyssey: Odyssey;
+    'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -109,6 +110,7 @@ export interface Config {
     'course-categories': CourseCategoriesSelect<false> | CourseCategoriesSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
     odyssey: OdysseySelect<false> | OdysseySelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -116,6 +118,7 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
+  fallbackLocale: null;
   globals: {};
   globalsSelect: {};
   locale: null;
@@ -162,6 +165,13 @@ export interface User {
   hash?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
   password?: string | null;
 }
 /**
@@ -207,7 +217,7 @@ export interface Group {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -257,12 +267,13 @@ export interface Applicant {
 export interface Award {
   id: number;
   name: string;
+  name_en: string;
   logo: number | Media;
   about: {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -273,13 +284,67 @@ export interface Award {
     };
     [k: string]: unknown;
   };
-  awardees?: (number | null) | Awardee;
+  about_en: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  program_about: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  program_about_en: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  stats: {
+    value: number;
+    label: string;
+    label_en: string;
+    description: string;
+    description_en: string;
+    id?: string | null;
+  }[];
+  awardees?: (number | Awardee)[] | null;
   covers?:
     | {
         cover: number | Media;
         id?: string | null;
       }[]
     | null;
+  event?: (number | null) | Event;
   facebook_link?: string | null;
   event_facebook_link?: string | null;
   connected_publicatios?: number | null;
@@ -296,11 +361,129 @@ export interface Award {
 export interface Awardee {
   id: number;
   name: string;
-  about: {
+  institution: string;
+  origin_country: string;
+  fields_of_science: {
+    field: string;
+    id?: string | null;
+  }[];
+  fields_of_science_en: {
+    field: string;
+    id?: string | null;
+  }[];
+  short_justification: string;
+  short_justification_en: string;
+  extended_justification?: string | null;
+  extended_justification_en?: string | null;
+  year: number;
+  picture: number | Media;
+  has_nobel?: boolean | null;
+  nobel_year?: number | null;
+  ceremony_video_link?: string | null;
+  video_description?: {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  video_description_en?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  interview_video_link?: string | null;
+  image_gallery?:
+    | {
+        image: number | Media;
+        caption: string;
+        caption_en: string;
+        id?: string | null;
+      }[]
+    | null;
+  downloads?: AwardeeDownloads;
+  publications?:
+    | {
+        title: string;
+        title_en: string;
+        abstract?: string | null;
+        abstract_en?: string | null;
+        cover_image: number | Media;
+        author: string;
+        date: string;
+        link?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  articles?:
+    | {
+        title: string;
+        title_en: string;
+        abstract?: string | null;
+        abstract_en?: string | null;
+        cover_image: number | Media;
+        author: string;
+        date: string;
+        link?: string | null;
+        download?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  websites?: AwardeeWebsites;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AwardeeDownloads".
+ */
+export interface AwardeeDownloads {
+  laudation_pdf?: (number | null) | Media;
+  press_photo_pack?: (number | null) | Media;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AwardeeWebsites".
+ */
+export interface AwardeeWebsites {
+  google_scholar_link?: string | null;
+  personal_website_link?: string | null;
+  institution_website_link?: string | null;
+  nobel_website_link?: string | null;
+}
+/**
+ * Események és eseményekkel kapcsolatos információk
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  name: string;
+  picture: number | Media;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -311,10 +494,9 @@ export interface Awardee {
     };
     [k: string]: unknown;
   };
-  year: number;
-  picture: number | Media;
-  testimony: string;
-  facebook_link?: string | null;
+  date: string;
+  location: string;
+  speakers?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -347,7 +529,7 @@ export interface Faq {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -387,7 +569,7 @@ export interface ApplyTimelineEvent {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -413,7 +595,7 @@ export interface AboutTimelineEvent {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -425,37 +607,6 @@ export interface AboutTimelineEvent {
     [k: string]: unknown;
   };
   logo: number | Media;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * Események és eseményekkel kapcsolatos információk
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events".
- */
-export interface Event {
-  id: number;
-  name: string;
-  picture: number | Media;
-  description: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  date: string;
-  location: string;
-  speakers?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -580,6 +731,23 @@ export interface Odyssey {
   description?: string | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv".
+ */
+export interface PayloadKv {
+  id: number;
+  key: string;
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -716,6 +884,13 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -788,8 +963,22 @@ export interface ApplicantsSelect<T extends boolean = true> {
  */
 export interface AwardsSelect<T extends boolean = true> {
   name?: T;
+  name_en?: T;
   logo?: T;
   about?: T;
+  about_en?: T;
+  program_about?: T;
+  program_about_en?: T;
+  stats?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        label_en?: T;
+        description?: T;
+        description_en?: T;
+        id?: T;
+      };
   awardees?: T;
   covers?:
     | T
@@ -797,6 +986,7 @@ export interface AwardsSelect<T extends boolean = true> {
         cover?: T;
         id?: T;
       };
+  event?: T;
   facebook_link?: T;
   event_facebook_link?: T;
   connected_publicatios?: T;
@@ -812,13 +1002,89 @@ export interface AwardsSelect<T extends boolean = true> {
  */
 export interface AwardeesSelect<T extends boolean = true> {
   name?: T;
-  about?: T;
+  institution?: T;
+  origin_country?: T;
+  fields_of_science?:
+    | T
+    | {
+        field?: T;
+        id?: T;
+      };
+  fields_of_science_en?:
+    | T
+    | {
+        field?: T;
+        id?: T;
+      };
+  short_justification?: T;
+  short_justification_en?: T;
+  extended_justification?: T;
+  extended_justification_en?: T;
   year?: T;
   picture?: T;
-  testimony?: T;
-  facebook_link?: T;
+  has_nobel?: T;
+  nobel_year?: T;
+  ceremony_video_link?: T;
+  video_description?: T;
+  video_description_en?: T;
+  interview_video_link?: T;
+  image_gallery?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        caption_en?: T;
+        id?: T;
+      };
+  downloads?: T | AwardeeDownloadsSelect<T>;
+  publications?:
+    | T
+    | {
+        title?: T;
+        title_en?: T;
+        abstract?: T;
+        abstract_en?: T;
+        cover_image?: T;
+        author?: T;
+        date?: T;
+        link?: T;
+        id?: T;
+      };
+  articles?:
+    | T
+    | {
+        title?: T;
+        title_en?: T;
+        abstract?: T;
+        abstract_en?: T;
+        cover_image?: T;
+        author?: T;
+        date?: T;
+        link?: T;
+        download?: T;
+        id?: T;
+      };
+  websites?: T | AwardeeWebsitesSelect<T>;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AwardeeDownloads_select".
+ */
+export interface AwardeeDownloadsSelect<T extends boolean = true> {
+  laudation_pdf?: T;
+  press_photo_pack?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AwardeeWebsites_select".
+ */
+export interface AwardeeWebsitesSelect<T extends boolean = true> {
+  google_scholar_link?: T;
+  personal_website_link?: T;
+  institution_website_link?: T;
+  nobel_website_link?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -948,6 +1214,14 @@ export interface OdysseySelect<T extends boolean = true> {
   description?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv_select".
+ */
+export interface PayloadKvSelect<T extends boolean = true> {
+  key?: T;
+  data?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

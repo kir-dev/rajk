@@ -39,6 +39,36 @@ interface MyCarouselProps {
 }
 
 export function MyCarousel(props: MyCarouselProps) {
+    // Filter and limit data to 3 events when clickable (Events)
+    const getDisplayData = () => {
+        if (!props.clickable) {
+            return props.data; // For community pictures, show all
+        }
+
+        // For events, limit to 3 and prioritize upcoming events
+        const events = props.data as Event[];
+        const today = new Date();
+
+        // Separate future and past events
+        const futureEvents = events.filter(event => new Date(event.date) >= today);
+        const pastEvents = events.filter(event => new Date(event.date) < today);
+
+        // Sort past events in reverse chronological order (most recent first)
+        pastEvents.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+        // Take up to 3 future events, fill with past events if needed
+        const displayEvents = [...futureEvents.slice(0, 3)];
+        const remaining = 3 - displayEvents.length;
+
+        if (remaining > 0) {
+            displayEvents.push(...pastEvents.slice(0, remaining));
+        }
+
+        return displayEvents;
+    };
+
+    const displayData = getDisplayData();
+
     const settings = {
         className: "overflow-hidden",
         centerMode: true,
@@ -54,13 +84,17 @@ export function MyCarousel(props: MyCarouselProps) {
             {
                 breakpoint: 768,
                 settings: {
-                    centerMode: false,
+                    centerMode: true,
+                    centerPadding: '20px',
                     variableWidth: false,
+                    slidesToShow: 1,
                 }
             },
             {
                 breakpoint: 9999,
                 settings: {
+                    centerMode: true,
+                    centerPadding: '0px',
                     variableWidth: true,
                 }
             }
@@ -72,11 +106,11 @@ export function MyCarousel(props: MyCarouselProps) {
     return (
         <div className="slider-container px-4 md:px-8" id="carousel">
             <TypedSlider {...settings}>
-                {props.data.map((doc) => (
-                    <div key={doc.id} className="h-64 outline-none px-3 md:px-4">
-                        <div className="transition-all duration-300 ease-in-out hover:scale-105 h-full w-full md:w-auto">
+                {displayData.map((doc) => (
+                    <div key={doc.id} className="h-64 outline-none px-2 md:px-4">
+                        <div className="transition-all duration-300 ease-in-out hover:scale-105 h-full w-full md:w-96">
                             {props.clickable ? (
-                                <a href={`/esemenyek/${doc.id}`} className="block relative h-full aspect-video">
+                                <a href={`/esemenyek/${doc.id}`} className="block relative h-full w-full">
                                     {isMedia(doc.picture) ? (
                                         <Image
                                             src={doc.picture.url ?? "/rajk_strucc_black.png"}
@@ -89,7 +123,7 @@ export function MyCarousel(props: MyCarouselProps) {
                                     ) : null}
                                 </a>
                             ) : (
-                                <div className="relative h-full aspect-video">
+                                <div className="relative h-full w-full">
                                     {isMedia(doc.picture) ? (
                                         <Image
                                             src={doc.picture.url ?? "/rajk_strucc_black.png"}
