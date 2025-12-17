@@ -167,7 +167,7 @@ export function AwardeeCard({awardee}: AwardeeCardProps) {
                             <div>
                                 <p className="font-medium text-background group-hover:text-primary transition-colors">{t(lang, pub.title, pub.title_en)}</p>
                                 <p className="text-sm text-muted-foreground mt-1">
-                                    {pub.author} · {new Date(pub.date).toLocaleDateString(lang)}
+                                    {pub.author} · {new Date(pub.date).getFullYear()}
                                 </p>
                                 <p className="text-sm text-black mt-1 hidden md:block">
                                     {lang === "HU" ? pub.abstract : pub.abstract_en}
@@ -315,7 +315,7 @@ export function AwardeeCard({awardee}: AwardeeCardProps) {
                             alt={awardee.name}
                             width={600}
                             height={600}
-                            className="w-full h-full object-cover rounded-lg"
+                            className="w-[300px] h-[300px] object-cover rounded-lg"
                         />
                         {awardee.has_nobel && (
                             <div

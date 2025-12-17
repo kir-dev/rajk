@@ -27,7 +27,7 @@ export async function fetchAward(id: string) {
 
 const awardUrlToAwardName = new Map<string, string>([
     ["neumann-janos", "Neumann János Díj"],
-    ["herbert-simon", "Simon Herbert Award"],
+    ["herbert-simon", "Herbert Simon-díj"],
     ["andorka-rudolf", "Andorka Rudolf Medál"],
 ]);
 
