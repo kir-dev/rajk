@@ -20,7 +20,7 @@ export function ExpandableSection({title, icon, children, className}: Expandable
                 onClick={() => setIsOpen(prev => !prev)}
                 aria-expanded={isOpen}
             >
-                <span className="flex items-center gap-2 text-lg font-semibold text-background">
+                <span className="flex items-center gap-2 text-lg font-semibold">
                     {icon}
                     {title}
                 </span>
