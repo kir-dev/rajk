@@ -43,17 +43,17 @@ export default async function ApplyPage() {
                         priority
                     />
                     <div className="flex flex-col absolute font-black top-0 left-0 w-full h-full items-center justify-center mt-20 text-white p-4">
-                        <h2 className="text-3xl md:text-5xl font-black max-w-2xl text-center mb-12 drop-shadow-lg">
+                        <h2 className="text-3xl md:text-5xl font-black max-w-2xl text-center self-start mb-12 drop-shadow-lg md:ml-20 lg:ml-32">
                             {t(lang, "Ajtókat nyitunk a világra", "We open doors to the world")}
                         </h2>
                         <Image 
                             className="px-8 mb-8" 
-                            src={"/rajk_logo2_white.png"} 
+                            src={"/logo-white/Rajk_logo_2025_white_a.svg"} 
                             alt={"Rajk logo"} 
                             width={700}
                             height={400}
                         />
-                        <h2 className="text-3xl md:text-5xl font-black mb-16">
+                        <h2 className="text-3xl md:text-5xl font-black mb-16 text-center self-end md:mr-20 lg:mr-32">
                             {t(lang, "Felvételi", "Admission")}
                         </h2>
                         <Countdown targetDate={submissionDeadline} />
@@ -69,7 +69,8 @@ export default async function ApplyPage() {
 
                 {/* Recruitment Process Section */}
                 <div className="flex flex-col items-center justify-center py-24 relative overflow-hidden px-4">
-                    <div className="flex flex-col md:flex-row lg:w-3/4 xl:w-1/2 relative z-10 bg-white/40 p-8 rounded-2xl backdrop-blur-sm">
+                    <div className="flex flex-col md:flex-row lg:w-3/4 xl:w-1/2 relative z-10 bg-white/40 p-8 rounded-2xl backdrop-blur-sm gap-8">
+                        <Image src="/logo-black/rajk_A.svg" alt="Rajk logo" width={200} height={200} />
                         <div className="flex flex-col items-start justify-center">
                             <h2 className="text-3xl font-black mb-6 text-rajk-green underline uppercase tracking-wider">
                                 {t(lang, "A Felvételi Menete", "The Admission Process")}
@@ -87,7 +88,7 @@ export default async function ApplyPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:w-3/4 xl:w-1/2 mt-16 relative z-10">
                         <div className="flex flex-col bg-white/40 p-8 rounded-2xl backdrop-blur-sm border-l-8 border-rajk-green">
                             <div className="flex items-center gap-4 mb-4">
-                                <span className="text-6xl font-black text-rajk-green opacity-20">1</span>
+                                <span className="text-6xl font-black text-rajk-green">1</span>
                                 <h2 className="text-3xl font-black text-rajk-green underline">
                                     {t(lang, "Írásbeli", "Written Round")}
                                 </h2>
@@ -103,7 +104,7 @@ export default async function ApplyPage() {
                         
                         <div className="flex flex-col bg-white/40 p-8 rounded-2xl backdrop-blur-sm border-r-8 border-rajk-green md:text-right">
                             <div className="flex items-center gap-4 mb-4 md:flex-row-reverse">
-                                <span className="text-6xl font-black text-rajk-green opacity-20">2</span>
+                                <span className="text-6xl font-black text-rajk-green">2</span>
                                 <h2 className="text-3xl font-black text-rajk-green underline">
                                     {t(lang, "Szóbeli", "Oral Round")}
                                 </h2>
@@ -125,7 +126,7 @@ export default async function ApplyPage() {
                 </div>
 
                 {/* Why Rajk Section */}
-                <div className="bg-rajk-green py-24 text-white">
+                <div className="bg-rajk-green py-24 text-black">
                     <div className="container mx-auto px-4 max-w-5xl">
                         <h2 className="text-4xl md:text-5xl font-black mb-12 text-center uppercase">
                             {t(lang, "Miért a Rajk?", "Why Rajk?")}
@@ -157,19 +158,16 @@ export default async function ApplyPage() {
                                 <h3 className="text-2xl font-bold mb-4">{t(lang, "Közösségi élmény", "Community Experience")}</h3>
                             </div>
                         </div>
-
-                        <div className="text-center mt-12">
-                             <h3 className="text-4xl md:text-6xl font-black italic tracking-tighter opacity-30 select-none">
-                                {t(lang, "Vigyázz, Kész, Rajk!", "Ready, Set, Rajk!")}
-                             </h3>
-                        </div>
                     </div>
                 </div>
 
                 {/* Gallery Section */}
                 <div className="py-24 bg-bezs">
                     <div className="container mx-auto px-4">
-                        <div className="text-center mb-12">
+                        <div className="text-center mb-12 flex flex-col items-center justify-center gap-4">
+                            <h3 className="text-4xl md:text-6xl font-black italic tracking-tighter select-none text-rajk-green">
+                                {t(lang, "Vigyázz, Kész, Rajk!", "Ready, Set, Rajk!")}
+                            </h3>
                             <h2 className="text-4xl font-black text-rajk-green mb-4">
                                 {t(lang, "Nézd meg milyenek a hétköznapok a Rajk falain belül!", "See what daily life is like within the walls of Rajk!")}
                             </h2>
@@ -182,7 +180,7 @@ export default async function ApplyPage() {
                 <FAQAccordion />
 
                 {/* Accepted Section */}
-                <div className="bg-zold py-24 text-white relative overflow-hidden">
+                <div className="bg-zold py-24 text-white relative overflow-hidden mb-10">
                     <div className="container mx-auto px-4 max-w-5xl relative z-10">
                         <h2 className="text-5xl md:text-7xl font-black mb-12 text-center drop-shadow-lg">
                             {t(lang, "Felvettünk?", "Accepted?")}

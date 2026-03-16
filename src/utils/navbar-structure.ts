@@ -31,7 +31,7 @@ export function getNavItems(lang: Lang): NavItem[] {
         { label: HU ? 'Nemzetközi kapcsolataink' : 'Our international relations', href: '/szakma/nemzetkozi-kapcsolatok' },
       ],*/
     },
-    { label: HU ? "Társasadalmi felelősségvállalás" : "Social Responsibility", href: "https://szabokalmanprogram.hu/" },
+    { label: HU ? "Társadalmi felelősségvállalás" : "Social Responsibility", href: "https://szabokalmanprogram.hu/" },
     {
       label: HU ? "Díjak" : "Awards",
       href: "#",
