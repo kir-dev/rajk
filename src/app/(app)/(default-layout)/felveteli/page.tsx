@@ -119,40 +119,42 @@ export default async function ApplyPage() {
                         </div>
                     </div>
 
-                    {/* Peeking Strucc */}
+                    {/* Peaking Strucc */}
                     <div className="absolute right-0 bottom-0 opacity-20 pointer-events-none translate-x-1/4 translate-y-1/4">
                         <Image src="/rajk_strucc_black.png" alt="Ostrich" width={600} height={600} />
                     </div>
                 </div>
 
                 {/* Why Rajk Section */}
-                <div className="bg-rajk-green py-24 text-black">
+                <div className="bg-bezs py-24 text-black">
                     <div className="container mx-auto px-4 max-w-5xl">
-                        <h2 className="text-4xl md:text-5xl font-black mb-12 text-center uppercase">
-                            {t(lang, "Miért a Rajk?", "Why Rajk?")}
-                        </h2>
-                        <p className="text-xl leading-relaxed text-center mb-16 max-w-3xl mx-auto opacity-90">
-                            {t(lang, 
-                                "A Rajk működését magunk formáljuk. A saját szabályaink szerint élünk, amelyeket az egymással folytatott diskurzus formál. A közösségünk diverz, így a vitáinkban sok különböző, egymásnak ellentmondó érték- és érvrendszer merül fel. Minden nap tanulunk egymástól magunkról, csapatmunkáról, közösségi dinamikáról, sikerről és kitartásról. Kis csoportokban, egymást motiválva mélyedünk el szakmailag a társadalomtudomány bármely területén.",
-                                "We shape Rajk's operation ourselves. We live by our own rules, formed by the discourse we have with each other. Our community is diverse, so many different, often contradictory value and argument systems arise in our debates. Every day we learn from each other about ourselves, teamwork, community dynamics, success, and perseverance. In small groups, motivating each other, we immerse ourselves professionally in any field of social science."
-                            )}
-                        </p>
+                        <div className="bg-white/40 p-6 rounded-2xl backdrop-blur-sm transition-transform hover:scale-105 m-4">
+                            <h2 className="text-4xl md:text-5xl font-black mb-12 text-center uppercase">
+                                {t(lang, "Miért a Rajk?", "Why Rajk?")}
+                            </h2>
+                            <p className="text-xl leading-relaxed text-center mb-16 max-w-3xl mx-auto opacity-90">
+                                {t(lang,
+                                    "A Rajk működését magunk formáljuk. A saját szabályaink szerint élünk, amelyeket az egymással folytatott diskurzus formál. A közösségünk diverz, így a vitáinkban sok különböző, egymásnak ellentmondó érték- és érvrendszer merül fel. Minden nap tanulunk egymástól magunkról, csapatmunkáról, közösségi dinamikáról, sikerről és kitartásról. Kis csoportokban, egymást motiválva mélyedünk el szakmailag a társadalomtudomány bármely területén.",
+                                    "We shape Rajk's operation ourselves. We live by our own rules, formed by the discourse we have with each other. Our community is diverse, so many different, often contradictory value and argument systems arise in our debates. Every day we learn from each other about ourselves, teamwork, community dynamics, success, and perseverance. In small groups, motivating each other, we immerse ourselves professionally in any field of social science."
+                                )}
+                            </p>
+                        </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-                            <div className="flex flex-col items-center text-center p-6 bg-white/10 rounded-2xl backdrop-blur-sm transition-transform hover:scale-105">
-                                <div className="p-4 bg-white/20 rounded-full mb-6">
+                            <div className="flex flex-col items-center text-center p-6 bg-white/40 rounded-2xl backdrop-blur-sm transition-transform hover:scale-105">
+                                <div className="p-4 bg-white/60 rounded-full mb-6">
                                     <GraduationCap size={40} />
                                 </div>
                                 <h3 className="text-2xl font-bold mb-4">{t(lang, "Szakmai elmélyülés", "Professional Depth")}</h3>
                             </div>
-                            <div className="flex flex-col items-center text-center p-6 bg-white/10 rounded-2xl backdrop-blur-sm transition-transform hover:scale-105">
-                                <div className="p-4 bg-white/20 rounded-full mb-6">
+                            <div className="flex flex-col items-center text-center p-6 bg-white/40 rounded-2xl backdrop-blur-sm transition-transform hover:scale-105">
+                                <div className="p-4 bg-white/60 rounded-full mb-6">
                                     <TrendingUp size={40} />
                                 </div>
                                 <h3 className="text-2xl font-bold mb-4">{t(lang, "Személyiségfejlődés", "Personal Growth")}</h3>
                             </div>
-                            <div className="flex flex-col items-center text-center p-6 bg-white/10 rounded-2xl backdrop-blur-sm transition-transform hover:scale-105">
-                                <div className="p-4 bg-white/20 rounded-full mb-6">
+                            <div className="flex flex-col items-center text-center p-6 bg-white/40 rounded-2xl backdrop-blur-sm transition-transform hover:scale-105">
+                                <div className="p-4 bg-white/60 rounded-full mb-6">
                                     <Users size={40} />
                                 </div>
                                 <h3 className="text-2xl font-bold mb-4">{t(lang, "Közösségi élmény", "Community Experience")}</h3>
