@@ -6,7 +6,6 @@ import ActionButton from "@/components/ActionButton";
 import { EmailReg } from "@/utils/emailReg";
 import { useLanguage } from "@/components/LanguageProvider";
 import { t } from "@/lib/utils";
-import Countdown from "@/components/countDown";
 
 interface DownloadQuestionnaireProps {
   releaseDate: Date;
@@ -40,9 +39,8 @@ export function DownloadQuestionnaire({ releaseDate, questionnaireUrl, archiveUr
             {!isReleased ? (
               <div className="flex flex-col items-center md:items-end w-full">
                 <p className="text-xl mb-4 opacity-90">
-                  {t(lang, "Hamarosan elérhető a 2026-os felvételi kérdőív:", "The 2026 admission questionnaire will be available soon:")}
+                  {t(lang, "Hamarosan elérhető a 2026-os felvételi kérdőív", "The 2026 admission questionnaire will be available soon")}
                 </p>
-                <Countdown targetDate={releaseDate} className="!justify-center md:!justify-end p-0" />
               </div>
             ) : (
               <ActionButton 
