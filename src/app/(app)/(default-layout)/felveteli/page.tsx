@@ -6,6 +6,7 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 import { DownloadQuestionnaire } from "@/components/felveteli/DownloadQuestionnaire";
 import { FAQAccordion } from "@/components/felveteli/FAQAccordion";
+import getFAQs from "@/payload-find/getFAQs";
 import MyCarousel from "@/components/MyCarousel";
 import { t } from "@/lib/utils";
 import { cookies } from "next/headers";
@@ -21,10 +22,13 @@ export default async function ApplyPage() {
     const lang = (cookieStore.get("lang")?.value as "HU" | "EN") || "HU";
     
     const payload = await getPayload({ config });
-    const recruitmentPictures = await payload.find({
-        collection: "recruitment-pictures",
-        limit: 10,
-    });
+    const [recruitmentPictures, faqs] = await Promise.all([
+        payload.find({
+            collection: "recruitment-pictures",
+            limit: 10,
+        }),
+        getFAQs(),
+    ]);
 
     const releaseDate = new Date('2026-04-22T08:00:00');
     const submissionDeadline = new Date('2026-05-13T19:59:59');
@@ -179,7 +183,7 @@ export default async function ApplyPage() {
                 </div>
 
                 {/* FAQ Section */}
-                <FAQAccordion />
+                <FAQAccordion faqs={faqs} />
 
                 {/* Accepted Section */}
                 <div className="bg-zold py-24 text-white relative overflow-hidden mb-10">
