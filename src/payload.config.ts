@@ -27,6 +27,7 @@ import {About_Timeline_Event} from "@/collections/About_Timeline_Event";
 import {Applicants} from "@/collections/Applicants";
 import {Events} from "@/collections/Events";
 import {CommunityPictures} from "@/collections/CommunityPictures";
+import {RecruitmentPictures} from "@/collections/RecruitmentPictures";
 import {CourseCategories} from "@/collections/CourseCategories";
 import {Courses} from "@/collections/Courses";
 import {Odyssey} from "@/collections/Odyssey";
@@ -57,6 +58,7 @@ export default buildConfig({
     About_Timeline_Event,
     Events,
     CommunityPictures,
+    RecruitmentPictures,
     CourseCategories,
     Courses,
     Odyssey,
