@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {BiSolidLeftArrow, BiSolidRightArrow} from "react-icons/bi";
 import Image from "next/image";
-import {CommunityPicture, Event} from "@/payload-types";
+import {CommunityPicture, Event, RecruitmentPicture} from "@/payload-types";
 import {isMedia} from "@/utils/isMedia";
 
 const NextArrow = (props: { onClick?: () => void }) => {
@@ -34,7 +34,7 @@ const PrevArrow = (props: { onClick?: () => void }) => {
 };
 
 interface MyCarouselProps {
-    data: Event[] | CommunityPicture[];
+    data: Event[] | CommunityPicture[] | RecruitmentPicture[];
     clickable: boolean;
 }
 

@@ -21,8 +21,8 @@ export default async function ApplyPage() {
     const lang = (cookieStore.get("lang")?.value as "HU" | "EN") || "HU";
     
     const payload = await getPayload({ config });
-    const communityPictures = await payload.find({
-        collection: "community-pictures",
+    const recruitmentPictures = await payload.find({
+        collection: "recruitment-pictures",
         limit: 10,
     });
 
@@ -174,7 +174,7 @@ export default async function ApplyPage() {
                                 {t(lang, "Nézd meg milyenek a hétköznapok a Rajk falain belül!", "See what daily life is like within the walls of Rajk!")}
                             </h2>
                         </div>
-                        <MyCarousel data={communityPictures.docs} clickable={false} />
+                        <MyCarousel data={recruitmentPictures.docs} clickable={false} />
                     </div>
                 </div>
 
