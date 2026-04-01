@@ -19,6 +19,7 @@ import * as migration_20251208_171738_add_users_sessions_table from './20251208_
 import * as migration_20251214_233315_fix_awards_richtext_data from './20251214_233315_fix_awards_richtext_data';
 import * as migration_20251216_140621_add_new_field_to_awards_and_awardees from './20251216_140621_add_new_field_to_awards_and_awardees';
 import * as migration_20251216_181541 from './20251216_181541';
+import * as migration_20260331_123516_add_recruitment_pictures from './20260331_123516_add_recruitment_pictures';
 
 export const migrations = [
   {
@@ -124,6 +125,11 @@ export const migrations = [
   {
     up: migration_20251216_181541.up,
     down: migration_20251216_181541.down,
-    name: '20251216_181541'
+    name: '20251216_181541',
+  },
+  {
+    up: migration_20260331_123516_add_recruitment_pictures.up,
+    down: migration_20260331_123516_add_recruitment_pictures.down,
+    name: '20260331_123516_add_recruitment_pictures'
   },
 ];

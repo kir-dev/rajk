@@ -82,6 +82,7 @@ export interface Config {
     'about-timeline-event': AboutTimelineEvent;
     events: Event;
     'community-pictures': CommunityPicture;
+    'recruitment-pictures': RecruitmentPicture;
     'course-categories': CourseCategory;
     courses: Course;
     odyssey: Odyssey;
@@ -107,6 +108,7 @@ export interface Config {
     'about-timeline-event': AboutTimelineEventSelect<false> | AboutTimelineEventSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     'community-pictures': CommunityPicturesSelect<false> | CommunityPicturesSelect<true>;
+    'recruitment-pictures': RecruitmentPicturesSelect<false> | RecruitmentPicturesSelect<true>;
     'course-categories': CourseCategoriesSelect<false> | CourseCategoriesSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
     odyssey: OdysseySelect<false> | OdysseySelect<true>;
@@ -624,6 +626,19 @@ export interface CommunityPicture {
   createdAt: string;
 }
 /**
+ * Felvételi oldal képei
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recruitment-pictures".
+ */
+export interface RecruitmentPicture {
+  id: number;
+  name: string;
+  picture: number | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "course-categories".
  */
@@ -815,6 +830,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'community-pictures';
         value: number | CommunityPicture;
+      } | null)
+    | ({
+        relationTo: 'recruitment-pictures';
+        value: number | RecruitmentPicture;
       } | null)
     | ({
         relationTo: 'course-categories';
@@ -1162,6 +1181,16 @@ export interface EventsSelect<T extends boolean = true> {
  * via the `definition` "community-pictures_select".
  */
 export interface CommunityPicturesSelect<T extends boolean = true> {
+  name?: T;
+  picture?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recruitment-pictures_select".
+ */
+export interface RecruitmentPicturesSelect<T extends boolean = true> {
   name?: T;
   picture?: T;
   updatedAt?: T;
