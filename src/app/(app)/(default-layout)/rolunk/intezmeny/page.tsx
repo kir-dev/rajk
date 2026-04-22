@@ -7,7 +7,7 @@ import Mukodes from "@/components/Intezmeny/Mukodes";
 import Documents from "@/components/Intezmeny/Documents";
 import getReportsGrouped from "@/payload-find/getReports";
 import Section from "@/components/Section";
-import VertNavBarLayout from "@/components/vertNavBarLayout";
+import VertNavBarLayout from "@/components/VertNavBarLayout";
 import { cookies } from "next/headers";
 import { t } from "@/lib/utils";
 import type { Lang } from "@/components/LanguageProvider";

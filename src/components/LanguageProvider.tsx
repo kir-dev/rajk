@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {createContext, useContext, useEffect, useEffectEvent, useState} from "react";
 
 export type Lang = "HU" | "EN";
 
@@ -23,12 +23,16 @@ export function LanguageProvider({
     document.cookie = `lang=${l}; path=/; max-age=31536000; samesite=lax`;
   };
 
+  const onLoaded = useEffectEvent((cookie: string) => {
+      const v = cookie.split("=")[1];
+      if (v === "HU" || v === "EN") setLangState(v);
+  })
+
   // hydrate from cookie on the client if present
   useEffect(() => {
     const cookie = document.cookie.split("; ").find((c) => c.startsWith("lang="));
     if (cookie) {
-      const v = cookie.split("=")[1];
-      if (v === "HU" || v === "EN") setLangState(v);
+      onLoaded(cookie);
     }
   }, []);
 

@@ -95,7 +95,7 @@ export default function Statistics(props: StatisticsProps) {
     return(
         <div className="relative w-full">
             <WawyBorder direction={"top"} color={props.color} szin={props.szin}/>
-            <div className={`${bgClass} text-white py-16 w-full`}>
+            <div className={`${bgClass} text-white pt-20 pb-16 w-full`}>
                 {/* Content container with adjusted positioning */}
                 <div className="max-w-6xl mx-auto px-8" ref={statsRef}>
                     {/* Header */}

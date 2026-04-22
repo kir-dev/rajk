@@ -1,5 +1,8 @@
 import type { Lang } from "@/components/LanguageProvider";
 
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
 export const getLocale = (lang: Lang) => (lang === "EN" ? "en-US" : "hu-HU");
 
 // Extend this dictionary with your project's tags if needed
@@ -25,3 +28,6 @@ export function t(lang: Lang, hu: string, en?: string) {
   return lang === "EN" ? en ?? hu : hu;
 }
 
+export function cn(...inputs: ClassValue[]) {
+    return twMerge(clsx(inputs))
+}

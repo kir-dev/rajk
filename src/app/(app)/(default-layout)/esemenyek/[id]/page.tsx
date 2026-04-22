@@ -27,7 +27,27 @@ export default async function EventDetails({
                     Vissza az eseményekhez
                 </Link>
 
-                <div className="flex flex-col lg:flex-row gap-6">
+                <div className="flex flex-col lg:flex-row gap-6 md:hidden">
+                    <div className="lg:sticky lg:top-24 lg:self-start">
+                        <CalendarDateCard title={event.name} start={event.date}/>
+                    </div>
+
+                    <div className="flex-1">
+                        <h1 className="text-3xl font-bold mb-6">{event.name}</h1>
+                        <Image
+                            src={pictureUrl}
+                            alt="Event Image"
+                            width={800}
+                            height={400}
+                            className="mb-6 rounded-lg w-full"
+                        />
+                        <div className="rich-text-content w-full">
+                            <RichText data={event.description} />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex flex-col lg:flex-row gap-6 max-md:hidden">
                     <div className="flex-1">
                         <h1 className="text-3xl font-bold mb-6">{event.name}</h1>
                         <Image

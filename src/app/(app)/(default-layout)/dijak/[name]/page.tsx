@@ -4,17 +4,17 @@ import SubTitle from "@/components/PageTitle/SubTitle";
 import {fetchAward} from "@/fetch/fetchAwards";
 import React from "react";
 import Section from "@/components/Section";
-import VertNavBarLayout from "@/components/vertNavBarLayout";
+import VertNavBarLayout from "@/components/VertNavBarLayout";
 import {Awardee, Media} from "@/payload-types";
 import Image from "next/image";
 import {isMedia} from "@/utils/isMedia";
-import {RichText} from "@payloadcms/richtext-lexical/react";
 import AwardeeGrid from "@/components/AwardeeGrid";
 
-export default async function Page({params}: { params: { id?: string } }) {
+export default async function Page({params}: { params: Promise<{ name: string }> }) {
+    const { name } = await params;
     
-    const award = await fetchAward(params.id || "1");
-    const awardee = award.awardees && (award.awardees as Awardee) || null;
+    const award = await fetchAward(name || "1");
+    const awardee = award.awardees && (award.awardees[0] as Awardee) || null;
     
     if (!award) {
         return <div className = "text-white">Award not found</div>;
@@ -63,7 +63,6 @@ export default async function Page({params}: { params: { id?: string } }) {
                             </div>
                             <div>
                                 <h2 className = "text-3xl font-bold mb-4">{awardee.name}</h2>
-                                <RichText className={"w-5/6 wrap-normal"} data={awardee.about}/>
                             </div>
                         </div>
                     </Section>
@@ -71,7 +70,7 @@ export default async function Page({params}: { params: { id?: string } }) {
                 {award.awardees && typeof award.awardees !== "number" &&
                     <Section id = {"Prev awardees"} title = {"Previous awardes"} className = "mb-40" lucideIconName = "Users">
                         <SubTitle text = {"Previous awardes"}></SubTitle>
-                        <AwardeeGrid awardees={[award.awardees, award.awardees, award.awardees, award.awardees, award.awardees]}/>
+                        <AwardeeGrid awardees={award.awardees as Awardee[]}/>
                     </Section>
                 }
             </VertNavBarLayout>

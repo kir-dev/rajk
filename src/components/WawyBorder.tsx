@@ -19,7 +19,7 @@ export default function WawyBorder(props: WawyBorderProps) {
     const bgImage = getBgImage();
 
     return (
-        <div className={`absolute left-0 w-full overflow-hidden leading-none transform ${(props.direction === "top") ? "translate-y-[-100%] top-0" : "translate-y-[100%] rotate-180 bottom-0"} z-10 bg-transparent ${props.backgroundColor || "bg-transparent"}`}>
+        <div className={`absolute left-0 w-full overflow-hidden leading-none transform ${(props.direction === "top") ? "translate-y-[-98%] top-0" : "translate-y-[98%] rotate-180 bottom-0"} z-20 bg-transparent ${props.backgroundColor || "bg-transparent"}`}>
             <svg
                 className="relative block w-full h-[70px]"
                 data-name="Layer 1"
@@ -34,17 +34,22 @@ export default function WawyBorder(props: WawyBorderProps) {
                     ></path>
                 ) : (
                     <>
-                        <path
-                            d="M0,0 L200,60 L400,30 L600,80 L800,20 L1000,70 L1200,40 L1200,120 L0,120 Z"
-                            fill="transparent"
-                            style={{ fill: `url(#img-${props.szin || "default"})` }}
-                        ></path>
-
                         <defs>
-                            <pattern id={`img-${props.szin || "default"}`} patternUnits="userSpaceOnUse" width="100%" height="100%">
-                                <image href={bgImage} x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" />
+                            <pattern id={`img-${props.szin || "default"}`} patternUnits="userSpaceOnUse" width="1200" height="120" preserveAspectRatio="xMidYMid slice">
+                                <image
+                                    href={bgImage}
+                                    x="0"
+                                    y="-540"
+                                    width="1200"
+                                    height="1200"
+                                    preserveAspectRatio="xMidYMid slice"
+                                />
                             </pattern>
                         </defs>
+                        <path
+                            d="M0,0 L200,60 L400,30 L600,80 L800,20 L1000,70 L1200,40 L1200,120 L0,120 Z"
+                            fill={`url(#img-${props.szin || "default"})`}
+                        ></path>
                     </>
                 )}
             </svg>

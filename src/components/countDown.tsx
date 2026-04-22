@@ -4,7 +4,11 @@
 import {useEffect, useState} from 'react'
 import cn from "@/utils/concatenate";
 
+import { useLanguage } from './LanguageProvider'
+import { t } from '@/lib/utils'
+
 export default function Countdown({ targetDate, className }: { targetDate: Date, className?: string }) {
+    const { lang } = useLanguage()
     const [timeLeft, setTimeLeft] = useState(getTimeRemaining(targetDate))
 
     useEffect(() => {
@@ -16,15 +20,15 @@ export default function Countdown({ targetDate, className }: { targetDate: Date,
     }, [targetDate])
 
     if (timeLeft.total <= 0) {
-        return <p className="text-2xl font-bold text-green-500">Times up!</p>
+        return <p className="text-2xl font-bold text-green-500">{t(lang, "Lejárt az idő!", "Times up!")}</p>
     }
 
     return (
         <div className={cn("text-white w-full flex justify-center p-4 gap-4 font-bold", className)}>
-            <CountdownElement value={timeLeft.days} label="nap" />
-            <CountdownElement value={timeLeft.hours} label="óra" />
-            <CountdownElement value={timeLeft.minutes} label="perc" />
-            <CountdownElement value={timeLeft.seconds} label="mp" />
+            <CountdownElement value={timeLeft.days} label={t(lang, "nap", "days")} />
+            <CountdownElement value={timeLeft.hours} label={t(lang, "óra", "hours")} />
+            <CountdownElement value={timeLeft.minutes} label={t(lang, "perc", "min")} />
+            <CountdownElement value={timeLeft.seconds} label={t(lang, "mp", "sec")} />
         </div>
     )
 }
