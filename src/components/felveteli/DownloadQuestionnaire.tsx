@@ -18,7 +18,8 @@ export function DownloadQuestionnaire({ releaseDate, questionnaireUrl, archiveUr
   const [email, setEmail] = useState('');
   const { lang } = useLanguage();
 
-  const isReleased = new Date() >= releaseDate;
+  //const isReleased = new Date() >= releaseDate;
+  const isReleased = true;
 
   const handleEmailReg = () => {
     EmailReg(email).then(() => {
