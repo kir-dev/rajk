@@ -11,6 +11,12 @@ import MyCarousel from "@/components/MyCarousel";
 import { t } from "@/lib/utils";
 import { cookies } from "next/headers";
 import { Metadata } from "next";
+import {
+    RECRUITMENT_RELEASE_DATE,
+    RECRUITMENT_SUBMISSION_DEADLINE,
+    QUESTIONNAIRE_DOWNLOAD_URL,
+    QUESTIONNAIRE_ARCHIVE_URL,
+} from "@/config/recruitment";
 
 export const metadata: Metadata = {
     title: "Felvételi | Rajk Szakkollégium",
@@ -30,8 +36,6 @@ export default async function ApplyPage() {
         getFAQs(),
     ]);
 
-    const releaseDate = new Date('2026-04-22T08:00:00');
-    const submissionDeadline = new Date('2026-05-13T19:59:59');
 
     return (
         <div className="bg-bezs overflow-hidden">
@@ -60,15 +64,15 @@ export default async function ApplyPage() {
                         <h2 className="text-3xl md:text-5xl font-black mb-16 text-center self-end md:mr-20 lg:mr-32">
                             {t(lang, "Felvételi", "Admission")}
                         </h2>
-                        <Countdown targetDate={submissionDeadline} />
+                        <Countdown targetDate={RECRUITMENT_SUBMISSION_DEADLINE} />
                     </div>
                 </div>
 
                 {/* Questionnaire Section */}
-                <DownloadQuestionnaire 
-                    releaseDate={releaseDate}
-                    questionnaireUrl="/2026_Rajk-kerdoiv.pdf"
-                    archiveUrl="/2025_Rajk-kerdoiv-2.pdf"
+                <DownloadQuestionnaire
+                    releaseDate={RECRUITMENT_RELEASE_DATE}
+                    questionnaireUrl={QUESTIONNAIRE_DOWNLOAD_URL}
+                    archiveUrl={QUESTIONNAIRE_ARCHIVE_URL}
                 />
 
                 {/* Recruitment Process Section */}

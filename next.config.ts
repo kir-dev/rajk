@@ -20,6 +20,9 @@ const nextConfig: NextConfig = {
     reactCompiler: true,
     productionBrowserSourceMaps: false,
     typedRoutes: true,
+    outputFileTracingIncludes: {
+        '/api/questionnaire': ['./private/**/*'],
+    },
     experimental: {
         typedEnv: true
     },
