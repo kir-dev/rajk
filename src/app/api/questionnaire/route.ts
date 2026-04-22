@@ -6,9 +6,9 @@ export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
 export async function GET() {
-    if (Date.now() < RECRUITMENT_RELEASE_DATE.getTime()) {
+    {/*if (Date.now() < RECRUITMENT_RELEASE_DATE.getTime()) {
         return new Response(null, { status: 404 });
-    }
+    }*/}
     const filePath = path.join(process.cwd(), 'private', '2026_Rajk-kerdoiv.docx');
     const file = await readFile(filePath);
     return new Response(new Uint8Array(file), {
